@@ -13,7 +13,35 @@ body {
   color: white;
 }
 
-/* NAVBAR */
+/* SPLASH SCREEN */
+#splash {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #020617;
+}
+
+#splash h1 {
+  font-size: 3rem;
+}
+
+#splash button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #2563eb;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* MAIN SITE */
+#main {
+  display: none;
+}
+
+/* NAV */
 nav {
   display: flex;
   justify-content: space-between;
@@ -21,82 +49,13 @@ nav {
   background: rgba(0,0,0,0.5);
 }
 
-nav a {
-  color: white;
-  margin-left: 20px;
-  text-decoration: none;
-}
-
 /* HERO */
 .hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 80px 50px;
 }
 
-.hero-text h1 {
-  font-size: 3rem;
-}
-
-.hero-text p {
-  color: #9ca3af;
-}
-
-.buttons button {
-  margin-right: 10px;
-  padding: 12px 20px;
-  border: none;
-  cursor: pointer;
-}
-
-.primary {
-  background: #2563eb;
-  color: white;
-}
-
-.secondary {
-  background: gray;
-  color: white;
-}
-
-/* IMAGE PLACEHOLDER */
-.hero-img {
-  width: 400px;
-  height: 400px;
-  background: #1f2937;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* SERVICES */
 .services {
   padding: 60px 50px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.card {
-  background: #1f2937;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.card h3 {
-  margin-top: 0;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 30px;
-  background: #020617;
-  margin-top: 40px;
 }
 </style>
 
@@ -104,77 +63,43 @@ footer {
 
 <body>
 
-<!-- NAVBAR -->
+<!-- SPLASH -->
+<div id="splash">
+  <h1>NxtGenGuard</h1>
+  <p>Cybersecurity • IT • Automation</p>
+  <button onclick="enterSite()">Enter Site</button>
+</div>
+
+<!-- MAIN SITE -->
+<div id="main">
+
 <nav>
   <div><strong>NxtGenGuard</strong></div>
   <div>
     <a href="#">Home</a>
     <a href="#">Services</a>
-    <a href="#">About</a>
     <a href="#">Contact</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-text">
-    <h1>Cybersecurity & IT Solutions</h1>
-    <p>Protecting systems. Securing networks. Empowering businesses.</p>
-
-    <div class="buttons">
-      <button class="primary">Get Started</button>
-      <button class="secondary">Free Consultation</button>
-    </div>
-  </div>
-
-  <div class="hero-img">
-    Image Here
-  </div>
+  <h1>Secure Your Digital World</h1>
+  <p>Modern cybersecurity solutions for businesses and individuals.</p>
 </section>
 
-<!-- SERVICES -->
 <section class="services">
-  <h2>Our Services</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <h3>Cybersecurity</h3>
-      <p>Threat detection, prevention, and system hardening.</p>
-    </div>
-
-    <div class="card">
-      <h3>IT Support</h3>
-      <p>Reliable troubleshooting and technical assistance.</p>
-    </div>
-
-    <div class="card">
-      <h3>Network Setup</h3>
-      <p>Secure and scalable infrastructure solutions.</p>
-    </div>
-
-    <div class="card">
-      <h3>Data Recovery</h3>
-      <p>Recover critical data quickly and safely.</p>
-    </div>
-
-    <div class="card">
-      <h3>Virus Removal</h3>
-      <p>Clean and protect systems from malicious threats.</p>
-    </div>
-
-    <div class="card">
-      <h3>Automation</h3>
-      <p>Streamline workflows and improve efficiency.</p>
-    </div>
-
-  </div>
+  <h2>Services</h2>
+  <p>Cybersecurity • IT Support • Network Setup • Data Recovery</p>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  © 2026 NxtGenGuard. All rights reserved.
-</footer>
+</div>
+
+<script>
+function enterSite() {
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("main").style.display = "block";
+}
+</script>
 
 </body>
 </html>
