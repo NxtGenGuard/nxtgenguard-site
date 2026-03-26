@@ -1,3 +1,3 @@
 window.addEventListener("load", () => {
-  console.log("Site loaded");
+  console.log("NxtGenGuard site loaded");
 });
