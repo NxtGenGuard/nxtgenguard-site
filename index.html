@@ -4,42 +4,177 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NxtGenGuard</title>
+
 <style>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #0b0f1a;
   color: white;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+  background: rgba(0,0,0,0.5);
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 50px;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+}
+
+.hero-text p {
+  color: #9ca3af;
+}
+
+.buttons button {
+  margin-right: 10px;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.primary {
+  background: #2563eb;
+  color: white;
+}
+
+.secondary {
+  background: gray;
+  color: white;
+}
+
+/* IMAGE PLACEHOLDER */
+.hero-img {
+  width: 400px;
+  height: 400px;
+  background: #1f2937;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 }
-.container {
+
+/* SERVICES */
+.services {
+  padding: 60px 50px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #1f2937;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+/* FOOTER */
+footer {
   text-align: center;
-}
-h1 {
-  font-size: 3rem;
-}
-p {
-  color: #9ca3af;
-}
-button {
-  margin-top: 20px;
-  padding: 12px 20px;
-  border: none;
-  background: #2563eb;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
+  padding: 30px;
+  background: #020617;
+  margin-top: 40px;
 }
 </style>
+
 </head>
+
 <body>
-<div class="container">
-  <h1>NxtGenGuard</h1>
-  <p>Cybersecurity • IT Systems • Automation</p>
-  <button>Get Started</button>
-</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div><strong>NxtGenGuard</strong></div>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Cybersecurity & IT Solutions</h1>
+    <p>Protecting systems. Securing networks. Empowering businesses.</p>
+
+    <div class="buttons">
+      <button class="primary">Get Started</button>
+      <button class="secondary">Free Consultation</button>
+    </div>
+  </div>
+
+  <div class="hero-img">
+    Image Here
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <h2>Our Services</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Cybersecurity</h3>
+      <p>Threat detection, prevention, and system hardening.</p>
+    </div>
+
+    <div class="card">
+      <h3>IT Support</h3>
+      <p>Reliable troubleshooting and technical assistance.</p>
+    </div>
+
+    <div class="card">
+      <h3>Network Setup</h3>
+      <p>Secure and scalable infrastructure solutions.</p>
+    </div>
+
+    <div class="card">
+      <h3>Data Recovery</h3>
+      <p>Recover critical data quickly and safely.</p>
+    </div>
+
+    <div class="card">
+      <h3>Virus Removal</h3>
+      <p>Clean and protect systems from malicious threats.</p>
+    </div>
+
+    <div class="card">
+      <h3>Automation</h3>
+      <p>Streamline workflows and improve efficiency.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 NxtGenGuard. All rights reserved.
+</footer>
+
 </body>
 </html>
