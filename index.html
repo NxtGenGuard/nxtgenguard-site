@@ -1,105 +1,1176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NxtGenGuard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NxtGenGuard</title>
+  <meta
+    name="description"
+    content="NxtGenGuard builds modern websites, custom web applications, dashboards, automation systems, and secure digital solutions for growing businesses."
+  />
+  <style>
+    :root {
+      --bg: #060b14;
+      --bg-2: #0b1220;
+      --panel: rgba(16, 24, 40, 0.72);
+      --panel-solid: #101826;
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #f4f7fb;
+      --muted: #9eb0c7;
+      --blue: #1f6fff;
+      --blue-soft: rgba(31, 111, 255, 0.18);
+      --cyan: #27c2ff;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --max: 1200px;
+    }
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0b0f1a;
-  color: white;
-}
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-/* SPLASH SCREEN */
-#splash {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: #020617;
-}
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, rgba(39, 194, 255, 0.12), transparent 28%),
+        radial-gradient(circle at 80% 20%, rgba(31, 111, 255, 0.14), transparent 24%),
+        linear-gradient(180deg, #050912 0%, #09111d 45%, #07101a 100%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-#splash h1 {
-  font-size: 3rem;
-}
+    body.menu-open {
+      overflow: hidden;
+    }
 
-#splash button {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background: #2563eb;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-/* MAIN SITE */
-#main {
-  display: none;
-}
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-/* NAV */
-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 50px;
-  background: rgba(0,0,0,0.5);
-}
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
 
-/* HERO */
-.hero {
-  padding: 80px 50px;
-}
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      color: #cfe0f6;
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+      backdrop-filter: blur(12px);
+    }
 
-.services {
-  padding: 60px 50px;
-}
-</style>
+    .pill::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      box-shadow: 0 0 14px rgba(39,194,255,0.8);
+    }
 
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      margin: 0 0 16px;
+      letter-spacing: -0.04em;
+    }
+
+    .section-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+      max-width: 720px;
+    }
+
+    /* Splash */
+    #splash {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at center, rgba(31,111,255,0.18), transparent 26%),
+        linear-gradient(180deg, rgba(5,9,18,0.96), rgba(5,9,18,0.985));
+      transition: opacity 0.55s ease, visibility 0.55s ease;
+    }
+
+    #splash.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .grid-bg,
+    .grid-bg::before,
+    .grid-bg::after {
+      position: absolute;
+      inset: 0;
+    }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: radial-gradient(circle at center, black 20%, transparent 72%);
+      opacity: 0.25;
+    }
+
+    .grid-bg::before,
+    .grid-bg::after {
+      content: "";
+      background: radial-gradient(circle, rgba(39,194,255,0.12), transparent 60%);
+      filter: blur(50px);
+      animation: floatGlow 8s ease-in-out infinite alternate;
+    }
+
+    .grid-bg::after {
+      background: radial-gradient(circle, rgba(31,111,255,0.12), transparent 60%);
+      animation-duration: 10s;
+      animation-delay: -2s;
+    }
+
+    @keyframes floatGlow {
+      from { transform: translate(-40px, -20px) scale(1); }
+      to { transform: translate(40px, 30px) scale(1.08); }
+    }
+
+    .splash-card {
+      position: relative;
+      width: min(760px, calc(100% - 28px));
+      padding: 42px 28px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      background: rgba(8, 14, 24, 0.76);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .splash-logo {
+      width: min(240px, 48vw);
+      margin: 0 auto 16px;
+      filter: drop-shadow(0 0 22px rgba(31,111,255,0.25));
+    }
+
+    .splash-title {
+      margin: 0;
+      font-size: clamp(2.4rem, 7vw, 5.2rem);
+      line-height: 0.94;
+      letter-spacing: -0.06em;
+    }
+
+    .splash-subtitle {
+      margin: 16px auto 28px;
+      max-width: 700px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      line-height: 1.75;
+    }
+
+    .splash-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      font-size: 0.98rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), #1151ca);
+      color: white;
+      box-shadow: 0 16px 30px rgba(17,81,202,0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    /* Main site */
+    #main {
+      display: none;
+    }
+
+    #main.visible {
+      display: block;
+    }
+
+    .site-shell {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blur-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      pointer-events: none;
+      opacity: 0.38;
+    }
+
+    .blur-1 {
+      width: 320px;
+      height: 320px;
+      top: 100px;
+      left: -80px;
+      background: rgba(39,194,255,0.12);
+    }
+
+    .blur-2 {
+      width: 360px;
+      height: 360px;
+      top: 420px;
+      right: -90px;
+      background: rgba(31,111,255,0.16);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(4, 8, 15, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 82px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+
+    .brand span {
+      font-size: 1.05rem;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .desktop-nav > a,
+    .nav-drop-toggle {
+      color: #e8eef8;
+      font-weight: 700;
+      font-size: 0.96rem;
+      letter-spacing: 0.02em;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .nav-drop {
+      position: relative;
+    }
+
+    .nav-drop-menu {
+      position: absolute;
+      top: calc(100% + 18px);
+      left: 0;
+      min-width: 290px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(9, 15, 27, 0.96);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.45);
+      display: none;
+    }
+
+    .nav-drop:hover .nav-drop-menu,
+    .nav-drop:focus-within .nav-drop-menu {
+      display: block;
+    }
+
+    .nav-drop-menu a {
+      display: block;
+      padding: 12px 14px;
+      border-radius: 12px;
+      color: #eff5ff;
+      font-weight: 700;
+      transition: background 0.18s ease;
+    }
+
+    .nav-drop-menu a:hover {
+      background: rgba(255,255,255,0.06);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-cta a {
+      font-weight: 700;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      padding: 0 0 18px;
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-panel {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(9, 15, 27, 0.94);
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-panel a,
+    .mobile-services summary {
+      display: block;
+      padding: 14px 12px;
+      border-radius: 12px;
+      color: #eef5ff;
+      font-weight: 700;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .mobile-panel a:hover,
+    .mobile-services summary:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .mobile-services[open] summary {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .mobile-services summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .mobile-submenu {
+      padding: 4px 6px 10px 16px;
+    }
+
+    .mobile-submenu a {
+      color: var(--muted);
+      font-weight: 600;
+      padding: 10px 12px;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 84px 0 54px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 38px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      margin: 18px 0 18px;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.94;
+      letter-spacing: -0.065em;
+      max-width: 760px;
+    }
+
+    .hero-copy p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .hero-note {
+      margin-top: 20px;
+      color: #bfd0e5;
+      font-size: 0.96rem;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 520px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
+        radial-gradient(circle at top right, rgba(39,194,255,0.18), transparent 28%),
+        rgba(10, 17, 30, 0.9);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 24px;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 36px 36px;
+      opacity: 0.18;
+      mask-image: linear-gradient(to bottom, black, transparent 92%);
+    }
+
+    .hero-panel {
+      position: absolute;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      background: rgba(8, 13, 24, 0.85);
+      backdrop-filter: blur(10px);
+      padding: 18px;
+    }
+
+    .hero-panel.top {
+      top: 22px;
+      right: 22px;
+      width: 220px;
+    }
+
+    .hero-panel.middle {
+      left: 22px;
+      bottom: 22px;
+      width: 235px;
+    }
+
+    .hero-panel strong,
+    .mini-card strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-panel p,
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    .hero-logo-wrap {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+      width: min(76%, 340px);
+      aspect-ratio: 1 / 1;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at center, rgba(39,194,255,0.18), transparent 65%),
+        rgba(255,255,255,0.02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-logo-wrap img {
+      width: 88%;
+      filter: drop-shadow(0 0 26px rgba(31,111,255,0.28));
+      opacity: 0.98;
+    }
+
+    /* Services */
+    .section {
+      padding: 92px 0 0;
+    }
+
+    .services-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .service-card {
+      position: relative;
+      padding: 26px;
+      min-height: 240px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      box-shadow: 0 18px 30px rgba(0,0,0,0.18);
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(39,194,255,0.25);
+      background: linear-gradient(180deg, rgba(31,111,255,0.07), rgba(255,255,255,0.03));
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-size: 1.4rem;
+      background: rgba(31,111,255,0.12);
+      border: 1px solid rgba(39,194,255,0.15);
+    }
+
+    .service-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.97rem;
+    }
+
+    /* Work */
+    .work-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .work-card {
+      padding: 26px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .work-tag {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(31,111,255,0.12);
+      color: #d7e6ff;
+      border: 1px solid rgba(39,194,255,0.15);
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .work-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .work-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .work-footer {
+      margin-top: 18px;
+      color: #d8e8ff;
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    /* About */
+    .about-wrap {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .about-card,
+    .about-side {
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      padding: 30px;
+    }
+
+    .about-card p {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .mini-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .mini-card {
+      border-radius: 20px;
+      padding: 22px;
+      background: rgba(8, 13, 24, 0.7);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* CTA */
+    .cta-box {
+      margin-top: 34px;
+      padding: 36px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at top right, rgba(39,194,255,0.12), transparent 30%),
+        rgba(9, 15, 27, 0.92);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h3 {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      letter-spacing: -0.04em;
+    }
+
+    .cta-box p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* Footer */
+    footer {
+      padding: 78px 0 36px;
+    }
+
+    .footer-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .footer-brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .about-wrap,
+      .services-grid,
+      .work-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .about-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        align-items: stretch;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .desktop-nav,
+      .nav-cta {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .hero-grid,
+      .services-grid,
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: 420px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(2.5rem, 12vw, 4.6rem);
+      }
+
+      .nav-wrap {
+        min-height: 76px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(var(--max), calc(100% - 22px));
+      }
+
+      .splash-card {
+        padding: 34px 18px;
+        border-radius: 24px;
+      }
+
+      .hero-panel.top,
+      .hero-panel.middle {
+        width: calc(100% - 44px);
+      }
+
+      .hero-card {
+        min-height: 460px;
+      }
+
+      .service-card,
+      .work-card,
+      .about-card,
+      .about-side {
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      .cta-box {
+        padding: 26px 22px;
+        border-radius: 24px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<!-- SPLASH -->
-<div id="splash">
-  <h1>NxtGenGuard</h1>
-  <p>Cybersecurity • IT • Automation</p>
-  <button onclick="enterSite()">Enter Site</button>
-</div>
-
-<!-- MAIN SITE -->
-<div id="main">
-
-<nav>
-  <div><strong>NxtGenGuard</strong></div>
-  <div>
-    <a href="#">Home</a>
-    <a href="#">Services</a>
-    <a href="#">Contact</a>
+  <!-- Splash -->
+  <div id="splash">
+    <div class="grid-bg"></div>
+    <div class="splash-card">
+      <img src="logo-blue.png" alt="NxtGenGuard logo" class="splash-logo" />
+      <div class="pill">Modern websites, apps, and digital systems</div>
+      <h1 class="splash-title">NxtGenGuard</h1>
+      <p class="splash-subtitle">
+        Custom websites, business applications, dashboards, automation, and secure digital
+        solutions built for companies that want to operate smarter and look stronger online.
+      </p>
+      <div class="splash-actions">
+        <button class="btn btn-primary" onclick="enterSite()">Enter Site</button>
+        <a class="btn btn-secondary" href="#contact" onclick="enterSite()">Start a Project</a>
+      </div>
+    </div>
   </div>
-</nav>
 
-<section class="hero">
-  <h1>Secure Your Digital World</h1>
-  <p>Modern cybersecurity solutions for businesses and individuals.</p>
-</section>
+  <!-- Main -->
+  <div id="main">
+    <div class="site-shell">
+      <div class="blur-orb blur-1"></div>
+      <div class="blur-orb blur-2"></div>
 
-<section class="services">
-  <h2>Services</h2>
-  <p>Cybersecurity • IT Support • Network Setup • Data Recovery</p>
-</section>
+      <header>
+        <div class="container nav-wrap">
+          <a class="brand" href="#home">
+            <img src="logo-blue.png" alt="NxtGenGuard logo" />
+            <span>NxtGenGuard</span>
+          </a>
 
-</div>
+          <nav class="desktop-nav" aria-label="Primary navigation">
+            <a href="#home">Home</a>
 
-<script>
-function enterSite() {
-  document.getElementById("splash").style.display = "none";
-  document.getElementById("main").style.display = "block";
-}
-</script>
+            <div class="nav-drop">
+              <button class="nav-drop-toggle" type="button">Services ▾</button>
+              <div class="nav-drop-menu">
+                <a href="#services">Web Design &amp; Development</a>
+                <a href="#services">Custom Web Applications</a>
+                <a href="#services">Dashboards &amp; Client Portals</a>
+                <a href="#services">Business Automation</a>
+                <a href="#services">Cloud Deployment</a>
+                <a href="#services">IT &amp; Security Consulting</a>
+              </div>
+            </div>
 
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+
+          <div class="nav-cta">
+            <a class="btn btn-secondary" href="#contact">Book a Consultation</a>
+          </div>
+
+          <button class="menu-toggle" type="button" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+        </div>
+
+        <div class="container mobile-menu" id="mobileMenu">
+          <div class="mobile-panel">
+            <a href="#home" onclick="closeMenu()">Home</a>
+
+            <details class="mobile-services">
+              <summary>Services</summary>
+              <div class="mobile-submenu">
+                <a href="#services" onclick="closeMenu()">Web Design &amp; Development</a>
+                <a href="#services" onclick="closeMenu()">Custom Web Applications</a>
+                <a href="#services" onclick="closeMenu()">Dashboards &amp; Client Portals</a>
+                <a href="#services" onclick="closeMenu()">Business Automation</a>
+                <a href="#services" onclick="closeMenu()">Cloud Deployment</a>
+                <a href="#services" onclick="closeMenu()">IT &amp; Security Consulting</a>
+              </div>
+            </details>
+
+            <a href="#work" onclick="closeMenu()">Work</a>
+            <a href="#about" onclick="closeMenu()">About</a>
+            <a href="#contact" onclick="closeMenu()">Contact</a>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero" id="home">
+          <div class="container hero-grid">
+            <div class="hero-copy">
+              <div class="pill">Built for modern businesses</div>
+              <h1>Websites, applications, and systems that move your business forward.</h1>
+              <p>
+                NxtGenGuard helps businesses launch strong digital experiences through modern website
+                design, custom application development, dashboards, automation, and secure deployment
+                strategies that support growth.
+              </p>
+              <div class="hero-actions">
+                <a class="btn btn-primary" href="#contact">Start Your Project</a>
+                <a class="btn btn-secondary" href="#services">Explore Services</a>
+              </div>
+              <div class="hero-note">
+                Web design • Custom apps • Dashboards • Automation • Cloud deployment
+              </div>
+            </div>
+
+            <div class="hero-card">
+              <div class="hero-panel top">
+                <strong>Custom Solutions</strong>
+                <p>
+                  Tailored websites and applications built around your goals, workflow, and long-term
+                  growth.
+                </p>
+              </div>
+
+              <div class="hero-logo-wrap">
+                <img src="logo-blue.png" alt="NxtGenGuard logo" />
+              </div>
+
+              <div class="hero-panel middle">
+                <strong>Modern Delivery</strong>
+                <p>
+                  GitHub-based development, clean deployment workflows, and scalable cloud-ready builds.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="services">
+          <div class="container">
+            <div class="pill">Services</div>
+            <h2 class="section-title">Digital solutions designed around real business needs.</h2>
+            <p class="section-copy">
+              Your business does not need generic tech. It needs the right tools, the right design,
+              and the right systems to support growth, visibility, and efficiency.
+            </p>
+
+            <div class="services-grid">
+              <article class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3>Web Design &amp; Development</h3>
+                <p>
+                  Professional websites built for credibility, speed, responsiveness, and a stronger
+                  digital presence.
+                </p>
+              </article>
+
+              <article class="service-card">
+                <div class="service-icon">💻</div>
+                <h3>Custom Web Applications</h3>
+                <p>
+                  Purpose-built systems created around your workflow, not forced into a one-size-fits-all tool.
+                </p>
+              </article>
+
+              <article class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Dashboards &amp; Client Portals</h3>
+                <p>
+                  Interactive dashboards and secure portals that give teams and clients better visibility.
+                </p>
+              </article>
+
+              <article class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Business Automation</h3>
+                <p>
+                  Reduce manual tasks with smart workflows, process automation, and connected digital systems.
+                </p>
+              </article>
+
+              <article class="service-card">
+                <div class="service-icon">☁️</div>
+                <h3>Cloud Deployment</h3>
+                <p>
+                  Modern hosting and deployment workflows using GitHub and cloud platforms for clean delivery.
+                </p>
+              </article>
+
+              <article class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3>IT &amp; Security Consulting</h3>
+                <p>
+                  Technical guidance for secure infrastructure, planning, and smarter digital decision-making.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="work">
+          <div class="container">
+            <div class="pill">Selected Work</div>
+            <h2 class="section-title">Built to solve problems, improve operations, and elevate presentation.</h2>
+            <p class="section-copy">
+              These are example solution areas you can keep for now and later replace with real projects,
+              screenshots, and client results.
+            </p>
+
+            <div class="work-grid">
+              <article class="work-card">
+                <div>
+                  <div class="work-tag">Website Project</div>
+                  <h3>Modern Business Website</h3>
+                  <p>
+                    A polished front-end experience focused on brand credibility, clear messaging, and lead generation.
+                  </p>
+                </div>
+                <div class="work-footer">Replace with your real project later →</div>
+              </article>
+
+              <article class="work-card">
+                <div>
+                  <div class="work-tag">Custom App</div>
+                  <h3>Internal Workflow Platform</h3>
+                  <p>
+                    A custom system designed to reduce manual tasks, centralize data, and improve team efficiency.
+                  </p>
+                </div>
+                <div class="work-footer">Replace with your real project later →</div>
+              </article>
+
+              <article class="work-card">
+                <div>
+                  <div class="work-tag">Dashboard</div>
+                  <h3>Client Reporting Dashboard</h3>
+                  <p>
+                    A cloud-based dashboard experience that makes reporting easier to read, share, and manage.
+                  </p>
+                </div>
+                <div class="work-footer">Replace with your real project later →</div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="about">
+          <div class="container">
+            <div class="pill">About</div>
+            <h2 class="section-title">A modern digital partner for businesses that want more than a basic website.</h2>
+
+            <div class="about-wrap">
+              <div class="about-card">
+                <p>
+                  NxtGenGuard focuses on building practical digital solutions that help businesses operate more
+                  efficiently and present themselves more professionally. From modern websites to custom
+                  applications, dashboards, and automation systems, the goal is simple: build technology that
+                  works for the business, not against it.
+                  <br /><br />
+                  Instead of relying on bloated templates and limited platforms, NxtGenGuard uses a cleaner,
+                  more modern workflow that supports flexibility, speed, and long-term growth.
+                </p>
+              </div>
+
+              <div class="about-side">
+                <div class="mini-grid">
+                  <div class="mini-card">
+                    <strong>Modern Approach</strong>
+                    <p>
+                      GitHub-based workflow, scalable hosting, cleaner deployment, and stronger long-term control.
+                    </p>
+                  </div>
+
+                  <div class="mini-card">
+                    <strong>Business Focused</strong>
+                    <p>
+                      Every build should support credibility, operations, efficiency, or client experience.
+                    </p>
+                  </div>
+
+                  <div class="mini-card">
+                    <strong>Built to Grow</strong>
+                    <p>
+                      Start with a strong web presence and expand into dashboards, portals, automation, and more.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="contact">
+          <div class="container">
+            <div class="cta-box">
+              <div>
+                <h3>Ready to build something stronger?</h3>
+                <p>
+                  Whether you need a professional website, a custom application, a reporting dashboard,
+                  or a smarter digital workflow, NxtGenGuard can help you move from idea to execution.
+                </p>
+              </div>
+              <a class="btn btn-primary" href="mailto:gsaenz@nxtgenguard.com">Contact NxtGenGuard</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="container footer-wrap">
+          <div class="footer-brand">
+            <img src="logo-blue.png" alt="NxtGenGuard logo" />
+            <span>NxtGenGuard</span>
+          </div>
+          <div class="footer-copy">© 2026 NxtGenGuard. All rights reserved.</div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    function enterSite() {
+      const splash = document.getElementById("splash");
+      const main = document.getElementById("main");
+      splash.classList.add("hidden");
+      main.classList.add("visible");
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById("mobileMenu");
+      const body = document.body;
+      menu.classList.toggle("open");
+      body.classList.toggle("menu-open");
+    }
+
+    function closeMenu() {
+      const menu = document.getElementById("mobileMenu");
+      const body = document.body;
+      menu.classList.remove("open");
+      body.classList.remove("menu-open");
+    }
+  </script>
 </body>
 </html>
