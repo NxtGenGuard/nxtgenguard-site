@@ -394,16 +394,17 @@
     .hero-grid {
       position: relative;
       min-height: calc(100vh - var(--nav-h));
+      display: grid;
+      align-items: end;
+      justify-items: center;
+      padding-bottom: 56px;
     }
 
     .hero-copy {
-      position: absolute;
-      left: 50%;
-      bottom: 38px;
-      top: auto;
-      transform: translateX(-50%);
-      width: min(980px, 92%);
-      padding: 0 20px;
+      position: relative;
+      width: min(760px, 92%);
+      margin: 0 auto;
+      padding: 0 12px;
       text-align: center;
     }
 
@@ -411,37 +412,37 @@
       content: "";
       position: absolute;
       left: 50%;
-      bottom: -18px;
+      bottom: -26px;
       transform: translateX(-50%);
-      width: min(100%, 620px);
-      height: 180px;
+      width: min(100%, 560px);
+      height: 150px;
       border-radius: 50%;
       background: radial-gradient(
         circle,
-        rgba(18, 34, 68, 0.34) 0%,
-        rgba(14, 26, 52, 0.14) 48%,
-        rgba(14, 26, 52, 0) 78%
+        rgba(16, 32, 62, 0.3) 0%,
+        rgba(12, 24, 48, 0.12) 48%,
+        rgba(12, 24, 48, 0) 78%
       );
-      filter: blur(14px);
+      filter: blur(16px);
       pointer-events: none;
       z-index: -1;
     }
 
     .hero-copy h1 {
       margin: 0 auto 14px;
-      max-width: 11ch;
-      font-size: clamp(2.6rem, 4.8vw, 4.2rem);
-      line-height: 0.92;
+      max-width: 9.6ch;
+      font-size: clamp(2.5rem, 4.3vw, 3.9rem);
+      line-height: 0.94;
       letter-spacing: -0.07em;
       text-shadow: 0 12px 34px rgba(0, 0, 0, 0.34);
     }
 
     .hero-copy p {
-      max-width: 680px;
+      max-width: 620px;
       margin: 0 auto 18px;
       color: var(--muted);
       font-size: 1rem;
-      line-height: 1.75;
+      line-height: 1.78;
       text-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
     }
 
@@ -451,7 +452,7 @@
       flex-wrap: wrap;
       justify-content: center;
       margin: 0 auto 18px;
-      max-width: 760px;
+      max-width: 620px;
     }
 
     .meta-chip {
@@ -466,7 +467,7 @@
 
     .hero-ghost-panel {
       margin: 0 auto;
-      max-width: 560px;
+      max-width: 540px;
       padding: 13px 16px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -953,18 +954,21 @@
 
       .hero-grid {
         min-height: calc(100vh - var(--nav-h));
+        padding-bottom: 28px;
       }
 
       .hero-copy {
-        bottom: 22px;
-        top: auto;
-        transform: translateX(-50%);
-        width: 94%;
+        width: min(680px, 96%);
+        padding: 0 8px;
       }
 
       .hero-copy h1 {
         max-width: 10ch;
-        font-size: clamp(2.2rem, 9vw, 3.2rem);
+        font-size: clamp(2.15rem, 8.6vw, 3.15rem);
+      }
+
+      .hero-copy p {
+        max-width: 560px;
       }
 
       .premium-media { min-height: auto; }
@@ -990,18 +994,24 @@
         padding-right: 20px;
       }
 
+      .hero-grid {
+        padding-bottom: 20px;
+      }
+
       .hero-copy {
-        bottom: 18px;
-        padding: 0 10px;
+        width: 100%;
+        padding: 0 6px;
       }
 
       .hero-copy h1 {
         max-width: 10ch;
-        font-size: clamp(2.15rem, 10vw, 3rem);
+        font-size: clamp(2rem, 10vw, 2.8rem);
+        line-height: 0.96;
       }
 
       .hero-copy p {
-        font-size: 0.96rem;
+        font-size: 0.95rem;
+        line-height: 1.7;
       }
 
       .hero-meta { gap: 8px; }
@@ -1094,7 +1104,7 @@
     <main>
       <section class="hero">
         <div class="container hero-grid">
-          <div class="hero-copy scroll-float" data-reveal data-depth="0.05">
+          <div class="hero-copy" data-reveal>
             <h1>Modern websites. Smarter systems. Built clean.</h1>
             <p>
               NxtGenGuard builds websites, applications, dashboards, and automation systems designed for businesses that want cleaner structure and better performance.
