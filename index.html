@@ -3,730 +3,551 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NxtGenGuard | Modern Websites, Apps & Systems</title>
-  <meta name="description" content="NxtGenGuard builds premium websites, custom applications, dashboards, automation systems, and secure digital solutions for modern businesses." />
+  <title>NxtGenGuard | Websites, Apps & Digital Systems</title>
+  <meta name="description" content="NxtGenGuard builds premium websites, custom applications, dashboards, automation systems, and cloud-ready digital solutions for modern businesses." />
+  <link rel="stylesheet" href="assets/css/style.css" />
   <style>
     :root {
-      --bg: #040913;
-      --bg-2: #091120;
-      --panel: rgba(10, 18, 33, 0.72);
-      --panel-2: rgba(10, 18, 33, 0.88);
-      --line: rgba(255,255,255,0.08);
-      --line-strong: rgba(87, 146, 255, 0.24);
-      --text: #f5f8ff;
-      --muted: #98a9c2;
-      --blue: #2b78ff;
-      --blue-2: #58a6ff;
-      --glow: rgba(43,120,255,0.35);
-      --radius: 24px;
-      --shadow: 0 24px 80px rgba(0,0,0,0.42);
-      --max: 1200px;
-      --nav-h: 82px;
+      --bg:#030812;
+      --bg-2:#07111f;
+      --panel:rgba(11,18,32,0.78);
+      --panel-2:rgba(10,16,30,0.92);
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(92,146,255,0.25);
+      --text:#f7f9ff;
+      --muted:#98a8c1;
+      --blue:#2b78ff;
+      --blue-2:#74b0ff;
+      --glow:rgba(43,120,255,0.35);
+      --radius:26px;
+      --shadow:0 26px 80px rgba(0,0,0,0.46);
+      --max:1240px;
+      --nav-h:84px;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--text);
-      font-family: Inter, Arial, Helvetica, sans-serif;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,Arial,Helvetica,sans-serif;
+      color:var(--text);
       background:
-        radial-gradient(circle at 12% 18%, rgba(88,166,255,0.11), transparent 24%),
-        radial-gradient(circle at 86% 12%, rgba(43,120,255,0.16), transparent 24%),
-        linear-gradient(180deg, #020712 0%, #07101d 48%, #050b16 100%);
-      overflow-x: hidden;
+        radial-gradient(circle at 14% 16%, rgba(56,120,255,0.14), transparent 25%),
+        radial-gradient(circle at 88% 10%, rgba(90,170,255,0.12), transparent 22%),
+        linear-gradient(180deg, #020611 0%, #06101d 46%, #040913 100%);
+      overflow-x:hidden;
     }
 
-    body.nav-open { overflow: hidden; }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
+    body.nav-open{overflow:hidden}
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
 
-    .container {
-      width: min(var(--max), calc(100% - 32px));
-      margin: 0 auto;
+    .container{width:min(var(--max),calc(100% - 32px));margin:0 auto}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:54px;
+      padding:0 22px;
+      border-radius:14px;
+      font-weight:800;
+      transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease,background .24s ease;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{
+      background:linear-gradient(135deg,var(--blue),#1454d1);
+      color:#fff;
+      box-shadow:0 18px 40px rgba(20,84,209,0.35);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .btn-secondary{
+      background:rgba(255,255,255,0.04);
+      border:1px solid var(--line);
+      color:#fff;
     }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 15px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      color: #dbe8ff;
-      font-size: 0.92rem;
-      backdrop-filter: blur(12px);
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 15px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+      color:#dce8ff;
+      font-size:.94rem;
+      backdrop-filter:blur(14px);
+    }
+    .pill::before{
+      content:"";
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--blue-2),var(--blue));
+      box-shadow:0 0 18px rgba(116,176,255,0.9);
     }
 
-    .pill::before {
-      content: "";
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue-2), var(--blue));
-      box-shadow: 0 0 14px rgba(88,166,255,0.9);
+    .section-head{max-width:760px;margin-bottom:28px}
+    .section-head h2{
+      margin:16px 0 10px;
+      font-size:clamp(2rem,4vw,3.5rem);
+      line-height:1.02;
+      letter-spacing:-0.05em;
+    }
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      font-size:1.04rem;
+      line-height:1.82;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 54px;
-      padding: 0 22px;
-      border-radius: 14px;
-      border: 1px solid transparent;
-      font-weight: 700;
-      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
-    }
-
-    .btn:hover { transform: translateY(-2px); }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--blue), #1352ca);
-      box-shadow: 0 18px 40px rgba(19,82,202,0.35);
-    }
-
-    .btn-secondary {
-      border-color: var(--line);
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-    }
-
-    .section-head {
-      max-width: 760px;
-      margin-bottom: 28px;
-    }
-
-    .section-head h2 {
-      margin: 16px 0 10px;
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      line-height: 1.02;
-      letter-spacing: -0.05em;
-    }
-
-    .section-head p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.04rem;
-      line-height: 1.8;
-    }
-
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      pointer-events: none;
-      opacity: 0.5;
-    }
-
-    .orb-1 { width: 340px; height: 340px; top: 120px; left: -80px; background: rgba(58,128,255,0.18); }
-    .orb-2 { width: 300px; height: 300px; top: 540px; right: -80px; background: rgba(39,194,255,0.12); }
-
-    /* Intro */
-    #intro {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      display: grid;
-      place-items: center;
+    /* Splash */
+    #splash{
+      position:fixed;
+      inset:0;
+      z-index:999;
+      display:grid;
+      place-items:center;
       background:
-        radial-gradient(circle at center, rgba(43,120,255,0.14), transparent 26%),
-        linear-gradient(180deg, rgba(2,7,18,0.98), rgba(2,7,18,1));
-      transition: opacity .8s ease, visibility .8s ease;
+        radial-gradient(circle at center, rgba(43,120,255,0.12), transparent 24%),
+        linear-gradient(180deg, rgba(2,6,17,0.98), rgba(2,6,17,1));
+      transition:opacity .85s ease, visibility .85s ease;
     }
-
-    #intro.hide {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .intro-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-      background-size: 46px 46px;
-      mask-image: radial-gradient(circle at center, black 20%, transparent 72%);
-      opacity: .22;
-    }
-
-    .intro-card {
-      position: relative;
-      width: min(640px, calc(100% - 28px));
-      padding: 44px 28px;
-      border-radius: 32px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(8,14,26,0.68);
-      box-shadow: var(--shadow);
-      text-align: center;
-      backdrop-filter: blur(16px);
-      animation: introFloat 2.4s ease-in-out infinite alternate;
-    }
-
-    .intro-logo {
-      width: min(210px, 52vw);
-      margin: 0 auto 14px;
-      filter: brightness(1.45) saturate(1.12) drop-shadow(0 0 30px rgba(43,120,255,0.35));
-    }
-
-    .intro-card h1 {
-      margin: 0;
-      font-size: clamp(2.2rem, 7vw, 4.5rem);
-      letter-spacing: -0.06em;
-      line-height: .95;
-    }
-
-    .intro-card p {
-      margin: 16px auto 0;
-      max-width: 560px;
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 1.02rem;
-    }
-
-    @keyframes introFloat {
-      from { transform: translateY(0); }
-      to { transform: translateY(-8px); }
-    }
-
-    /* Site */
-    .site {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-
-    .site.ready {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      background: rgba(3,8,16,0.72);
-      backdrop-filter: blur(16px);
-    }
-
-    .nav-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: var(--nav-h);
-      gap: 20px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
-    .brand img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      filter: brightness(1.45) saturate(1.12) drop-shadow(0 0 18px rgba(43,120,255,0.22));
-    }
-
-    .brand span { font-size: 1.06rem; }
-
-    .desktop-nav, .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .desktop-nav a,
-    .nav-drop-toggle {
-      font-weight: 700;
-      color: #e9f0ff;
-      background: none;
-      border: none;
-      padding: 0;
-      font-size: 0.96rem;
-      cursor: pointer;
-    }
-
-    .nav-drop { position: relative; }
-
-    .nav-drop-menu {
-      position: absolute;
-      top: calc(100% + 18px);
-      left: 0;
-      min-width: 270px;
-      padding: 12px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(7,13,24,0.96);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
-      display: none;
-    }
-
-    .nav-drop:hover .nav-drop-menu,
-    .nav-drop:focus-within .nav-drop-menu { display: block; }
-
-    .nav-drop-menu a {
-      display: block;
-      padding: 12px 14px;
-      border-radius: 12px;
-    }
-
-    .nav-drop-menu a:hover { background: rgba(255,255,255,0.05); }
-
-    .menu-toggle {
-      display: none;
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
-      color: white;
-      font-size: 1.15rem;
-    }
-
-    .mobile-nav {
-      display: none;
-      padding: 0 0 18px;
-    }
-
-    .mobile-nav.open { display: block; }
-
-    .mobile-panel {
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: rgba(7,13,24,0.95);
-      padding: 14px;
-      box-shadow: var(--shadow);
-    }
-
-    .mobile-panel a,
-    .mobile-panel summary {
-      display: block;
-      padding: 14px 12px;
-      border-radius: 12px;
-      font-weight: 700;
-      list-style: none;
-      cursor: pointer;
-    }
-
-    .mobile-panel a:hover,
-    .mobile-panel summary:hover,
-    .mobile-panel details[open] summary { background: rgba(255,255,255,0.05); }
-
-    .mobile-panel summary::-webkit-details-marker { display: none; }
-
-    .mobile-submenu { padding: 4px 0 0 10px; }
-    .mobile-submenu a { color: var(--muted); font-weight: 600; }
-
-    /* Hero */
-    .hero {
-      position: relative;
-      padding: 72px 0 34px;
-      overflow: clip;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      align-items: center;
-      gap: 40px;
-    }
-
-    .hero-copy h1 {
-      margin: 18px 0 18px;
-      max-width: 760px;
-      font-size: clamp(3.2rem, 8vw, 6.3rem);
-      line-height: .92;
-      letter-spacing: -0.07em;
-    }
-
-    .hero-copy p {
-      margin: 0;
-      max-width: 690px;
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.86;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-    }
-
-    .hero-meta {
-      margin-top: 24px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .meta-chip {
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.07);
-      background: rgba(255,255,255,0.03);
-      color: #d8e5fb;
-      font-size: .9rem;
-    }
-
-    .hero-visual {
-      position: relative;
-      min-height: 540px;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 34px;
-      padding: 24px;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015)),
-        radial-gradient(circle at top right, rgba(39,194,255,0.16), transparent 28%),
-        rgba(8,14,26,0.88);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-visual::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+    #splash.hide{opacity:0;visibility:hidden;pointer-events:none}
+    .splash-grid{
+      position:absolute;
+      inset:0;
       background-image:
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 34px 34px;
-      mask-image: linear-gradient(to bottom, black, transparent 92%);
-      opacity: .22;
+      background-size:42px 42px;
+      mask-image:radial-gradient(circle at center, black 22%, transparent 74%);
+      opacity:.22;
+    }
+    .splash-wrap{
+      position:relative;
+      display:grid;
+      place-items:center;
+      width:min(520px, calc(100% - 28px));
+      min-height:420px;
+      border-radius:34px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(8,13,24,0.66);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(16px);
+      text-align:center;
+      padding:28px;
+      overflow:hidden;
+    }
+    .loader-ring{
+      position:absolute;
+      width:230px;
+      height:230px;
+      border-radius:50%;
+      border:2px solid rgba(255,255,255,0.06);
+      border-top-color:rgba(116,176,255,0.85);
+      border-right-color:rgba(43,120,255,0.45);
+      animation:spin 1.35s linear infinite;
+      box-shadow:0 0 40px rgba(43,120,255,0.12);
+    }
+    .loader-ring::after{
+      content:"";
+      position:absolute;
+      inset:14px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .splash-logo{
+      position:relative;
+      width:min(170px, 46vw);
+      filter:drop-shadow(0 0 30px rgba(116,176,255,0.22));
+      animation:logoPulse 2.2s ease-in-out infinite;
+      z-index:2;
+    }
+    @keyframes logoPulse{
+      0%,100%{transform:scale(1);opacity:1}
+      50%{transform:scale(1.055);opacity:.9}
+    }
+    .splash-text{
+      position:absolute;
+      bottom:48px;
+      left:50%;
+      transform:translateX(-50%);
+      color:#dce8ff;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:.78rem;
+      white-space:nowrap;
+      z-index:2;
     }
 
-    .frame {
-      position: absolute;
-      inset: 72px 70px 72px 70px;
-      border-radius: 34px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.06);
-      display: grid;
-      place-items: center;
-      overflow: hidden;
+    /* Main site */
+    .site{
+      opacity:0;
+      transform:translateY(14px);
+      transition:opacity .8s ease, transform .8s ease;
+    }
+    .site.ready{opacity:1;transform:translateY(0)}
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      background:rgba(4,9,18,0.72);
+      backdrop-filter:blur(18px);
+    }
+    .nav-wrap{
+      min-height:var(--nav-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:22px;
+    }
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      letter-spacing:-0.03em;
+    }
+    .brand img{
+      width:44px;
+      height:44px;
+      object-fit:contain;
+      filter:drop-shadow(0 0 18px rgba(116,176,255,0.15));
+    }
+    .brand span{font-size:1.05rem}
+
+    .desktop-nav,.nav-actions{display:flex;align-items:center;gap:28px}
+    .desktop-nav a,.nav-drop-toggle{
+      color:#edf2ff;
+      font-weight:700;
+      background:none;
+      border:none;
+      padding:0;
+      font-size:.97rem;
+      cursor:pointer;
+    }
+    .nav-drop{position:relative}
+    .nav-drop-menu{
+      position:absolute;
+      top:calc(100% + 18px);
+      left:0;
+      min-width:280px;
+      padding:12px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(7,12,24,0.98);
+      box-shadow:0 24px 60px rgba(0,0,0,0.45);
+      display:none;
+    }
+    .nav-drop:hover .nav-drop-menu,
+    .nav-drop:focus-within .nav-drop-menu{display:block}
+    .nav-drop-menu a{display:block;padding:12px 14px;border-radius:12px}
+    .nav-drop-menu a:hover{background:rgba(255,255,255,0.05)}
+
+    .menu-toggle{
+      display:none;
+      width:48px;
+      height:48px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.04);
+      color:#fff;
+      font-size:1.15rem;
+    }
+    .mobile-nav{display:none;padding:0 0 18px}
+    .mobile-nav.open{display:block}
+    .mobile-panel{
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:rgba(7,13,24,0.96);
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+    .mobile-panel a,.mobile-panel summary{
+      display:block;
+      padding:14px 12px;
+      border-radius:12px;
+      font-weight:700;
+      list-style:none;
+      cursor:pointer;
+    }
+    .mobile-panel a:hover,.mobile-panel summary:hover,.mobile-panel details[open] summary{background:rgba(255,255,255,0.05)}
+    .mobile-submenu{padding:4px 0 0 10px}
+    .mobile-submenu a{color:var(--muted);font-weight:600}
+    .mobile-panel summary::-webkit-details-marker{display:none}
+
+    /* Hero */
+    .hero{
+      position:relative;
+      padding:74px 0 30px;
+      overflow:clip;
+    }
+    .orb{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(95px);
+      pointer-events:none;
+      opacity:.5;
+    }
+    .orb-a{width:340px;height:340px;top:110px;left:-80px;background:rgba(43,120,255,0.18)}
+    .orb-b{width:280px;height:280px;top:520px;right:-60px;background:rgba(116,176,255,0.12)}
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:40px;
+      align-items:center;
+    }
+    .hero-copy h1{
+      margin:18px 0 18px;
+      max-width:770px;
+      font-size:clamp(3.2rem,8vw,6.2rem);
+      line-height:.92;
+      letter-spacing:-0.07em;
+    }
+    .hero-copy p{
+      margin:0;
+      max-width:690px;
+      color:var(--muted);
+      font-size:1.08rem;
+      line-height:1.88;
+    }
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+    .hero-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+    .meta-chip{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.07);
+      background:rgba(255,255,255,0.03);
+      color:#dce7fb;
+      font-size:.9rem;
     }
 
-    .frame::before {
-      content: "";
-      position: absolute;
-      inset: 18px;
-      border-radius: 28px;
-      background: radial-gradient(circle at center, rgba(88,166,255,0.17), transparent 62%), rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.04);
+    .hero-visual{
+      position:relative;
+      min-height:560px;
+      padding:24px;
+      border-radius:34px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012)),
+        radial-gradient(circle at top right, rgba(116,176,255,0.14), transparent 26%),
+        rgba(8,13,24,0.88);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .hero-visual::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size:36px 36px;
+      mask-image:linear-gradient(to bottom, black, transparent 92%);
+      opacity:.22;
+    }
+    .visual-frame{
+      position:absolute;
+      inset:74px 64px 74px 64px;
+      border-radius:34px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012));
+      border:1px solid rgba(255,255,255,0.06);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+    }
+    .visual-frame::before{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border-radius:28px;
+      background:radial-gradient(circle at center, rgba(116,176,255,0.16), transparent 64%), rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .hero-symbol{
+      position:relative;
+      width:min(78%, 300px);
+      filter:drop-shadow(0 0 34px rgba(116,176,255,0.2));
+      animation:floatSymbol 4.2s ease-in-out infinite;
+      z-index:1;
+    }
+    @keyframes floatSymbol{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
     }
 
-    .hero-main-logo {
-      position: relative;
-      width: min(76%, 290px);
-      filter: brightness(1.52) saturate(1.15) drop-shadow(0 0 34px rgba(43,120,255,0.3));
-      animation: heroPulse 3.4s ease-in-out infinite;
+    .floating-card{
+      position:absolute;
+      max-width:235px;
+      padding:18px;
+      border-radius:20px;
+      background:rgba(6,11,22,0.9);
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 16px 40px rgba(0,0,0,0.3);
+      backdrop-filter:blur(12px);
+      animation:floatCard 5.5s ease-in-out infinite;
+      z-index:2;
     }
+    .floating-card strong{display:block;margin-bottom:8px;font-size:1rem}
+    .floating-card p{margin:0;color:var(--muted);line-height:1.75;font-size:.92rem}
+    .card-top{top:24px;right:24px}
+    .card-bottom{bottom:24px;left:24px;animation-delay:-2.1s}
+    @keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-    @keyframes heroPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.035); }
+    /* Categories */
+    .featured{padding:64px 0 0}
+    .featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+    .feature-card{
+      position:relative;
+      padding:28px;
+      min-height:260px;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.014));
+      overflow:hidden;
+      transition:transform .24s ease,border-color .24s ease,box-shadow .24s ease;
     }
-
-    .floating-card {
-      position: absolute;
-      max-width: 230px;
-      padding: 18px;
-      border-radius: 20px;
-      background: rgba(6, 11, 22, 0.88);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
-      backdrop-filter: blur(12px);
-      animation: floatCard 5.2s ease-in-out infinite;
+    .feature-card:hover{transform:translateY(-5px);border-color:var(--line-strong);box-shadow:0 22px 50px rgba(0,0,0,0.25)}
+    .feature-no{
+      display:inline-flex;
+      width:44px;height:44px;
+      align-items:center;justify-content:center;
+      border-radius:14px;
+      margin-bottom:18px;
+      font-weight:800;
+      color:#dce7ff;
+      background:rgba(43,120,255,0.12);
+      border:1px solid rgba(116,176,255,0.18);
     }
+    .feature-card h3{margin:0 0 10px;font-size:1.24rem;letter-spacing:-0.03em}
+    .feature-card p{margin:0 0 18px;color:var(--muted);line-height:1.82}
+    .feature-link{font-weight:800;color:#dce7ff}
 
-    .floating-card strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 1rem;
+    /* Visual strip */
+    .visual-strip{padding:92px 0 0}
+    .visual-panel{
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:24px;
+      align-items:stretch;
     }
-
-    .floating-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: .92rem;
+    .visual-copy,.visual-image{
+      border-radius:30px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.03);
+      padding:30px;
     }
-
-    .card-a { top: 24px; right: 24px; }
-    .card-b { bottom: 24px; left: 24px; animation-delay: -2.2s; }
-
-    @keyframes floatCard {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .visual-copy p{margin:14px 0 0;color:var(--muted);line-height:1.86}
+    .mini-points{display:grid;gap:14px;margin-top:24px}
+    .mini-point{
+      border-radius:18px;
+      padding:16px 18px;
+      background:rgba(7,13,24,0.82);
+      border:1px solid rgba(255,255,255,0.06);
     }
+    .mini-point strong{display:block;margin-bottom:6px}
+    .mini-point span{color:var(--muted);line-height:1.7}
 
-    /* Featured services */
-    .featured {
-      padding: 62px 0 0;
+    .visual-image{
+      position:relative;
+      overflow:hidden;
+      min-height:420px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+      background:#060c17;
     }
-
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 22px;
+    .visual-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      opacity:.82;
+      transform:scale(1.03);
     }
-
-    .feature-card {
-      position: relative;
-      padding: 28px;
-      min-height: 250px;
-      border-radius: 26px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
-      overflow: hidden;
-      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--line-strong);
-      box-shadow: 0 22px 50px rgba(0,0,0,0.24);
-    }
-
-    .feature-no {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      margin-bottom: 18px;
-      color: #dbe7ff;
-      background: rgba(43,120,255,0.12);
-      border: 1px solid rgba(88,166,255,0.18);
-      font-weight: 800;
-    }
-
-    .feature-card h3 {
-      margin: 0 0 10px;
-      font-size: 1.24rem;
-      letter-spacing: -0.03em;
-    }
-
-    .feature-card p {
-      margin: 0 0 18px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .feature-link {
-      color: #d9e7ff;
-      font-weight: 700;
-    }
-
-    /* Preview */
-    .preview {
-      padding: 92px 0 0;
-    }
-
-    .preview-panel {
-      display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .preview-copy,
-    .preview-cards {
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.03);
-      padding: 30px;
-    }
-
-    .preview-copy p {
-      margin: 14px 0 0;
-      color: var(--muted);
-      line-height: 1.85;
-    }
-
-    .preview-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .mini-page {
-      padding: 14px 16px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.06);
-      background: rgba(7,13,24,0.72);
-    }
-
-    .mini-page strong { display: block; margin-bottom: 6px; }
-    .mini-page span { color: var(--muted); font-size: .92rem; }
-
-    .stack {
-      display: grid;
-      gap: 16px;
-    }
-
-    .stack-card {
-      border-radius: 22px;
-      padding: 20px;
-      background: rgba(7,13,24,0.82);
-      border: 1px solid rgba(255,255,255,0.06);
-      transform: translateX(0);
-      transition: transform .22s ease, border-color .22s ease;
-    }
-
-    .stack-card:hover {
-      transform: translateX(5px);
-      border-color: var(--line-strong);
-    }
-
-    .stack-card strong {
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .stack-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.75;
+    .visual-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(3,8,18,0.08), rgba(3,8,18,0.52));
     }
 
     /* CTA */
-    .cta {
-      padding: 92px 0 70px;
-    }
-
-    .cta-box {
-      padding: 38px;
-      border-radius: 34px;
-      border: 1px solid rgba(255,255,255,0.08);
+    .cta{padding:92px 0 72px}
+    .cta-box{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      flex-wrap:wrap;
+      padding:38px;
+      border-radius:34px;
+      border:1px solid rgba(255,255,255,0.08);
       background:
-        radial-gradient(circle at top right, rgba(88,166,255,0.13), transparent 28%),
-        rgba(8,14,26,0.92);
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      flex-wrap: wrap;
+        radial-gradient(circle at top right, rgba(116,176,255,0.14), transparent 28%),
+        rgba(8,13,24,0.92);
+      box-shadow:var(--shadow);
     }
+    .cta-box h2{margin:0 0 10px;font-size:clamp(2rem,4vw,3rem);line-height:1;letter-spacing:-0.05em}
+    .cta-box p{margin:0;max-width:720px;color:var(--muted);line-height:1.82}
 
-    .cta-box h2 {
-      margin: 0 0 10px;
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1;
-      letter-spacing: -0.05em;
+    footer{padding:0 0 36px}
+    .footer-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      padding-top:24px;
+      border-top:1px solid rgba(255,255,255,0.08);
     }
+    .footer-brand{display:inline-flex;align-items:center;gap:12px;font-weight:800}
+    .footer-brand img{width:40px;height:40px;object-fit:contain}
+    .footer-copy{color:var(--muted)}
 
-    .cta-box p {
-      margin: 0;
-      max-width: 720px;
-      color: var(--muted);
-      line-height: 1.8;
+    [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .75s ease, transform .75s ease}
+    [data-reveal].show{opacity:1;transform:translateY(0)}
+
+    @media (max-width: 1024px){
+      .hero-grid,.visual-panel,.featured-grid{grid-template-columns:1fr 1fr}
+      .featured-grid .feature-card:last-child{grid-column:span 2}
     }
-
-    footer {
-      padding: 0 0 36px;
+    @media (max-width: 860px){
+      .desktop-nav,.nav-actions{display:none}
+      .menu-toggle{display:inline-flex;align-items:center;justify-content:center}
+      .hero-grid,.visual-panel,.featured-grid{grid-template-columns:1fr}
+      .featured-grid .feature-card:last-child{grid-column:auto}
+      .hero{padding-top:46px}
+      .hero-visual{min-height:460px}
+      .visual-frame{inset:82px 30px 74px 30px}
+      .hero-copy h1{font-size:clamp(2.8rem,14vw,4.8rem)}
     }
-
-    .footer-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      flex-wrap: wrap;
-    }
-
-    .footer-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-    }
-
-    .footer-brand img {
-      width: 40px;
-      height: 40px;
-      object-fit: contain;
-      filter: brightness(1.45) saturate(1.12);
-    }
-
-    .footer-copy { color: var(--muted); }
-
-    [data-reveal] {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-
-    [data-reveal].show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 1024px) {
-      .hero-grid,
-      .preview-panel,
-      .featured-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .featured-grid .feature-card:last-child { grid-column: span 2; }
-    }
-
-    @media (max-width: 860px) {
-      .desktop-nav, .nav-actions { display: none; }
-      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
-      .hero-grid,
-      .featured-grid,
-      .preview-panel { grid-template-columns: 1fr; }
-      .featured-grid .feature-card:last-child { grid-column: auto; }
-      .hero { padding-top: 46px; }
-      .hero-visual { min-height: 460px; }
-      .frame { inset: 72px 34px 72px 34px; }
-      .hero-copy h1 { font-size: clamp(2.8rem, 14vw, 4.8rem); }
-    }
-
-    @media (max-width: 560px) {
-      .container { width: min(var(--max), calc(100% - 22px)); }
-      .intro-card { padding: 34px 18px; border-radius: 24px; }
-      .hero-visual { min-height: 430px; padding: 18px; border-radius: 28px; }
-      .frame { inset: 88px 18px 74px 18px; border-radius: 24px; }
-      .floating-card {
-        max-width: calc(100% - 36px);
-        left: 18px;
-        right: 18px;
-      }
-      .card-a { top: 18px; }
-      .card-b { bottom: 18px; }
-      .feature-card,
-      .preview-copy,
-      .preview-cards,
-      .cta-box { padding: 24px 20px; border-radius: 24px; }
+    @media (max-width: 560px){
+      .container{width:min(var(--max), calc(100% - 22px))}
+      .splash-wrap{min-height:380px;border-radius:26px}
+      .loader-ring{width:190px;height:190px}
+      .hero-visual{min-height:430px;padding:18px;border-radius:28px}
+      .visual-frame{inset:92px 18px 78px 18px;border-radius:24px}
+      .floating-card{max-width:calc(100% - 36px);left:18px;right:18px}
+      .card-top{top:18px}
+      .card-bottom{bottom:18px}
+      .feature-card,.visual-copy,.cta-box{padding:24px 20px;border-radius:24px}
     }
   </style>
 </head>
 <body>
-  <div id="intro" aria-hidden="true">
-    <div class="intro-grid"></div>
-    <div class="intro-card">
-      <img src="logo-blue.png" alt="NxtGenGuard logo" class="intro-logo" />
-      <div class="pill">Modern websites, apps, and digital systems</div>
-      <h1>NxtGenGuard</h1>
-      <p>Premium digital systems for companies that want to look stronger, operate smarter, and scale with cleaner technology.</p>
+  <div id="splash" aria-hidden="true">
+    <div class="splash-grid"></div>
+    <div class="splash-wrap">
+      <div class="loader-ring"></div>
+      <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" class="splash-logo" />
+      <div class="splash-text">Preparing digital experience</div>
     </div>
   </div>
 
@@ -734,7 +555,7 @@
     <header>
       <div class="container nav-wrap">
         <a class="brand" href="index.html">
-          <img src="logo-blue.png" alt="NxtGenGuard logo" />
+          <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
           <span>NxtGenGuard</span>
         </a>
 
@@ -757,7 +578,7 @@
         </nav>
 
         <div class="nav-actions">
-          <a class="btn btn-secondary" href="contact.html">Book a Consultation</a>
+          <a class="btn btn-secondary" href="contact.html">Start a Project</a>
         </div>
 
         <button class="menu-toggle" type="button" aria-label="Open menu" onclick="toggleMenu()">☰</button>
@@ -781,19 +602,19 @@
 
     <main>
       <section class="hero">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
+        <div class="orb orb-a"></div>
+        <div class="orb orb-b"></div>
         <div class="container hero-grid">
           <div class="hero-copy" data-reveal>
             <div class="pill">Built for modern businesses</div>
-            <h1>Premium websites, custom apps, and digital systems that feel built for the next level.</h1>
-            <p>NxtGenGuard helps businesses launch polished digital experiences through website design, custom applications, dashboards, automation, and cloud-ready delivery. Cleaner design. Better systems. Stronger presentation.</p>
+            <h1>Premium websites, custom apps, and digital systems that look sharp and work hard.</h1>
+            <p>NxtGenGuard builds websites, applications, dashboards, automation systems, and cloud-ready digital solutions for businesses that want a stronger online presence and cleaner internal operations.</p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="contact.html">Start a Project</a>
               <a class="btn btn-secondary" href="services.html">Explore Services</a>
             </div>
             <div class="hero-meta">
-              <span class="meta-chip">Web Design</span>
+              <span class="meta-chip">Websites</span>
               <span class="meta-chip">Custom Apps</span>
               <span class="meta-chip">Dashboards</span>
               <span class="meta-chip">Automation</span>
@@ -802,16 +623,18 @@
           </div>
 
           <div class="hero-visual" data-reveal>
-            <div class="floating-card card-a">
+            <div class="floating-card card-top">
               <strong>Custom Solutions</strong>
-              <p>Tailored builds designed around your workflow, business goals, and growth.</p>
+              <p>Systems built around real workflows, operations, and long-term business growth.</p>
             </div>
-            <div class="frame">
-              <img src="logo-blue.png" alt="NxtGenGuard logo" class="hero-main-logo" />
+
+            <div class="visual-frame">
+              <img src="assets/images/logo/shield-logo.png" alt="NxtGenGuard symbol" class="hero-symbol" />
             </div>
-            <div class="floating-card card-b">
+
+            <div class="floating-card card-bottom">
               <strong>Modern Delivery</strong>
-              <p>GitHub-based workflows, premium front-end design, and scalable cloud deployment.</p>
+              <p>Premium design, cleaner structure, and cloud-ready builds that feel built for the next level.</p>
             </div>
           </div>
         </div>
@@ -820,65 +643,61 @@
       <section class="featured">
         <div class="container">
           <div class="section-head" data-reveal>
-            <div class="pill">Core Services</div>
-            <h2>Keep the homepage sharp. Put the depth on dedicated pages.</h2>
-            <p>This homepage now stays focused on the first impression. Service details, case studies, and company information can live on their own pages instead of crowding the front.</p>
+            <div class="pill">What We Build</div>
+            <h2>Keep the homepage clean. Put the depth where it belongs.</h2>
+            <p>The front page should make a strong impression, not overload people. Service details, company story, project examples, and inquiry flow all live on their own pages so the brand feels more premium and more focused.</p>
           </div>
 
           <div class="featured-grid">
             <article class="feature-card" data-reveal>
               <div class="feature-no">01</div>
-              <h3>Web Design &amp; Development</h3>
-              <p>High-end business websites built for trust, speed, mobile polish, and a stronger digital presence.</p>
-              <a class="feature-link" href="services.html">View service page →</a>
+              <h3>Web</h3>
+              <p>Modern website design and development built to present your business better, load cleaner, and create a stronger first impression.</p>
+              <a class="feature-link" href="services.html">View services →</a>
             </article>
 
             <article class="feature-card" data-reveal>
               <div class="feature-no">02</div>
-              <h3>Custom Web Applications</h3>
-              <p>Purpose-built systems that match your workflow instead of forcing your business into generic tools.</p>
-              <a class="feature-link" href="services.html">View service page →</a>
+              <h3>Systems</h3>
+              <p>Custom applications, dashboards, client portals, and internal tools designed around how your team actually works.</p>
+              <a class="feature-link" href="services.html">View services →</a>
             </article>
 
             <article class="feature-card" data-reveal>
               <div class="feature-no">03</div>
-              <h3>Dashboards, Automation &amp; Cloud</h3>
-              <p>Reporting, portals, integrations, and deployment workflows that make operations cleaner and smarter.</p>
-              <a class="feature-link" href="services.html">View service page →</a>
+              <h3>Operations</h3>
+              <p>Automation, cloud deployment, and consulting that help businesses simplify processes and move with more confidence.</p>
+              <a class="feature-link" href="services.html">View services →</a>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="preview">
-        <div class="container preview-panel">
-          <div class="preview-copy" data-reveal>
-            <div class="pill">Site Structure</div>
-            <h2 style="margin:16px 0 0; font-size:clamp(2rem,4vw,3rem); line-height:1.02; letter-spacing:-0.05em;">A premium site should breathe.</h2>
-            <p>Your old layout had the hero, services, work, about, and contact all stacked on the same page. This new direction keeps the homepage as a premium entry point, then routes people to dedicated pages for the rest.</p>
-            <div class="preview-links">
-              <div class="mini-page"><strong>services.html</strong><span>Full service breakdown</span></div>
-              <div class="mini-page"><strong>work.html</strong><span>Portfolio and case studies</span></div>
-              <div class="mini-page"><strong>about.html</strong><span>Story, process, approach</span></div>
-              <div class="mini-page"><strong>contact.html</strong><span>Consultation and inquiry</span></div>
+      <section class="visual-strip">
+        <div class="container visual-panel">
+          <div class="visual-copy" data-reveal>
+            <div class="pill">Why NxtGenGuard</div>
+            <h2 style="margin:16px 0 0;font-size:clamp(2rem,4vw,3rem);line-height:1.03;letter-spacing:-0.05em;">Built to feel premium without feeling overdone.</h2>
+            <p>NxtGenGuard sits between a premium web studio, a systems company, and an IT-driven digital build partner. That means cleaner front-end design, stronger technical structure, and a business-first approach behind every project.</p>
+            <div class="mini-points">
+              <div class="mini-point">
+                <strong>Cleaner presentation</strong>
+                <span>Sharper design, stronger visual hierarchy, and a more polished digital presence.</span>
+              </div>
+              <div class="mini-point">
+                <strong>Smarter systems</strong>
+                <span>Applications, dashboards, and automation that reduce friction and support real operations.</span>
+              </div>
+              <div class="mini-point">
+                <strong>Built for growth</strong>
+                <span>From small businesses to internal teams, the goal is always cleaner structure and better delivery.</span>
+              </div>
             </div>
           </div>
 
-          <div class="preview-cards">
-            <div class="stack">
-              <div class="stack-card" data-reveal>
-                <strong>More premium feel</strong>
-                <p>Less scrolling noise, more space, stronger typography, cleaner hierarchy, and focused motion.</p>
-              </div>
-              <div class="stack-card" data-reveal>
-                <strong>Better animation direction</strong>
-                <p>Auto intro, reveal-on-scroll, floating glass cards, logo glow, and smoother page rhythm instead of everything hitting at once.</p>
-              </div>
-              <div class="stack-card" data-reveal>
-                <strong>Cleaner branding</strong>
-                <p>The logo is brightened with CSS so it reads against the dark background while you work on a stronger light/transparent logo version later.</p>
-              </div>
-            </div>
+          <div class="visual-image" data-reveal>
+            <img src="assets/images/logo/laptop-keyboard.jpg" alt="Modern technology workspace" />
+            <div class="visual-overlay"></div>
           </div>
         </div>
       </section>
@@ -889,7 +708,7 @@
             <div>
               <div class="pill">Ready to build</div>
               <h2>Let’s create something that looks expensive and performs like it.</h2>
-              <p>From polished front-end websites to custom business systems, NxtGenGuard helps companies move from outdated online presence to a cleaner premium digital identity.</p>
+              <p>Whether you need a stronger website, a custom application, a reporting system, or a cleaner digital workflow, NxtGenGuard helps businesses move from outdated to premium.</p>
             </div>
             <a class="btn btn-primary" href="contact.html">Start Your Project</a>
           </div>
@@ -900,7 +719,7 @@
     <footer>
       <div class="container footer-wrap">
         <div class="footer-brand">
-          <img src="logo-blue.png" alt="NxtGenGuard logo" />
+          <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
           <span>NxtGenGuard</span>
         </div>
         <div class="footer-copy">© 2026 NxtGenGuard. All rights reserved.</div>
@@ -909,32 +728,30 @@
   </div>
 
   <script>
-    const intro = document.getElementById('intro');
+    const splash = document.getElementById('splash');
     const siteRoot = document.getElementById('siteRoot');
     const mobileNav = document.getElementById('mobileNav');
 
     window.addEventListener('load', () => {
       setTimeout(() => {
-        intro.classList.add('hide');
+        splash.classList.add('hide');
         siteRoot.classList.add('ready');
-      }, 2200);
+      }, 2100);
     });
 
-    function toggleMenu() {
+    function toggleMenu(){
       mobileNav.classList.toggle('open');
       document.body.classList.toggle('nav-open');
     }
 
-    function closeMenu() {
+    function closeMenu(){
       mobileNav.classList.remove('open');
       document.body.classList.remove('nav-open');
     }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('show');
       });
     }, { threshold: 0.18 });
 
