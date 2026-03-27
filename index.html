@@ -290,16 +290,16 @@
     .hero {
       position: relative;
       min-height: calc(100vh - var(--nav-h));
-      display: block;
-      padding: 0;
+      overflow: hidden;
+      isolation: isolate;
     }
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, rgba(2, 5, 12, 0.9) 0%, rgba(3, 8, 18, 0.72) 36%, rgba(3, 8, 18, 0.72) 64%, rgba(2, 5, 12, 0.9) 100%),
-        linear-gradient(180deg, rgba(2, 5, 12, 0.38), rgba(2, 5, 12, 0.7)),
+        linear-gradient(90deg, rgba(2, 5, 12, 0.9) 0%, rgba(3, 8, 18, 0.7) 36%, rgba(3, 8, 18, 0.7) 64%, rgba(2, 5, 12, 0.9) 100%),
+        linear-gradient(180deg, rgba(2, 5, 12, 0.25), rgba(2, 5, 12, 0.62)),
         url("assets/images/logo/wallpapercode.jpg") center center / cover no-repeat;
       z-index: -3;
       transform: scale(1.03);
@@ -311,31 +311,44 @@
       background:
         radial-gradient(circle at 20% 22%, rgba(50, 110, 255, 0.14), transparent 25%),
         radial-gradient(circle at 80% 50%, rgba(108, 180, 255, 0.08), transparent 26%),
-        linear-gradient(180deg, rgba(2, 5, 12, 0.12), rgba(2, 5, 12, 0.4));
+        linear-gradient(180deg, rgba(2, 5, 12, 0.06) 0%, rgba(2, 5, 12, 0.18) 55%, rgba(2, 5, 12, 0.46) 100%);
       z-index: -2;
     }
-    .hero-grid {
-      display: block;
-      position: relative;
-      height: 100%;
-    }
-    .hero-copy {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0;
-      text-align: center;
+    .hero-bottom-fade {
       position: absolute;
-      bottom: 60px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 250px;
+      background: linear-gradient(180deg, rgba(2, 6, 17, 0), rgba(2, 6, 17, 0.34) 40%, rgba(2, 6, 17, 0.82) 100%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .hero-grid {
+      position: relative;
+      min-height: calc(100vh - var(--nav-h));
+    }
+    .hero-topline {
+      position: absolute;
+      top: 64px;
       left: 50%;
       transform: translateX(-50%);
-      width: 100%;
+      width: min(100%, 940px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+    .hero-topline .pill {
+      margin: 0 auto;
     }
     .intro-shell {
-      min-height: 78px;
+      min-height: 54px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 0 12px;
+      margin: 0;
     }
     .intro-line {
       position: relative;
@@ -350,6 +363,7 @@
       opacity: 0.94;
       text-align: center;
       transition: opacity 0.35s ease, transform 0.35s ease;
+      text-shadow: 0 0 20px rgba(14, 26, 52, 0.42);
     }
     .intro-line .cursor {
       width: 11px;
@@ -360,19 +374,44 @@
       animation: blink 0.9s steps(1) infinite;
     }
     @keyframes blink { 50% { opacity: 0; } }
+    .hero-copy {
+      position: absolute;
+      left: 50%;
+      bottom: 42px;
+      transform: translateX(-50%);
+      width: min(100%, 980px);
+      padding: 0 16px;
+      text-align: center;
+    }
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      width: min(100%, 760px);
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(20, 38, 74, 0.5) 0%, rgba(14, 26, 52, 0.24) 46%, rgba(14, 26, 52, 0) 76%);
+      filter: blur(12px);
+      pointer-events: none;
+      z-index: -1;
+    }
     .hero-copy h1 {
-      margin: 18px auto 14px;
+      margin: 0 auto 14px;
       max-width: 9.3ch;
-      font-size: clamp(3rem, 6.7vw, 5.15rem);
+      font-size: clamp(3rem, 6.5vw, 5rem);
       line-height: 0.9;
       letter-spacing: -0.085em;
+      text-shadow: 0 12px 34px rgba(0, 0, 0, 0.34);
     }
     .hero-copy p {
       margin: 0 auto;
       max-width: 730px;
       color: var(--muted);
-      font-size: 1.03rem;
-      line-height: 1.82;
+      font-size: 1.02rem;
+      line-height: 1.8;
+      text-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
     }
     .hero-meta {
       display: flex;
@@ -397,11 +436,12 @@
       padding: 13px 16px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(6, 11, 22, 0.4);
+      background: rgba(6, 11, 22, 0.42);
       backdrop-filter: blur(14px);
       color: #d3e1f7;
       font-size: 0.94rem;
       line-height: 1.72;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
     }
 
     .scroll-float {
@@ -411,10 +451,6 @@
       transform: translate3d(var(--float-x), var(--float-y), 0) scale(var(--float-scale));
       transition: transform 0.18s linear;
       will-change: transform;
-    }
-
-    .hero-copy .pill {
-      margin-inline: auto;
     }
 
     /* Services */
@@ -791,15 +827,18 @@
       }
       .hero {
         min-height: auto;
-        align-items: flex-end;
-        padding-top: 36px;
-        padding-bottom: 26px;
+        padding-top: 0;
       }
       .hero-grid {
-        grid-template-columns: 1fr;
+        min-height: calc(100vh - var(--nav-h));
+      }
+      .hero-topline {
+        top: 42px;
+        width: calc(100% - 24px);
       }
       .hero-copy {
-        max-width: 100%;
+        bottom: 28px;
+        width: calc(100% - 8px);
       }
       .hero-copy h1 { font-size: clamp(2.9rem, 13vw, 4.8rem); }
       .premium-media { min-height: auto; }
@@ -817,16 +856,21 @@
       .container { width: min(var(--max), calc(100% - 22px)); }
       .splash-wrap { min-height: 380px; border-radius: 26px; }
       .loader-ring { width: 190px; height: 190px; }
-      .hero-copy,
       .premium-copy,
       .cta-box { padding-left: 20px; padding-right: 20px; }
+      .hero-topline {
+        top: 34px;
+      }
       .intro-shell {
-        min-height: 62px;
-        margin-bottom: 6px;
+        min-height: 48px;
+        margin-bottom: 0;
+      }
+      .hero-copy {
+        bottom: 18px;
+        padding: 0 10px;
       }
       .hero-copy h1 {
         max-width: 8.5ch;
-        margin-top: 12px;
         font-size: clamp(2.5rem, 13vw, 3.8rem);
       }
       .hero-copy p {
@@ -916,16 +960,17 @@
     <main>
       <section class="hero">
         <div class="container hero-grid">
-          <div class="hero-copy scroll-float" data-reveal data-depth="0.08">
+          <div class="hero-topline">
             <div class="pill">Built for modern businesses</div>
-
             <div class="intro-shell">
               <div class="intro-line" id="typedIntro" aria-live="polite">
                 <span id="typedText"></span>
                 <span class="cursor"></span>
               </div>
             </div>
+          </div>
 
+          <div class="hero-copy scroll-float" data-reveal data-depth="0.05">
             <h1>Cleaner websites, sharper systems, and digital delivery that feels built for the next level.</h1>
             <p>
               NxtGenGuard builds premium websites, applications, dashboards, automation systems, and cloud-ready digital solutions for businesses that want a stronger presence, better structure, and a more modern way to operate.
@@ -944,6 +989,7 @@
             </div>
           </div>
         </div>
+        <div class="hero-bottom-fade"></div>
       </section>
 
       <section class="featured">
