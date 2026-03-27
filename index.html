@@ -291,7 +291,7 @@
       position: relative;
       min-height: calc(100vh - var(--nav-h));
       display: flex;
-      align-items: flex-end;
+      align-items: stretch;
       padding: 48px 0 34px;
       overflow: clip;
       isolation: isolate;
@@ -321,12 +321,14 @@
       display: grid;
       grid-template-columns: minmax(0, 1040px);
       justify-content: center;
+      height: 100%;
     }
     .hero-copy {
       max-width: 860px;
       margin: 0 auto;
       padding: 18px 0 0;
       text-align: center;
+      margin-top: auto;
     }
     .intro-shell {
       min-height: 78px;
