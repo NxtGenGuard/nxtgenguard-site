@@ -500,7 +500,7 @@
       --float-y: 0px;
       --float-scale: 1;
       transform: translate3d(var(--float-x), var(--float-y), 0) scale(var(--float-scale));
-      transition: transform 0.18s linear;
+      transition: transform 0.14s linear;
       will-change: transform;
     }
 
@@ -690,6 +690,8 @@
       height: auto;
       object-fit: cover;
       opacity: 0.95;
+      transform: translate3d(0, 0, 0) scale(1.08);
+      transition: transform 0.16s linear, filter 0.16s linear;
     }
 
     .dashboard-card::after {
@@ -750,8 +752,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.08);
-      transition: transform 1.1s var(--ease), filter 1.1s var(--ease);
+      transform: translate3d(0, 0, 0) scale(1.08);
+      transition: transform 0.16s linear, filter 0.16s linear;
       filter: saturate(1.02);
     }
 
@@ -909,13 +911,13 @@
     [data-reveal] {
       opacity: 0;
       --reveal-x: 0px;
-      --reveal-y: 34px;
+      --reveal-y: 88px;
       transform: translate3d(
         calc(var(--float-x, 0px) + var(--reveal-x)),
         calc(var(--float-y, 0px) + var(--reveal-y)),
         0
       ) scale(var(--float-scale, 1));
-      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+      transition: opacity 1s var(--ease), transform 1s var(--ease);
       will-change: opacity, transform;
     }
 
@@ -925,8 +927,8 @@
       --reveal-y: 0px;
     }
 
-    [data-reveal="left"] { --reveal-x: -48px; --reveal-y: 0px; }
-    [data-reveal="right"] { --reveal-x: 48px; --reveal-y: 0px; }
+    [data-reveal="left"] { --reveal-x: -88px; --reveal-y: 0px; }
+    [data-reveal="right"] { --reveal-x: 88px; --reveal-y: 0px; }
 
     .parallax { will-change: transform; }
 
@@ -981,6 +983,13 @@
         --float-y: 0px !important;
         --float-scale: 1 !important;
       }
+
+      [data-reveal] {
+        --reveal-y: 42px;
+      }
+
+      [data-reveal="left"] { --reveal-x: -34px; --reveal-y: 0px; }
+      [data-reveal="right"] { --reveal-x: 34px; --reveal-y: 0px; }
     }
 
     @media (max-width: 560px) {
@@ -1313,7 +1322,7 @@
           entry.target.classList.add('show');
         }
       });
-    }, { threshold: 0.16 });
+    }, { threshold: 0.12 });
 
     document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
 
@@ -1324,7 +1333,7 @@
           entry.target.classList.add('active');
         }
       });
-    }, { threshold: 0.55 });
+    }, { threshold: 0.5 });
 
     featureCards.forEach((card) => cardObserver.observe(card));
 
@@ -1334,12 +1343,14 @@
       scrollFloatItems.forEach((item) => {
         const rect = item.getBoundingClientRect();
         const center = rect.top + rect.height / 2;
-        const distance = (center - vh / 2) / vh;
+        const distance = Math.max(-1, Math.min(1, (center - vh / 2) / vh));
         const depth = Number(item.dataset.depth || 0.08);
         const xSeed = Number(item.dataset.x || 0);
-        const yMove = distance * -120 * depth;
-        const xMove = xSeed * distance;
-        const scale = 1 + ((1 - Math.min(Math.abs(distance), 1)) * depth * 0.08);
+
+        const yMove = distance * -280 * depth;
+        const xMove = xSeed * distance * 1.9;
+        const scale = 1 + ((1 - Math.abs(distance)) * depth * 0.14);
+
         item.style.setProperty('--float-x', `${xMove.toFixed(2)}px`);
         item.style.setProperty('--float-y', `${yMove.toFixed(2)}px`);
         item.style.setProperty('--float-scale', scale.toFixed(3));
@@ -1348,16 +1359,23 @@
       parallaxItems.forEach((item) => {
         const rect = item.getBoundingClientRect();
         const center = rect.top + rect.height / 2;
-        const distance = (center - vh / 2) / vh;
-        item.style.filter = `saturate(${1 + (1 - Math.min(Math.abs(distance), 1)) * 0.08})`;
+        const distance = Math.max(-1, Math.min(1, (center - vh / 2) / vh));
+        const media = item.tagName === 'IMG' ? item : item.querySelector('img');
+
+        if (media) {
+          media.style.transform = `translate3d(0, ${distance * -48}px, 0) scale(1.08)`;
+          media.style.filter = `saturate(${1 + (1 - Math.abs(distance)) * 0.18})`;
+        } else {
+          item.style.filter = `saturate(${1 + (1 - Math.abs(distance)) * 0.12})`;
+        }
       });
 
       if (dashboardCard) {
         const rect = dashboardCard.getBoundingClientRect();
         const center = rect.top + rect.height / 2;
         const distance = Math.max(-1, Math.min(1, (center - vh / 2) / vh));
-        const scale = 1 + (0.05 * (1 - Math.abs(distance)));
-        dashboardCard.style.transform = `translate3d(0, ${distance * -20}px, 0) scale(${scale}) rotateX(${distance * -2.8}deg)`;
+        const scale = 1 + (0.08 * (1 - Math.abs(distance)));
+        dashboardCard.style.transform = `translate3d(0, ${distance * -42}px, 0) scale(${scale}) rotateX(${distance * -4.5}deg)`;
       }
     }
 
