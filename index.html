@@ -291,8 +291,8 @@
       position: relative;
       min-height: calc(100vh - var(--nav-h));
       display: flex;
-      align-items: center;
-      padding: 48px 0 54px;
+      align-items: flex-end;
+      padding: 48px 0 34px;
       overflow: clip;
       isolation: isolate;
     }
@@ -325,7 +325,7 @@
     .hero-copy {
       max-width: 860px;
       margin: 0 auto;
-      padding: 18px 0 10px;
+      padding: 18px 0 0;
       text-align: center;
     }
     .intro-shell {
@@ -359,25 +359,25 @@
     }
     @keyframes blink { 50% { opacity: 0; } }
     .hero-copy h1 {
-      margin: 16px auto 18px;
-      max-width: 9.6ch;
-      font-size: clamp(3rem, 7.1vw, 5.4rem);
+      margin: 18px auto 14px;
+      max-width: 9.3ch;
+      font-size: clamp(3rem, 6.7vw, 5.15rem);
       line-height: 0.9;
-      letter-spacing: -0.08em;
+      letter-spacing: -0.085em;
     }
     .hero-copy p {
       margin: 0 auto;
-      max-width: 760px;
+      max-width: 730px;
       color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.86;
+      font-size: 1.03rem;
+      line-height: 1.82;
     }
     .hero-meta {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
       justify-content: center;
-      margin: 24px auto 0;
+      margin: 20px auto 0;
       max-width: 760px;
     }
     .meta-chip {
@@ -390,9 +390,9 @@
       backdrop-filter: blur(12px);
     }
     .hero-ghost-panel {
-      margin: 26px auto 0;
+      margin: 18px auto 0;
       max-width: 560px;
-      padding: 14px 16px;
+      padding: 13px 16px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: rgba(6, 11, 22, 0.4);
@@ -789,7 +789,9 @@
       }
       .hero {
         min-height: auto;
+        align-items: flex-end;
         padding-top: 36px;
+        padding-bottom: 26px;
       }
       .hero-grid {
         grid-template-columns: 1fr;
@@ -816,8 +818,13 @@
       .hero-copy,
       .premium-copy,
       .cta-box { padding-left: 20px; padding-right: 20px; }
+      .intro-shell {
+        min-height: 62px;
+        margin-bottom: 6px;
+      }
       .hero-copy h1 {
-        max-width: 8.6ch;
+        max-width: 8.5ch;
+        margin-top: 12px;
         font-size: clamp(2.5rem, 13vw, 3.8rem);
       }
       .hero-copy p {
