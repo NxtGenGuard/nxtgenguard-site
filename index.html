@@ -290,11 +290,8 @@
     .hero {
       position: relative;
       min-height: calc(100vh - var(--nav-h));
-      display: flex;
-      align-items: stretch;
-      padding: 48px 0 34px;
-      overflow: clip;
-      isolation: isolate;
+      display: block;
+      padding: 0;
     }
     .hero::before {
       content: "";
@@ -318,17 +315,20 @@
       z-index: -2;
     }
     .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1040px);
-      justify-content: center;
+      display: block;
+      position: relative;
       height: 100%;
     }
     .hero-copy {
       max-width: 860px;
       margin: 0 auto;
-      padding: 18px 0 0;
+      padding: 0;
       text-align: center;
-      margin-top: auto;
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
     }
     .intro-shell {
       min-height: 78px;
