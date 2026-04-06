@@ -596,22 +596,44 @@
       position: absolute;
       inset: 0;
       z-index: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: rgba(4, 9, 18, 0.96);
+      --media-bg: none;
+    }
+
+    .feature-media::before {
+      content: "";
+      position: absolute;
+      inset: -8%;
+      background-image: var(--media-bg);
+      background-size: cover;
+      background-position: center center;
+      filter: blur(28px) saturate(0.92) brightness(0.34);
+      transform: scale(1.18);
+      opacity: 0.96;
+      pointer-events: none;
     }
 
     .feature-media img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      opacity: 0.95;
-      transform: translate3d(0, 0, 0) scale(1.05);
+      object-fit: contain;
+      object-position: center center;
+      opacity: 0.98;
+      position: relative;
+      z-index: 1;
+      transform: translate3d(0, 0, 0) scale(1.01);
       transition: transform 0.5s var(--ease), filter 0.5s var(--ease);
-      filter: saturate(1.02) brightness(0.78);
+      filter: saturate(1.04) brightness(0.88);
     }
 
     .feature-card:hover .feature-media img,
     .feature-card.active .feature-media img {
-      transform: translate3d(0, 0, 0) scale(1.09);
-      filter: saturate(1.08) brightness(0.82);
+      transform: translate3d(0, 0, 0) scale(1.03);
+      filter: saturate(1.08) brightness(0.92);
     }
 
     .feature-body {
@@ -1198,7 +1220,7 @@
         var(--img-translate-x),
         calc(var(--img-translate-y) + var(--media-scroll-y)),
         0
-      ) scale(1.06);
+      ) scale(1.01);
       transition: transform 0.42s var(--ease), filter 0.42s var(--ease);
       will-change: transform;
       backface-visibility: hidden;
@@ -1211,8 +1233,8 @@
         var(--img-translate-x),
         calc(var(--img-translate-y) + var(--media-scroll-y)),
         0
-      ) scale(1.1);
-      filter: saturate(1.08) brightness(0.84);
+      ) scale(1.035);
+      filter: saturate(1.08) brightness(0.92);
     }
 
     .feature-body {
@@ -1293,27 +1315,44 @@
       inset: 0;
       overflow: hidden;
       background: rgba(5, 9, 18, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      --preview-scroll-y: 0px;
+      --preview-scale: 1.01;
+      --media-bg: none;
     }
 
-    .preview-main {
-      --preview-scroll-y: 0px;
-      --preview-scale: 1.04;
+    .preview-main::before {
+      content: "";
+      position: absolute;
+      inset: -8%;
+      background-image: var(--media-bg);
+      background-size: cover;
+      background-position: center center;
+      filter: blur(34px) saturate(0.94) brightness(0.32);
+      transform: scale(1.18);
+      opacity: 0.96;
+      pointer-events: none;
     }
 
     .preview-main img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      opacity: 0.96;
+      object-fit: contain;
+      object-position: center center;
+      opacity: 0.98;
+      position: relative;
+      z-index: 1;
       transform: translate3d(0, var(--preview-scroll-y), 0) scale(var(--preview-scale));
       transition: opacity 0.35s ease, transform 0.65s var(--ease), filter 0.65s var(--ease);
-      filter: saturate(1.04) brightness(0.82);
+      filter: saturate(1.04) brightness(0.9);
       will-change: transform, filter, opacity;
     }
 
     .preview-main.is-swapping img {
       opacity: 0.34;
-      transform: translate3d(0, calc(var(--preview-scroll-y) + 10px), 0) scale(1.02);
+      transform: translate3d(0, calc(var(--preview-scroll-y) + 6px), 0) scale(1.0);
     }
 
     .preview-main::after {
@@ -2047,6 +2086,21 @@
     const previewTitle = document.getElementById('previewTitle');
     const previewCopy = document.getElementById('previewCopy');
     const previewCard = document.getElementById('previewCard');
+
+    function setMediaBackground(target, src) {
+      if (!target || !src) return;
+      const safeSrc = String(src).replace(/"/g, '\\"');
+      target.style.setProperty('--media-bg', `url("${safeSrc}")`);
+    }
+
+    document.querySelectorAll('.feature-media').forEach((media) => {
+      const img = media.querySelector('img');
+      if (img) setMediaBackground(media, img.getAttribute('src') || img.src);
+    });
+
+    if (previewMain && previewImage) {
+      setMediaBackground(previewMain, previewImage.getAttribute('src') || previewImage.src);
+    }
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     window.addEventListener('load', () => {
@@ -2103,6 +2157,7 @@
       window.clearTimeout(setPreview.swapTimer);
       setPreview.swapTimer = window.setTimeout(() => {
         previewImage.src = nextSrc;
+        setMediaBackground(previewMain, nextSrc);
         previewTitle.textContent = nextTitle;
         previewCopy.textContent = nextCopy;
         previewMain.classList.remove('is-swapping');
@@ -2182,8 +2237,8 @@
         const distance = clamp((center - vh / 2) / vh, -1, 1);
         const focus = 1 - Math.abs(distance);
 
-        card.style.setProperty('--media-scroll-y', `${(distance * -42).toFixed(2)}px`);
-        card.style.setProperty('--body-scroll-y', `${(distance * -12).toFixed(2)}px`);
+        card.style.setProperty('--media-scroll-y', `${(distance * -16).toFixed(2)}px`);
+        card.style.setProperty('--body-scroll-y', `${(distance * -8).toFixed(2)}px`);
 
         if (!card.classList.contains('is-pointer-active')) {
           card.style.setProperty('--motion-y', `${(-focus * 8).toFixed(2)}px`);
@@ -2200,10 +2255,10 @@
         if (!media) return;
 
         if (item.id === 'previewMain') {
-          item.style.setProperty('--preview-scroll-y', `${(distance * -34).toFixed(2)}px`);
-          item.style.setProperty('--preview-scale', `${(1.04 + focus * 0.06).toFixed(3)}`);
+          item.style.setProperty('--preview-scroll-y', `${(distance * -12).toFixed(2)}px`);
+          item.style.setProperty('--preview-scale', `${(1.01 + focus * 0.025).toFixed(3)}`);
           if (previewCard) {
-            previewCard.style.setProperty('--preview-card-shift-y', `${(distance * -18).toFixed(2)}px`);
+            previewCard.style.setProperty('--preview-card-shift-y', `${(distance * -10).toFixed(2)}px`);
           }
           media.style.filter = `saturate(${(1 + focus * 0.2).toFixed(3)}) brightness(${(0.8 + focus * 0.08).toFixed(3)})`;
         } else if (!item.hasAttribute('data-tilt-card')) {
