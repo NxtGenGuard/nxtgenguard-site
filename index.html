@@ -1800,6 +1800,286 @@
       }
     }
 
+  
+    /* CTA video refinement */
+    .cta-box {
+      min-height: 0;
+      text-align: left;
+      padding: 34px 34px 34px;
+    }
+
+    .cta-inner {
+      width: min(1120px, 100%);
+      padding: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+      align-items: center;
+      gap: 34px;
+      justify-items: stretch;
+    }
+
+    .cta-copy {
+      display: grid;
+      gap: 20px;
+      align-content: center;
+      justify-items: start;
+    }
+
+    .cta-copy h2 {
+      margin: 0;
+      max-width: 8.5ch;
+      text-align: left;
+    }
+
+    .cta-copy-note {
+      margin: 0;
+      max-width: 48ch;
+      color: var(--muted);
+      line-height: 1.82;
+    }
+
+    .cta-actions {
+      justify-content: flex-start;
+    }
+
+    .cta-media {
+      display: grid;
+      gap: 12px;
+      align-content: center;
+    }
+
+    .cta-video-frame {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      border-radius: 26px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at top right, rgba(110, 189, 255, 0.14), transparent 26%),
+        rgba(5, 10, 20, 0.92);
+      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.3);
+      isolation: isolate;
+    }
+
+    .cta-video-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(4, 9, 18, 0.02), rgba(4, 9, 18, 0.28)),
+        radial-gradient(circle at 18% 18%, rgba(53, 93, 255, 0.14), transparent 28%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .cta-video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #040911;
+      position: relative;
+      z-index: 2;
+      display: block;
+    }
+
+    .cta-video-placeholder {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 8px;
+      text-align: center;
+      padding: 24px;
+      background:
+        linear-gradient(180deg, rgba(4, 9, 18, 0.26), rgba(4, 9, 18, 0.7)),
+        radial-gradient(circle at center, rgba(53, 93, 255, 0.16), transparent 42%);
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+    }
+
+    .cta-video-placeholder span {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .cta-video-placeholder small {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 28ch;
+    }
+
+    .cta-video-frame.has-video .cta-video-placeholder {
+      opacity: 0;
+    }
+
+    .cta-video-meta {
+      color: rgba(220, 232, 255, 0.66);
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    /* Cleaner premium footer */
+    .footer-shell.footer-shell--clean {
+      padding: 34px 32px 18px;
+      background:
+        radial-gradient(circle at top right, rgba(110, 189, 255, 0.11), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(31, 69, 202, 0.08), transparent 28%),
+        rgba(7, 12, 24, 0.86);
+    }
+
+    .footer-intro {
+      display: grid;
+      grid-template-columns: 1.16fr auto;
+      gap: 24px;
+      align-items: end;
+      padding-bottom: 24px;
+      margin-bottom: 26px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-kicker {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(220, 232, 255, 0.72);
+    }
+
+    .footer-intro h3 {
+      margin: 0;
+      font-size: clamp(1.55rem, 2.7vw, 2.45rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      max-width: 16ch;
+    }
+
+    .footer-intro p {
+      margin: 12px 0 0;
+      max-width: 54ch;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .footer-grid-clean {
+      display: grid;
+      grid-template-columns: 1.18fr 0.78fr 0.84fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .footer-col h4 {
+      margin: 0 0 14px;
+      font-size: 0.88rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(220, 232, 255, 0.72);
+    }
+
+    .footer-col-brand p {
+      margin: 16px 0 18px;
+      max-width: 32ch;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .footer-links-clean {
+      display: grid;
+      gap: 12px;
+    }
+
+    .footer-links-clean a {
+      color: #dbe6ff;
+      opacity: 0.88;
+      line-height: 1.56;
+      transition: opacity 0.24s ease, transform 0.24s ease;
+    }
+
+    .footer-links-clean a:hover {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+
+    .footer-contact-row-clean {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-chip-clean {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: #e8f0ff;
+      font-weight: 700;
+      transition: transform 0.24s ease, border-color 0.24s ease, background 0.24s ease;
+    }
+
+    .footer-chip-clean:hover {
+      transform: translateY(-2px);
+      border-color: rgba(126, 165, 255, 0.28);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-bottom {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    @media (max-width: 1080px) {
+      .cta-inner,
+      .footer-intro,
+      .footer-grid-clean {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-intro .btn {
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .cta-box {
+        padding: 24px 20px;
+      }
+
+      .cta-copy h2 {
+        max-width: none;
+      }
+
+      .cta-video-frame {
+        border-radius: 22px;
+      }
+
+      .cta-actions,
+      .cta-actions .btn,
+      .footer-intro .btn,
+      .footer-contact-row-clean,
+      .footer-contact-row-clean .footer-chip-clean {
+        width: 100%;
+      }
+
+      .cta-copy,
+      .cta-media {
+        gap: 16px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1927,8 +2207,7 @@
         <div class="container premium-shell">
           <div class="premium-copy scroll-float" data-reveal="left" data-depth="0.11" data-x="-14">
             <h2>Clean on the surface. Strong underneath.</h2>
-            <p class="section-copy">Hover a point to preview the kind of work you want to show here.</p>
-
+            
             <div class="mini-points">
               <button
                 class="mini-point active"
@@ -1993,11 +2272,37 @@
             </div>
 
             <div class="cta-inner">
-              <h2>Let’s build something that looks sharp and works hard.</h2>
+              <div class="cta-copy">
+                <h2>Let’s build something that looks sharp and works hard.</h2>
+                <p class="cta-copy-note">A short dashboard walkthrough or systems reel fits best here — keep it clean, visual, and under 30 seconds.</p>
 
-              <div class="cta-actions">
-                <a class="btn btn-primary" href="services.html">Explore Services</a>
-                <a class="btn btn-secondary" href="contact.html">Contact</a>
+                <div class="cta-actions">
+                  <a class="btn btn-primary" href="services.html">Explore Services</a>
+                  <a class="btn btn-secondary" href="contact.html">Contact</a>
+                </div>
+              </div>
+
+              <div class="cta-media">
+                <div class="cta-video-frame" id="ctaVideoFrame">
+                  <video
+                    id="ctaVideo"
+                    class="cta-video"
+                    controls
+                    playsinline
+                    preload="metadata"
+                    poster="assets/images/logo/cta-video-poster.jpg"
+                  >
+                    <source src="assets/images/logo/cta-showcase.mp4" type="video/mp4" />
+                    Your browser does not support HTML5 video.
+                  </video>
+
+                  <div class="cta-video-placeholder" id="ctaVideoPlaceholder">
+                    <span>CTA video placeholder</span>
+                    <small>Drop your file here: <strong>assets/images/logo/cta-showcase.mp4</strong></small>
+                  </div>
+                </div>
+
+                <div class="cta-video-meta">Recommended export: 16:10 · 1600×1000 or 1920×1200</div>
               </div>
             </div>
           </div>
@@ -2007,65 +2312,67 @@
 
     <footer>
       <div class="container">
-        <div class="footer-shell footer-shell--premium">
-          <div class="footer-header">
-            <div class="footer-header-copy">
-              <span class="footer-kicker">NxtGenGuard Resources</span>
-              <h3>Useful cyber resources. Cleaner systems. A stronger finish to the page.</h3>
-              <p>Keep the brand aligned with NxtGenGuard while still pointing visitors to practical tools, guidance, and a clear next step.</p>
+        <div class="footer-shell footer-shell--clean">
+          <div class="footer-intro">
+            <div class="footer-intro-copy">
+              <span class="footer-kicker">NxtGenGuard</span>
+              <h3>Sharper systems. Better visibility. A cleaner finish to the page.</h3>
+              <p>Keep the close of the homepage useful and premium — strong brand presence, clear navigation, practical resources, and one clean next step.</p>
             </div>
+
             <a class="btn btn-secondary" href="contact.html">Start a Conversation</a>
           </div>
 
-          <div class="footer-grid">
-            <div class="footer-card footer-card-brand">
+          <div class="footer-grid-clean">
+            <div class="footer-col footer-col-brand">
               <div class="footer-brand">
                 <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
                 <span>NxtGenGuard</span>
               </div>
+
               <p>Websites, dashboards, analytics layers, platforms, and security-aware systems built for modern businesses.</p>
-              <div class="footer-contact-row">
-                <a class="footer-chip" href="tel:+18182751690">(818) 275-1690</a>
-                <a class="footer-chip" href="contact.html">Email / Contact</a>
+
+              <div class="footer-contact-row-clean">
+                <a class="footer-chip-clean" href="tel:+18182751690">(818) 275-1690</a>
+                <a class="footer-chip-clean" href="contact.html">Email / Contact</a>
               </div>
             </div>
 
-            <div class="footer-card">
+            <div class="footer-col">
               <h4>Navigation</h4>
-              <div class="footer-link-list">
+              <div class="footer-links-clean">
                 <a href="index.html">Home</a>
                 <a href="services.html">Services</a>
                 <a href="work.html">Work</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <a href="terms.html">Terms &amp; Conditions</a>
               </div>
             </div>
 
-            <div class="footer-card">
-              <h4>Security Resources</h4>
-              <div class="footer-link-list">
+            <div class="footer-col">
+              <h4>Core Services</h4>
+              <div class="footer-links-clean">
+                <a href="services.html#websites">Websites</a>
+                <a href="services.html#platforms">Platforms</a>
+                <a href="services.html#systems">Systems</a>
+                <a href="services.html#automation">Automation &amp; Cloud</a>
+              </div>
+            </div>
+
+            <div class="footer-col">
+              <h4>Resources</h4>
+              <div class="footer-links-clean">
                 <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer">NIST Cybersecurity Framework</a>
                 <a href="https://www.cisa.gov/secure-our-world/recognize-and-report-phishing" target="_blank" rel="noopener noreferrer">CISA Phishing Guidance</a>
                 <a href="https://lookup.icann.org/" target="_blank" rel="noopener noreferrer">ICANN WHOIS Lookup</a>
                 <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a>
               </div>
             </div>
-
-            <div class="footer-card">
-              <h4>Cyber Tools</h4>
-              <div class="footer-link-list">
-                <a href="https://www.bitdefender.com/" target="_blank" rel="noopener noreferrer">Bitdefender</a>
-                <a href="https://cybermap.kaspersky.com/" target="_blank" rel="noopener noreferrer">Cyberthreat Live Map</a>
-                <a href="https://www.cisecurity.org/controls" target="_blank" rel="noopener noreferrer">CIS Controls</a>
-                <a href="https://www.comptia.org/en-us/certifications/security/" target="_blank" rel="noopener noreferrer">CompTIA Security+</a>
-              </div>
-            </div>
           </div>
 
           <div class="footer-bottom">
             <span>© 2026 NxtGenGuard. All rights reserved.</span>
-            <span>Websites · Dashboards · Analytics · Systems</span>
+            <span>Websites · Platforms · Dashboards · Systems</span>
           </div>
         </div>
       </div>
@@ -2086,6 +2393,13 @@
     const previewTitle = document.getElementById('previewTitle');
     const previewCopy = document.getElementById('previewCopy');
     const previewCard = document.getElementById('previewCard');
+    const ctaVideoFrame = document.getElementById('ctaVideoFrame');
+    const ctaVideo = document.getElementById('ctaVideo');
+    const CTA_VIDEO_ENABLED = true;
+    const CTA_VIDEO_AUDIO_ENABLED = false;
+    const CTA_VIDEO_AUTOPLAY = true;
+    const CTA_VIDEO_LOOP = true;
+
 
     function setMediaBackground(target, src) {
       if (!target || !src) return;
@@ -2103,7 +2417,42 @@
     }
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    function initCtaVideo() {
+      if (!ctaVideoFrame || !ctaVideo || !CTA_VIDEO_ENABLED) return;
+
+      ctaVideo.controls = true;
+      ctaVideo.loop = CTA_VIDEO_LOOP;
+      ctaVideo.muted = !CTA_VIDEO_AUDIO_ENABLED;
+
+      const markReady = () => {
+        ctaVideoFrame.classList.add('has-video');
+      };
+
+      const markEmpty = () => {
+        ctaVideoFrame.classList.remove('has-video');
+      };
+
+      ctaVideo.addEventListener('loadeddata', markReady);
+      ctaVideo.addEventListener('canplay', markReady);
+      ctaVideo.addEventListener('error', markEmpty);
+
+      try {
+        ctaVideo.load();
+      } catch (error) {
+        markEmpty();
+      }
+
+      if (CTA_VIDEO_AUTOPLAY && !CTA_VIDEO_AUDIO_ENABLED) {
+        ctaVideo.autoplay = true;
+        const playAttempt = ctaVideo.play();
+        if (playAttempt && typeof playAttempt.catch === 'function') {
+          playAttempt.catch(() => {});
+        }
+      }
+    }
+
     window.addEventListener('load', () => {
+      initCtaVideo();
       setTimeout(() => {
         splash.classList.add('hide');
         siteRoot.classList.add('ready');
