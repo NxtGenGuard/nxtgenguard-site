@@ -524,7 +524,16 @@
       --float-x: 0px;
       --float-y: 0px;
       --float-scale: 1;
-      transform: translate3d(var(--float-x), var(--float-y), 0) scale(var(--float-scale));
+      --motion-x: 0px;
+      --motion-y: 0px;
+      --tilt-x: 0deg;
+      --tilt-y: 0deg;
+      transform: translate3d(
+        calc(var(--float-x) + var(--motion-x)),
+        calc(var(--float-y) + var(--motion-y)),
+        0
+      ) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--float-scale));
+      transform-style: preserve-3d;
       transition: transform 0.14s linear;
       will-change: transform;
     }
@@ -905,10 +914,11 @@
       --reveal-x: 0px;
       --reveal-y: 88px;
       transform: translate3d(
-        calc(var(--float-x, 0px) + var(--reveal-x)),
-        calc(var(--float-y, 0px) + var(--reveal-y)),
+        calc(var(--float-x, 0px) + var(--motion-x, 0px) + var(--reveal-x)),
+        calc(var(--float-y, 0px) + var(--motion-y, 0px) + var(--reveal-y)),
         0
-      ) scale(var(--float-scale, 1));
+      ) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(var(--float-scale, 1));
+      transform-style: preserve-3d;
       transition: opacity 1s var(--ease), transform 1s var(--ease);
       will-change: opacity, transform;
     }
@@ -970,6 +980,10 @@
         --float-x: 0px !important;
         --float-y: 0px !important;
         --float-scale: 1 !important;
+        --motion-x: 0px !important;
+        --motion-y: 0px !important;
+        --tilt-x: 0deg !important;
+        --tilt-y: 0deg !important;
       }
 
       [data-reveal] {
@@ -1156,32 +1170,70 @@
     .feature-card {
       --img-translate-x: 0px;
       --img-translate-y: 0px;
+      --media-scroll-y: 0px;
       --body-x: 0px;
       --body-y: 0px;
+      --body-scroll-y: 0px;
+      --motion-x: 0px;
+      --motion-y: 0px;
+      --tilt-x: 0deg;
+      --tilt-y: 0deg;
+      transform-style: preserve-3d;
+      perspective: 1200px;
+    }
+
+    .feature-card:hover,
+    .feature-card.active,
+    .feature-card.is-pointer-active {
+      --motion-y: -10px;
+    }
+
+    .feature-media,
+    .feature-body {
+      transform-style: preserve-3d;
     }
 
     .feature-media img {
-      transform: translate3d(var(--img-translate-x), var(--img-translate-y), 0) scale(1.06);
+      transform: translate3d(
+        var(--img-translate-x),
+        calc(var(--img-translate-y) + var(--media-scroll-y)),
+        0
+      ) scale(1.06);
       transition: transform 0.42s var(--ease), filter 0.42s var(--ease);
       will-change: transform;
+      backface-visibility: hidden;
     }
 
     .feature-card:hover .feature-media img,
     .feature-card.active .feature-media img,
     .feature-card.is-pointer-active .feature-media img {
-      transform: translate3d(var(--img-translate-x), var(--img-translate-y), 0) scale(1.1);
+      transform: translate3d(
+        var(--img-translate-x),
+        calc(var(--img-translate-y) + var(--media-scroll-y)),
+        0
+      ) scale(1.1);
       filter: saturate(1.08) brightness(0.84);
     }
 
     .feature-body {
-      transform: translate3d(var(--body-x), var(--body-y), 0);
+      transform: translate3d(
+        var(--body-x),
+        calc(var(--body-y) + var(--body-scroll-y)),
+        24px
+      );
       transition: transform 0.35s var(--ease);
       will-change: transform;
+      backface-visibility: hidden;
     }
 
     .feature-card:hover .feature-body,
-    .feature-card.active .feature-body {
-      transform: translate3d(var(--body-x), calc(var(--body-y) - 4px), 0);
+    .feature-card.active .feature-body,
+    .feature-card.is-pointer-active .feature-body {
+      transform: translate3d(
+        var(--body-x),
+        calc(var(--body-y) + var(--body-scroll-y) - 4px),
+        28px
+      );
     }
 
     /* Hover preview section */
@@ -1243,19 +1295,25 @@
       background: rgba(5, 9, 18, 0.95);
     }
 
+    .preview-main {
+      --preview-scroll-y: 0px;
+      --preview-scale: 1.04;
+    }
+
     .preview-main img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       opacity: 0.96;
-      transform: translate3d(0, 0, 0) scale(1.04);
+      transform: translate3d(0, var(--preview-scroll-y), 0) scale(var(--preview-scale));
       transition: opacity 0.35s ease, transform 0.65s var(--ease), filter 0.65s var(--ease);
       filter: saturate(1.04) brightness(0.82);
+      will-change: transform, filter, opacity;
     }
 
     .preview-main.is-swapping img {
       opacity: 0.34;
-      transform: translate3d(0, 10px, 0) scale(1.02);
+      transform: translate3d(0, calc(var(--preview-scroll-y) + 10px), 0) scale(1.02);
     }
 
     .preview-main::after {
@@ -1283,27 +1341,69 @@
 
     .preview-scan {
       position: absolute;
-      left: -20%;
-      right: -20%;
-      top: 18%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(110, 189, 255, 0.56), transparent);
-      box-shadow: 0 0 18px rgba(110, 189, 255, 0.44);
-      animation: previewScanMove 5.6s linear infinite;
+      width: 62%;
+      height: 54%;
+      left: -8%;
+      top: 10%;
+      border-radius: 999px;
+      background: radial-gradient(circle at center, rgba(110, 189, 255, 0.22), rgba(110, 189, 255, 0.02) 48%, rgba(110, 189, 255, 0) 72%);
+      filter: blur(34px);
+      box-shadow: 0 0 44px rgba(90, 150, 255, 0.18);
+      animation: previewAuroraDrift 12s ease-in-out infinite alternate;
       z-index: 2;
-      opacity: 0.72;
+      opacity: 0.44;
       pointer-events: none;
+      mix-blend-mode: screen;
     }
 
-    @keyframes previewScanMove {
-      0% { transform: translateY(-220px); opacity: 0; }
-      10% { opacity: 0.7; }
-      50% { opacity: 0.9; }
-      90% { opacity: 0.4; }
-      100% { transform: translateY(460px); opacity: 0; }
+    .preview-scan::before,
+    .preview-scan::after {
+      content: "";
+      position: absolute;
+      border-radius: inherit;
+      background: radial-gradient(circle at center, rgba(110, 189, 255, 0.22), rgba(110, 189, 255, 0) 70%);
+      filter: blur(18px);
+      animation: previewAuroraPulse 8s ease-in-out infinite;
+    }
+
+    .preview-scan::before {
+      inset: 16% 20% 30% 10%;
+    }
+
+    .preview-scan::after {
+      inset: 36% 10% 12% 40%;
+      opacity: 0.7;
+      animation-delay: -4s;
+    }
+
+    @keyframes previewAuroraDrift {
+      0% {
+        transform: translate3d(-6%, -5%, 0) rotate(-8deg) scale(0.92);
+        opacity: 0.22;
+      }
+      50% {
+        transform: translate3d(18%, 4%, 0) rotate(2deg) scale(1.04);
+        opacity: 0.48;
+      }
+      100% {
+        transform: translate3d(4%, 16%, 0) rotate(8deg) scale(1.12);
+        opacity: 0.3;
+      }
+    }
+
+    @keyframes previewAuroraPulse {
+      0%, 100% {
+        transform: scale(0.88);
+        opacity: 0.28;
+      }
+      50% {
+        transform: scale(1.08);
+        opacity: 0.52;
+      }
     }
 
     .preview-card {
+      --preview-card-shift-y: 0px;
       position: absolute;
       right: 30px;
       bottom: 30px;
@@ -1315,6 +1415,7 @@
       backdrop-filter: blur(16px);
       box-shadow: 0 18px 38px rgba(0, 0, 0, 0.3);
       z-index: 3;
+      transform: translate3d(0, var(--preview-card-shift-y), 0);
       transition: transform 0.45s var(--ease), border-color 0.45s var(--ease), box-shadow 0.45s var(--ease);
     }
 
@@ -1332,7 +1433,7 @@
     }
 
     .preview-card.glow {
-      transform: translateY(-4px);
+      transform: translate3d(0, calc(var(--preview-card-shift-y) - 4px), 0);
       border-color: rgba(126, 165, 255, 0.28);
       box-shadow: 0 22px 42px rgba(0, 0, 0, 0.34);
     }
@@ -1746,6 +1847,7 @@
           <div class="featured-grid">
             <article class="feature-card parallax scroll-float" data-reveal data-depth="0.16" data-x="-20" data-tilt-card>
               <div class="feature-media">
+                <!-- Replace this path with your final websites image -->
                 <img src="assets/images/logo/Website2.png" alt="Websites service placeholder image" />
               </div>
               <div class="feature-body">
@@ -1757,6 +1859,7 @@
 
             <article class="feature-card parallax scroll-float" data-reveal data-depth="0.12" data-x="0" data-tilt-card>
               <div class="feature-media">
+                <!-- Replace this path with your final platforms image -->
                 <img src="assets/images/logo/Survey_Dashboard.png" alt="Platforms service placeholder image" />
               </div>
               <div class="feature-body">
@@ -1768,6 +1871,7 @@
 
             <article class="feature-card parallax scroll-float" data-reveal data-depth="0.16" data-x="20" data-tilt-card>
               <div class="feature-media">
+                <!-- Replace this path with your final systems image -->
                 <img src="assets/images/logo/Systems.png" alt="Systems service placeholder image" />
               </div>
               <div class="feature-body">
@@ -1943,6 +2047,7 @@
     const previewTitle = document.getElementById('previewTitle');
     const previewCopy = document.getElementById('previewCopy');
     const previewCard = document.getElementById('previewCard');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -2017,15 +2122,20 @@
 
     tiltCards.forEach((card) => {
       card.addEventListener('mousemove', (event) => {
+        if (prefersReducedMotion) return;
+
         const rect = card.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - 0.5;
         const y = (event.clientY - rect.top) / rect.height - 0.5;
 
         card.classList.add('is-pointer-active');
-        card.style.setProperty('--img-translate-x', `${(x * -18).toFixed(2)}px`);
-        card.style.setProperty('--img-translate-y', `${(y * -18).toFixed(2)}px`);
-        card.style.setProperty('--body-x', `${(x * 10).toFixed(2)}px`);
-        card.style.setProperty('--body-y', `${(y * 8).toFixed(2)}px`);
+        card.style.setProperty('--img-translate-x', `${(x * -24).toFixed(2)}px`);
+        card.style.setProperty('--img-translate-y', `${(y * -20).toFixed(2)}px`);
+        card.style.setProperty('--body-x', `${(x * 14).toFixed(2)}px`);
+        card.style.setProperty('--body-y', `${(y * 10).toFixed(2)}px`);
+        card.style.setProperty('--motion-x', `${(x * 6).toFixed(2)}px`);
+        card.style.setProperty('--tilt-x', `${(y * -6).toFixed(2)}deg`);
+        card.style.setProperty('--tilt-y', `${(x * 8).toFixed(2)}deg`);
       });
 
       card.addEventListener('mouseleave', () => {
@@ -2034,46 +2144,89 @@
         card.style.setProperty('--img-translate-y', '0px');
         card.style.setProperty('--body-x', '0px');
         card.style.setProperty('--body-y', '0px');
+        card.style.setProperty('--motion-x', '0px');
+        card.style.setProperty('--tilt-x', '0deg');
+        card.style.setProperty('--tilt-y', '0deg');
       });
     });
 
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
     function handleParallax() {
+      if (prefersReducedMotion) return;
+
       const vh = window.innerHeight;
 
       scrollFloatItems.forEach((item) => {
         const rect = item.getBoundingClientRect();
         const center = rect.top + rect.height / 2;
-        const distance = Math.max(-1, Math.min(1, (center - vh / 2) / vh));
+        const distance = clamp((center - vh / 2) / vh, -1, 1);
+        const focus = 1 - Math.abs(distance);
         const depth = Number(item.dataset.depth || 0.08);
         const xSeed = Number(item.dataset.x || 0);
 
-        const yMove = distance * -280 * depth;
-        const xMove = xSeed * distance * 1.9;
-        const scale = 1 + ((1 - Math.abs(distance)) * depth * 0.14);
+        const yMove = distance * -420 * depth;
+        const xMove = xSeed * distance * 2.5;
+        const scale = 1 + (focus * depth * 0.22);
 
         item.style.setProperty('--float-x', `${xMove.toFixed(2)}px`);
         item.style.setProperty('--float-y', `${yMove.toFixed(2)}px`);
         item.style.setProperty('--float-scale', scale.toFixed(3));
       });
 
+      featureCards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const distance = clamp((center - vh / 2) / vh, -1, 1);
+        const focus = 1 - Math.abs(distance);
+
+        card.style.setProperty('--media-scroll-y', `${(distance * -42).toFixed(2)}px`);
+        card.style.setProperty('--body-scroll-y', `${(distance * -12).toFixed(2)}px`);
+
+        if (!card.classList.contains('is-pointer-active')) {
+          card.style.setProperty('--motion-y', `${(-focus * 8).toFixed(2)}px`);
+        }
+      });
+
       parallaxItems.forEach((item) => {
         const rect = item.getBoundingClientRect();
         const center = rect.top + rect.height / 2;
-        const distance = Math.max(-1, Math.min(1, (center - vh / 2) / vh));
+        const distance = clamp((center - vh / 2) / vh, -1, 1);
+        const focus = 1 - Math.abs(distance);
         const media = item.tagName === 'IMG' ? item : item.querySelector('img');
 
-        if (media) {
-          const baseScale = item.id === 'previewMain' ? 1.04 : 1.07;
-          const translate = item.id === 'previewMain' ? distance * -16 : distance * -28;
-          media.style.transform = `translate3d(0, ${translate}px, 0) scale(${baseScale})`;
-          media.style.filter = `saturate(${1 + (1 - Math.abs(distance)) * 0.16}) brightness(${0.78 + (1 - Math.abs(distance)) * 0.06})`;
+        if (!media) return;
+
+        if (item.id === 'previewMain') {
+          item.style.setProperty('--preview-scroll-y', `${(distance * -34).toFixed(2)}px`);
+          item.style.setProperty('--preview-scale', `${(1.04 + focus * 0.06).toFixed(3)}`);
+          if (previewCard) {
+            previewCard.style.setProperty('--preview-card-shift-y', `${(distance * -18).toFixed(2)}px`);
+          }
+          media.style.filter = `saturate(${(1 + focus * 0.2).toFixed(3)}) brightness(${(0.8 + focus * 0.08).toFixed(3)})`;
+        } else if (!item.hasAttribute('data-tilt-card')) {
+          const translate = distance * -48;
+          const scale = 1.08 + focus * 0.04;
+          media.style.transform = `translate3d(0, ${translate.toFixed(2)}px, 0) scale(${scale.toFixed(3)})`;
+          media.style.filter = `saturate(${(1 + focus * 0.18).toFixed(3)}) brightness(${(0.78 + focus * 0.06).toFixed(3)})`;
         }
       });
     }
 
+    let scrollFrame = null;
+    function scheduleParallax() {
+      if (scrollFrame !== null) return;
+      scrollFrame = window.requestAnimationFrame(() => {
+        handleParallax();
+        scrollFrame = null;
+      });
+    }
+
     handleParallax();
-    window.addEventListener('scroll', handleParallax, { passive: true });
-    window.addEventListener('resize', handleParallax);
+    window.addEventListener('scroll', scheduleParallax, { passive: true });
+    window.addEventListener('resize', scheduleParallax);
   </script>
 </body>
 </html>
