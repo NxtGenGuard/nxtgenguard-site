@@ -2288,9 +2288,13 @@
                     id="ctaVideo"
                     class="cta-video"
                     controls
+                    autoplay
+                    muted
+                    loop
                     playsinline
-                    preload="metadata"
-                    poster="assets/images/logo/devia_vd.mp4"
+                    webkit-playsinline="true"
+                    preload="auto"
+                    poster="assets/images/logo/cta-video-poster.jpg"
                   >
                     <source src="assets/images/logo/cta-showcase.mp4" type="video/mp4" />
                     Your browser does not support HTML5 video.
@@ -2298,7 +2302,7 @@
 
                   <div class="cta-video-placeholder" id="ctaVideoPlaceholder">
                     <span>CTA video placeholder</span>
-                    <small>Drop your file here: <strong>assets/images/logo/devia_vd.mp4</strong></small>
+                    <small>Drop your file here: <strong>assets/images/logo/cta-showcase.mp4</strong></small>
                   </div>
                 </div>
 
@@ -2420,34 +2424,85 @@
     function initCtaVideo() {
       if (!ctaVideoFrame || !ctaVideo || !CTA_VIDEO_ENABLED) return;
 
-      ctaVideo.controls = true;
-      ctaVideo.loop = CTA_VIDEO_LOOP;
-      ctaVideo.muted = !CTA_VIDEO_AUDIO_ENABLED;
+      const sourceEl = ctaVideo.querySelector('source');
+      const hasSource = Boolean(sourceEl && sourceEl.getAttribute('src'));
+      if (!hasSource) {
+        ctaVideoFrame.classList.remove('has-video');
+        return;
+      }
 
       const markReady = () => {
-        ctaVideoFrame.classList.add('has-video');
+        if (ctaVideo.videoWidth > 0 && ctaVideo.videoHeight > 0) {
+          ctaVideoFrame.classList.add('has-video');
+        }
       };
 
       const markEmpty = () => {
         ctaVideoFrame.classList.remove('has-video');
       };
 
+      const tryPlayVideo = () => {
+        if (!CTA_VIDEO_AUTOPLAY || CTA_VIDEO_AUDIO_ENABLED) return;
+        const playAttempt = ctaVideo.play();
+        if (playAttempt && typeof playAttempt.catch === 'function') {
+          playAttempt.catch(() => {});
+        }
+      };
+
+      ctaVideo.controls = true;
+      ctaVideo.loop = CTA_VIDEO_LOOP;
+      ctaVideo.preload = 'auto';
+      ctaVideo.playsInline = true;
+      ctaVideo.setAttribute('playsinline', '');
+      ctaVideo.setAttribute('webkit-playsinline', 'true');
+      ctaVideo.defaultMuted = !CTA_VIDEO_AUDIO_ENABLED;
+      ctaVideo.muted = !CTA_VIDEO_AUDIO_ENABLED;
+
+      if (CTA_VIDEO_AUDIO_ENABLED) {
+        ctaVideo.autoplay = false;
+        ctaVideo.removeAttribute('autoplay');
+        ctaVideo.removeAttribute('muted');
+      } else {
+        ctaVideo.autoplay = CTA_VIDEO_AUTOPLAY;
+        ctaVideo.setAttribute('muted', '');
+        if (CTA_VIDEO_AUTOPLAY) {
+          ctaVideo.setAttribute('autoplay', '');
+        }
+      }
+
+      ctaVideo.addEventListener('loadedmetadata', () => {
+        markReady();
+        tryPlayVideo();
+      });
       ctaVideo.addEventListener('loadeddata', markReady);
-      ctaVideo.addEventListener('canplay', markReady);
+      ctaVideo.addEventListener('canplay', () => {
+        markReady();
+        tryPlayVideo();
+      });
+      ctaVideo.addEventListener('canplaythrough', () => {
+        markReady();
+        tryPlayVideo();
+      });
+      ctaVideo.addEventListener('playing', markReady);
       ctaVideo.addEventListener('error', markEmpty);
+      if (sourceEl) {
+        sourceEl.addEventListener('error', markEmpty);
+      }
+
+      const visibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          markReady();
+          tryPlayVideo();
+        });
+      }, { threshold: 0.35 });
+
+      visibilityObserver.observe(ctaVideoFrame);
 
       try {
         ctaVideo.load();
       } catch (error) {
         markEmpty();
-      }
-
-      if (CTA_VIDEO_AUTOPLAY && !CTA_VIDEO_AUDIO_ENABLED) {
-        ctaVideo.autoplay = true;
-        const playAttempt = ctaVideo.play();
-        if (playAttempt && typeof playAttempt.catch === 'function') {
-          playAttempt.catch(() => {});
-        }
       }
     }
 
