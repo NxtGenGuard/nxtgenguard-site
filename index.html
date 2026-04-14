@@ -1100,20 +1100,21 @@
     .hero-slogan {
       position: absolute;
       left: 50%;
-      top: 34%;
-      transform: translate(-50%, -50%);
+      top: clamp(54px, 9vw, 88px);
+      transform: translateX(-50%);
       text-align: center;
-      width: min(820px, 92%);
+      width: min(980px, 94%);
       pointer-events: none;
+      z-index: 3;
     }
 
     .hero-slogan span {
       display: inline-block;
-      font-size: clamp(0.96rem, 1.7vw, 1.3rem);
-      letter-spacing: 0.26em;
+      font-size: clamp(1rem, 1.45vw, 1.24rem);
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: rgba(235, 243, 255, 0.74);
-      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.36);
+      color: rgba(235, 243, 255, 0.84);
+      text-shadow: 0 12px 36px rgba(0, 0, 0, 0.44);
       animation: heroSloganFloat 6s ease-in-out infinite;
     }
 
@@ -1744,12 +1745,12 @@
 
     @media (max-width: 860px) {
       .hero-slogan {
-        top: 30%;
+        top: 54px;
       }
 
       .hero-slogan span {
-        font-size: 0.86rem;
-        letter-spacing: 0.22em;
+        font-size: 0.84rem;
+        letter-spacing: 0.2em;
       }
 
       .hero-grid {
@@ -1764,8 +1765,8 @@
 
     @media (max-width: 560px) {
       .hero-slogan {
-        top: 26%;
-        width: 92%;
+        top: 46px;
+        width: 94%;
       }
 
       .hero-copy--open h1 {
@@ -1800,64 +1801,71 @@
       }
     }
 
-  
     /* CTA video refinement */
     .cta-box {
-      min-height: 0;
-      text-align: left;
-      padding: 34px 34px 34px;
+      min-height: clamp(560px, 72vh, 760px);
+      text-align: center;
+      padding: 0;
+      overflow: hidden;
     }
 
     .cta-inner {
-      width: min(1120px, 100%);
-      padding: 0;
-      display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
-      align-items: center;
-      gap: 34px;
-      justify-items: stretch;
+      width: 100%;
+      min-height: inherit;
+      display: block;
+      position: relative;
     }
 
     .cta-copy {
+      position: absolute;
+      left: 50%;
+      bottom: 38px;
+      transform: translateX(-50%);
+      width: min(840px, calc(100% - 48px));
       display: grid;
       gap: 20px;
-      align-content: center;
-      justify-items: start;
+      justify-items: center;
+      align-content: end;
+      text-align: center;
+      z-index: 4;
     }
 
     .cta-copy h2 {
       margin: 0;
-      max-width: 8.5ch;
-      text-align: left;
+      max-width: 9.4ch;
+      text-align: center;
+      text-shadow: 0 16px 40px rgba(0, 0, 0, 0.52);
     }
 
-    .cta-copy-note {
-      margin: 0;
-      max-width: 48ch;
-      color: var(--muted);
-      line-height: 1.82;
+    .cta-copy-note,
+    .cta-video-placeholder,
+    .cta-video-meta {
+      display: none !important;
     }
 
     .cta-actions {
-      justify-content: flex-start;
+      justify-content: center;
     }
 
     .cta-media {
-      display: grid;
-      gap: 12px;
-      align-content: center;
+      position: absolute;
+      inset: 0;
+      display: block;
+      z-index: 1;
     }
 
     .cta-video-frame {
-      position: relative;
-      aspect-ratio: 16 / 10;
-      border-radius: 26px;
+      position: absolute;
+      inset: 0;
+      aspect-ratio: auto;
+      border-radius: inherit;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: none;
       background:
-        radial-gradient(circle at top right, rgba(110, 189, 255, 0.14), transparent 26%),
+        linear-gradient(180deg, rgba(4, 9, 18, 0.04), rgba(4, 9, 18, 0.34)),
+        url("assets/images/logo/cta-video-poster.jpg") center center / cover no-repeat,
         rgba(5, 10, 20, 0.92);
-      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.3);
+      box-shadow: none;
       isolation: isolate;
     }
 
@@ -1866,125 +1874,110 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(4, 9, 18, 0.02), rgba(4, 9, 18, 0.28)),
-        radial-gradient(circle at 18% 18%, rgba(53, 93, 255, 0.14), transparent 28%);
-      z-index: 1;
+        linear-gradient(180deg, rgba(4, 9, 18, 0.08) 0%, rgba(4, 9, 18, 0.22) 28%, rgba(4, 9, 18, 0.58) 68%, rgba(4, 9, 18, 0.9) 100%),
+        radial-gradient(circle at top right, rgba(110, 189, 255, 0.14), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(31, 69, 202, 0.12), transparent 32%);
+      z-index: 2;
       pointer-events: none;
     }
 
     .cta-video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #040911;
-      position: relative;
-      z-index: 2;
-      display: block;
-    }
-
-    .cta-video-placeholder {
       position: absolute;
       inset: 0;
-      z-index: 3;
-      display: grid;
-      place-items: center;
-      align-content: center;
-      gap: 8px;
-      text-align: center;
-      padding: 24px;
-      background:
-        linear-gradient(180deg, rgba(4, 9, 18, 0.26), rgba(4, 9, 18, 0.7)),
-        radial-gradient(circle at center, rgba(53, 93, 255, 0.16), transparent 42%);
-      transition: opacity 0.28s ease;
-      pointer-events: none;
-    }
-
-    .cta-video-placeholder span {
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .cta-video-placeholder small {
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 28ch;
-    }
-
-    .cta-video-frame.has-video .cta-video-placeholder {
-      opacity: 0;
-    }
-
-    .cta-video-meta {
-      color: rgba(220, 232, 255, 0.66);
-      font-size: 0.84rem;
-      line-height: 1.6;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      background: #040911;
+      z-index: 1;
+      display: block;
+      filter: saturate(1.02) contrast(1.02) brightness(0.9);
     }
 
     /* Cleaner premium footer */
     .footer-shell.footer-shell--clean {
-      padding: 34px 32px 18px;
+      padding: 34px 32px 20px;
       background:
-        radial-gradient(circle at top right, rgba(110, 189, 255, 0.11), transparent 26%),
+        radial-gradient(circle at top right, rgba(110, 189, 255, 0.1), transparent 24%),
         radial-gradient(circle at bottom left, rgba(31, 69, 202, 0.08), transparent 28%),
-        rgba(7, 12, 24, 0.86);
+        rgba(7, 12, 24, 0.84);
     }
 
     .footer-intro {
       display: grid;
-      grid-template-columns: 1.16fr auto;
+      grid-template-columns: minmax(0, 1.2fr) auto;
       gap: 24px;
       align-items: end;
-      padding-bottom: 24px;
+      padding-bottom: 22px;
       margin-bottom: 26px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .footer-kicker {
+    .footer-name {
       display: inline-block;
-      margin-bottom: 10px;
-      font-size: 0.76rem;
+      margin-bottom: 12px;
+      font-size: 1rem;
       font-weight: 800;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(220, 232, 255, 0.72);
+      letter-spacing: -0.02em;
+      color: rgba(235, 243, 255, 0.96);
     }
 
     .footer-intro h3 {
       margin: 0;
-      font-size: clamp(1.55rem, 2.7vw, 2.45rem);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      max-width: 16ch;
+      font-size: clamp(1.95rem, 3vw, 3rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      max-width: 14ch;
     }
 
     .footer-intro p {
       margin: 12px 0 0;
-      max-width: 54ch;
+      max-width: 58ch;
       color: var(--muted);
-      line-height: 1.8;
+      line-height: 1.82;
     }
 
     .footer-grid-clean {
       display: grid;
-      grid-template-columns: 1.18fr 0.78fr 0.84fr 1fr;
-      gap: 28px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(140px, 0.78fr) minmax(160px, 0.82fr) minmax(200px, 0.96fr);
+      gap: 34px;
       align-items: start;
     }
 
+    .footer-col {
+      min-width: 0;
+    }
+
     .footer-col h4 {
-      margin: 0 0 14px;
-      font-size: 0.88rem;
-      letter-spacing: 0.14em;
+      margin: 0 0 16px;
+      font-size: 0.86rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: rgba(220, 232, 255, 0.72);
     }
 
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .footer-brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      flex: 0 0 auto;
+    }
+
     .footer-col-brand p {
-      margin: 16px 0 18px;
-      max-width: 32ch;
+      margin: 0 0 20px;
+      max-width: 30ch;
       color: var(--muted);
-      line-height: 1.8;
+      line-height: 1.84;
     }
 
     .footer-links-clean {
@@ -1995,7 +1988,7 @@
     .footer-links-clean a {
       color: #dbe6ff;
       opacity: 0.88;
-      line-height: 1.56;
+      line-height: 1.6;
       transition: opacity 0.24s ease, transform 0.24s ease;
     }
 
@@ -2014,8 +2007,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 42px;
-      padding: 0 14px;
+      min-height: 44px;
+      padding: 0 15px;
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: rgba(255, 255, 255, 0.04);
@@ -2042,7 +2035,6 @@
     }
 
     @media (max-width: 1080px) {
-      .cta-inner,
       .footer-intro,
       .footer-grid-clean {
         grid-template-columns: 1fr;
@@ -2055,15 +2047,17 @@
 
     @media (max-width: 560px) {
       .cta-box {
-        padding: 24px 20px;
+        min-height: 520px;
+      }
+
+      .cta-copy {
+        width: calc(100% - 32px);
+        bottom: 24px;
+        gap: 16px;
       }
 
       .cta-copy h2 {
-        max-width: none;
-      }
-
-      .cta-video-frame {
-        border-radius: 22px;
+        max-width: 11ch;
       }
 
       .cta-actions,
@@ -2072,11 +2066,6 @@
       .footer-contact-row-clean,
       .footer-contact-row-clean .footer-chip-clean {
         width: 100%;
-      }
-
-      .cta-copy,
-      .cta-media {
-        gap: 16px;
       }
     }
 
@@ -2272,22 +2261,11 @@
             </div>
 
             <div class="cta-inner">
-              <div class="cta-copy">
-                <h2>Let’s build something that looks sharp and works hard.</h2>
-                <p class="cta-copy-note">A short dashboard walkthrough or systems reel fits best here — keep it clean, visual, and under 30 seconds.</p>
-
-                <div class="cta-actions">
-                  <a class="btn btn-primary" href="services.html">Explore Services</a>
-                  <a class="btn btn-secondary" href="contact.html">Contact</a>
-                </div>
-              </div>
-
               <div class="cta-media">
                 <div class="cta-video-frame" id="ctaVideoFrame">
                   <video
                     id="ctaVideo"
                     class="cta-video"
-                    controls
                     autoplay
                     muted
                     loop
@@ -2296,17 +2274,19 @@
                     preload="auto"
                     poster="assets/images/logo/cta-video-poster.jpg"
                   >
-                    <source src="assets/images/logo/FinalDevAi.mp4" type="video/mp4" />
+                    <source src="assets/images/logo/cta-showcase.mp4" type="video/mp4" />
                     Your browser does not support HTML5 video.
                   </video>
-
-                  <div class="cta-video-placeholder" id="ctaVideoPlaceholder">
-                    <span>CTA video placeholder</span>
-                    <small>Drop your file here: <strong>assets/images/logo/cta-showcase.mp4</strong></small>
-                  </div>
                 </div>
+              </div>
 
-                <div class="cta-video-meta">Recommended export: 16:10 · 1600×1000 or 1920×1200</div>
+              <div class="cta-copy">
+                <h2>Let’s build something that looks sharp and works hard.</h2>
+
+                <div class="cta-actions">
+                  <a class="btn btn-primary" href="services.html">Explore Services</a>
+                  <a class="btn btn-secondary" href="contact.html">Contact</a>
+                </div>
               </div>
             </div>
           </div>
@@ -2319,7 +2299,7 @@
         <div class="footer-shell footer-shell--clean">
           <div class="footer-intro">
             <div class="footer-intro-copy">
-              <span class="footer-kicker">NxtGenGuard</span>
+              <span class="footer-name">NxtGenGuard</span>
               <h3>Sharper systems. Better visibility. A cleaner finish to the page.</h3>
               <p>Keep the close of the homepage useful and premium — strong brand presence, clear navigation, practical resources, and one clean next step.</p>
             </div>
@@ -2403,6 +2383,7 @@
     const CTA_VIDEO_AUDIO_ENABLED = false;
     const CTA_VIDEO_AUTOPLAY = true;
     const CTA_VIDEO_LOOP = true;
+    const CTA_VIDEO_SHOW_CONTROLS = false;
 
 
     function setMediaBackground(target, src) {
@@ -2449,7 +2430,7 @@
         }
       };
 
-      ctaVideo.controls = true;
+      ctaVideo.controls = CTA_VIDEO_SHOW_CONTROLS || CTA_VIDEO_AUDIO_ENABLED;
       ctaVideo.loop = CTA_VIDEO_LOOP;
       ctaVideo.preload = 'auto';
       ctaVideo.playsInline = true;
@@ -2462,6 +2443,7 @@
         ctaVideo.autoplay = false;
         ctaVideo.removeAttribute('autoplay');
         ctaVideo.removeAttribute('muted');
+        ctaVideo.controls = true;
       } else {
         ctaVideo.autoplay = CTA_VIDEO_AUTOPLAY;
         ctaVideo.setAttribute('muted', '');
