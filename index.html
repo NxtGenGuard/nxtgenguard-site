@@ -306,11 +306,24 @@
       cursor: pointer;
     }
 
-    .nav-drop { position: relative; }
+    .nav-drop {
+      position: relative;
+      padding-bottom: 14px;
+      margin-bottom: -14px;
+    }
+
+    .nav-drop::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      height: 16px;
+    }
 
     .nav-drop-menu {
       position: absolute;
-      top: calc(100% + 18px);
+      top: calc(100% + 8px);
       left: 0;
       min-width: 280px;
       padding: 12px;
@@ -318,12 +331,28 @@
       border: 1px solid var(--line);
       background: rgba(7, 12, 24, 0.98);
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-      display: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    }
+
+    .nav-drop-menu::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -14px;
+      height: 14px;
     }
 
     .nav-drop:hover .nav-drop-menu,
     .nav-drop:focus-within .nav-drop-menu {
-      display: block;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
     .nav-drop-menu a {
@@ -1819,11 +1848,12 @@
     .cta-copy {
       position: absolute;
       left: 50%;
-      bottom: 38px;
+      right: auto;
+      bottom: 28px;
       transform: translateX(-50%);
-      width: min(840px, calc(100% - 48px));
+      width: min(1240px, calc(100% - 72px));
       display: grid;
-      gap: 20px;
+      gap: 16px;
       justify-items: center;
       align-content: end;
       text-align: center;
@@ -1832,9 +1862,14 @@
 
     .cta-copy h2 {
       margin: 0;
-      max-width: 9.4ch;
+      width: 100%;
+      max-width: none;
+      font-size: clamp(2.55rem, 5.6vw, 5.8rem);
+      line-height: 0.9;
+      letter-spacing: -0.055em;
       text-align: center;
-      text-shadow: 0 16px 40px rgba(0, 0, 0, 0.52);
+      text-wrap: balance;
+      text-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
     }
 
     .cta-copy-note,
@@ -1845,6 +1880,7 @@
 
     .cta-actions {
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .cta-media {
@@ -1894,154 +1930,111 @@
       filter: saturate(1.02) contrast(1.02) brightness(0.9);
     }
 
-    /* Cleaner premium footer */
+    .splash-text {
+      display: none !important;
+    }
+
+    /* Refined footer */
     .footer-shell.footer-shell--clean {
-      padding: 34px 32px 20px;
+      padding: 44px 34px 26px;
       background:
-        radial-gradient(circle at top right, rgba(110, 189, 255, 0.1), transparent 24%),
-        radial-gradient(circle at bottom left, rgba(31, 69, 202, 0.08), transparent 28%),
-        rgba(7, 12, 24, 0.84);
+        radial-gradient(circle at top right, rgba(110, 189, 255, 0.11), transparent 24%),
+        radial-gradient(circle at bottom left, rgba(31, 69, 202, 0.09), transparent 28%),
+        rgba(7, 12, 24, 0.86);
+      display: grid;
+      gap: 24px;
     }
 
     .footer-intro {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) auto;
-      gap: 24px;
-      align-items: end;
-      padding-bottom: 22px;
-      margin-bottom: 26px;
+      justify-items: center;
+      gap: 18px;
+      padding-bottom: 24px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
     }
 
-    .footer-name {
-      display: inline-block;
-      margin-bottom: 12px;
-      font-size: 1rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: rgba(235, 243, 255, 0.96);
+    .footer-mark {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      opacity: 0.95;
+      filter: drop-shadow(0 0 18px rgba(89, 152, 255, 0.18));
     }
 
     .footer-intro h3 {
       margin: 0;
-      font-size: clamp(1.95rem, 3vw, 3rem);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-      max-width: 14ch;
+      max-width: 18ch;
+      font-size: clamp(2.3rem, 4.6vw, 4.4rem);
+      line-height: 0.94;
+      letter-spacing: -0.065em;
+      text-wrap: balance;
     }
 
-    .footer-intro p {
-      margin: 12px 0 0;
-      max-width: 58ch;
-      color: var(--muted);
-      line-height: 1.82;
-    }
-
-    .footer-grid-clean {
+    .footer-resources {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(140px, 0.78fr) minmax(160px, 0.82fr) minmax(200px, 0.96fr);
-      gap: 34px;
-      align-items: start;
+      justify-items: center;
+      gap: 14px;
+      text-align: center;
     }
 
-    .footer-col {
-      min-width: 0;
-    }
-
-    .footer-col h4 {
-      margin: 0 0 16px;
-      font-size: 0.86rem;
-      letter-spacing: 0.16em;
+    .footer-resources h4 {
+      margin: 0;
+      font-size: 0.82rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(220, 232, 255, 0.72);
-    }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-      font-weight: 800;
-      font-size: 1.2rem;
-      letter-spacing: -0.03em;
-    }
-
-    .footer-brand img {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-      flex: 0 0 auto;
-    }
-
-    .footer-col-brand p {
-      margin: 0 0 20px;
-      max-width: 30ch;
-      color: var(--muted);
-      line-height: 1.84;
+      color: rgba(220, 232, 255, 0.66);
     }
 
     .footer-links-clean {
-      display: grid;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 12px;
     }
 
     .footer-links-clean a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
       color: #dbe6ff;
-      opacity: 0.88;
-      line-height: 1.6;
-      transition: opacity 0.24s ease, transform 0.24s ease;
+      opacity: 0.9;
+      line-height: 1.2;
+      transition: transform 0.22s ease, opacity 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+      text-align: center;
     }
 
     .footer-links-clean a:hover {
       opacity: 1;
-      transform: translateX(2px);
-    }
-
-    .footer-contact-row-clean {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .footer-chip-clean {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 0 15px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.04);
-      color: #e8f0ff;
-      font-weight: 700;
-      transition: transform 0.24s ease, border-color 0.24s ease, background 0.24s ease;
-    }
-
-    .footer-chip-clean:hover {
       transform: translateY(-2px);
-      border-color: rgba(126, 165, 255, 0.28);
-      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(110, 189, 255, 0.28);
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .footer-bottom {
-      margin-top: 26px;
-      padding-top: 18px;
+      margin-top: 4px;
+      padding-top: 22px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      color: var(--muted);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: rgba(212, 224, 246, 0.76);
+      font-size: 0.98rem;
     }
 
-    @media (max-width: 1080px) {
-      .footer-intro,
-      .footer-grid-clean {
-        grid-template-columns: 1fr;
+    @media (max-width: 900px) {
+      .footer-shell.footer-shell--clean {
+        padding: 38px 22px 24px;
       }
 
-      .footer-intro .btn {
-        justify-self: start;
+      .footer-intro h3 {
+        max-width: 14ch;
       }
     }
 
@@ -2051,23 +2044,33 @@
       }
 
       .cta-copy {
-        width: calc(100% - 32px);
-        bottom: 24px;
-        gap: 16px;
+        width: calc(100% - 28px);
+        bottom: 18px;
+        gap: 14px;
       }
 
       .cta-copy h2 {
-        max-width: 11ch;
+        width: 100%;
+        max-width: none;
+        font-size: clamp(2.15rem, 10.5vw, 3.6rem);
+        line-height: 0.92;
+      }
+
+      .footer-intro h3 {
+        max-width: none;
+        font-size: clamp(2rem, 10vw, 3.2rem);
+      }
+
+      .footer-links-clean a {
+        width: 100%;
       }
 
       .cta-actions,
-      .cta-actions .btn,
-      .footer-intro .btn,
-      .footer-contact-row-clean,
-      .footer-contact-row-clean .footer-chip-clean {
+      .cta-actions .btn {
         width: 100%;
       }
     }
+
 
   </style>
 </head>
@@ -2079,7 +2082,6 @@
         <div class="loader-ring"></div>
         <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" class="splash-logo" />
       </div>
-      <div class="splash-text">Preparing digital experience</div>
     </div>
   </div>
 
@@ -2272,9 +2274,9 @@
                     playsinline
                     webkit-playsinline="true"
                     preload="auto"
-                    poster="assets/images/logo/FinalDevAi.mp4"
+                    poster="assets/images/logo/cta-video-poster.jpg"
                   >
-                    <source src="assets/images/logo/FinalDevAi.mp4" type="video/mp4" />
+                    <source src="assets/images/logo/cta-showcase.mp4" type="video/mp4" />
                     Your browser does not support HTML5 video.
                   </video>
                 </div>
@@ -2298,65 +2300,22 @@
       <div class="container">
         <div class="footer-shell footer-shell--clean">
           <div class="footer-intro">
-            <div class="footer-intro-copy">
-              <span class="footer-name">NxtGenGuard</span>
-              <h3>Sharper systems. Better visibility. A cleaner finish to the page.</h3>
-              <p>Keep the close of the homepage useful and premium — strong brand presence, clear navigation, practical resources, and one clean next step.</p>
-            </div>
-
-            <a class="btn btn-secondary" href="contact.html">Start a Conversation</a>
+            <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" class="footer-mark" />
+            <h3>Sharper systems. Better visibility. A cleaner finish to the page.</h3>
           </div>
 
-          <div class="footer-grid-clean">
-            <div class="footer-col footer-col-brand">
-              <div class="footer-brand">
-                <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
-                <span>NxtGenGuard</span>
-              </div>
-
-              <p>Websites, dashboards, analytics layers, platforms, and security-aware systems built for modern businesses.</p>
-
-              <div class="footer-contact-row-clean">
-                <a class="footer-chip-clean" href="tel:+18182751690">(818) 275-1690</a>
-                <a class="footer-chip-clean" href="contact.html">Email / Contact</a>
-              </div>
-            </div>
-
-            <div class="footer-col">
-              <h4>Navigation</h4>
-              <div class="footer-links-clean">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <a href="work.html">Work</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-              </div>
-            </div>
-
-            <div class="footer-col">
-              <h4>Core Services</h4>
-              <div class="footer-links-clean">
-                <a href="services.html#websites">Websites</a>
-                <a href="services.html#platforms">Platforms</a>
-                <a href="services.html#systems">Systems</a>
-                <a href="services.html#automation">Automation &amp; Cloud</a>
-              </div>
-            </div>
-
-            <div class="footer-col">
-              <h4>Resources</h4>
-              <div class="footer-links-clean">
-                <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer">NIST Cybersecurity Framework</a>
-                <a href="https://www.cisa.gov/secure-our-world/recognize-and-report-phishing" target="_blank" rel="noopener noreferrer">CISA Phishing Guidance</a>
-                <a href="https://lookup.icann.org/" target="_blank" rel="noopener noreferrer">ICANN WHOIS Lookup</a>
-                <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a>
-              </div>
+          <div class="footer-resources">
+            <h4>Resources</h4>
+            <div class="footer-links-clean">
+              <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer">NIST Cybersecurity Framework</a>
+              <a href="https://www.cisa.gov/secure-our-world/recognize-and-report-phishing" target="_blank" rel="noopener noreferrer">CISA Phishing Guidance</a>
+              <a href="https://lookup.icann.org/" target="_blank" rel="noopener noreferrer">ICANN WHOIS Lookup</a>
+              <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a>
             </div>
           </div>
 
           <div class="footer-bottom">
-            <span>© 2026 NxtGenGuard. All rights reserved.</span>
-            <span>Websites · Platforms · Dashboards · Systems</span>
+            <span>© NxtGenGuard · Est. 2017 · All rights reserved.</span>
           </div>
         </div>
       </div>
@@ -2384,7 +2343,6 @@
     const CTA_VIDEO_AUTOPLAY = true;
     const CTA_VIDEO_LOOP = true;
     const CTA_VIDEO_SHOW_CONTROLS = false;
-
 
     function setMediaBackground(target, src) {
       if (!target || !src) return;
