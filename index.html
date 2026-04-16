@@ -274,19 +274,20 @@
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
+      justify-content: center;
+      gap: 0;
       font-weight: 800;
       letter-spacing: -0.03em;
     }
 
     .brand img {
-      width: 44px;
-      height: 44px;
+      width: 62px;
+      height: 62px;
       object-fit: contain;
-      filter: drop-shadow(0 0 18px rgba(116, 176, 255, 0.15));
+      filter: drop-shadow(0 0 22px rgba(116, 176, 255, 0.18));
     }
 
-    .brand span { font-size: 1.05rem; }
+    .brand span { display: none; }
 
     .desktop-nav,
     .nav-actions {
@@ -948,16 +949,14 @@
     .footer-cta {
       justify-self: end;
     }
-
-    .footer-bottom {
-      margin-top: 26px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      color: var(--muted);
+    .footer-pagebar {
+      margin-top: 22px;
+      padding: 18px 24px 26px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+      color: rgba(212, 224, 246, 0.76);
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
     }
 
     [data-reveal] {
@@ -1129,21 +1128,25 @@
     .hero-slogan {
       position: absolute;
       left: 50%;
-      top: clamp(54px, 9vw, 88px);
+      top: clamp(30px, 5vw, 54px);
       transform: translateX(-50%);
       text-align: center;
-      width: min(980px, 94%);
+      width: min(1120px, 96%);
       pointer-events: none;
       z-index: 3;
     }
 
     .hero-slogan span {
       display: inline-block;
-      font-size: clamp(1rem, 1.45vw, 1.24rem);
-      letter-spacing: 0.24em;
+      font-size: clamp(1.08rem, 1.62vw, 1.42rem);
+      font-weight: 800;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(235, 243, 255, 0.84);
-      text-shadow: 0 12px 36px rgba(0, 0, 0, 0.44);
+      color: #f5f9ff;
+      text-shadow:
+        0 0 16px rgba(196, 223, 255, 0.18),
+        0 0 34px rgba(74, 136, 255, 0.16),
+        0 12px 36px rgba(0, 0, 0, 0.46);
       animation: heroSloganFloat 6s ease-in-out infinite;
     }
 
@@ -1881,6 +1884,16 @@
     .cta-actions {
       justify-content: center;
       flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .cta-actions .btn {
+      min-width: 232px;
+      min-height: 68px;
+      padding: 0 28px;
+      border-radius: 18px;
+      font-size: 1.08rem;
+      line-height: 1;
     }
 
     .cta-media {
@@ -1936,7 +1949,7 @@
 
     /* Refined footer */
     .footer-shell.footer-shell--clean {
-      padding: 44px 34px 26px;
+      padding: 48px 34px 34px;
       background:
         radial-gradient(circle at top right, rgba(110, 189, 255, 0.11), transparent 24%),
         radial-gradient(circle at bottom left, rgba(31, 69, 202, 0.09), transparent 28%),
@@ -1948,33 +1961,28 @@
     .footer-intro {
       display: grid;
       justify-items: center;
-      gap: 18px;
-      padding-bottom: 24px;
+      gap: 0;
+      padding-bottom: 28px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       text-align: center;
     }
 
-    .footer-mark {
-      width: 46px;
-      height: 46px;
-      object-fit: contain;
-      opacity: 0.95;
-      filter: drop-shadow(0 0 18px rgba(89, 152, 255, 0.18));
-    }
+    .footer-mark { display: none !important; }
 
     .footer-intro h3 {
       margin: 0;
-      max-width: 18ch;
-      font-size: clamp(2.3rem, 4.6vw, 4.4rem);
-      line-height: 0.94;
+      max-width: 28ch;
+      font-size: clamp(2.2rem, 4.25vw, 4.65rem);
+      line-height: 0.93;
       letter-spacing: -0.065em;
       text-wrap: balance;
+      text-align: center;
     }
 
     .footer-resources {
       display: grid;
       justify-items: center;
-      gap: 14px;
+      gap: 16px;
       text-align: center;
     }
 
@@ -2034,7 +2042,7 @@
       }
 
       .footer-intro h3 {
-        max-width: 14ch;
+        max-width: 18ch;
       }
     }
 
@@ -2088,9 +2096,8 @@
   <div class="site" id="siteRoot">
     <header>
       <div class="container nav-wrap">
-        <a class="brand" href="index.html">
+        <a class="brand" href="index.html" aria-label="NxtGenGuard home">
           <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
-          <span>NxtGenGuard</span>
         </a>
 
         <nav class="desktop-nav" aria-label="Primary">
@@ -2274,9 +2281,9 @@
                     playsinline
                     webkit-playsinline="true"
                     preload="auto"
-                    poster="assets/images/logo/cta-video-poster.jpg"
+                    poster="assets/images/logo/FinalDevAi.mp4"
                   >
-                    <source src="assets/images/logo/cta-showcase.mp4" type="video/mp4" />
+                    <source src="assets/images/logo/FinalDevAi.mp4" type="video/mp4" />
                     Your browser does not support HTML5 video.
                   </video>
                 </div>
@@ -2300,7 +2307,6 @@
       <div class="container">
         <div class="footer-shell footer-shell--clean">
           <div class="footer-intro">
-            <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" class="footer-mark" />
             <h3>Sharper systems. Better visibility. A cleaner finish to the page.</h3>
           </div>
 
@@ -2313,12 +2319,9 @@
               <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a>
             </div>
           </div>
-
-          <div class="footer-bottom">
-            <span>© NxtGenGuard · Est. 2017 · All rights reserved.</span>
-          </div>
         </div>
       </div>
+      <div class="footer-pagebar">© NxtGenGuard · Established 2017 · All rights reserved.</div>
     </footer>
   </div>
 
