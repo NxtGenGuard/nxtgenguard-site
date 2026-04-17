@@ -469,6 +469,34 @@
       text-align: center;
     }
 
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 auto 18px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.035);
+      color: #dce7fb;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-2), var(--blue));
+      box-shadow: 0 0 14px rgba(120, 182, 255, 0.72);
+    }
+
     .hero-copy::before {
       content: "";
       position: absolute;
@@ -499,7 +527,7 @@
     }
 
     .hero-copy p {
-      max-width: 640px;
+      max-width: 760px;
       margin: 0 auto 22px;
       color: var(--muted);
       font-size: 1.05rem;
@@ -703,6 +731,97 @@
     .feature-card:hover .feature-link::after,
     .feature-card.active .feature-link::after {
       transform: translate(3px, -3px);
+    }
+
+    /* Proof section */
+    .proof {
+      padding: 48px 0 0;
+    }
+
+    .proof-shell {
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at top right, rgba(120, 182, 255, 0.09), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(41, 88, 206, 0.08), transparent 28%),
+        rgba(7, 12, 24, 0.82);
+      padding: 34px;
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.2);
+      display: grid;
+      gap: 24px;
+    }
+
+    .proof-top {
+      display: grid;
+      gap: 14px;
+      max-width: 880px;
+    }
+
+    .proof-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      color: #dce7fb;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .proof-kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-2), var(--blue));
+      box-shadow: 0 0 14px rgba(120, 182, 255, 0.72);
+    }
+
+    .proof-shell h2 {
+      margin: 0;
+      max-width: 15ch;
+      font-size: clamp(2rem, 3.6vw, 3.25rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .proof-shell p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.82;
+      font-size: 1rem;
+    }
+
+    .proof-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .proof-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      color: #e8f0ff;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .proof-builtfor {
+      max-width: 920px;
+      color: #e4edff;
+      line-height: 1.8;
+      font-weight: 600;
     }
 
     /* Why section */
@@ -988,6 +1107,8 @@
       .featured-grid,
       .premium-shell,
       .footer-top { grid-template-columns: 1fr; }
+
+      .proof-shell { padding: 26px; }
 
       .footer-nav { justify-content: flex-start; }
       .footer-cta { justify-self: start; }
@@ -1949,20 +2070,20 @@
 
     /* Refined footer */
     .footer-shell.footer-shell--clean {
-      padding: 48px 34px 34px;
+      padding: 52px 34px 34px;
       background:
         radial-gradient(circle at top right, rgba(110, 189, 255, 0.11), transparent 24%),
         radial-gradient(circle at bottom left, rgba(31, 69, 202, 0.09), transparent 28%),
         rgba(7, 12, 24, 0.86);
       display: grid;
-      gap: 24px;
+      gap: 28px;
     }
 
     .footer-intro {
       display: grid;
       justify-items: center;
       gap: 0;
-      padding-bottom: 28px;
+      padding-bottom: 26px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       text-align: center;
     }
@@ -1971,10 +2092,10 @@
 
     .footer-intro h3 {
       margin: 0;
-      max-width: 28ch;
-      font-size: clamp(2.2rem, 4.25vw, 4.65rem);
-      line-height: 0.93;
-      letter-spacing: -0.065em;
+      max-width: 24ch;
+      font-size: clamp(2.15rem, 4vw, 4.25rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
       text-wrap: balance;
       text-align: center;
     }
@@ -1986,7 +2107,9 @@
       text-align: center;
     }
 
-    .footer-resources h4 {
+    .footer-resources h4,
+    .footer-proof-block h4,
+    .footer-map-kicker {
       margin: 0;
       font-size: 0.82rem;
       letter-spacing: 0.22em;
@@ -2001,7 +2124,8 @@
       gap: 12px;
     }
 
-    .footer-links-clean a {
+    .footer-links-clean a,
+    .footer-links-clean span {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -2024,25 +2148,136 @@
       background: rgba(255, 255, 255, 0.05);
     }
 
-    .footer-bottom {
-      margin-top: 4px;
-      padding-top: 22px;
+    .footer-links-clean .footer-link-empty {
+      min-width: 132px;
+      opacity: 0.28;
+      pointer-events: none;
+    }
+
+    .footer-proof-wrap {
+      padding-top: 8px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: grid;
+      gap: 22px;
+      justify-items: center;
+    }
+
+    .footer-proof-block {
+      width: min(100%, 980px);
+      display: grid;
+      gap: 16px;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .footer-proof-block h5 {
+      margin: 0;
+      max-width: 18ch;
+      font-size: clamp(1.95rem, 3.2vw, 3rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-wrap: balance;
+    }
+
+    .footer-proof-block p {
+      margin: 0;
+      max-width: 900px;
+      color: var(--muted);
+      line-height: 1.82;
+      font-size: 1rem;
+    }
+
+    .footer-proof-pills {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
+      gap: 12px;
+      margin-top: 2px;
+    }
+
+    .footer-proof-pill {
+      display: inline-flex;
       align-items: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      color: #e8f0ff;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .footer-proof-builtfor {
+      max-width: 920px;
+      color: #e4edff !important;
+      line-height: 1.8 !important;
+      font-weight: 600;
+    }
+
+    .footer-map-shell {
+      width: min(100%, 1080px);
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .footer-map-card {
+      width: 100%;
+      padding: 16px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at top right, rgba(110, 189, 255, 0.08), transparent 24%),
+        rgba(5, 10, 20, 0.8);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .footer-map-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 4;
+      min-height: 330px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #050b14;
+    }
+
+    .footer-map-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .footer-map-note {
+      margin: 0;
+      color: rgba(219, 230, 255, 0.62);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .footer-pagebar {
+      margin-top: 18px;
+      padding: 18px 20px 0;
       text-align: center;
       color: rgba(212, 224, 246, 0.76);
       font-size: 0.98rem;
     }
 
+
     @media (max-width: 900px) {
       .footer-shell.footer-shell--clean {
-        padding: 38px 22px 24px;
+        padding: 38px 22px 26px;
       }
 
       .footer-intro h3 {
         max-width: 18ch;
+      }
+
+      .footer-map-frame {
+        min-height: 280px;
       }
     }
 
@@ -2069,8 +2304,18 @@
         font-size: clamp(2rem, 10vw, 3.2rem);
       }
 
-      .footer-links-clean a {
+      .footer-proof-block h5 {
+        max-width: none;
+        font-size: clamp(1.75rem, 8.8vw, 2.8rem);
+      }
+
+      .footer-links-clean a,
+      .footer-links-clean span {
         width: 100%;
+      }
+
+      .footer-map-frame {
+        min-height: 220px;
       }
 
       .cta-actions,
@@ -2118,7 +2363,7 @@
         </nav>
 
         <div class="nav-actions">
-          <a class="btn btn-secondary" href="contact.html">Contact</a>
+          <a class="btn btn-secondary" href="contact.html">Start a Project</a>
         </div>
 
         <button class="menu-toggle" type="button" aria-label="Open menu" onclick="toggleMenu()">☰</button>
@@ -2152,7 +2397,7 @@
           <div class="hero-copy hero-copy--open" data-reveal>
             <h1>Clear design. Strong systems.</h1>
             <p>
-              Websites, dashboards, analytics, and platforms built with cleaner presentation, stronger structure, and a security-minded edge.
+              Websites, dashboards, analytics, and operational platforms for service businesses, operations teams, and growing companies that need better visibility and cleaner systems.
             </p>
           </div>
         </div>
@@ -2169,7 +2414,7 @@
               </div>
               <div class="feature-body">
                 <h3>Websites</h3>
-                <p>Brand-forward websites built to make your business feel current, credible, and clear.</p>
+                <p>Websites built to present your business clearly and professionally.</p>
                 <a class="feature-link" href="services.html#websites">View service</a>
               </div>
             </article>
@@ -2181,7 +2426,7 @@
               </div>
               <div class="feature-body">
                 <h3>Platforms</h3>
-                <p>Dashboards, analytics views, portals, and internal tools shaped around real workflows.</p>
+                <p>Dashboards, portals, and internal tools built around how your team actually works.</p>
                 <a class="feature-link" href="services.html#platforms">View service</a>
               </div>
             </article>
@@ -2193,7 +2438,7 @@
               </div>
               <div class="feature-body">
                 <h3>Systems</h3>
-                <p>Automation, cloud, and security-aware infrastructure that keep operations moving.</p>
+                <p>Systems, automation, and cloud setup built to keep operations running cleanly.</p>
                 <a class="feature-link" href="services.html#systems">View service</a>
               </div>
             </article>
@@ -2204,18 +2449,18 @@
       <section class="premium-strip">
         <div class="container premium-shell">
           <div class="premium-copy scroll-float" data-reveal="left" data-depth="0.11" data-x="-14">
-            <h2>Clean on the surface. Strong underneath.</h2>
+            <h2>Looks clear up front. Holds up behind the scenes.</h2>
             
             <div class="mini-points">
               <button
-                class="mini-point active"
+                class="mini-point"
                 type="button"
                 data-preview="assets/images/logo/Webpage_techspace.png"
                 data-title="Sharper presentation"
-                data-copy="Show polished websites, cleaner hierarchy, and stronger brand presence in motion."
+                data-copy="Polished websites, stronger hierarchy, and a clearer first impression."
               >
                 <strong>Sharper presentation</strong>
-                <span>Cleaner design, better hierarchy, and a stronger first impression.</span>
+                <span>Websites that feel organized, current, and easy to trust.</span>
               </button>
 
               <button
@@ -2223,10 +2468,10 @@
                 type="button"
                 data-preview="assets/images/logo/dashboard_analytics.png"
                 data-title="Technical depth"
-                data-copy="Show dashboards, analytics layers, portals, and more technical systems work behind the interface."
+                data-copy="Dashboards, analytics layers, portals, and systems built with real functionality in mind."
               >
                 <strong>Technical depth</strong>
-                <span>Systems built with real functionality behind the interface.</span>
+                <span>Dashboards, portals, and internal tools with real structure behind the interface.</span>
               </button>
 
               <button
@@ -2234,10 +2479,10 @@
                 type="button"
                 data-preview="assets/images/logo/workflow_automation_dashboard.png"
                 data-title="Built for real use"
-                data-copy="Show automation, cloud structure, or security-aware systems that support real operations."
+                data-copy="Automation, cloud, and security-aware systems built to support daily operations cleanly."
               >
                 <strong>Built for real use</strong>
-                <span>Designed to support operations, visibility, and growth.</span>
+                <span>Systems designed for reporting, operations, visibility, and cleaner day-to-day workflows.</span>
               </button>
             </div>
           </div>
@@ -2250,8 +2495,8 @@
               <div class="preview-grid"></div>
               <div class="preview-scan"></div>
               <div class="preview-card" id="previewCard">
-                <strong id="previewTitle">Sharper presentation</strong>
-                <span id="previewCopy">Show polished websites, cleaner hierarchy, and stronger brand presence in motion.</span>
+                <strong id="previewTitle">Preview of what NxtGenGuard builds</strong>
+                <span id="previewCopy">Websites, dashboards, and systems designed to support how real teams work.</span>
               </div>
             </div>
           </div>
@@ -2290,11 +2535,11 @@
               </div>
 
               <div class="cta-copy">
-                <h2>Let’s build something that looks sharp and works hard.</h2>
+                <h2>Tell us what you need to build.</h2>
 
                 <div class="cta-actions">
-                  <a class="btn btn-primary" href="services.html">Explore Services</a>
-                  <a class="btn btn-secondary" href="contact.html">Contact</a>
+                  <a class="btn btn-primary" href="contact.html">Start a Project</a>
+                  <a class="btn btn-secondary" href="work.html">View Work</a>
                 </div>
               </div>
             </div>
@@ -2317,6 +2562,46 @@
               <a href="https://www.cisa.gov/secure-our-world/recognize-and-report-phishing" target="_blank" rel="noopener noreferrer">CISA Phishing Guidance</a>
               <a href="https://lookup.icann.org/" target="_blank" rel="noopener noreferrer">ICANN WHOIS Lookup</a>
               <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a>
+              <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
+              <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
+              <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
+              <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
+            </div>
+          </div>
+
+          <div class="footer-proof-wrap">
+            <div class="footer-proof-block">
+              <h5>Established in 2017. Based in Los Angeles. Built by an IT engineer.</h5>
+              <p>
+                NxtGenGuard brings IT engineering experience into websites, dashboards, and security-aware systems designed for day-to-day use — not just good screenshots.
+              </p>
+
+              <div class="footer-proof-pills" aria-label="NxtGenGuard proof signals">
+                <span class="footer-proof-pill">Established 2017</span>
+                <span class="footer-proof-pill">Los Angeles</span>
+                <span class="footer-proof-pill">IT engineer-led</span>
+                <span class="footer-proof-pill">Security-aware by design</span>
+              </div>
+
+              <p class="footer-proof-builtfor">
+                Built for service businesses, operations teams, and growing companies that need clearer presentation, better reporting, and stronger system structure.
+              </p>
+            </div>
+
+            <div class="footer-map-shell">
+              <div class="footer-map-kicker">Live cyberthreat map</div>
+              <div class="footer-map-card">
+                <div class="footer-map-frame">
+                  <iframe
+                    src="https://cybermap.kaspersky.com/en/widget/dynamic/dark"
+                    title="Kaspersky Cyberthreat Live Map"
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+              <p class="footer-map-note">Based on data from Kaspersky.</p>
             </div>
           </div>
         </div>
