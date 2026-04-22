@@ -434,11 +434,28 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, rgba(2, 5, 12, 0.9) 0%, rgba(3, 8, 18, 0.54) 36%, rgba(3, 8, 18, 0.54) 64%, rgba(2, 5, 12, 0.9) 100%),
-        linear-gradient(180deg, rgba(2, 5, 12, 0.14), rgba(2, 5, 12, 0.54)),
-        url("assets/images/logo/wallpapercode.jpg") center center / cover no-repeat;
+        linear-gradient(90deg, rgba(2, 5, 12, 0.92) 0%, rgba(3, 8, 18, 0.48) 34%, rgba(3, 8, 18, 0.48) 66%, rgba(2, 5, 12, 0.92) 100%),
+        linear-gradient(180deg, rgba(2, 5, 12, 0.16), rgba(2, 5, 12, 0.56));
       z-index: -3;
       transform: scale(1.03);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: -4;
+      overflow: hidden;
+      background: #020611;
+    }
+
+    .hero-bg-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      filter: saturate(0.92) brightness(0.36) contrast(1.05);
+      transform: scale(1.06);
     }
 
     .hero::after {
@@ -2009,12 +2026,16 @@
     }
 
     .cta-actions .btn {
-      min-width: 232px;
+      width: min(100%, 280px);
+      min-width: 280px;
       min-height: 68px;
       padding: 0 28px;
       border-radius: 18px;
       font-size: 1.08rem;
       line-height: 1;
+      justify-content: center;
+      text-align: center;
+      flex: 0 0 280px;
     }
 
     .cta-media {
@@ -2070,45 +2091,16 @@
 
     /* Refined footer */
     .footer-shell.footer-shell--clean {
-      padding: 52px 34px 34px;
+      padding: 28px 34px 30px;
       background:
         radial-gradient(circle at top right, rgba(110, 189, 255, 0.11), transparent 24%),
         radial-gradient(circle at bottom left, rgba(31, 69, 202, 0.09), transparent 28%),
         rgba(7, 12, 24, 0.86);
       display: grid;
-      gap: 28px;
-    }
-
-    .footer-intro {
-      display: grid;
-      justify-items: center;
-      gap: 0;
-      padding-bottom: 26px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      text-align: center;
-    }
-
-    .footer-mark { display: none !important; }
-
-    .footer-intro h3 {
-      margin: 0;
-      max-width: 24ch;
-      font-size: clamp(2.15rem, 4vw, 4.25rem);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-      text-wrap: balance;
-      text-align: center;
-    }
-
-    .footer-resources {
-      display: grid;
-      justify-items: center;
-      gap: 16px;
-      text-align: center;
+      gap: 22px;
     }
 
     .footer-resources h4,
-    .footer-proof-block h4,
     .footer-map-kicker {
       margin: 0;
       font-size: 0.82rem;
@@ -2155,91 +2147,47 @@
     }
 
     .footer-proof-wrap {
-      padding-top: 8px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: grid;
-      gap: 22px;
       justify-items: center;
-    }
-
-    .footer-proof-block {
-      width: min(100%, 980px);
-      display: grid;
-      gap: 16px;
-      justify-items: center;
-      text-align: center;
-    }
-
-    .footer-proof-block h5 {
-      margin: 0;
-      max-width: 18ch;
-      font-size: clamp(1.95rem, 3.2vw, 3rem);
-      line-height: 0.98;
-      letter-spacing: -0.05em;
-      text-wrap: balance;
-    }
-
-    .footer-proof-block p {
-      margin: 0;
-      max-width: 900px;
-      color: var(--muted);
-      line-height: 1.82;
-      font-size: 1rem;
-    }
-
-    .footer-proof-pills {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 2px;
-    }
-
-    .footer-proof-pill {
-      display: inline-flex;
-      align-items: center;
-      min-height: 44px;
-      padding: 0 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.03);
-      color: #e8f0ff;
-      font-weight: 700;
-      letter-spacing: 0.01em;
     }
 
     .footer-proof-builtfor {
       max-width: 920px;
-      color: #e4edff !important;
-      line-height: 1.8 !important;
+      margin: 0;
+      color: #e4edff;
+      line-height: 1.8;
       font-weight: 600;
+      text-align: center;
     }
 
     .footer-map-shell {
-      width: min(100%, 1080px);
+      width: min(100%, 1120px);
       display: grid;
-      gap: 12px;
+      gap: 14px;
       justify-items: center;
       text-align: center;
     }
 
     .footer-map-card {
       width: 100%;
-      padding: 16px;
-      border-radius: 28px;
+      padding: 18px;
+      border-radius: 30px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       background:
         radial-gradient(circle at top right, rgba(110, 189, 255, 0.08), transparent 24%),
         rgba(5, 10, 20, 0.8);
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+      display: grid;
+      gap: 18px;
+      justify-items: center;
     }
 
     .footer-map-frame {
       position: relative;
       width: 100%;
-      aspect-ratio: 9 / 4;
-      min-height: 330px;
-      border-radius: 20px;
+      aspect-ratio: 16 / 7;
+      min-height: 300px;
+      border-radius: 22px;
       overflow: hidden;
       background: #050b14;
     }
@@ -2252,10 +2200,19 @@
     }
 
     .footer-map-note {
-      margin: 0;
+      margin: -6px 0 0;
       color: rgba(219, 230, 255, 0.62);
       font-size: 0.88rem;
       line-height: 1.5;
+    }
+
+    .footer-resources.footer-resources--inside {
+      width: 100%;
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .footer-pagebar {
@@ -2299,16 +2256,6 @@
         line-height: 0.92;
       }
 
-      .footer-intro h3 {
-        max-width: none;
-        font-size: clamp(2rem, 10vw, 3.2rem);
-      }
-
-      .footer-proof-block h5 {
-        max-width: none;
-        font-size: clamp(1.75rem, 8.8vw, 2.8rem);
-      }
-
       .footer-links-clean a,
       .footer-links-clean span {
         width: 100%;
@@ -2318,9 +2265,14 @@
         min-height: 220px;
       }
 
-      .cta-actions,
+      .cta-actions {
+        width: 100%;
+      }
+
       .cta-actions .btn {
         width: 100%;
+        min-width: 0;
+        flex: 1 1 100%;
       }
     }
 
@@ -2389,6 +2341,21 @@
 
     <main>
       <section class="hero">
+        <div class="hero-media" aria-hidden="true">
+          <video
+            id="heroVideo"
+            class="hero-bg-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            webkit-playsinline="true"
+            preload="auto"
+            poster="assets/images/logo/wallpapercode.jpg"
+          >
+            <source src="assets/images/logo/NXGEGD.mp4" type="video/mp4" />
+          </video>
+        </div>
         <div class="container hero-grid">
           <div class="hero-slogan" aria-hidden="true">
             <span>Build sharper. See clearer. Stay guarded.</span>
@@ -2526,9 +2493,9 @@
                     playsinline
                     webkit-playsinline="true"
                     preload="auto"
-                    poster="assets/images/logo/FinalDevAi.mp4"
+                    poster="assets/images/logo/cta-video-poster.jpg"
                   >
-                    <source src="assets/images/logo/FinalDevAi.mp4" type="video/mp4" />
+                    <source src="assets/images/logo/cta-showcase.mp4" type="video/mp4" />
                     Your browser does not support HTML5 video.
                   </video>
                 </div>
@@ -2551,46 +2518,10 @@
     <footer>
       <div class="container">
         <div class="footer-shell footer-shell--clean">
-          <div class="footer-intro">
-            <h3>Sharper systems. Better visibility. A cleaner finish to the page.</h3>
-          </div>
-
-          <div class="footer-resources">
-            <h4>Resources</h4>
-            <div class="footer-links-clean">
-              <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer">NIST Cybersecurity Framework</a>
-              <a href="https://www.cisa.gov/secure-our-world/recognize-and-report-phishing" target="_blank" rel="noopener noreferrer">CISA Phishing Guidance</a>
-              <a href="https://lookup.icann.org/" target="_blank" rel="noopener noreferrer">ICANN WHOIS Lookup</a>
-              <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a>
-              <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
-              <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
-              <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
-              <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
-            </div>
-          </div>
-
           <div class="footer-proof-wrap">
-            <div class="footer-proof-block">
-              <h5>Established in 2017. Based in Los Angeles. Built by an IT engineer.</h5>
-              <p>
-                NxtGenGuard brings IT engineering experience into websites, dashboards, and security-aware systems designed for day-to-day use — not just good screenshots.
-              </p>
-
-              <div class="footer-proof-pills" aria-label="NxtGenGuard proof signals">
-                <span class="footer-proof-pill">Established 2017</span>
-                <span class="footer-proof-pill">Los Angeles</span>
-                <span class="footer-proof-pill">IT engineer-led</span>
-                <span class="footer-proof-pill">Security-aware by design</span>
-              </div>
-
-              <p class="footer-proof-builtfor">
-                Built for service businesses, operations teams, and growing companies that need clearer presentation, better reporting, and stronger system structure.
-              </p>
-            </div>
-
             <div class="footer-map-shell">
-              <div class="footer-map-kicker">Live cyberthreat map</div>
               <div class="footer-map-card">
+                <div class="footer-map-kicker">Live cyberthreat map</div>
                 <div class="footer-map-frame">
                   <iframe
                     src="https://cybermap.kaspersky.com/en/widget/dynamic/dark"
@@ -2600,8 +2531,26 @@
                     allowfullscreen
                   ></iframe>
                 </div>
+                <p class="footer-map-note">Based on data from Kaspersky.</p>
+
+                <div class="footer-resources footer-resources--inside">
+                  <h4>Resources</h4>
+                  <div class="footer-links-clean">
+                    <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer">NIST Cybersecurity Framework</a>
+                    <a href="https://www.cisa.gov/secure-our-world/recognize-and-report-phishing" target="_blank" rel="noopener noreferrer">CISA Phishing Guidance</a>
+                    <a href="https://lookup.icann.org/" target="_blank" rel="noopener noreferrer">ICANN WHOIS Lookup</a>
+                    <a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">OWASP Top 10</a>
+                    <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
+                    <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
+                    <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
+                    <span class="footer-link-empty" aria-hidden="true">&nbsp;</span>
+                  </div>
+                </div>
+
+                <p class="footer-proof-builtfor">
+                  Built for service businesses, operations teams, and growing companies that need clearer presentation, better reporting, and stronger system structure.
+                </p>
               </div>
-              <p class="footer-map-note">Based on data from Kaspersky.</p>
             </div>
           </div>
         </div>
@@ -2624,6 +2573,7 @@
     const previewTitle = document.getElementById('previewTitle');
     const previewCopy = document.getElementById('previewCopy');
     const previewCard = document.getElementById('previewCard');
+    const heroVideo = document.getElementById('heroVideo');
     const ctaVideoFrame = document.getElementById('ctaVideoFrame');
     const ctaVideo = document.getElementById('ctaVideo');
     const CTA_VIDEO_ENABLED = true;
@@ -2631,6 +2581,33 @@
     const CTA_VIDEO_AUTOPLAY = true;
     const CTA_VIDEO_LOOP = true;
     const CTA_VIDEO_SHOW_CONTROLS = false;
+
+
+    function initAmbientVideo(video) {
+      if (!video) return;
+      const sourceEl = video.querySelector('source');
+      if (!sourceEl || !sourceEl.getAttribute('src')) return;
+      const tryPlay = () => {
+        const attempt = video.play();
+        if (attempt && typeof attempt.catch === 'function') {
+          attempt.catch(() => {});
+        }
+      };
+      video.muted = true;
+      video.defaultMuted = true;
+      video.autoplay = true;
+      video.loop = true;
+      video.preload = 'auto';
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', 'true');
+      video.addEventListener('loadeddata', tryPlay);
+      video.addEventListener('canplay', tryPlay);
+      try {
+        video.load();
+      } catch (error) {}
+      tryPlay();
+    }
 
     function setMediaBackground(target, src) {
       if (!target || !src) return;
@@ -2735,6 +2712,7 @@
     }
 
     window.addEventListener('load', () => {
+      initAmbientVideo(heroVideo);
       initCtaVideo();
       setTimeout(() => {
         splash.classList.add('hide');
