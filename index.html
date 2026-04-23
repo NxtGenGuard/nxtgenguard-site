@@ -2277,6 +2277,86 @@
     }
 
 
+  
+
+    /* Premium section mobile UX fix */
+    @media (max-width: 1080px) {
+      .premium-shell {
+        gap: 18px;
+      }
+
+      .premium-media {
+        order: -1;
+        align-self: start;
+        min-height: 360px;
+      }
+
+      .preview-stage {
+        min-height: 360px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .premium-media {
+        position: sticky;
+        top: calc(var(--nav-h) + 12px);
+        z-index: 12;
+        box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
+      }
+
+      .premium-media.scroll-float,
+      .premium-media[data-reveal],
+      .premium-media[data-reveal].show {
+        transform: none !important;
+        opacity: 1;
+      }
+
+      .premium-copy {
+        padding-top: 24px;
+      }
+
+      .premium-copy h2 {
+        margin-top: 0;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .premium-media,
+      .preview-stage {
+        min-height: 240px;
+      }
+
+      .premium-media {
+        top: calc(var(--nav-h) + 10px);
+      }
+
+      .preview-card {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        width: auto;
+        padding: 16px;
+      }
+
+      .preview-card strong {
+        font-size: 0.96rem;
+      }
+
+      .preview-card span {
+        font-size: 0.88rem;
+        line-height: 1.62;
+      }
+
+      .mini-points {
+        gap: 12px;
+      }
+
+      .mini-point {
+        padding: 16px;
+      }
+    }
+
+
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7LW5PDQ2VN"></script>
@@ -2374,7 +2454,7 @@
           <div class="hero-copy hero-copy--open" data-reveal>
             <h1>Clear design. Strong systems.</h1>
             <p>
-              Websites, dashboards, analytics, and operational platforms for service businesses, operations teams, and growing companies that need better visibility and cleaner systems.
+              Websites, dashboards, and systems built to clean up how your business actually runs.
             </p>
           </div>
         </div>
@@ -2391,7 +2471,7 @@
               </div>
               <div class="feature-body">
                 <h3>Websites</h3>
-                <p>Websites built to present your business clearly and professionally.</p>
+                <p>Websites that make your business look sharp and easy to trust.</p>
                 <a class="feature-link" href="services.html#websites">View service</a>
               </div>
             </article>
@@ -2426,18 +2506,18 @@
       <section class="premium-strip">
         <div class="container premium-shell">
           <div class="premium-copy scroll-float" data-reveal="left" data-depth="0.11" data-x="-14">
-            <h2>Looks clear up front. Holds up behind the scenes.</h2>
+            <h2>Looks sharp. Runs clean.</h2>
             
             <div class="mini-points">
               <button
-                class="mini-point"
+                class="mini-point active"
                 type="button"
                 data-preview="assets/images/logo/Webpage_techspace.png"
                 data-title="Sharper presentation"
-                data-copy="Polished websites, stronger hierarchy, and a clearer first impression."
+                data-copy="Polished websites with better structure and a clearer first impression."
               >
                 <strong>Sharper presentation</strong>
-                <span>Websites that feel organized, current, and easy to trust.</span>
+                <span>Websites that look sharp, feel current, and are easy to trust.</span>
               </button>
 
               <button
@@ -2445,10 +2525,10 @@
                 type="button"
                 data-preview="assets/images/logo/dashboard_analytics.png"
                 data-title="Technical depth"
-                data-copy="Dashboards, analytics layers, portals, and systems built with real functionality in mind."
+                data-copy="Dashboards, portals, and internal tools built with real structure and real function."
               >
                 <strong>Technical depth</strong>
-                <span>Dashboards, portals, and internal tools with real structure behind the interface.</span>
+                <span>Dashboards, portals, and internal tools with real structure under the hood.</span>
               </button>
 
               <button
@@ -2456,10 +2536,10 @@
                 type="button"
                 data-preview="assets/images/logo/workflow_automation_dashboard.png"
                 data-title="Built for real use"
-                data-copy="Automation, cloud, and security-aware systems built to support daily operations cleanly."
+                data-copy="Systems built for reporting, operations, visibility, and cleaner day-to-day work."
               >
                 <strong>Built for real use</strong>
-                <span>Systems designed for reporting, operations, visibility, and cleaner day-to-day workflows.</span>
+                <span>Systems built for reporting, operations, visibility, and cleaner day-to-day work.</span>
               </button>
             </div>
           </div>
@@ -2467,13 +2547,13 @@
           <div class="premium-media scroll-float" data-reveal="right" data-depth="0.08" data-x="16">
             <div class="preview-stage">
               <div class="preview-main parallax" id="previewMain">
-                <img id="previewImage" src="assets/images/logo/circuit_cityscape.png" alt="Preview of NxtGenGuard capabilities" />
+                <img id="previewImage" src="assets/images/logo/Webpage_techspace.png" alt="Sharper presentation preview" />
               </div>
               <div class="preview-grid"></div>
               <div class="preview-scan"></div>
               <div class="preview-card" id="previewCard">
-                <strong id="previewTitle">Preview of what NxtGenGuard builds</strong>
-                <span id="previewCopy">Websites, dashboards, and systems designed to support how real teams work.</span>
+                <strong id="previewTitle">Sharper presentation</strong>
+                <span id="previewCopy">Polished websites with better structure and a clearer first impression.</span>
               </div>
             </div>
           </div>
@@ -2760,8 +2840,10 @@
 
     featureCards.forEach((card) => cardObserver.observe(card));
 
-    function setPreview(point) {
+    function setPreview(point, options = {}) {
       if (!point || !previewImage) return;
+
+      const { instant = false } = options;
 
       miniPoints.forEach((item) => item.classList.remove('active'));
       point.classList.add('active');
@@ -2770,22 +2852,39 @@
       const nextTitle = point.dataset.title;
       const nextCopy = point.dataset.copy;
 
+      window.clearTimeout(setPreview.swapTimer);
+      window.clearTimeout(setPreview.glowTimer);
+
+      if (instant) {
+        previewMain.classList.remove('is-swapping');
+        previewCard.classList.remove('glow');
+        previewImage.src = nextSrc;
+        previewImage.alt = `${nextTitle} preview`;
+        setMediaBackground(previewMain, nextSrc);
+        previewTitle.textContent = nextTitle;
+        previewCopy.textContent = nextCopy;
+        return;
+      }
+
       previewMain.classList.add('is-swapping');
       previewCard.classList.add('glow');
 
-      window.clearTimeout(setPreview.swapTimer);
       setPreview.swapTimer = window.setTimeout(() => {
         previewImage.src = nextSrc;
+        previewImage.alt = `${nextTitle} preview`;
         setMediaBackground(previewMain, nextSrc);
         previewTitle.textContent = nextTitle;
         previewCopy.textContent = nextCopy;
         previewMain.classList.remove('is-swapping');
       }, 180);
 
-      window.clearTimeout(setPreview.glowTimer);
       setPreview.glowTimer = window.setTimeout(() => {
         previewCard.classList.remove('glow');
       }, 520);
+    }
+
+    if (miniPoints.length) {
+      setPreview(miniPoints[0], { instant: true });
     }
 
     miniPoints.forEach((point) => {
