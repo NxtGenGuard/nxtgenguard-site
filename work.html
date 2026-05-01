@@ -1,22 +1,240 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NxtGenGuard | Work</title>
+  <meta name="description" content="NxtGenGuard work examples across websites, dashboards, business systems, automation, security camera setups, data extraction, and technical projects." />
+  <link rel="stylesheet" href="assets/css/nxtgen-pages.css" />
 </head>
 <body>
+  <div class="site ready" id="siteRoot">
+    <header>
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html" aria-label="NxtGenGuard home">
+          <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
+        </a>
 
-<nav class="navbar">
-  <a href="index.html">Home</a>
-  <a href="services.html">Services</a>
-  <a href="work.html">Work</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-</nav>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <div class="nav-drop">
+            <a class="nav-drop-toggle" href="services.html">Services ▾</a>
+            <div class="nav-drop-menu">
+              <a href="services.html">All Services</a>
+              <a href="services.html#websites">Websites</a>
+              <a href="services.html#platforms">Platforms &amp; Dashboards</a>
+              <a href="services.html#systems">Business Systems</a>
+              <a href="services.html#automation">Automation &amp; Cloud</a>
+              <a href="services.html#consulting">IT &amp; Security Consulting</a>
+              <a href="services.html#maintenance">Maintenance &amp; Support</a>
+            </div>
+          </div>
+          <a class="active" href="work.html" aria-current="page">Work</a>
+          <a href="about.html">About</a>
+          <a href="contact.php">Contact</a>
+        </nav>
 
-<section class="hero">
-  <h1>Our Work</h1>
-  <p>Examples of what we’ve built.</p>
-</section>
+        <div class="nav-actions">
+          <a class="btn btn-secondary" href="contact.php">Start a Project</a>
+        </div>
 
+        <button class="menu-toggle" type="button" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+      </div>
+
+      <div class="container mobile-nav" id="mobileNav">
+        <div class="mobile-panel">
+          <a href="index.html" onclick="closeMenu()">Home</a>
+          <details>
+            <summary>Services</summary>
+            <div class="mobile-submenu">
+              <a href="services.html" onclick="closeMenu()">All Services</a>
+              <a href="services.html#websites" onclick="closeMenu()">Websites</a>
+              <a href="services.html#platforms" onclick="closeMenu()">Platforms &amp; Dashboards</a>
+              <a href="services.html#systems" onclick="closeMenu()">Business Systems</a>
+              <a href="services.html#automation" onclick="closeMenu()">Automation &amp; Cloud</a>
+              <a href="services.html#consulting" onclick="closeMenu()">IT &amp; Security Consulting</a>
+              <a href="services.html#maintenance" onclick="closeMenu()">Maintenance &amp; Support</a>
+            </div>
+          </details>
+          <a href="work.html" onclick="closeMenu()">Work</a>
+          <a href="about.html" onclick="closeMenu()">About</a>
+          <a href="contact.php" onclick="closeMenu()">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero" aria-labelledby="page-title">
+        <div class="container page-hero-inner">
+          <div class="pill">Work portfolio</div>
+          <h1 id="page-title">Keep this page as Work.</h1>
+          <p>
+            I recommend keeping this page as a portfolio instead of turning it into a blog. Use it to show everything you have built:
+            webpages, dashboards, security cameras, data extraction, automations, systems, prototypes, and real technical work. Testimonials can be added later as proof blocks.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Work direction">
+        <div class="container grid-3">
+          <article class="card">
+            <h3>Why not only blogs?</h3>
+            <p>Blogs are useful later for SEO, but your main proof right now should be visual work, systems, dashboards, and technical projects.</p>
+          </article>
+          <article class="card">
+            <h3>Where testimonials go</h3>
+            <p>Add testimonials below projects once you have quotes. They should support your work, not replace the portfolio.</p>
+          </article>
+          <article class="card">
+            <h3>What to publish here</h3>
+            <p>Use project cards for websites, dashboards, IT systems, camera setups, data extraction, automation, and security-focused work.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Project cards">
+        <div class="container">
+          <div class="section-head">
+            <h2>Project examples.</h2>
+            <p>These are placeholders. Replace the titles, images, and descriptions with your real work as you collect screenshots.</p>
+          </div>
+          <div class="grid-3">
+            <article class="card work-card">
+              <div class="placeholder"><span>Website image</span></div>
+              <div class="work-card-body">
+                <h3>Business Website Build</h3>
+                <p>A clean service-business website with homepage, service sections, contact flow, and a sharper brand presentation.</p>
+                <div class="tag-row"><span class="tag">Web design</span><span class="tag">Landing page</span><span class="tag">SEO structure</span></div>
+              </div>
+            </article>
+
+            <article class="card work-card">
+              <div class="placeholder"><span>Dashboard image</span></div>
+              <div class="work-card-body">
+                <h3>Operations Dashboard</h3>
+                <p>A dashboard-style view for tracking work, requests, statuses, metrics, and operational visibility.</p>
+                <div class="tag-row"><span class="tag">Dashboard</span><span class="tag">Reporting</span><span class="tag">Internal tool</span></div>
+              </div>
+            </article>
+
+            <article class="card work-card">
+              <div class="placeholder"><span>Survey image</span></div>
+              <div class="work-card-body">
+                <h3>Survey &amp; Data Reporting</h3>
+                <p>Collection and visualization of form or survey data so teams can understand patterns, results, and follow-up needs.</p>
+                <div class="tag-row"><span class="tag">Forms</span><span class="tag">Charts</span><span class="tag">Data cleanup</span></div>
+              </div>
+            </article>
+
+            <article class="card work-card">
+              <div class="placeholder"><span>Automation image</span></div>
+              <div class="work-card-body">
+                <h3>Data Extraction Workflow</h3>
+                <p>Automation for collecting, cleaning, moving, or transforming data from files, websites, forms, or operational sources.</p>
+                <div class="tag-row"><span class="tag">Python</span><span class="tag">Automation</span><span class="tag">Data extraction</span></div>
+              </div>
+            </article>
+
+            <article class="card work-card">
+              <div class="placeholder"><span>Camera image</span></div>
+              <div class="work-card-body">
+                <h3>Security Camera &amp; Site Tech</h3>
+                <p>Planning and setup for cameras, device placement, network readiness, access, and practical site technology needs.</p>
+                <div class="tag-row"><span class="tag">Cameras</span><span class="tag">Network</span><span class="tag">Site setup</span></div>
+              </div>
+            </article>
+
+            <article class="card work-card">
+              <div class="placeholder"><span>Cloud image</span></div>
+              <div class="work-card-body">
+                <h3>Cloud &amp; System Setup</h3>
+                <p>Cloud planning, system organization, deployment support, accounts, permissions, and cleaner technical structure.</p>
+                <div class="tag-row"><span class="tag">Cloud</span><span class="tag">Systems</span><span class="tag">Deployment</span></div>
+              </div>
+            </article>
+
+            <article class="card work-card">
+              <div class="placeholder"><span>MDM image</span></div>
+              <div class="work-card-body">
+                <h3>Device Management Support</h3>
+                <p>Experience with managed device environments, Apple systems, policies, setup workflows, and technical support structure.</p>
+                <div class="tag-row"><span class="tag">JAMF</span><span class="tag">Apple</span><span class="tag">Endpoint support</span></div>
+              </div>
+            </article>
+
+            <article class="card work-card">
+              <div class="placeholder"><span>AI image</span></div>
+              <div class="work-card-body">
+                <h3>AI / Chatbot Prototype</h3>
+                <p>Prototype assistants, guided intake bots, and simple automation helpers that can support users before a ticket is created.</p>
+                <div class="tag-row"><span class="tag">Chatbot</span><span class="tag">Intake</span><span class="tag">Prototype</span></div>
+              </div>
+            </article>
+
+            <article class="card work-card">
+              <div class="placeholder"><span>Security image</span></div>
+              <div class="work-card-body">
+                <h3>Security &amp; Network Review</h3>
+                <p>Security-minded cleanup for devices, access, network structure, cloud tools, and operational risk reduction.</p>
+                <div class="tag-row"><span class="tag">Security</span><span class="tag">Network</span><span class="tag">Consulting</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Testimonials placeholder">
+        <div class="container grid-2">
+          <div class="card">
+            <div class="pill">Testimonials later</div>
+            <h2 style="margin:14px 0 10px;font-size:clamp(2rem,4vw,3.2rem);line-height:.98;letter-spacing:-.06em;">Add proof when you have it.</h2>
+            <p>
+              I would not make the page only testimonials. Put testimonials under the work as supporting proof. Keep this page as the place clients can see what you actually do.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Suggested testimonial format</h3>
+            <p>“NxtGenGuard helped us clean up our workflow, launch a better system, and understand what was happening technically.”</p>
+            <div class="tag-row"><span class="tag">Client name placeholder</span><span class="tag">Company placeholder</span><span class="tag">Project type</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Work call to action">
+        <div class="container">
+          <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;">
+            <div>
+              <div class="pill">Build the next case study</div>
+              <h2 style="margin:14px 0 8px;font-size:clamp(1.9rem,3.8vw,3.1rem);line-height:.98;letter-spacing:-.06em;">Turn your next project into proof.</h2>
+              <p>Every site, dashboard, system, camera setup, or automation can become a portfolio card here.</p>
+            </div>
+            <a class="btn btn-primary" href="contact.php">Start a Project</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-shell">
+          <div class="footer-links-clean" aria-label="Footer links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="work.html">Work</a>
+            <a href="about.html">About</a>
+            <a href="contact.php">Contact</a>
+          </div>
+          <p class="footer-note">Built for service businesses, operations teams, and growing companies that need clearer presentation, better reporting, and stronger system structure.</p>
+        </div>
+      </div>
+      <div class="footer-pagebar">© NxtGenGuard · Established 2017 · All rights reserved.</div>
+    </footer>
+  </div>
+
+  <script>
+    const mobileNav = document.getElementById('mobileNav');
+    function toggleMenu() { mobileNav.classList.toggle('open'); document.body.classList.toggle('nav-open'); }
+    function closeMenu() { mobileNav.classList.remove('open'); document.body.classList.remove('nav-open'); }
+  </script>
 </body>
 </html>
