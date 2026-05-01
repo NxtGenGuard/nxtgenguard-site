@@ -2388,24 +2388,26 @@
         </a>
 
         <nav class="desktop-nav" aria-label="Primary">
-          <a href="index.html">Home</a>
+          <a class="active" href="index.html" aria-current="page">Home</a>
           <div class="nav-drop">
-            <button class="nav-drop-toggle" type="button">Services ▾</button>
+            <a class="nav-drop-toggle" href="services.html">Services ▾</a>
             <div class="nav-drop-menu">
+              <a href="services.html">All Services</a>
               <a href="services.html#websites">Websites</a>
-              <a href="services.html#platforms">Platforms</a>
-              <a href="services.html#systems">Systems</a>
+              <a href="services.html#platforms">Platforms &amp; Dashboards</a>
+              <a href="services.html#systems">Business Systems</a>
               <a href="services.html#automation">Automation &amp; Cloud</a>
               <a href="services.html#consulting">IT &amp; Security Consulting</a>
+              <a href="services.html#maintenance">Maintenance &amp; Support</a>
             </div>
           </div>
           <a href="work.html">Work</a>
           <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
+          <a href="contact.php">Contact</a>
         </nav>
 
         <div class="nav-actions">
-          <a class="btn btn-secondary" href="contact.html">Start a Project</a>
+          <a class="btn btn-secondary" href="contact.php">Start a Project</a>
         </div>
 
         <button class="menu-toggle" type="button" aria-label="Open menu" onclick="toggleMenu()">☰</button>
@@ -2417,14 +2419,18 @@
           <details>
             <summary>Services</summary>
             <div class="mobile-submenu">
+              <a href="services.html" onclick="closeMenu()">All Services</a>
               <a href="services.html#websites" onclick="closeMenu()">Websites</a>
-              <a href="services.html#platforms" onclick="closeMenu()">Platforms</a>
-              <a href="services.html#systems" onclick="closeMenu()">Systems</a>
+              <a href="services.html#platforms" onclick="closeMenu()">Platforms &amp; Dashboards</a>
+              <a href="services.html#systems" onclick="closeMenu()">Business Systems</a>
+              <a href="services.html#automation" onclick="closeMenu()">Automation &amp; Cloud</a>
+              <a href="services.html#consulting" onclick="closeMenu()">IT &amp; Security Consulting</a>
+              <a href="services.html#maintenance" onclick="closeMenu()">Maintenance &amp; Support</a>
             </div>
           </details>
           <a href="work.html" onclick="closeMenu()">Work</a>
           <a href="about.html" onclick="closeMenu()">About</a>
-          <a href="contact.html" onclick="closeMenu()">Contact</a>
+          <a href="contact.php" onclick="closeMenu()">Contact</a>
         </div>
       </div>
     </header>
@@ -2598,7 +2604,7 @@
                 <h2>Tell us what you need to build.</h2>
 
                 <div class="cta-actions">
-                  <a class="btn btn-primary" href="contact.html">Start a Project</a>
+                  <a class="btn btn-primary" href="contact.php">Start a Project</a>
                   <a class="btn btn-secondary" href="work.html">View Work</a>
                 </div>
               </div>
