@@ -1,22 +1,223 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NxtGenGuard | About</title>
+  <meta name="description" content="About NxtGenGuard, a founder-led technology studio building enterprise websites, dashboards, systems, automation, and security-conscious workflows." />
+  <link rel="stylesheet" href="assets/css/nxtgen-pages.css" />
 </head>
 <body>
+  <div class="site ready" id="siteRoot">
+    <header>
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html" aria-label="NxtGenGuard home">
+          <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
+        </a>
 
-<nav class="navbar">
-  <a href="index.html">Home</a>
-  <a href="services.html">Services</a>
-  <a href="work.html">Work</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-</nav>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <div class="nav-drop">
+            <a class="nav-drop-toggle" href="services.html">Services ▾</a>
+            <div class="nav-drop-menu">
+              <a href="services.html">All Services</a>
+              <a href="services.html#websites">Websites</a>
+              <a href="services.html#platforms">Platforms &amp; Dashboards</a>
+              <a href="services.html#systems">Business Systems</a>
+              <a href="services.html#automation">Automation &amp; Cloud</a>
+              <a href="services.html#consulting">IT &amp; Security Consulting</a>
+              <a href="services.html#maintenance">Maintenance &amp; Support</a>
+            </div>
+          </div>
+          <a href="work.html">Work</a>
+          <a class="active" href="about.html" aria-current="page">About</a>
+          <a href="contact.php">Contact</a>
+        </nav>
 
-<section class="hero">
-  <h1>About Us</h1>
-  <p>Who we are and how we work.</p>
-</section>
+        <div class="nav-actions">
+          <a class="btn btn-secondary" href="contact.php">Start a Project</a>
+        </div>
 
+        <button class="menu-toggle" type="button" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+      </div>
+
+      <div class="container mobile-nav" id="mobileNav">
+        <div class="mobile-panel">
+          <a href="index.html" onclick="closeMenu()">Home</a>
+          <details>
+            <summary>Services</summary>
+            <div class="mobile-submenu">
+              <a href="services.html" onclick="closeMenu()">All Services</a>
+              <a href="services.html#websites" onclick="closeMenu()">Websites</a>
+              <a href="services.html#platforms" onclick="closeMenu()">Platforms &amp; Dashboards</a>
+              <a href="services.html#systems" onclick="closeMenu()">Business Systems</a>
+              <a href="services.html#automation" onclick="closeMenu()">Automation &amp; Cloud</a>
+              <a href="services.html#consulting" onclick="closeMenu()">IT &amp; Security Consulting</a>
+              <a href="services.html#maintenance" onclick="closeMenu()">Maintenance &amp; Support</a>
+            </div>
+          </details>
+          <a href="work.html" onclick="closeMenu()">Work</a>
+          <a href="about.html" onclick="closeMenu()">About</a>
+          <a href="contact.php" onclick="closeMenu()">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero" aria-labelledby="page-title">
+        <div class="container page-hero-inner">
+          <div class="pill">About NxtGenGuard</div>
+          <h1 id="page-title">Founder-led systems, built with enterprise discipline.</h1>
+          <p>
+            NxtGenGuard is moving beyond basic tech support into enterprise-minded digital work: websites, dashboards,
+            business systems, automation, cloud structure, and security-conscious consulting for teams that need cleaner operations.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Founder story">
+        <div class="container grid-2">
+          <div class="placeholder"><span>Founder image placeholder</span></div>
+          <div class="card">
+            <div class="pill">Founder</div>
+            <h2 style="margin:18px 0 16px;font-size:clamp(2rem,4vw,3.4rem);line-height:.98;letter-spacing:-.06em;">Gabriel Saenz</h2>
+            <p>
+              NxtGenGuard is built by Gabriel Saenz, an IT engineer with hands-on experience across real operational environments,
+              including education technology, enterprise support, networking, systems, cloud, Apple device management, and cybersecurity-focused work.
+            </p>
+            <br />
+            <p>
+              The goal of this About page is not to read like a full résumé. It should show enough credibility for a business owner,
+              operations lead, or enterprise client to understand that the work is grounded in real technical practice.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Enterprise IT</span>
+              <span class="tag">Cloud</span>
+              <span class="tag">Cybersecurity</span>
+              <span class="tag">Dashboards</span>
+              <span class="tag">Automation</span>
+              <span class="tag">Device management</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Recommended about positioning">
+        <div class="container">
+          <div class="section-head">
+            <h2>What the About page should say.</h2>
+            <p>
+              I recommend keeping this page focused on trust, capability, and direction. Use your background as proof, but do not overload visitors with every certification or every old service.
+            </p>
+          </div>
+          <div class="grid-3">
+            <article class="card">
+              <h3>Enterprise direction</h3>
+              <p>Position NxtGenGuard as a studio for websites, platforms, dashboards, internal systems, automation, and secure technical planning.</p>
+            </article>
+            <article class="card">
+              <h3>Real experience</h3>
+              <p>Use your work history to show that you understand real environments with users, devices, workflows, tickets, security needs, and operational pressure.</p>
+            </article>
+            <article class="card">
+              <h3>Practical delivery</h3>
+              <p>Make it clear that the work is not just design. It is clean structure, usable systems, reliable handoff, and long-term maintainability.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Core strengths">
+        <div class="container">
+          <div class="section-head">
+            <h2>Core strengths.</h2>
+            <p>These are the areas I would highlight because they support the new enterprise direction.</p>
+          </div>
+          <div class="grid-4">
+            <article class="card"><h3>Web presence</h3><p>Modern service pages, landing pages, and company sites built to explain the offer clearly.</p></article>
+            <article class="card"><h3>Dashboards</h3><p>Reporting views, intake trackers, survey dashboards, and internal visibility tools.</p></article>
+            <article class="card"><h3>Systems</h3><p>Connected workflows for ticketing, requests, operations, handoffs, and business process cleanup.</p></article>
+            <article class="card"><h3>Security mindset</h3><p>Technical decisions shaped by cloud, identity, endpoint, networking, and cybersecurity fundamentals.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="Credentials and background">
+        <div class="container grid-2">
+          <div class="card">
+            <div class="section-head" style="margin-bottom:20px;">
+              <h2>Selected credentials.</h2>
+              <p>Show a short selected list instead of every credential. This looks cleaner and stronger.</p>
+            </div>
+            <div class="tag-row">
+              <span class="tag">JAMF Pro Certified Associate</span>
+              <span class="tag">ITIL 4 Foundation</span>
+              <span class="tag">AWS Cloud Solutions Architect</span>
+              <span class="tag">Microsoft Azure Administrator Associate</span>
+              <span class="tag">Microsoft Cybersecurity Analyst</span>
+              <span class="tag">Google Cybersecurity</span>
+              <span class="tag">IBM Cybersecurity Analyst</span>
+              <span class="tag">Palo Alto Networks Cybersecurity</span>
+              <span class="tag">Cyber Security Certificate</span>
+              <span class="tag">Computer Programmer</span>
+              <span class="tag">Cloud Computing</span>
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span>Current</span>
+              <div><h3>Enterprise IT and systems work</h3><p>Hands-on technical experience supporting operational environments, users, devices, projects, and infrastructure.</p></div>
+            </div>
+            <div class="timeline-item">
+              <span>Background</span>
+              <div><h3>UCLA, LAUSD, HARMAN experience</h3><p>Experience across education, enterprise, and technical operations environments, with exposure to networking, support, and systems improvement.</p></div>
+            </div>
+            <div class="timeline-item">
+              <span>NxtGenGuard</span>
+              <div><h3>Building toward enterprise services</h3><p>The brand direction is now websites, dashboards, systems, automation, cloud, and security-aware consulting.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-label="About page call to action">
+        <div class="container">
+          <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;">
+            <div>
+              <div class="pill">Next step</div>
+              <h2 style="margin:14px 0 8px;font-size:clamp(1.9rem,3.8vw,3.1rem);line-height:.98;letter-spacing:-.06em;">Let the work show the trust.</h2>
+              <p>Use this About page to build confidence, then send visitors to Work or Contact.</p>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <a class="btn btn-primary" href="work.html">View Work</a>
+              <a class="btn btn-secondary" href="contact.php">Start a Project</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-shell">
+          <div class="footer-links-clean" aria-label="Footer links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="work.html">Work</a>
+            <a href="about.html">About</a>
+            <a href="contact.php">Contact</a>
+          </div>
+          <p class="footer-note">Built for service businesses, operations teams, and growing companies that need clearer presentation, better reporting, and stronger system structure.</p>
+        </div>
+      </div>
+      <div class="footer-pagebar">© NxtGenGuard · Established 2017 · All rights reserved.</div>
+    </footer>
+  </div>
+
+  <script>
+    const mobileNav = document.getElementById('mobileNav');
+    function toggleMenu() { mobileNav.classList.toggle('open'); document.body.classList.toggle('nav-open'); }
+    function closeMenu() { mobileNav.classList.remove('open'); document.body.classList.remove('nav-open'); }
+  </script>
 </body>
 </html>
