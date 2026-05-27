@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NxtGenGuard | Maintenance &amp; Support</title>
+  <meta name="description" content="Ongoing updates, improvements, troubleshooting, and technical support for the systems we build." />
+  <style>
+
+    :root {
+      --bg: #020612;
+      --bg-2: #07111f;
+      --panel: rgba(10, 16, 30, 0.78);
+      --panel-2: rgba(8, 14, 26, 0.92);
+      --line: rgba(255, 255, 255, 0.08);
+      --line-strong: rgba(99, 156, 255, 0.24);
+      --text: #f7f9ff;
+      --muted: #9aacc7;
+      --blue: #2b78ff;
+      --blue-2: #78b6ff;
+      --radius: 28px;
+      --shadow: 0 26px 80px rgba(0, 0, 0, 0.46);
+      --max: 1240px;
+      --nav-h: 84px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 15%, rgba(38, 94, 195, 0.16), transparent 24%),
+        radial-gradient(circle at 88% 12%, rgba(80, 150, 255, 0.12), transparent 24%),
+        linear-gradient(180deg, #01040d 0%, #050c18 44%, #030813 100%);
+      overflow-x: hidden;
+    }
+    body.nav-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: 14px;
+      font-weight: 800;
+      transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease), background 0.28s var(--ease);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(31, 69, 202, 0.96), rgba(46, 88, 224, 0.9));
+      border: 1px solid rgba(126, 165, 255, 0.38);
+      box-shadow: 0 18px 38px rgba(31, 69, 202, 0.28);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+    .btn-primary:hover, .btn-secondary:hover { border-color: rgba(186, 214, 255, 0.56); }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 10px 15px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: #dce8ff;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      backdrop-filter: blur(14px);
+    }
+    .pill::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-2), var(--blue));
+      box-shadow: 0 0 18px rgba(120, 182, 255, 0.9);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(3, 8, 18, 0.74);
+      backdrop-filter: blur(18px);
+    }
+    .nav-wrap {
+      min-height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+    .brand { display: inline-flex; align-items: center; justify-content: center; }
+    .brand img {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 22px rgba(116, 176, 255, 0.18));
+    }
+    .desktop-nav, .nav-actions { display: flex; align-items: center; gap: 28px; }
+    .desktop-nav a, .nav-drop-toggle {
+      color: #edf2ff;
+      font-weight: 700;
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.97rem;
+      cursor: pointer;
+    }
+    .desktop-nav a:hover, .desktop-nav a.active, .nav-drop-toggle:hover, .nav-drop-toggle.active { color: #fff; }
+    .nav-drop { position: relative; padding-bottom: 14px; margin-bottom: -14px; }
+    .nav-drop::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
+    .nav-drop-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 300px;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(7, 12, 24, 0.98);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    }
+    .nav-drop-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
+    .nav-drop:hover .nav-drop-menu, .nav-drop:focus-within .nav-drop-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .nav-drop-menu a { display: block; padding: 12px 14px; border-radius: 12px; }
+    .nav-drop-menu a:hover { background: rgba(255, 255, 255, 0.05); }
+
+    .menu-toggle {
+      display: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      font-size: 1.15rem;
+    }
+    .mobile-nav { display: none; padding: 0 0 18px; }
+    .mobile-nav.open { display: block; }
+    .mobile-panel {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(7, 13, 24, 0.96);
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+    .mobile-panel a, .mobile-panel summary {
+      display: block;
+      padding: 14px 12px;
+      border-radius: 12px;
+      font-weight: 700;
+      list-style: none;
+      cursor: pointer;
+    }
+    .mobile-panel a:hover, .mobile-panel summary:hover, .mobile-panel details[open] summary { background: rgba(255, 255, 255, 0.05); }
+    .mobile-submenu { padding: 4px 0 0 10px; }
+    .mobile-submenu a { color: var(--muted); font-weight: 600; }
+    .mobile-panel summary::-webkit-details-marker { display: none; }
+
+
+    /* Premium site footer */
+    .site-footer {
+      position: relative;
+      padding: 0 0 48px;
+      overflow: hidden;
+    }
+
+    .site-footer::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 280px;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(43, 120, 255, 0.14), transparent 26%),
+        radial-gradient(circle at 84% 72%, rgba(120, 182, 255, 0.10), transparent 30%);
+      pointer-events: none;
+      opacity: 0.86;
+    }
+
+    .footer-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background:
+        radial-gradient(circle at top left, rgba(43, 120, 255, 0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(120, 182, 255, 0.10), transparent 24%),
+        linear-gradient(180deg, rgba(8, 14, 28, 0.94), rgba(5, 10, 20, 0.92));
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.32);
+      padding: 34px;
+      isolation: isolate;
+    }
+
+    .footer-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+      background-size: 38px 38px;
+      opacity: 0.18;
+      mask-image: radial-gradient(circle at top center, black 0%, transparent 76%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.72fr 1fr 0.92fr;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      font-size: 1.08rem;
+      color: #fff;
+    }
+
+    .footer-brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 22px rgba(120, 182, 255, 0.18));
+    }
+
+    .footer-brand-block p {
+      margin: 16px 0 0;
+      max-width: 410px;
+      color: var(--muted);
+      line-height: 1.78;
+      font-size: 0.96rem;
+    }
+
+    .footer-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .footer-badges span,
+    .footer-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.035);
+      color: #dbe7ff;
+      font-weight: 800;
+      font-size: 0.78rem;
+    }
+
+    .footer-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4dff9a;
+      box-shadow: 0 0 16px rgba(77, 255, 154, 0.7);
+    }
+
+    .footer-col h4,
+    .footer-cta-card h4 {
+      margin: 0 0 14px;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(220, 232, 255, 0.68);
+    }
+
+    .footer-links-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-links-list a {
+      width: fit-content;
+      color: #dbe6ff;
+      opacity: 0.86;
+      font-weight: 750;
+      line-height: 1.44;
+      transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease;
+    }
+
+    .footer-links-list a:hover {
+      opacity: 1;
+      color: #fff;
+      transform: translateX(3px);
+    }
+
+    .footer-cta-card {
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at top right, rgba(120, 182, 255, 0.12), transparent 34%),
+        rgba(255, 255, 255, 0.035);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+    }
+
+    .footer-cta-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.94rem;
+    }
+
+    .footer-cta-card .btn {
+      width: 100%;
+      min-height: 50px;
+    }
+
+    .footer-bottom {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: rgba(212, 224, 246, 0.72);
+      font-size: 0.92rem;
+    }
+
+    .footer-bottom strong {
+      color: #eef4ff;
+    }
+
+    @media (max-width: 1080px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-cta-card { grid-column: span 2; }
+    }
+
+    @media (max-width: 620px) {
+      .site-footer { padding-bottom: 34px; }
+      .footer-shell { border-radius: 26px; padding: 24px 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-cta-card { grid-column: auto; }
+      .footer-brand-block p { max-width: none; }
+      .footer-links-list a { width: 100%; }
+      .footer-bottom { align-items: flex-start; flex-direction: column; }
+    }
+
+
+    @media (max-width: 860px) {
+      .desktop-nav, .nav-actions { display: none; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(var(--max), calc(100% - 22px)); }
+    }
+
+
+    .detail-hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      padding: 82px 0 58px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .detail-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(2, 6, 17, 0.96) 0%, rgba(2, 6, 17, 0.84) 42%, rgba(2, 6, 17, 0.46) 100%),
+        linear-gradient(180deg, rgba(2, 6, 17, 0.18), rgba(2, 6, 17, 0.88)),
+        var(--hero-img) center center / cover no-repeat;
+      filter: saturate(1.02);
+    }
+    .detail-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, black 0%, transparent 82%);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+    .detail-hero-grid { display: grid; grid-template-columns: 1fr 0.82fr; gap: 34px; align-items: center; }
+    .detail-copy { display: grid; gap: 22px; }
+    .back-link { color: var(--blue-2); font-weight: 800; width: fit-content; }
+    .detail-copy h1 { margin: 0; font-size: clamp(2.8rem, 7.2vw, 6.1rem); line-height: 0.9; letter-spacing: -0.078em; }
+    .detail-copy p { margin: 0; max-width: 780px; color: var(--muted); font-size: clamp(1rem, 1.4vw, 1.12rem); line-height: 1.82; }
+    .detail-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-card {
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(5, 10, 20, 0.66);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .hero-card img { width: 100%; height: 390px; object-fit: cover; object-position: center center; filter: saturate(1.04) brightness(0.9); }
+    .detail-content { padding: 62px 0 86px; }
+    .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .info-card {
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(7, 12, 24, 0.82);
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+      padding: 28px;
+    }
+    .info-card.wide { grid-column: 1 / -1; }
+    .info-card h2 { margin: 0 0 18px; font-size: clamp(1.55rem, 2.6vw, 2.45rem); line-height: 1; letter-spacing: -0.055em; }
+    .info-card p { margin: 0; color: var(--muted); line-height: 1.78; }
+    .clean-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .clean-list li {
+      position: relative;
+      padding-left: 26px;
+      color: #dce8ff;
+      line-height: 1.66;
+    }
+    .clean-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.68em;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-2), var(--blue));
+      box-shadow: 0 0 14px rgba(120, 182, 255, 0.65);
+    }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .process-step {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .process-step strong { display: block; margin-bottom: 8px; color: #fff; }
+    .process-step span { color: var(--muted); line-height: 1.62; }
+    .service-cta { padding: 0 0 86px; }
+    .service-cta-box { position: relative; overflow: hidden; padding: 42px 34px; border-radius: 34px; border: 1px solid rgba(255, 255, 255, 0.08); background: radial-gradient(circle at top right, rgba(120, 182, 255, 0.14), transparent 28%), radial-gradient(circle at bottom left, rgba(43, 120, 255, 0.11), transparent 26%), rgba(8, 13, 24, 0.92); box-shadow: var(--shadow); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .service-cta-box h2 { margin: 0 0 8px; font-size: clamp(1.9rem, 3.8vw, 3.1rem); line-height: 0.96; letter-spacing: -0.06em; }
+    .service-cta-box p { margin: 0; color: var(--muted); max-width: 650px; line-height: 1.76; }
+    @media (max-width: 1080px) { .detail-hero-grid, .content-grid { grid-template-columns: 1fr; } .process-grid { grid-template-columns: repeat(2, 1fr); } .service-cta-box { align-items: flex-start; flex-direction: column; } }
+    @media (max-width: 620px) { .detail-hero { padding: 58px 0 42px; } .hero-card, .info-card, .service-cta-box { border-radius: 24px; } .hero-card img { height: 250px; } .process-grid { grid-template-columns: 1fr; } .info-card, .service-cta-box { padding-left: 20px; padding-right: 20px; } .service-cta-box .btn, .detail-actions .btn { width: 100%; } }
+
+  </style>
+</head>
+<body>
+  <div class="site ready" id="siteRoot">
+
+    <header>
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html" aria-label="NxtGenGuard home">
+          <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
+        </a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <div class="nav-drop">
+            <a class="nav-drop-toggle active" href="services.html">Services ▾</a>
+            <div class="nav-drop-menu">
+              <a href="services.html">All Services</a>
+              <a href="enterprise-websites.html">Enterprise Websites</a>
+              <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
+              <a href="business-systems.html">Business Systems</a>
+              <a href="automation-cloud.html">Automation &amp; Cloud</a>
+              <a href="it-security-consulting.html">IT &amp; Security Consulting</a>
+              <a href="maintenance-support.html">Maintenance &amp; Support</a>
+            </div>
+          </div>
+          <a href="work.html">Work</a>
+          <a href="about.html">About</a>
+          <a href="contact.php">Contact</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="btn btn-secondary" href="contact.php">Start a Project</a>
+        </div>
+        <button class="menu-toggle" type="button" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+      </div>
+      <div class="container mobile-nav" id="mobileNav">
+        <div class="mobile-panel">
+          <a href="index.html" onclick="closeMenu()">Home</a>
+          <details>
+            <summary>Services</summary>
+            <div class="mobile-submenu">
+              <a href="services.html" onclick="closeMenu()">All Services</a>
+              <a href="enterprise-websites.html" onclick="closeMenu()">Enterprise Websites</a>
+              <a href="platforms-dashboards.html" onclick="closeMenu()">Platforms &amp; Dashboards</a>
+              <a href="business-systems.html" onclick="closeMenu()">Business Systems</a>
+              <a href="automation-cloud.html" onclick="closeMenu()">Automation &amp; Cloud</a>
+              <a href="it-security-consulting.html" onclick="closeMenu()">IT &amp; Security Consulting</a>
+              <a href="maintenance-support.html" onclick="closeMenu()">Maintenance &amp; Support</a>
+            </div>
+          </details>
+          <a href="work.html" onclick="closeMenu()">Work</a>
+          <a href="about.html" onclick="closeMenu()">About</a>
+          <a href="contact.php" onclick="closeMenu()">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="detail-hero" style="--hero-img: url('assets/images/logo/Maintenance%26Support.png');" aria-labelledby="page-title">
+        <div class="container detail-hero-grid">
+          <div class="detail-copy">
+            <a class="back-link" href="services.html#maintenance">← Back to Services</a>
+            <div class="pill">Maintenance &amp; Support</div>
+            <h1 id="page-title">Maintenance &amp; Support</h1>
+            <p>Maintenance and support that keeps your websites, systems, and automations stable after launch.</p>
+            <div class="detail-actions">
+              <a class="btn btn-primary" href="contact.php?service=Maintenance%20%26%20Support">Start this service</a>
+              <a class="btn btn-secondary" href="services.html">View all services</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <img src="assets/images/logo/Maintenance%26Support.png" alt="Maintenance &amp; Support image" />
+          </div>
+        </div>
+      </section>
+
+      <section class="detail-content" aria-label="Maintenance &amp; Support details">
+        <div class="container content-grid">
+          <article class="info-card wide">
+            <h2>What this service is for</h2>
+            <p>This service is for keeping the work alive after it is built. It covers updates, fixes, improvements, monitoring routines, documentation, and support for the systems and pages NxtGenGuard builds.</p>
+          </article>
+
+          <article class="info-card">
+            <h2>What we can do</h2>
+            <ul class="clean-list">
+              <li>Website and service page updates</li>
+              <li>Bug fixes and troubleshooting</li>
+              <li>System and automation improvements</li>
+              <li>Basic monitoring and health-check routines</li>
+              <li>Content, layout, and performance adjustments</li>
+              <li>Support ticket intake for requested changes</li>
+            </ul>
+          </article>
+
+          <article class="info-card">
+            <h2>Best for</h2>
+            <ul class="clean-list">
+              <li>Businesses that want support after launch</li>
+              <li>Teams that need updates without rebuilding everything</li>
+              <li>Companies running dashboards, forms, or automations</li>
+              <li>Owners who want a technical partner for ongoing improvements</li>
+            </ul>
+          </article>
+
+          <article class="info-card wide">
+            <h2>How the service works</h2>
+            <div class="process-grid">
+              <div class="process-step">
+                <strong>Step 1</strong>
+                <span>Receive the request or support ticket</span>
+              </div>
+              <div class="process-step">
+                <strong>Step 2</strong>
+                <span>Review the issue, update, or improvement need</span>
+              </div>
+              <div class="process-step">
+                <strong>Step 3</strong>
+                <span>Apply the change, fix, or maintenance step</span>
+              </div>
+              <div class="process-step">
+                <strong>Step 4</strong>
+                <span>Confirm completion and document what changed</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="info-card wide">
+            <h2>Possible deliverables</h2>
+            <ul class="clean-list">
+              <li>Support request handling</li>
+              <li>Update and fix logs</li>
+              <li>Maintenance notes</li>
+              <li>Improvement recommendations</li>
+              <li>Ongoing support path</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="service-cta" aria-label="Start Maintenance &amp; Support">
+        <div class="container">
+          <div class="service-cta-box">
+            <div>
+              <h2>Ready to talk about Maintenance &amp; Support?</h2>
+              <p>Submit a project request and include what you want built, fixed, connected, or improved.</p>
+            </div>
+            <a class="btn btn-primary" href="contact.php?service=Maintenance%20%26%20Support">Start a Project</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" aria-label="NxtGenGuard footer">
+      <div class="container">
+        <div class="footer-shell">
+          <div class="footer-grid">
+            <div class="footer-brand-block">
+              <a class="footer-brand" href="index.html" aria-label="NxtGenGuard home">
+                <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
+                <span>NxtGenGuard</span>
+              </a>
+              <p>Enterprise websites, dashboards, systems, automation, cloud, and IT/security guidance built with clean structure and a guarded mindset.</p>
+              <div class="footer-badges" aria-label="NxtGenGuard highlights">
+                <span>Established 2017</span>
+                <span>Enterprise services</span>
+                <span>Secure by design</span>
+              </div>
+            </div>
+
+            <nav class="footer-col" aria-label="Footer navigation">
+              <h4>Navigate</h4>
+              <div class="footer-links-list">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="work.html">Work</a>
+                <a href="about.html">About</a>
+                <a href="contact.php">Contact</a>
+              </div>
+            </nav>
+
+            <nav class="footer-col" aria-label="Footer service links">
+              <h4>Services</h4>
+              <div class="footer-links-list">
+                <a href="enterprise-websites.html">Enterprise Websites</a>
+                <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
+                <a href="business-systems.html">Business Systems</a>
+                <a href="automation-cloud.html">Automation &amp; Cloud</a>
+                <a href="it-security-consulting.html">IT &amp; Security Consulting</a>
+                <a href="maintenance-support.html">Maintenance &amp; Support</a>
+              </div>
+            </nav>
+
+            <div class="footer-cta-card">
+              <h4>Project intake</h4>
+              <p>Tell us what you need built, cleaned up, connected, or supported. The request starts as a project ticket.</p>
+              <a class="btn btn-primary" href="contact.php">Start a Project</a>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <span><strong>© NxtGenGuard</strong> · Established 2017 · All rights reserved.</span>
+            <span class="footer-status">Ready for new projects</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const mobileNav = document.getElementById('mobileNav');
+    function toggleMenu() {
+      mobileNav.classList.toggle('open');
+      document.body.classList.toggle('nav-open');
+    }
+    function closeMenu() {
+      mobileNav.classList.remove('open');
+      document.body.classList.remove('nav-open');
+    }
+  </script>
+
+</body>
+</html>
