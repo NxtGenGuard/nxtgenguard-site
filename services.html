@@ -4,12 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NxtGenGuard | Services</title>
-  <meta
-    name="description"
-    content="NxtGenGuard enterprise services for websites, platforms, dashboards, systems, automation, cloud, and IT security consulting."
-  />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta name="description" content="NxtGenGuard enterprise services for websites, platforms, dashboards, systems, automation, cloud, and IT security consulting." />
   <style>
+
     :root {
       --bg: #020612;
       --bg-2: #07111f;
@@ -30,7 +27,6 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       font-family: Inter, Arial, Helvetica, sans-serif;
@@ -41,7 +37,6 @@
         linear-gradient(180deg, #01040d 0%, #050c18 44%, #030813 100%);
       overflow-x: hidden;
     }
-
     body.nav-open { overflow: hidden; }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
@@ -55,37 +50,21 @@
       padding: 0 22px;
       border-radius: 14px;
       font-weight: 800;
-      transition:
-        transform 0.28s var(--ease),
-        box-shadow 0.28s var(--ease),
-        border-color 0.28s var(--ease),
-        background 0.28s var(--ease);
+      transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease), background 0.28s var(--ease);
     }
-
     .btn:hover { transform: translateY(-2px); }
-
     .btn-primary {
       color: #fff;
       background: linear-gradient(135deg, rgba(31, 69, 202, 0.96), rgba(46, 88, 224, 0.9));
       border: 1px solid rgba(126, 165, 255, 0.38);
       box-shadow: 0 18px 38px rgba(31, 69, 202, 0.28);
     }
-
-    .btn-primary:hover {
-      border-color: rgba(186, 214, 255, 0.56);
-      box-shadow: 0 22px 46px rgba(31, 69, 202, 0.34);
-    }
-
     .btn-secondary {
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
       color: #fff;
     }
-
-    .btn-secondary:hover {
-      border-color: rgba(120, 182, 255, 0.26);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
-    }
+    .btn-primary:hover, .btn-secondary:hover { border-color: rgba(186, 214, 255, 0.56); }
 
     .pill {
       display: inline-flex;
@@ -103,7 +82,6 @@
       text-transform: uppercase;
       backdrop-filter: blur(14px);
     }
-
     .pill::before {
       content: "";
       width: 9px;
@@ -121,7 +99,6 @@
       background: rgba(3, 8, 18, 0.74);
       backdrop-filter: blur(18px);
     }
-
     .nav-wrap {
       min-height: var(--nav-h);
       display: flex;
@@ -129,32 +106,15 @@
       justify-content: space-between;
       gap: 22px;
     }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
+    .brand { display: inline-flex; align-items: center; justify-content: center; }
     .brand img {
       width: 62px;
       height: 62px;
       object-fit: contain;
       filter: drop-shadow(0 0 22px rgba(116, 176, 255, 0.18));
     }
-
-    .desktop-nav,
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .desktop-nav a,
-    .nav-drop-toggle {
+    .desktop-nav, .nav-actions { display: flex; align-items: center; gap: 28px; }
+    .desktop-nav a, .nav-drop-toggle {
       color: #edf2ff;
       font-weight: 700;
       background: none;
@@ -163,29 +123,9 @@
       font-size: 0.97rem;
       cursor: pointer;
     }
-
-    .desktop-nav a:hover,
-    .desktop-nav a.active,
-    .nav-drop-toggle:hover,
-    .nav-drop-toggle.active {
-      color: #fff;
-    }
-
-    .nav-drop {
-      position: relative;
-      padding-bottom: 14px;
-      margin-bottom: -14px;
-    }
-
-    .nav-drop::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 100%;
-      height: 16px;
-    }
-
+    .desktop-nav a:hover, .desktop-nav a.active, .nav-drop-toggle:hover, .nav-drop-toggle.active { color: #fff; }
+    .nav-drop { position: relative; padding-bottom: 14px; margin-bottom: -14px; }
+    .nav-drop::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
     .nav-drop-menu {
       position: absolute;
       top: calc(100% + 8px);
@@ -202,33 +142,15 @@
       pointer-events: none;
       transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
     }
-
-    .nav-drop-menu::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: -14px;
-      height: 14px;
-    }
-
-    .nav-drop:hover .nav-drop-menu,
-    .nav-drop:focus-within .nav-drop-menu {
+    .nav-drop-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
+    .nav-drop:hover .nav-drop-menu, .nav-drop:focus-within .nav-drop-menu {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
       pointer-events: auto;
     }
-
-    .nav-drop-menu a {
-      display: block;
-      padding: 12px 14px;
-      border-radius: 12px;
-    }
-
-    .nav-drop-menu a:hover {
-      background: rgba(255, 255, 255, 0.05);
-    }
+    .nav-drop-menu a { display: block; padding: 12px 14px; border-radius: 12px; }
+    .nav-drop-menu a:hover { background: rgba(255, 255, 255, 0.05); }
 
     .menu-toggle {
       display: none;
@@ -240,14 +162,8 @@
       color: #fff;
       font-size: 1.15rem;
     }
-
-    .mobile-nav {
-      display: none;
-      padding: 0 0 18px;
-    }
-
+    .mobile-nav { display: none; padding: 0 0 18px; }
     .mobile-nav.open { display: block; }
-
     .mobile-panel {
       border: 1px solid var(--line);
       border-radius: 22px;
@@ -255,9 +171,7 @@
       padding: 14px;
       box-shadow: var(--shadow);
     }
-
-    .mobile-panel a,
-    .mobile-panel summary {
+    .mobile-panel a, .mobile-panel summary {
       display: block;
       padding: 14px 12px;
       border-radius: 12px;
@@ -265,23 +179,216 @@
       list-style: none;
       cursor: pointer;
     }
-
-    .mobile-panel a:hover,
-    .mobile-panel summary:hover,
-    .mobile-panel details[open] summary {
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .mobile-submenu {
-      padding: 4px 0 0 10px;
-    }
-
-    .mobile-submenu a {
-      color: var(--muted);
-      font-weight: 600;
-    }
-
+    .mobile-panel a:hover, .mobile-panel summary:hover, .mobile-panel details[open] summary { background: rgba(255, 255, 255, 0.05); }
+    .mobile-submenu { padding: 4px 0 0 10px; }
+    .mobile-submenu a { color: var(--muted); font-weight: 600; }
     .mobile-panel summary::-webkit-details-marker { display: none; }
+
+
+    /* Premium site footer */
+    .site-footer {
+      position: relative;
+      padding: 0 0 48px;
+      overflow: hidden;
+    }
+
+    .site-footer::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 280px;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(43, 120, 255, 0.14), transparent 26%),
+        radial-gradient(circle at 84% 72%, rgba(120, 182, 255, 0.10), transparent 30%);
+      pointer-events: none;
+      opacity: 0.86;
+    }
+
+    .footer-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background:
+        radial-gradient(circle at top left, rgba(43, 120, 255, 0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(120, 182, 255, 0.10), transparent 24%),
+        linear-gradient(180deg, rgba(8, 14, 28, 0.94), rgba(5, 10, 20, 0.92));
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.32);
+      padding: 34px;
+      isolation: isolate;
+    }
+
+    .footer-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+      background-size: 38px 38px;
+      opacity: 0.18;
+      mask-image: radial-gradient(circle at top center, black 0%, transparent 76%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.72fr 1fr 0.92fr;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      font-size: 1.08rem;
+      color: #fff;
+    }
+
+    .footer-brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 22px rgba(120, 182, 255, 0.18));
+    }
+
+    .footer-brand-block p {
+      margin: 16px 0 0;
+      max-width: 410px;
+      color: var(--muted);
+      line-height: 1.78;
+      font-size: 0.96rem;
+    }
+
+    .footer-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .footer-badges span,
+    .footer-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.035);
+      color: #dbe7ff;
+      font-weight: 800;
+      font-size: 0.78rem;
+    }
+
+    .footer-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4dff9a;
+      box-shadow: 0 0 16px rgba(77, 255, 154, 0.7);
+    }
+
+    .footer-col h4,
+    .footer-cta-card h4 {
+      margin: 0 0 14px;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(220, 232, 255, 0.68);
+    }
+
+    .footer-links-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-links-list a {
+      width: fit-content;
+      color: #dbe6ff;
+      opacity: 0.86;
+      font-weight: 750;
+      line-height: 1.44;
+      transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease;
+    }
+
+    .footer-links-list a:hover {
+      opacity: 1;
+      color: #fff;
+      transform: translateX(3px);
+    }
+
+    .footer-cta-card {
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        radial-gradient(circle at top right, rgba(120, 182, 255, 0.12), transparent 34%),
+        rgba(255, 255, 255, 0.035);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+    }
+
+    .footer-cta-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.94rem;
+    }
+
+    .footer-cta-card .btn {
+      width: 100%;
+      min-height: 50px;
+    }
+
+    .footer-bottom {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: rgba(212, 224, 246, 0.72);
+      font-size: 0.92rem;
+    }
+
+    .footer-bottom strong {
+      color: #eef4ff;
+    }
+
+    @media (max-width: 1080px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-cta-card { grid-column: span 2; }
+    }
+
+    @media (max-width: 620px) {
+      .site-footer { padding-bottom: 34px; }
+      .footer-shell { border-radius: 26px; padding: 24px 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-cta-card { grid-column: auto; }
+      .footer-brand-block p { max-width: none; }
+      .footer-links-list a { width: 100%; }
+      .footer-bottom { align-items: flex-start; flex-direction: column; }
+    }
+
+
+    @media (max-width: 860px) {
+      .desktop-nav, .nav-actions { display: none; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(var(--max), calc(100% - 22px)); }
+    }
+
 
     .services-hero {
       position: relative;
@@ -289,96 +396,55 @@
       isolation: isolate;
       padding: 108px 0 66px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .services-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
       background:
-        radial-gradient(circle at 16% 26%, rgba(43, 120, 255, 0.18), transparent 30%),
-        radial-gradient(circle at 82% 18%, rgba(120, 182, 255, 0.12), transparent 26%),
-        linear-gradient(180deg, rgba(2, 6, 17, 0.42), rgba(2, 6, 17, 0.02));
+        linear-gradient(90deg, rgba(2, 6, 17, 0.94) 0%, rgba(2, 6, 17, 0.72) 44%, rgba(2, 6, 17, 0.42) 100%),
+        linear-gradient(180deg, rgba(2, 6, 17, 0.18), rgba(2, 6, 17, 0.78)),
+        url("assets/images/logo/ServicesBG.png") center center / cover no-repeat;
     }
-
     .services-hero::after {
       content: "";
       position: absolute;
       inset: 0;
-      z-index: -1;
+      z-index: 0;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
       background-size: 42px 42px;
       mask-image: linear-gradient(180deg, black 0%, transparent 78%);
-      opacity: 0.2;
+      opacity: 0.24;
+      pointer-events: none;
     }
-
-    .services-hero-inner {
-      display: grid;
-      gap: 22px;
-      max-width: 890px;
-    }
-
-    .services-hero h1 {
-      margin: 0;
-      font-size: clamp(3.2rem, 9vw, 7.2rem);
-      line-height: 0.86;
-      letter-spacing: -0.08em;
-      text-shadow: 0 18px 48px rgba(0, 0, 0, 0.36);
-    }
-
-    .services-hero p {
-      margin: 0;
-      max-width: 760px;
-      color: var(--muted);
-      font-size: clamp(1rem, 1.6vw, 1.18rem);
-      line-height: 1.82;
-    }
-
-    .services-statement {
-      padding: 56px 0 18px;
-    }
-
+    .services-hero-inner { position: relative; z-index: 1; display: grid; gap: 22px; max-width: 890px; }
+    .services-hero h1 { margin: 0; font-size: clamp(3.2rem, 9vw, 7.2rem); line-height: 0.86; letter-spacing: -0.08em; text-shadow: 0 18px 48px rgba(0, 0, 0, 0.36); }
+    .services-hero p { margin: 0; max-width: 760px; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.18rem); line-height: 1.82; }
+    .services-statement { padding: 56px 0 18px; }
     .statement-card {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 26px;
-      align-items: center;
-      padding: 34px;
+      place-items: center;
+      text-align: center;
+      padding: 38px 34px;
       border-radius: 32px;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      background:
-        radial-gradient(circle at top right, rgba(120, 182, 255, 0.1), transparent 28%),
-        rgba(7, 12, 24, 0.82);
+      background: radial-gradient(circle at top right, rgba(120, 182, 255, 0.1), transparent 28%), rgba(7, 12, 24, 0.82);
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
     }
-
     .statement-card h2 {
-      margin: 0;
+      margin: 0 auto;
+      max-width: 980px;
       font-size: clamp(2rem, 4vw, 3.4rem);
       line-height: 0.98;
       letter-spacing: -0.06em;
+      animation: statementBounce 6s ease-in-out infinite;
     }
-
-    .statement-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.82;
-      font-size: 1.02rem;
+    @keyframes statementBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
-
-    .service-cards-section {
-      padding: 26px 0 92px;
+    @media (prefers-reduced-motion: reduce) {
+      .statement-card h2 { animation: none; }
     }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
-    }
-
+    .service-cards-section { padding: 26px 0 92px; }
+    .cards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
     .service-card {
       scroll-margin-top: calc(var(--nav-h) + 24px);
       position: relative;
@@ -388,293 +454,63 @@
       background: rgba(6, 11, 21, 0.84);
       overflow: hidden;
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
-      transition:
-        transform 0.36s var(--ease),
-        border-color 0.36s var(--ease),
-        box-shadow 0.36s var(--ease),
-        background 0.36s var(--ease);
+      transition: transform 0.36s var(--ease), border-color 0.36s var(--ease), box-shadow 0.36s var(--ease), background 0.36s var(--ease);
     }
-
-    .service-card:hover,
-    .service-card:focus-visible {
-      transform: translateY(-8px);
-      border-color: var(--line-strong);
-      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.32);
-      outline: none;
-      background: rgba(8, 14, 26, 0.94);
-    }
-
+    .service-card:hover, .service-card:focus-visible { transform: translateY(-8px); border-color: var(--line-strong); box-shadow: 0 24px 50px rgba(0, 0, 0, 0.32); outline: none; background: rgba(8, 14, 26, 0.94); }
     .service-visual {
-      min-height: 200px;
-      position: relative;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 28% 22%, rgba(120, 182, 255, 0.24), transparent 28%),
-        radial-gradient(circle at 80% 72%, rgba(43, 120, 255, 0.16), transparent 30%),
-        linear-gradient(135deg, rgba(7, 18, 38, 0.94), rgba(4, 8, 18, 0.98));
-    }
-
-    .service-visual::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-      background-size: 30px 30px;
-      opacity: 0.28;
-    }
-
-    .service-visual::after {
-      content: "Replace Image";
-      position: relative;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 0 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.05);
-      color: rgba(220, 232, 255, 0.78);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      backdrop-filter: blur(12px);
-    }
-
-    .service-card-body {
-      padding: 28px;
-      display: grid;
-      gap: 16px;
-    }
-
-    .service-card h3 {
-      margin: 0;
-      font-size: clamp(1.35rem, 2.3vw, 1.9rem);
-      line-height: 1.02;
-      letter-spacing: -0.052em;
-    }
-
-    .service-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.76;
-      font-size: 0.98rem;
-    }
-
-    .service-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 2px;
-    }
-
-    .service-tag {
-      display: inline-flex;
-      align-items: center;
-      min-height: 32px;
-      padding: 0 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.03);
-      color: #dbe6ff;
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-
-    .card-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 4px;
-      color: #eef3ff;
-      font-weight: 900;
-    }
-
-    .card-link::after {
-      content: "↗";
-      transition: transform 0.28s var(--ease);
-    }
-
-    .service-card:hover .card-link::after,
-    .service-card:focus-visible .card-link::after {
-      transform: translate(3px, -3px);
-    }
-
-    .quick-cta {
-      padding: 0 0 86px;
-    }
-
-    .quick-cta-box {
+      min-height: 240px;
       position: relative;
       overflow: hidden;
-      padding: 42px 34px;
-      border-radius: 34px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background:
-        radial-gradient(circle at top right, rgba(120, 182, 255, 0.14), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(43, 120, 255, 0.11), transparent 26%),
-        rgba(8, 13, 24, 0.92);
-      box-shadow: var(--shadow);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
+      background: linear-gradient(135deg, rgba(7, 18, 38, 0.94), rgba(4, 8, 18, 0.98));
     }
+    .service-visual img { width: 100%; height: 240px; object-fit: cover; object-position: center center; filter: saturate(1.02) brightness(0.82); transform: scale(1.01); transition: transform 0.42s var(--ease), filter 0.42s var(--ease); }
+    .service-visual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(3, 8, 18, 0.06) 0%, rgba(3, 8, 18, 0.22) 48%, rgba(3, 8, 18, 0.68) 100%); pointer-events: none; }
+    .service-card:hover .service-visual img { transform: scale(1.06); filter: saturate(1.1) brightness(0.92); }
+    .service-card-body { padding: 28px; display: grid; gap: 16px; }
+    .service-card h3 { margin: 0; font-size: clamp(1.35rem, 2.3vw, 1.9rem); line-height: 1.02; letter-spacing: -0.052em; }
+    .service-card p { margin: 0; color: var(--muted); line-height: 1.76; font-size: 0.98rem; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+    .service-tag { display: inline-flex; align-items: center; min-height: 32px; padding: 0 11px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.03); color: #dbe6ff; font-size: 0.78rem; font-weight: 700; }
+    .card-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; color: #eef3ff; font-weight: 900; }
+    .card-link::after { content: "↗"; transition: transform 0.28s var(--ease); }
+    .service-card:hover .card-link::after, .service-card:focus-visible .card-link::after { transform: translate(3px, -3px); }
+    @media (max-width: 1080px) { .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .statement-card { grid-template-columns: 1fr; } }
+    @media (max-width: 860px) { .services-hero { padding: 82px 0 52px; } }
+    @media (max-width: 620px) { .cards-grid { grid-template-columns: 1fr; } .service-visual, .service-visual img { min-height: 210px; height: 210px; } .statement-card, .service-card { border-radius: 24px; } .statement-card { padding-left: 20px; padding-right: 20px; } }
 
-    .quick-cta-box h2 {
-      margin: 0 0 8px;
-      font-size: clamp(1.9rem, 3.8vw, 3.1rem);
-      line-height: 0.96;
-      letter-spacing: -0.06em;
-    }
-
-    .quick-cta-box p {
-      margin: 0;
-      color: var(--muted);
-      max-width: 650px;
-      line-height: 1.76;
-    }
-
-    footer {
-      padding: 0 0 48px;
-    }
-
-    .footer-shell.footer-shell--clean {
-      padding: 28px 34px 30px;
-      border-radius: 32px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background:
-        radial-gradient(circle at top right, rgba(110, 189, 255, 0.11), transparent 24%),
-        radial-gradient(circle at bottom left, rgba(31, 69, 202, 0.09), transparent 28%),
-        rgba(7, 12, 24, 0.86);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
-      display: grid;
-      gap: 22px;
-      text-align: center;
-    }
-
-    .footer-links-clean {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .footer-links-clean a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.03);
-      color: #dbe6ff;
-      opacity: 0.9;
-      line-height: 1.2;
-      transition: transform 0.22s ease, opacity 0.22s ease, border-color 0.22s ease, background 0.22s ease;
-      text-align: center;
-      font-weight: 700;
-    }
-
-    .footer-links-clean a:hover {
-      opacity: 1;
-      transform: translateY(-2px);
-      border-color: rgba(110, 189, 255, 0.28);
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .footer-note {
-      margin: 0 auto;
-      max-width: 920px;
-      color: #e4edff;
-      line-height: 1.8;
-      font-weight: 600;
-    }
-
-    .footer-pagebar {
-      margin-top: 18px;
-      padding: 18px 20px 0;
-      text-align: center;
-      color: rgba(212, 224, 246, 0.76);
-      font-size: 0.98rem;
-    }
-
-    @media (max-width: 1080px) {
-      .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .statement-card { grid-template-columns: 1fr; }
-      .quick-cta-box { align-items: flex-start; flex-direction: column; }
-    }
-
-    @media (max-width: 860px) {
-      .desktop-nav,
-      .nav-actions { display: none; }
-
-      .menu-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .services-hero { padding: 82px 0 52px; }
-    }
-
-    @media (max-width: 620px) {
-      .container { width: min(var(--max), calc(100% - 22px)); }
-      .cards-grid { grid-template-columns: 1fr; }
-      .service-visual { min-height: 178px; }
-      .statement-card,
-      .service-card,
-      .quick-cta-box,
-      .footer-shell.footer-shell--clean { border-radius: 24px; }
-      .statement-card,
-      .quick-cta-box,
-      .footer-shell.footer-shell--clean { padding-left: 20px; padding-right: 20px; }
-      .quick-cta-box .btn,
-      .footer-links-clean a { width: 100%; }
-    }
   </style>
 </head>
 <body>
   <div class="site ready" id="siteRoot">
+
     <header>
       <div class="container nav-wrap">
         <a class="brand" href="index.html" aria-label="NxtGenGuard home">
           <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
         </a>
-
         <nav class="desktop-nav" aria-label="Primary">
           <a href="index.html">Home</a>
           <div class="nav-drop">
-            <a class="nav-drop-toggle active" href="services.html" aria-current="page">Services ▾</a>
+            <a class="nav-drop-toggle active" href="services.html">Services ▾</a>
             <div class="nav-drop-menu">
               <a href="services.html">All Services</a>
-              <a href="#websites">Websites</a>
-              <a href="#platforms">Platforms &amp; Dashboards</a>
-              <a href="#systems">Business Systems</a>
-              <a href="#automation">Automation &amp; Cloud</a>
-              <a href="#consulting">IT &amp; Security Consulting</a>
-              <a href="#maintenance">Maintenance &amp; Support</a>
+              <a href="enterprise-websites.html">Enterprise Websites</a>
+              <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
+              <a href="business-systems.html">Business Systems</a>
+              <a href="automation-cloud.html">Automation &amp; Cloud</a>
+              <a href="it-security-consulting.html">IT &amp; Security Consulting</a>
+              <a href="maintenance-support.html">Maintenance &amp; Support</a>
             </div>
           </div>
           <a href="work.html">Work</a>
           <a href="about.html">About</a>
           <a href="contact.php">Contact</a>
         </nav>
-
         <div class="nav-actions">
           <a class="btn btn-secondary" href="contact.php">Start a Project</a>
         </div>
-
         <button class="menu-toggle" type="button" aria-label="Open menu" onclick="toggleMenu()">☰</button>
       </div>
-
       <div class="container mobile-nav" id="mobileNav">
         <div class="mobile-panel">
           <a href="index.html" onclick="closeMenu()">Home</a>
@@ -682,12 +518,12 @@
             <summary>Services</summary>
             <div class="mobile-submenu">
               <a href="services.html" onclick="closeMenu()">All Services</a>
-              <a href="#websites" onclick="closeMenu()">Websites</a>
-              <a href="#platforms" onclick="closeMenu()">Platforms &amp; Dashboards</a>
-              <a href="#systems" onclick="closeMenu()">Business Systems</a>
-              <a href="#automation" onclick="closeMenu()">Automation &amp; Cloud</a>
-              <a href="#consulting" onclick="closeMenu()">IT &amp; Security Consulting</a>
-              <a href="#maintenance" onclick="closeMenu()">Maintenance &amp; Support</a>
+              <a href="enterprise-websites.html" onclick="closeMenu()">Enterprise Websites</a>
+              <a href="platforms-dashboards.html" onclick="closeMenu()">Platforms &amp; Dashboards</a>
+              <a href="business-systems.html" onclick="closeMenu()">Business Systems</a>
+              <a href="automation-cloud.html" onclick="closeMenu()">Automation &amp; Cloud</a>
+              <a href="it-security-consulting.html" onclick="closeMenu()">IT &amp; Security Consulting</a>
+              <a href="maintenance-support.html" onclick="closeMenu()">Maintenance &amp; Support</a>
             </div>
           </details>
           <a href="work.html" onclick="closeMenu()">Work</a>
@@ -700,11 +536,8 @@
     <main>
       <section class="services-hero" aria-labelledby="page-title">
         <div class="container services-hero-inner">
-          <div class="pill">Enterprise services</div>
           <h1 id="page-title">Services</h1>
-          <p>
-            Simple, focused services for companies that need a sharper digital presence, cleaner workflows, and stronger technical structure.
-          </p>
+          <p>Simple, focused services for companies that need a sharper digital presence, cleaner workflows, and stronger technical structure.</p>
         </div>
       </section>
 
@@ -712,10 +545,6 @@
         <div class="container">
           <div class="statement-card">
             <h2>Pick what you need built, cleaned up, or connected.</h2>
-            <p>
-              NxtGenGuard is moving toward enterprise-focused work: websites, platforms, dashboards, internal systems,
-              automation, cloud setup, and IT/security consulting. Each card below is a simple service card and anchor target from the homepage and dropdown. Use the project button below when you are ready to reach out.
-            </p>
           </div>
         </div>
       </section>
@@ -723,8 +552,10 @@
       <section class="service-cards-section" aria-label="NxtGenGuard services">
         <div class="container">
           <div class="cards-grid">
-            <a class="service-card" id="websites" href="#websites">
-              <div class="service-visual" aria-hidden="true"><!-- Add your website image here later. --></div>
+            <a class="service-card" id="websites" href="enterprise-websites.html">
+              <div class="service-visual" aria-hidden="true">
+                <img src="assets/images/logo/EnterpriseWebsites.png" alt="Enterprise Websites service image" />
+              </div>
               <div class="service-card-body">
                 <h3>Enterprise Websites</h3>
                 <p>Clean, modern websites built to explain your company, services, and value clearly.</p>
@@ -736,9 +567,10 @@
                 <span class="card-link">View service</span>
               </div>
             </a>
-
-            <a class="service-card" id="platforms" href="#platforms">
-              <div class="service-visual" aria-hidden="true"><!-- Add your dashboard/platform image here later. --></div>
+            <a class="service-card" id="platforms" href="platforms-dashboards.html">
+              <div class="service-visual" aria-hidden="true">
+                <img src="assets/images/logo/Platforms%26Dashboards.png" alt="Platforms &amp; Dashboards service image" />
+              </div>
               <div class="service-card-body">
                 <h3>Platforms &amp; Dashboards</h3>
                 <p>Custom dashboards, portals, and internal tools that help teams see work, data, and progress.</p>
@@ -750,9 +582,10 @@
                 <span class="card-link">View service</span>
               </div>
             </a>
-
-            <a class="service-card" id="systems" href="#systems">
-              <div class="service-visual" aria-hidden="true"><!-- Add your systems image here later. --></div>
+            <a class="service-card" id="systems" href="business-systems.html">
+              <div class="service-visual" aria-hidden="true">
+                <img src="assets/images/logo/BusinessSystems.png" alt="Business Systems service image" />
+              </div>
               <div class="service-card-body">
                 <h3>Business Systems</h3>
                 <p>Connected systems that organize intake, operations, tracking, communication, and delivery.</p>
@@ -764,9 +597,10 @@
                 <span class="card-link">View service</span>
               </div>
             </a>
-
-            <a class="service-card" id="automation" href="#automation">
-              <div class="service-visual" aria-hidden="true"><!-- Add your automation/cloud image here later. --></div>
+            <a class="service-card" id="automation" href="automation-cloud.html">
+              <div class="service-visual" aria-hidden="true">
+                <img src="assets/images/logo/Automation%26Cloud.png" alt="Automation &amp; Cloud service image" />
+              </div>
               <div class="service-card-body">
                 <h3>Automation &amp; Cloud</h3>
                 <p>Automated tasks, cloud setup, integrations, and deployment support for cleaner business operations.</p>
@@ -778,9 +612,10 @@
                 <span class="card-link">View service</span>
               </div>
             </a>
-
-            <a class="service-card" id="consulting" href="#consulting">
-              <div class="service-visual" aria-hidden="true"><!-- Add your consulting/security image here later. --></div>
+            <a class="service-card" id="consulting" href="it-security-consulting.html">
+              <div class="service-visual" aria-hidden="true">
+                <img src="assets/images/logo/IT%26SecurityConsulting.png" alt="IT &amp; Security Consulting service image" />
+              </div>
               <div class="service-card-body">
                 <h3>IT &amp; Security Consulting</h3>
                 <p>Guidance for infrastructure, security posture, device management, cloud planning, and technical cleanup.</p>
@@ -792,9 +627,10 @@
                 <span class="card-link">View service</span>
               </div>
             </a>
-
-            <a class="service-card" id="maintenance" href="#maintenance">
-              <div class="service-visual" aria-hidden="true"><!-- Add your maintenance/support image here later. --></div>
+            <a class="service-card" id="maintenance" href="maintenance-support.html">
+              <div class="service-visual" aria-hidden="true">
+                <img src="assets/images/logo/Maintenance%26Support.png" alt="Maintenance &amp; Support service image" />
+              </div>
               <div class="service-card-body">
                 <h3>Maintenance &amp; Support</h3>
                 <p>Ongoing updates, improvements, troubleshooting, and technical support for the systems we build.</p>
@@ -810,50 +646,76 @@
         </div>
       </section>
 
-      <section class="quick-cta" aria-label="Project call to action">
-        <div class="container">
-          <div class="quick-cta-box">
-            <div>
-              <h2>Need help choosing?</h2>
-              <p>Send a short message with what you want to build, improve, or connect. We can shape it into the right service package.</p>
-            </div>
-            <a class="btn btn-primary" href="contact.php">Start a Project</a>
-          </div>
-        </div>
-      </section>
     </main>
 
-    <footer>
+    <footer class="site-footer" aria-label="NxtGenGuard footer">
       <div class="container">
-        <div class="footer-shell footer-shell--clean">
-          <div class="footer-links-clean" aria-label="Footer links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="work.html">Work</a>
-            <a href="about.html">About</a>
-            <a href="contact.php">Contact</a>
+        <div class="footer-shell">
+          <div class="footer-grid">
+            <div class="footer-brand-block">
+              <a class="footer-brand" href="index.html" aria-label="NxtGenGuard home">
+                <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
+                <span>NxtGenGuard</span>
+              </a>
+              <p>Enterprise websites, dashboards, systems, automation, cloud, and IT/security guidance built with clean structure and a guarded mindset.</p>
+              <div class="footer-badges" aria-label="NxtGenGuard highlights">
+                <span>Established 2017</span>
+                <span>Enterprise services</span>
+                <span>Secure by design</span>
+              </div>
+            </div>
+
+            <nav class="footer-col" aria-label="Footer navigation">
+              <h4>Navigate</h4>
+              <div class="footer-links-list">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="work.html">Work</a>
+                <a href="about.html">About</a>
+                <a href="contact.php">Contact</a>
+              </div>
+            </nav>
+
+            <nav class="footer-col" aria-label="Footer service links">
+              <h4>Services</h4>
+              <div class="footer-links-list">
+                <a href="enterprise-websites.html">Enterprise Websites</a>
+                <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
+                <a href="business-systems.html">Business Systems</a>
+                <a href="automation-cloud.html">Automation &amp; Cloud</a>
+                <a href="it-security-consulting.html">IT &amp; Security Consulting</a>
+                <a href="maintenance-support.html">Maintenance &amp; Support</a>
+              </div>
+            </nav>
+
+            <div class="footer-cta-card">
+              <h4>Project intake</h4>
+              <p>Tell us what you need built, cleaned up, connected, or supported. The request starts as a project ticket.</p>
+              <a class="btn btn-primary" href="contact.php">Start a Project</a>
+            </div>
           </div>
-          <p class="footer-note">
-            Built for service businesses, operations teams, and growing companies that need clearer presentation, better reporting, and stronger system structure.
-          </p>
+
+          <div class="footer-bottom">
+            <span><strong>© NxtGenGuard</strong> · Established 2017 · All rights reserved.</span>
+            <span class="footer-status">Ready for new projects</span>
+          </div>
         </div>
       </div>
-      <div class="footer-pagebar">© NxtGenGuard · Established 2017 · All rights reserved.</div>
     </footer>
+
   </div>
 
   <script>
     const mobileNav = document.getElementById('mobileNav');
-
     function toggleMenu() {
       mobileNav.classList.toggle('open');
       document.body.classList.toggle('nav-open');
     }
-
     function closeMenu() {
       mobileNav.classList.remove('open');
       document.body.classList.remove('nav-open');
     }
   </script>
+
 </body>
 </html>
