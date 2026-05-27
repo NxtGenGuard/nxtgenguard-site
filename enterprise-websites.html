@@ -39,7 +39,7 @@
     }
     body.nav-open { overflow: hidden; }
     a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
+    img, video { display: block; max-width: 100%; }
     .container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
 
     .btn {
@@ -66,30 +66,6 @@
     }
     .btn-primary:hover, .btn-secondary:hover { border-color: rgba(186, 214, 255, 0.56); }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      width: fit-content;
-      padding: 10px 15px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.04);
-      color: #dce8ff;
-      font-size: 0.9rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      backdrop-filter: blur(14px);
-    }
-    .pill::before {
-      content: "";
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue-2), var(--blue));
-      box-shadow: 0 0 18px rgba(120, 182, 255, 0.9);
-    }
 
     header {
       position: sticky;
@@ -434,7 +410,15 @@
       box-shadow: var(--shadow);
       overflow: hidden;
     }
-    .hero-card img { width: 100%; height: 390px; object-fit: cover; object-position: center center; filter: saturate(1.04) brightness(0.9); }
+    .hero-card img,
+    .hero-card video {
+      width: 100%;
+      height: 390px;
+      object-fit: cover;
+      object-position: center center;
+      filter: saturate(1.04) brightness(0.9);
+      display: block;
+    }
     .detail-content { padding: 62px 0 86px; }
     .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .info-card {
@@ -479,7 +463,7 @@
     .service-cta-box h2 { margin: 0 0 8px; font-size: clamp(1.9rem, 3.8vw, 3.1rem); line-height: 0.96; letter-spacing: -0.06em; }
     .service-cta-box p { margin: 0; color: var(--muted); max-width: 650px; line-height: 1.76; }
     @media (max-width: 1080px) { .detail-hero-grid, .content-grid { grid-template-columns: 1fr; } .process-grid { grid-template-columns: repeat(2, 1fr); } .service-cta-box { align-items: flex-start; flex-direction: column; } }
-    @media (max-width: 620px) { .detail-hero { padding: 58px 0 42px; } .hero-card, .info-card, .service-cta-box { border-radius: 24px; } .hero-card img { height: 250px; } .process-grid { grid-template-columns: 1fr; } .info-card, .service-cta-box { padding-left: 20px; padding-right: 20px; } .service-cta-box .btn, .detail-actions .btn { width: 100%; } }
+    @media (max-width: 620px) { .detail-hero { padding: 58px 0 42px; } .hero-card, .info-card, .service-cta-box { border-radius: 24px; } .hero-card img, .hero-card video { height: 250px; } .process-grid { grid-template-columns: 1fr; } .info-card, .service-cta-box { padding-left: 20px; padding-right: 20px; } .service-cta-box .btn, .detail-actions .btn { width: 100%; } }
 
   </style>
 </head>
@@ -541,7 +525,6 @@
         <div class="container detail-hero-grid">
           <div class="detail-copy">
             <a class="back-link" href="services.html#websites">← Back to Services</a>
-            <div class="pill">Enterprise Websites</div>
             <h1 id="page-title">Enterprise Websites</h1>
             <p>Enterprise websites that make your company easier to understand and easier to trust.</p>
             <div class="detail-actions">
@@ -549,8 +532,12 @@
               <a class="btn btn-secondary" href="services.html">View all services</a>
             </div>
           </div>
-          <div class="hero-card">
-            <img src="assets/images/logo/EnterpriseWebsites.png" alt="Enterprise Websites image" />
+          <div class="hero-card" aria-label="Enterprise Websites page preview video">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/images/logo/EnterpriseWebsites.png">
+              <source src="assets/images/logo/EnterpriseWebsites.mp4" type="video/mp4" />
+              <source src="assets/images/logo/EnterpriseWebsites.mov" type="video/quicktime" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </section>
