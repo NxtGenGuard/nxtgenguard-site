@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NxtGenGuard | Platforms &amp; Dashboards</title>
-  <meta name="description" content="Custom dashboards, portals, and internal tools that help teams see work, data, and progress." />
+  <meta name="description" content="Custom dashboards, admin panels, client portals, reporting interfaces, and internal tools built around your business data and workflows." />
   <style>
 
     :root {
@@ -47,6 +47,7 @@
 
     .btn {
       display: inline-flex;
+      cursor: pointer;
       align-items: center;
       justify-content: center;
       min-height: 54px;
@@ -67,6 +68,12 @@
       border: 1px solid rgba(22, 137, 232, 0.16);
       color: var(--text);
       box-shadow: 0 14px 32px rgba(7, 24, 39, 0.07);
+    }
+    .btn-small {
+      min-height: 46px;
+      padding: 0 16px;
+      border-radius: 12px;
+      font-size: 0.92rem;
     }
     .btn-primary:hover, .btn-secondary:hover {
       border-color: rgba(20, 184, 166, 0.42);
@@ -172,190 +179,6 @@
     .mobile-submenu a { color: var(--muted); font-weight: 700; }
     .mobile-panel summary::-webkit-details-marker { display: none; }
 
-
-    /* Premium site footer */
-    .site-footer {
-      position: relative;
-      padding: 0 0 48px;
-      overflow: hidden;
-    }
-
-    .site-footer::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 280px;
-      background:
-        radial-gradient(circle at 18% 20%, rgba(103, 205, 251, 0.22), transparent 28%),
-        radial-gradient(circle at 84% 72%, rgba(255, 184, 107, 0.16), transparent 30%);
-      pointer-events: none;
-      opacity: 0.9;
-    }
-
-    .footer-shell {
-      position: relative;
-      overflow: hidden;
-      border-radius: 34px;
-      border: 1px solid rgba(22, 137, 232, 0.14);
-      background:
-        radial-gradient(circle at top left, rgba(103, 205, 251, 0.22), transparent 28%),
-        radial-gradient(circle at top right, rgba(255, 184, 107, 0.14), transparent 24%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(237, 248, 255, 0.9));
-      box-shadow: 0 26px 70px rgba(7, 24, 39, 0.11);
-      padding: 34px;
-      isolation: isolate;
-    }
-
-    .footer-shell::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(22, 137, 232, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(22, 137, 232, 0.06) 1px, transparent 1px);
-      background-size: 38px 38px;
-      opacity: 0.18;
-      mask-image: radial-gradient(circle at top center, black 0%, transparent 76%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.35fr 0.75fr 1fr;
-      gap: 30px;
-      align-items: start;
-    }
-
-    .footer-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 900;
-      letter-spacing: -0.035em;
-      font-size: 1.08rem;
-      color: var(--text);
-    }
-
-    .footer-brand img {
-      width: 52px;
-      height: 52px;
-      object-fit: contain;
-      filter: drop-shadow(0 10px 18px rgba(7, 24, 39, 0.08));
-    }
-
-    .footer-brand-block p {
-      margin: 16px 0 0;
-      max-width: 410px;
-      color: var(--muted);
-      line-height: 1.78;
-      font-size: 0.96rem;
-    }
-
-    .footer-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 18px;
-    }
-
-    .footer-badges span,
-    .footer-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 36px;
-      padding: 0 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(22, 137, 232, 0.14);
-      background: rgba(255, 255, 255, 0.72);
-      color: #23445e;
-      font-weight: 800;
-      font-size: 0.78rem;
-    }
-
-    .footer-status::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--teal);
-      box-shadow: 0 0 16px rgba(20, 184, 166, 0.58);
-    }
-
-    .footer-col h4 {
-      margin: 0 0 14px;
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--blue);
-    }
-
-    .footer-links-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .footer-links-list a {
-      width: fit-content;
-      color: var(--text);
-      opacity: 0.78;
-      font-weight: 800;
-      line-height: 1.44;
-      transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease;
-    }
-
-    .footer-links-list a:hover {
-      opacity: 1;
-      color: var(--blue);
-      transform: translateX(3px);
-    }
-
-    .footer-bottom {
-      margin-top: 28px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(22, 137, 232, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      flex-direction: column;
-      text-align: center;
-      color: rgba(7, 24, 39, 0.68);
-      font-size: 0.92rem;
-    }
-
-    .footer-bottom strong {
-      color: var(--text);
-    }
-
-    @media (max-width: 1080px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .footer-brand-block { grid-column: span 2; }
-    }
-
-    @media (max-width: 620px) {
-      .site-footer { padding-bottom: 34px; }
-      .footer-shell { border-radius: 26px; padding: 24px 20px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-      .footer-brand-block { grid-column: auto; }
-      .footer-brand-block p { max-width: none; }
-      .footer-links-list a { width: 100%; }
-      .footer-bottom { align-items: center; }
-    }
-
-
-    @media (max-width: 860px) {
-      .desktop-nav { display: none; }
-      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
-    }
-    @media (max-width: 620px) {
-      .container { width: min(var(--max), calc(100% - 22px)); }
-    }
-
-
     .detail-hero {
       position: relative;
       overflow: hidden;
@@ -387,21 +210,91 @@
       opacity: 0.22;
       pointer-events: none;
     }
-    .detail-hero-grid { display: grid; grid-template-columns: 1fr 0.82fr; gap: 34px; align-items: center; }
+    .detail-hero-grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 34px; align-items: center; }
     .detail-copy { display: grid; gap: 22px; }
     .back-link { color: var(--blue); font-weight: 900; width: fit-content; }
     .back-link:hover { color: var(--teal); }
-    .detail-copy h1 { margin: 0; font-size: clamp(2.8rem, 7.2vw, 6.1rem); line-height: 0.9; letter-spacing: -0.078em; color: var(--text); }
-    .detail-copy p { margin: 0; max-width: 780px; color: var(--muted); font-size: clamp(1rem, 1.4vw, 1.12rem); line-height: 1.82; }
+    .detail-copy h1 { margin: 0; max-width: 900px; font-size: clamp(2.7rem, 7vw, 5.85rem); line-height: 0.9; letter-spacing: -0.078em; color: var(--text); }
+    .detail-copy p { margin: 0; max-width: 790px; color: var(--muted); font-size: clamp(1rem, 1.4vw, 1.14rem); line-height: 1.82; }
     .detail-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .hero-card {
-      border-radius: 30px;
+
+    .hero-dashboard {
+      position: relative;
+      border-radius: 32px;
       border: 1px solid rgba(22, 137, 232, 0.14);
-      background: rgba(255, 255, 255, 0.76);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.28), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(237, 248, 255, 0.82));
       box-shadow: var(--shadow);
+      padding: 18px;
       overflow: hidden;
     }
-    .hero-card img { width: 100%; height: 390px; object-fit: cover; object-position: center center; filter: saturate(1.08) brightness(1.02); }
+    .hero-dashboard::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(22, 137, 232, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22, 137, 232, 0.06) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at top center, black 0%, transparent 76%);
+      pointer-events: none;
+    }
+    .dashboard-window {
+      position: relative;
+      border-radius: 24px;
+      border: 1px solid rgba(22, 137, 232, 0.14);
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 18px 46px rgba(7, 24, 39, 0.10);
+      overflow: hidden;
+    }
+    .window-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px;
+      border-bottom: 1px solid rgba(22, 137, 232, 0.10);
+      background: rgba(255, 255, 255, 0.72);
+    }
+    .window-dots { display: flex; gap: 7px; }
+    .window-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(22, 137, 232, 0.22); }
+    .window-title { font-size: 0.82rem; font-weight: 900; color: rgba(7, 24, 39, 0.68); }
+    .dashboard-body { padding: 18px; display: grid; gap: 14px; }
+    .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .metric-card {
+      border-radius: 18px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: linear-gradient(180deg, rgba(237, 248, 255, 0.82), rgba(255, 255, 255, 0.92));
+      padding: 14px;
+    }
+    .metric-card span { display: block; color: var(--muted); font-size: 0.75rem; font-weight: 800; }
+    .metric-card strong { display: block; margin-top: 8px; color: var(--text); font-size: 1.5rem; letter-spacing: -0.05em; }
+    .dashboard-main { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 12px; }
+    .chart-panel, .table-panel, .activity-panel {
+      border-radius: 18px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: rgba(255, 255, 255, 0.78);
+      padding: 14px;
+    }
+    .chart-panel h3, .table-panel h3, .activity-panel h3 { margin: 0 0 12px; font-size: 0.86rem; letter-spacing: -0.02em; color: var(--text); }
+    .bar-chart { height: 148px; display: flex; align-items: end; gap: 8px; padding-top: 10px; }
+    .bar-chart span { flex: 1; min-width: 12px; border-radius: 999px 999px 8px 8px; background: linear-gradient(180deg, var(--blue-2), var(--teal)); box-shadow: 0 12px 20px rgba(20, 184, 166, 0.18); }
+    .bar-chart span:nth-child(1) { height: 42%; }
+    .bar-chart span:nth-child(2) { height: 68%; }
+    .bar-chart span:nth-child(3) { height: 54%; }
+    .bar-chart span:nth-child(4) { height: 82%; }
+    .bar-chart span:nth-child(5) { height: 62%; }
+    .bar-chart span:nth-child(6) { height: 76%; }
+    .bar-chart span:nth-child(7) { height: 48%; }
+    .mini-table { display: grid; gap: 8px; }
+    .mini-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(22, 137, 232, 0.08); color: #23445e; font-weight: 800; font-size: 0.82rem; }
+    .mini-row:last-child { border-bottom: none; }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 14px rgba(20, 184, 166, 0.42); }
+    .activity-panel { display: grid; gap: 10px; }
+    .activity-line { display: flex; align-items: center; gap: 10px; color: var(--muted); font-weight: 800; font-size: 0.78rem; }
+    .activity-line::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: linear-gradient(135deg, var(--blue-2), var(--teal)); }
+
     .detail-content { padding: 62px 0 86px; }
     .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .info-card {
@@ -414,7 +307,11 @@
     }
     .info-card.wide { grid-column: 1 / -1; }
     .info-card h2 { margin: 0 0 18px; font-size: clamp(1.55rem, 2.6vw, 2.45rem); line-height: 1; letter-spacing: -0.055em; color: var(--text); }
+    .info-card h3 { margin: 0 0 10px; font-size: 1.12rem; letter-spacing: -0.035em; color: var(--text); }
     .info-card p { margin: 0; color: var(--muted); line-height: 1.78; }
+    .info-card p + p { margin-top: 12px; }
+    .lead-copy { max-width: 920px; font-size: 1.04rem; }
+
     .clean-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
     .clean-list li {
       position: relative;
@@ -433,7 +330,340 @@
       background: linear-gradient(135deg, var(--blue-2), var(--teal));
       box-shadow: 0 0 14px rgba(20, 184, 166, 0.42);
     }
-    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    .feature-grid, .path-grid, .screen-grid, .plan-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .feature-grid { grid-template-columns: repeat(4, 1fr); }
+    .path-grid { grid-template-columns: repeat(3, 1fr); }
+    .plan-grid { grid-template-columns: repeat(3, 1fr); }
+    .screen-grid { grid-template-columns: repeat(4, 1fr); }
+    .feature-card, .path-card, .screen-card, .plan-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: linear-gradient(180deg, rgba(237, 248, 255, 0.72), rgba(255, 255, 255, 0.92));
+      padding: 20px;
+    }
+    .feature-card::before, .path-card::before, .screen-card::before, .plan-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-2), var(--teal), rgba(255, 184, 107, 0.9));
+      opacity: 0.82;
+    }
+    .feature-card p, .path-card p, .screen-card p, .plan-card p { font-size: 0.95rem; line-height: 1.72; }
+    .path-card, .plan-card { display: grid; gap: 16px; grid-template-rows: 1fr auto; align-content: stretch; height: 100%; }
+    .path-card .btn, .plan-card .btn { width: fit-content; align-self: end; }
+    .path-card.featured, .plan-card.featured {
+      border-color: rgba(20, 184, 166, 0.28);
+      box-shadow: 0 18px 42px rgba(20, 184, 166, 0.10);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.28), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(237, 248, 255, 0.9));
+    }
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+    .card-meta span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(22, 137, 232, 0.13);
+      background: rgba(255, 255, 255, 0.72);
+      color: #23445e;
+      font-size: 0.76rem;
+      font-weight: 900;
+    }
+    .request-note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      line-height: 1.72;
+      font-weight: 700;
+    }
+    .price-line {
+      display: block;
+      margin: 10px 0 12px;
+      color: var(--text);
+      font-size: clamp(1.25rem, 2vw, 1.72rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      font-weight: 950;
+    }
+    .price-detail {
+      margin: 0 0 6px;
+      color: #23445e;
+      font-weight: 850;
+      line-height: 1.55;
+    }
+    .scope-note {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 184, 107, 0.28);
+      background: rgba(255, 248, 239, 0.64);
+      color: #5a4430;
+      line-height: 1.68;
+      font-weight: 800;
+    }
+
+    .selection-panel {
+      margin: 0 0 20px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(22, 137, 232, 0.14);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.22), transparent 30%),
+        rgba(255, 255, 255, 0.76);
+    }
+    .selection-panel p { margin-top: 12px; }
+    .selection-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .selection-step {
+      display: grid;
+      gap: 4px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(22, 137, 232, 0.13);
+      background: rgba(255, 255, 255, 0.74);
+    }
+    .selection-step strong {
+      color: var(--blue);
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .selection-step span {
+      color: #23445e;
+      font-weight: 900;
+      line-height: 1.4;
+    }
+    .choice-card.is-selected,
+    .demo-card.is-selected,
+    .addon-card.is-selected {
+      border-color: rgba(20, 184, 166, 0.52);
+      box-shadow: 0 20px 44px rgba(20, 184, 166, 0.16);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.34), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(237, 248, 255, 0.94));
+    }
+    .option-button.is-selected,
+    .demo-button.is-selected,
+    .addon-button.is-selected {
+      background: linear-gradient(135deg, #0e7fe4 0%, #25b6ef 58%, #14b8a6 100%);
+      color: #fff;
+    }
+    .demo-grid,
+    .addon-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .demo-grid { grid-template-columns: repeat(4, 1fr); margin-top: 18px; }
+    .addon-grid { grid-template-columns: repeat(4, 1fr); margin-top: 18px; }
+    .demo-card,
+    .addon-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 16px;
+      height: 100%;
+      border-radius: 22px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: linear-gradient(180deg, rgba(237, 248, 255, 0.72), rgba(255, 255, 255, 0.92));
+      padding: 20px;
+    }
+    .demo-card::before,
+    .addon-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-2), var(--teal), rgba(255, 184, 107, 0.9));
+      opacity: 0.82;
+    }
+    .demo-card.featured,
+    .addon-card.featured {
+      border-color: rgba(20, 184, 166, 0.28);
+      box-shadow: 0 18px 42px rgba(20, 184, 166, 0.10);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.28), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(237, 248, 255, 0.9));
+    }
+    .demo-card .price-line,
+    .addon-card .price-line { font-size: 1.22rem; }
+    .demo-card p,
+    .addon-card p { color: var(--muted); line-height: 1.72; }
+    .demo-card .btn,
+    .addon-card .btn { width: fit-content; align-self: end; }
+    .demo-meta {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .demo-meta span {
+      display: block;
+      border-radius: 14px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      padding: 10px 12px;
+      color: #23445e;
+      font-size: 0.84rem;
+      font-weight: 850;
+      line-height: 1.42;
+    }
+    .step-divider {
+      margin: 26px 0 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(22, 137, 232, 0.12);
+    }
+    .today-due-panel {
+      display: grid;
+      gap: 5px;
+      margin: 14px 0 16px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 184, 107, 0.30);
+      background:
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.18), transparent 30%),
+        rgba(255, 248, 239, 0.72);
+    }
+    .today-due-panel strong {
+      color: var(--text);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .today-due-panel span {
+      color: #5a4430;
+      font-size: 1.04rem;
+      font-weight: 950;
+      line-height: 1.45;
+    }
+    .demo-policy-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .demo-policy-card {
+      border-radius: 18px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      padding: 16px;
+    }
+    .demo-policy-card strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .demo-policy-card span {
+      color: var(--muted);
+      line-height: 1.62;
+      font-size: 0.94rem;
+    }
+    .selection-summary {
+      margin-top: 22px;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(20, 184, 166, 0.26);
+      background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, 0.14), transparent 28%),
+        rgba(255, 255, 255, 0.78);
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 14px 0 16px;
+    }
+    .summary-item {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: rgba(255, 255, 255, 0.78);
+    }
+    .summary-item strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+      font-size: 0.82rem;
+    }
+    .summary-item span {
+      color: #23445e;
+      font-weight: 850;
+      line-height: 1.45;
+    }
+    .compiled-link.is-disabled,
+    .compiled-link[aria-disabled="true"] {
+      opacity: 0.52;
+      pointer-events: none;
+      box-shadow: none;
+    }
+    .addon-price-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .addon-price-item {
+      border-radius: 18px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      padding: 16px;
+    }
+    .addon-price-item strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+    .addon-price-item span {
+      display: block;
+      color: #23445e;
+      font-weight: 850;
+      line-height: 1.55;
+    }
+
+    .intake-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .intake-item {
+      border-radius: 18px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      padding: 16px;
+    }
+    .intake-item strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 7px;
+      letter-spacing: -0.025em;
+    }
+    .intake-item span {
+      display: block;
+      color: var(--muted);
+      line-height: 1.62;
+      font-size: 0.94rem;
+    }
+
+    .process-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
     .process-step {
       padding: 18px;
       border-radius: 20px;
@@ -442,6 +672,32 @@
     }
     .process-step strong { display: block; margin-bottom: 8px; color: var(--text); }
     .process-step span { color: var(--muted); line-height: 1.62; }
+
+    .split-card {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .connection-panel {
+      border-radius: 24px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background:
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.16), transparent 28%),
+        linear-gradient(180deg, rgba(237, 248, 255, 0.78), rgba(255, 255, 255, 0.92));
+      padding: 22px;
+    }
+    .connection-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 16px; }
+    .connection-list span {
+      border-radius: 14px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: rgba(255, 255, 255, 0.76);
+      padding: 12px;
+      color: #23445e;
+      font-weight: 900;
+      font-size: 0.85rem;
+    }
+
     .service-cta { padding: 0 0 86px; }
     .service-cta-box {
       position: relative;
@@ -460,9 +716,168 @@
       gap: 24px;
     }
     .service-cta-box h2 { margin: 0 0 8px; font-size: clamp(1.9rem, 3.8vw, 3.1rem); line-height: 0.96; letter-spacing: -0.06em; color: var(--text); }
-    .service-cta-box p { margin: 0; color: var(--muted); max-width: 650px; line-height: 1.76; }
-    @media (max-width: 1080px) { .detail-hero-grid, .content-grid { grid-template-columns: 1fr; } .process-grid { grid-template-columns: repeat(2, 1fr); } .service-cta-box { align-items: flex-start; flex-direction: column; } }
-    @media (max-width: 620px) { .detail-hero { padding: 58px 0 42px; } .hero-card, .info-card, .service-cta-box { border-radius: 24px; } .hero-card img { height: 250px; } .process-grid { grid-template-columns: 1fr; } .info-card, .service-cta-box { padding-left: 20px; padding-right: 20px; } .service-cta-box .btn, .detail-actions .btn { width: 100%; } }
+    .service-cta-box p { margin: 0; color: var(--muted); max-width: 700px; line-height: 1.76; }
+
+    /* Premium site footer */
+    .site-footer {
+      position: relative;
+      padding: 0 0 48px;
+      overflow: hidden;
+    }
+    .site-footer::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 280px;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(103, 205, 251, 0.22), transparent 28%),
+        radial-gradient(circle at 84% 72%, rgba(255, 184, 107, 0.16), transparent 30%);
+      pointer-events: none;
+      opacity: 0.9;
+    }
+    .footer-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid rgba(22, 137, 232, 0.14);
+      background:
+        radial-gradient(circle at top left, rgba(103, 205, 251, 0.22), transparent 28%),
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.14), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(237, 248, 255, 0.9));
+      box-shadow: 0 26px 70px rgba(7, 24, 39, 0.11);
+      padding: 34px;
+      isolation: isolate;
+    }
+    .footer-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(22, 137, 232, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22, 137, 232, 0.06) 1px, transparent 1px);
+      background-size: 38px 38px;
+      opacity: 0.18;
+      mask-image: radial-gradient(circle at top center, black 0%, transparent 76%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.75fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      font-size: 1.08rem;
+      color: var(--text);
+    }
+    .footer-brand img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(7, 24, 39, 0.08));
+    }
+    .footer-brand-block p {
+      margin: 16px 0 0;
+      max-width: 410px;
+      color: var(--muted);
+      line-height: 1.78;
+      font-size: 0.96rem;
+    }
+    .footer-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+    .footer-badges span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(22, 137, 232, 0.14);
+      background: rgba(255, 255, 255, 0.72);
+      color: #23445e;
+      font-weight: 800;
+      font-size: 0.78rem;
+    }
+    .footer-col h4 {
+      margin: 0 0 14px;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .footer-links-list { display: grid; gap: 10px; }
+    .footer-links-list a {
+      width: fit-content;
+      color: var(--text);
+      opacity: 0.78;
+      font-weight: 800;
+      line-height: 1.44;
+      transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease;
+    }
+    .footer-links-list a:hover {
+      opacity: 1;
+      color: var(--blue);
+      transform: translateX(3px);
+    }
+    .footer-bottom {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(22, 137, 232, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: rgba(7, 24, 39, 0.68);
+      font-size: 0.92rem;
+    }
+    .footer-bottom strong { color: var(--text); }
+
+    @media (max-width: 1120px) {
+      .feature-grid, .screen-grid { grid-template-columns: repeat(2, 1fr); }
+      .path-grid, .plan-grid, .demo-grid, .addon-grid, .demo-policy-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: repeat(3, 1fr); }
+      .dashboard-main { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 1080px) {
+      .detail-hero-grid, .content-grid, .split-card { grid-template-columns: 1fr; }
+      .service-cta-box { align-items: flex-start; flex-direction: column; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand-block { grid-column: span 2; }
+    }
+    @media (max-width: 860px) {
+      .desktop-nav { display: none; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+      .metric-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .feature-grid, .path-grid, .screen-grid, .plan-grid, .demo-grid, .addon-grid, .process-grid, .connection-list, .intake-grid, .selection-steps, .summary-grid, .addon-price-list, .demo-policy-grid { grid-template-columns: 1fr; }
+      .path-card .btn, .plan-card .btn, .addon-card .btn { width: 100%; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(var(--max), calc(100% - 22px)); }
+      .detail-hero { padding: 58px 0 42px; }
+      .hero-dashboard, .info-card, .service-cta-box { border-radius: 24px; }
+      .info-card, .service-cta-box { padding-left: 20px; padding-right: 20px; }
+      .service-cta-box .btn, .detail-actions .btn { width: 100%; }
+      .site-footer { padding-bottom: 34px; }
+      .footer-shell { border-radius: 26px; padding: 24px 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-brand-block { grid-column: auto; }
+      .footer-brand-block p { max-width: none; }
+      .footer-links-list a { width: 100%; }
+    }
 
   </style>
 </head>
@@ -472,7 +887,7 @@
     <header>
       <div class="container nav-wrap">
         <a class="brand" href="index.html" aria-label="NxtGenGuard home">
-          <img src="nxtgenguard-site/assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
+          <img src="assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
         </a>
         <nav class="desktop-nav" aria-label="Primary">
           <a href="index.html">Home</a>
@@ -480,7 +895,7 @@
             <a class="nav-drop-toggle active" href="services.html">Services ▾</a>
             <div class="nav-drop-menu">
               <a href="services.html">All Services</a>
-              <a href="enterprise-websites.html">Enterprise Websites</a>
+              <a href="enterprise-websites.html">Websites &amp; Web Platforms</a>
               <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
               <a href="business-systems.html">Business Systems</a>
               <a href="automation-cloud.html">Automation &amp; Cloud</a>
@@ -501,7 +916,7 @@
             <summary>Services</summary>
             <div class="mobile-submenu">
               <a href="services.html" onclick="closeMenu()">All Services</a>
-              <a href="enterprise-websites.html" onclick="closeMenu()">Enterprise Websites</a>
+              <a href="enterprise-websites.html" onclick="closeMenu()">Websites &amp; Web Platforms</a>
               <a href="platforms-dashboards.html" onclick="closeMenu()">Platforms &amp; Dashboards</a>
               <a href="business-systems.html" onclick="closeMenu()">Business Systems</a>
               <a href="automation-cloud.html" onclick="closeMenu()">Automation &amp; Cloud</a>
@@ -522,14 +937,48 @@
           <div class="detail-copy">
             <a class="back-link" href="services.html#platforms">← Back to Services</a>
             <h1 id="page-title">Platforms &amp; Dashboards</h1>
-            <p>Dashboards and internal tools that turn scattered information into something your team can actually use.</p>
+            <p>Custom dashboards, admin panels, client portals, reporting interfaces, and internal tools that help your business see what is happening, control who can access it, and move work forward with less manual tracking.</p>
             <div class="detail-actions">
-              <a class="btn btn-primary" href="contact.php?service=Platforms%20%26%20Dashboards">Start this service</a>
-              <a class="btn btn-secondary" href="services.html">View all services</a>
+              <a class="btn btn-primary" href="contact.php?service=Platforms%20%26%20Dashboards&amp;plan=Custom%20Dashboard%20Request">Request a dashboard build</a>
+              <a class="btn btn-secondary" href="#dashboard-pricing">View starting points</a>
             </div>
           </div>
-          <div class="hero-card">
-            <img src="assets/images/logo/Platforms%26Dashboards.png" alt="Platforms &amp; Dashboards image" />
+
+          <div class="hero-dashboard" aria-label="Dashboard interface preview">
+            <div class="dashboard-window">
+              <div class="window-top">
+                <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="window-title">Operations dashboard preview</div>
+              </div>
+              <div class="dashboard-body">
+                <div class="metric-grid">
+                  <div class="metric-card"><span>Open work</span><strong>128</strong></div>
+                  <div class="metric-card"><span>On track</span><strong>91%</strong></div>
+                  <div class="metric-card"><span>Alerts</span><strong>06</strong></div>
+                </div>
+                <div class="dashboard-main">
+                  <div class="chart-panel">
+                    <h3>Weekly activity</h3>
+                    <div class="bar-chart" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                  </div>
+                  <div class="table-panel">
+                    <h3>Queue status</h3>
+                    <div class="mini-table">
+                      <div class="mini-row"><span>Approvals</span><span class="status-dot" aria-hidden="true"></span></div>
+                      <div class="mini-row"><span>Client updates</span><span class="status-dot" aria-hidden="true"></span></div>
+                      <div class="mini-row"><span>Reports ready</span><span class="status-dot" aria-hidden="true"></span></div>
+                      <div class="mini-row"><span>Imports synced</span><span class="status-dot" aria-hidden="true"></span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="activity-panel">
+                  <h3>Recent workflow</h3>
+                  <div class="activity-line">New intake form submitted</div>
+                  <div class="activity-line">Role access updated</div>
+                  <div class="activity-line">Report generated for review</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -537,63 +986,479 @@
       <section class="detail-content" aria-label="Platforms &amp; Dashboards details">
         <div class="container content-grid">
           <article class="info-card wide">
-            <h2>What this service is for</h2>
-            <p>This service is for teams that need visibility. Instead of hunting through spreadsheets, emails, and disconnected tools, your data can be organized into dashboards, portals, and clear reporting views.</p>
+            <h2>Build the working screens behind your business</h2>
+            <p class="lead-copy">This service is for the operational side of your business: the dashboards, portals, admin screens, forms, data views, and workflow tools your team uses to make decisions. Instead of copying updates between spreadsheets, emails, and disconnected apps, you can organize the work into a cleaner interface designed around how your business actually runs.</p>
           </article>
 
           <article class="info-card">
-            <h2>What we can do</h2>
+            <h2>What this service can cover</h2>
             <ul class="clean-list">
-              <li>Business dashboards for KPIs, projects, tickets, or operations</li>
-              <li>Internal portals for teams, clients, or admins</li>
-              <li>Reporting views for status, progress, and performance</li>
-              <li>Role-based page structure and protected areas when needed</li>
-              <li>Charts, tables, filters, and status cards</li>
-              <li>Data-ready layouts that can connect to future back-end systems</li>
+              <li>Custom dashboards for operations, finance, projects, tickets, inventory, service work, or executive reporting</li>
+              <li>Admin panels for managing records, users, requests, statuses, approvals, and internal activity</li>
+              <li>Client portals where customers, members, vendors, or partners can view updates and submit information</li>
+              <li>Reporting interfaces with charts, tables, filters, summaries, exports, and status cards</li>
+              <li>Internal tools with forms, queue screens, task views, notes, assignments, and workflow steps</li>
+              <li>User access planning for admins, staff, clients, reviewers, and read-only roles</li>
             </ul>
           </article>
 
           <article class="info-card">
             <h2>Best for</h2>
             <ul class="clean-list">
-              <li>Teams tracking work across multiple tools</li>
-              <li>Businesses using spreadsheets but needing a cleaner view</li>
-              <li>Companies that need client or staff portals</li>
-              <li>Owners who want clearer reporting and operational visibility</li>
+              <li>Your team needs one clear place to see work, data, and progress</li>
+              <li>You are tracking important business activity in spreadsheets but need a more controlled interface</li>
+              <li>You need a portal, admin panel, or dashboard that is private and role-aware</li>
+              <li>You want cleaner reporting without forcing your team into a tool that does not match your workflow</li>
+              <li>You already have a system, but the screens are confusing, outdated, slow, or hard to maintain</li>
             </ul>
           </article>
 
           <article class="info-card wide">
-            <h2>How the service works</h2>
-            <div class="process-grid">
-              <div class="process-step">
-                <strong>Step 1</strong>
-                <span>Map the information your team needs to see</span>
+            <h2>Dashboard and platform capabilities</h2>
+            <div class="feature-grid">
+              <div class="feature-card">
+                <h3>Data views</h3>
+                <p>Tables, cards, lists, detail pages, filters, search, and status views that make information easier to understand.</p>
               </div>
-              <div class="process-step">
-                <strong>Step 2</strong>
-                <span>Design the dashboard or portal workflow</span>
+              <div class="feature-card">
+                <h3>Forms and intake</h3>
+                <p>Structured forms for requests, updates, approvals, onboarding, internal notes, and operational handoffs.</p>
               </div>
-              <div class="process-step">
-                <strong>Step 3</strong>
-                <span>Build the interface and reporting structure</span>
+              <div class="feature-card">
+                <h3>Charts and reporting</h3>
+                <p>Visual summaries for trends, KPIs, workload, revenue, progress, exceptions, and team performance.</p>
               </div>
-              <div class="process-step">
-                <strong>Step 4</strong>
-                <span>Prepare the layout for live data, database, or API integration</span>
+              <div class="feature-card">
+                <h3>User access</h3>
+                <p>Role-aware screen planning for owners, admins, staff, clients, vendors, or reviewers.</p>
+              </div>
+              <div class="feature-card">
+                <h3>Workflow screens</h3>
+                <p>Queues, task boards, approval states, record updates, assignment panels, and next-step guidance.</p>
+              </div>
+              <div class="feature-card">
+                <h3>Automation hooks</h3>
+                <p>Interfaces that can trigger notifications, updates, task creation, report generation, or system handoffs.</p>
+              </div>
+              <div class="feature-card">
+                <h3>Cloud-connected systems</h3>
+                <p>Dashboards and portals designed to connect with databases, APIs, cloud storage, and backend services.</p>
+              </div>
+              <div class="feature-card">
+                <h3>Fix and improve</h3>
+                <p>Cleanup, redesign, maintenance, troubleshooting, and feature additions for dashboards you already have.</p>
               </div>
             </div>
           </article>
 
+          <article class="info-card wide" id="dashboard-paths">
+            <h2>Build your dashboard request in 3 steps</h2>
+            <div class="selection-panel" id="dashboard-request-builder">
+              <div class="selection-steps" aria-label="Dashboard request steps">
+                <div class="selection-step"><strong>Step 1</strong><span>Pick the dashboard path</span></div>
+                <div class="selection-step"><strong>Step 2</strong><span>Pick the starting point</span></div>
+                <div class="selection-step"><strong>Step 3</strong><span>Add demo, support, or growth options</span></div>
+              </div>
+              <p>You can build your request on this page without leaving. Nothing is sent until you click the final contact button. When you continue, your selected path, starting point, budget range, and optional add-ons are included with your contact request.</p>
+            </div>
+
+            <h2>Step 1: choose the dashboard path you need</h2>
+            <div class="path-grid">
+              <div class="path-card choice-card featured" data-choice-group="path" data-choice-value="Reporting dashboard" data-choice-label="Reporting dashboard">
+                <div>
+                  <h3>Reporting dashboard</h3>
+                  <p>For owners and teams that need KPIs, progress, status, exceptions, trends, or executive summaries in one clean view.</p>
+                  <div class="card-meta"><span>Charts</span><span>Tables</span><span>Filters</span></div>
+                </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="Reporting dashboard" data-label="Reporting dashboard">Choose this path</button>
+              </div>
+
+              <div class="path-card choice-card" data-choice-group="path" data-choice-value="Admin panel" data-choice-label="Admin panel">
+                <div>
+                  <h3>Admin panel</h3>
+                  <p>For managing records, requests, users, statuses, forms, notes, approvals, and day-to-day operational activity.</p>
+                  <div class="card-meta"><span>Records</span><span>Roles</span><span>Controls</span></div>
+                </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="Admin panel" data-label="Admin panel">Choose this path</button>
+              </div>
+
+              <div class="path-card choice-card" data-choice-group="path" data-choice-value="Client portal" data-choice-label="Client portal">
+                <div>
+                  <h3>Client portal</h3>
+                  <p>For giving customers, members, vendors, or partners a private place to submit information, check updates, and view documents or status.</p>
+                  <div class="card-meta"><span>Private access</span><span>Submissions</span><span>Status</span></div>
+                </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="Client portal" data-label="Client portal">Choose this path</button>
+              </div>
+
+              <div class="path-card choice-card featured" data-choice-group="path" data-choice-value="Centralized survey/admin hub" data-choice-label="Centralized survey/admin hub">
+                <div>
+                  <h3>Centralized survey/admin hub</h3>
+                  <p>For combining two, three, or more surveys, intake forms, or reporting links into one private admin panel with one login and separate dashboard views.</p>
+                  <div class="card-meta"><span>One login</span><span>Survey hub</span><span>Multi-dashboard</span></div>
+                </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="Centralized survey/admin hub" data-label="Centralized survey/admin hub">Choose this path</button>
+              </div>
+
+              <div class="path-card choice-card" data-choice-group="path" data-choice-value="Internal workflow tool" data-choice-label="Internal workflow tool">
+                <div>
+                  <h3>Internal workflow tool</h3>
+                  <p>For replacing manual tracking with screens for intake, routing, task updates, approval flows, team queues, and repeatable steps.</p>
+                  <div class="card-meta"><span>Queues</span><span>Forms</span><span>Approvals</span></div>
+                </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="Internal workflow tool" data-label="Internal workflow tool">Choose this path</button>
+              </div>
+
+              <div class="path-card choice-card" data-choice-group="path" data-choice-value="Cloud-connected system" data-choice-label="Cloud-connected system">
+                <div>
+                  <h3>Cloud-connected system</h3>
+                  <p>For dashboards that need live data, databases, APIs, automation, scheduled jobs, file storage, or custom cloud infrastructure.</p>
+                  <div class="card-meta"><span>APIs</span><span>Database</span><span>Cloud</span></div>
+                </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="Cloud-connected system" data-label="Cloud-connected system">Choose this path</button>
+              </div>
+            </div>
+            <p class="request-note">Choosing a path does not leave this page. It only adds the path to the request summary below.</p>
+          </article>
+
+          <article class="info-card wide" id="dashboard-pricing">
+            <h2>Step 2: choose your dashboard starting point</h2>
+            <p class="lead-copy">Custom dashboard and platform projects usually start around <strong>$10,000</strong> and commonly range from <strong>$10,000–$30,000+</strong>. The final quote depends on your dashboard screens, KPIs, data sources, user access, automations, and the level of cloud or database work needed. Ongoing maintenance, cloud hosting, future KPI additions, and new feature work can be scoped separately or covered under a support plan.</p>
+            <div class="plan-grid">
+              <div class="plan-card choice-card" data-choice-group="plan" data-choice-value="Dashboard Starter" data-choice-label="Dashboard Starter" data-budget="10000-15000">
+                <div>
+                  <h3>Dashboard Starter</h3>
+                  <span class="price-line">Starting around $10k</span>
+                  <p class="price-detail">Best for one focused dashboard or reporting view.</p>
+                  <p>Plan KPI cards, charts, tables, filters, and 1–3 core screens so your team can see the most important numbers clearly.</p>
+                  <div class="card-meta"><span>1–3 screens</span><span>KPI view</span><span>Light workflow</span></div>
+                </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="Dashboard Starter" data-label="Dashboard Starter" data-budget="10000-15000">Choose starting point</button>
+              </div>
+              <div class="plan-card choice-card featured" data-choice-group="plan" data-choice-value="Operations Dashboard" data-choice-label="Operations Dashboard" data-budget="15000-25000">
+                <div>
+                  <h3>Operations Dashboard</h3>
+                  <span class="price-line">Most projects: $15k–$25k</span>
+                  <p class="price-detail">Best for a real internal tool with multiple views.</p>
+                  <p>Build dashboards, reporting pages, forms, record tables, workflow screens, filters, and team-ready navigation around your business process.</p>
+                  <div class="card-meta"><span>4–8 screens</span><span>Forms</span><span>Reports</span></div>
+                </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="Operations Dashboard" data-label="Operations Dashboard" data-budget="15000-25000">Choose starting point</button>
+              </div>
+              <div class="plan-card choice-card" data-choice-group="plan" data-choice-value="Custom Platform / Client Portal" data-choice-label="Custom Platform / Client Portal" data-budget="25000-30000-plus">
+                <div>
+                  <h3>Custom Platform / Client Portal</h3>
+                  <span class="price-line">Custom scope: $25k–$30k+</span>
+                  <p class="price-detail">Best for advanced access, integrations, and portal workflows.</p>
+                  <p>Create a deeper admin system or portal with role-based access, client/staff views, connected data, automation, centralized survey dashboards, and launch support.</p>
+                  <div class="card-meta"><span>Multi-role</span><span>APIs / data</span><span>Survey hub</span></div>
+                </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="Custom Platform / Client Portal" data-label="Custom Platform / Client Portal" data-budget="25000-30000-plus">Choose starting point</button>
+              </div>
+            </div>
+            <p class="request-note">Choosing a starting point does not charge you. It only adds the plan and budget range to your request summary.</p>
+            <p class="scope-note">We confirm final pricing after a discovery review because two dashboards can look similar on the surface but require very different KPI logic, integrations, permissions, testing, and post-launch support needs.</p>
+          </article>
+
+          <article class="info-card wide" id="dashboard-addons">
+            <h2>Step 3: choose demo, maintenance, and growth options</h2>
+            <p class="lead-copy">These options help us understand what should happen next. A demo selection shows an estimated demo amount due today, but this page is still a request builder. You are not charged automatically.</p>
+
+            <div class="step-divider" id="demo-options">
+              <h3>Do you want a demo before the full build?</h3>
+              <p class="lead-copy">Start with a free fit call, then choose a paid demo only if you want files, visuals, or a proof-of-concept before approving the full dashboard build.</p>
+              <div class="demo-grid" aria-label="Dashboard demo options">
+                <div class="demo-card choice-card" data-choice-group="demo" data-choice-value="No paid demo / free fit call first" data-choice-label="No paid demo / free fit call first" data-demo-fee="0" data-demo-fee-label="$0" data-demo-timeline="Fit call first" data-demo-credit="No demo fee selected">
+                  <div>
+                    <h3>Free fit call first</h3>
+                    <span class="price-line">$0 today</span>
+                    <p class="price-detail">Best when you want to talk through scope before paying for a demo.</p>
+                    <p>A short phone or Zoom call to confirm the goal, dashboard path, likely starting point, and whether a paid demo makes sense.</p>
+                    <div class="demo-meta">
+                      <span>No demo files included</span>
+                      <span>Good for early questions</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button demo-button" type="button" data-choice-type="demo" data-value="No paid demo / free fit call first" data-label="No paid demo / free fit call first" data-demo-fee="0" data-demo-fee-label="$0" data-demo-timeline="Fit call first" data-demo-credit="No demo fee selected">Choose demo option</button>
+                </div>
+
+                <div class="demo-card choice-card" data-choice-group="demo" data-choice-value="Visual demo snapshot" data-choice-label="Visual demo snapshot" data-demo-fee="750" data-demo-fee-label="$750" data-demo-timeline="2–3 business days" data-demo-credit="Credited toward the main build if approved within 30 days">
+                  <div>
+                    <h3>Visual demo snapshot</h3>
+                    <span class="price-line">$750 today</span>
+                    <p class="price-detail">Best for a quick look before a bigger decision.</p>
+                    <p>A small visual concept using sample data so you can see the direction before moving into a larger dashboard proposal.</p>
+                    <div class="demo-meta">
+                      <span>1–2 screen concepts</span>
+                      <span>Delivered in 2–3 business days</span>
+                      <span>1 small polish pass</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button demo-button" type="button" data-choice-type="demo" data-value="Visual demo snapshot" data-label="Visual demo snapshot" data-demo-fee="750" data-demo-fee-label="$750" data-demo-timeline="2–3 business days" data-demo-credit="Credited toward the main build if approved within 30 days">Choose demo option</button>
+                </div>
+
+                <div class="demo-card choice-card featured" data-choice-group="demo" data-choice-value="Blueprint + clickable demo" data-choice-label="Blueprint + clickable demo" data-demo-fee="1500" data-demo-fee-label="$1,500" data-demo-timeline="Within 5 business days" data-demo-credit="Credited toward the main build if approved within 45 days">
+                  <div>
+                    <h3>Blueprint + clickable demo</h3>
+                    <span class="price-line">$1,500 today</span>
+                    <p class="price-detail">Best for most custom dashboard requests.</p>
+                    <p>A paid scope call plus a visual or clickable demo that maps the first dashboard direction, KPI priorities, workflow, and screen structure.</p>
+                    <div class="demo-meta">
+                      <span>30–45 minute scope call</span>
+                      <span>2–3 core screens</span>
+                      <span>Delivered within 5 business days</span>
+                      <span>1 grouped revision round</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button demo-button" type="button" data-choice-type="demo" data-value="Blueprint + clickable demo" data-label="Blueprint + clickable demo" data-demo-fee="1500" data-demo-fee-label="$1,500" data-demo-timeline="Within 5 business days" data-demo-credit="Credited toward the main build if approved within 45 days">Choose demo option</button>
+                </div>
+
+                <div class="demo-card choice-card" data-choice-group="demo" data-choice-value="Advanced proof-of-concept demo" data-choice-label="Advanced proof-of-concept demo" data-demo-fee="3500" data-demo-fee-label="$3,500" data-demo-timeline="7–10 business days" data-demo-credit="Credited toward the main build if approved within 45 days">
+                  <div>
+                    <h3>Advanced proof-of-concept</h3>
+                    <span class="price-line">$3,500 today</span>
+                    <p class="price-detail">Best for survey hubs, portals, and advanced admin flows.</p>
+                    <p>A deeper demo when you are considering a larger platform with multiple dashboards, sample admin screens, sample records, or survey-style views.</p>
+                    <div class="demo-meta">
+                      <span>45–60 minute scope call</span>
+                      <span>3–5 sample screens</span>
+                      <span>Delivered in 7–10 business days</span>
+                      <span>2 grouped review rounds</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button demo-button" type="button" data-choice-type="demo" data-value="Advanced proof-of-concept demo" data-label="Advanced proof-of-concept demo" data-demo-fee="3500" data-demo-fee-label="$3,500" data-demo-timeline="7–10 business days" data-demo-credit="Credited toward the main build if approved within 45 days">Choose demo option</button>
+                </div>
+              </div>
+              <p class="scope-note">Demo delivery timing starts after the scope call is complete, demo payment is received, and you provide any needed sample content, KPI names, survey fields, brand direction, or example data. Demo fees are credited toward the main build only when you approve the project within the stated credit window and the full build stays aligned with the approved demo scope.</p>
+            </div>
+
+            <div class="step-divider" id="support-options">
+              <h3>Optional support and growth add-ons</h3>
+              <p class="lead-copy">Choose these when you expect maintenance, future KPI changes, new survey dashboards, or feature growth after launch.</p>
+              <div class="addon-grid" aria-label="Maintenance and growth add-ons">
+                <div class="addon-card" data-addon-value="Maintenance & Care" data-addon-label="Maintenance & Care" data-addon-budget="750-monthly-plus">
+                  <div>
+                    <h3>Maintenance &amp; Care</h3>
+                    <span class="price-line">Starting around $750/mo</span>
+                    <p class="price-detail">Best for keeping the dashboard stable after launch.</p>
+                    <p>Small fixes, access questions, light content or label updates, health checks, and general support. Hosting and third-party software costs are separate when applicable.</p>
+                  </div>
+                  <button class="btn btn-primary btn-small addon-button" type="button" data-addon-button>Add to request</button>
+                </div>
+
+                <div class="addon-card featured" data-addon-value="KPI & Report Growth" data-addon-label="KPI & Report Growth" data-addon-budget="1500-4000-monthly">
+                  <div>
+                    <h3>KPI &amp; Report Growth</h3>
+                    <span class="price-line">$1.5k–$4k/mo</span>
+                    <p class="price-detail">Best when KPIs will keep changing.</p>
+                    <p>Monthly improvement support for new KPI cards, report pages, filters, charts, exports, survey fields, and dashboard refinements as your business evolves.</p>
+                  </div>
+                  <button class="btn btn-primary btn-small addon-button" type="button" data-addon-button>Add to request</button>
+                </div>
+
+                <div class="addon-card" data-addon-value="Feature Add-On Bank" data-addon-label="Feature Add-On Bank" data-addon-budget="2500-one-time-plus">
+                  <div>
+                    <h3>Feature Add-On Bank</h3>
+                    <span class="price-line">From $2.5k</span>
+                    <p class="price-detail">Best for planned extra KPIs or small features.</p>
+                    <p>A pre-scoped change budget for extra KPI cards, small report updates, labels, filters, exports, or minor admin improvements after the main scope is approved.</p>
+                  </div>
+                  <button class="btn btn-primary btn-small addon-button" type="button" data-addon-button>Add to request</button>
+                </div>
+
+                <div class="addon-card" data-addon-value="Platform Support Retainer" data-addon-label="Platform Support Retainer" data-addon-budget="custom-monthly">
+                  <div>
+                    <h3>Platform Support Retainer</h3>
+                    <span class="price-line">Custom monthly scope</span>
+                    <p class="price-detail">Best for admin hubs and multi-dashboard systems.</p>
+                    <p>Ongoing support for admin users, multiple surveys, new dashboard sections, integrations, access changes, automation updates, and planned feature releases.</p>
+                  </div>
+                  <button class="btn btn-primary btn-small addon-button" type="button" data-addon-button>Add to request</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="selection-summary" id="request-summary">
+              <h3>Your request summary</h3>
+              <p>This summary updates on the page first. After you choose a path and starting point, the final button sends your selected path, starting point, demo option, estimated demo cost, timeline, credit note, and support add-ons to the contact form.</p>
+              <div class="summary-grid">
+                <div class="summary-item"><strong>Path</strong><span id="summaryPath">Not selected yet</span></div>
+                <div class="summary-item"><strong>Starting point</strong><span id="summaryPlan">Not selected yet</span></div>
+                <div class="summary-item"><strong>Demo option</strong><span id="summaryDemo">Optional — not selected</span></div>
+                <div class="summary-item"><strong>Add-ons</strong><span id="summaryAddons">None selected</span></div>
+              </div>
+              <div class="today-due-panel" aria-live="polite">
+                <strong>Estimated demo due today</strong>
+                <span id="summaryTodayDue">$0 — no paid demo selected on this page.</span>
+              </div>
+              <a class="btn btn-primary compiled-link is-disabled" id="compiledContactLink" href="contact.php?service=Platforms%20%26%20Dashboards" aria-disabled="true">Choose a path and starting point first</a>
+            </div>
+            <p class="scope-note">No payment is collected on this page. We confirm paid demos through the contact form, a call, and an invoice/payment link before work starts. Your demo fee covers scope thinking, KPI structure, workflow planning, review preparation, and a clean review-ready demo package.</p>
+          </article>
+
+          <article class="info-card wide" id="demo-policy">
+            <h2>Paid demo process, review rules, and scope clarity</h2>
+            <p class="lead-copy">A paid demo is a small planning/prototype phase, not the full dashboard. It helps you see the direction before committing to a $10k–$30k+ build while keeping the scope clear and preventing unlimited unpaid changes.</p>
+            <div class="demo-policy-grid">
+              <div class="demo-policy-card"><strong>1. Fit call first</strong><span>Start with a short Zoom or phone call to confirm the goal, selected path, expected KPIs, survey/admin needs, and whether the demo option is the right size.</span></div>
+              <div class="demo-policy-card"><strong>2. Demo fee paid upfront</strong><span>The selected demo fee is due before demo work starts. The fee is credited toward the main build if you approve the project within the stated credit window.</span></div>
+              <div class="demo-policy-card"><strong>3. Demo files delivered</strong><span>The review package may include screenshots, a preview link, a video walkthrough, PDF notes, or clickable prototype files depending on the demo option selected.</span></div>
+              <div class="demo-policy-card"><strong>4. Limited demo revisions</strong><span>Send demo changes as one grouped list. The standard demo includes one grouped revision round; extra rounds are quoted before work continues.</span></div>
+            </div>
+            <p class="request-note">Demo change policy: one grouped revision round is included with the $1,500 demo, two grouped review rounds are included with the $3,500 proof-of-concept, and extra demo revision rounds start around $350–$750 depending on what changed.</p>
+            <p class="scope-note">Demo disclaimer: demo work is a concept/prototype for review and planning. It is not a production dashboard, live database, deployed application, security system, API integration, or final source-code delivery unless a separate written scope says so. New KPIs, extra survey connections, additional dashboards, user roles, automations, or integrations requested after the approved demo scope are treated as change requests or added to the full proposal.</p>
+          </article>
+
           <article class="info-card wide">
-            <h2>Possible deliverables</h2>
+            <h2>What affects dashboard pricing?</h2>
             <ul class="clean-list">
-              <li>Dashboard page layouts</li>
-              <li>Portal structure</li>
-              <li>Reporting card and chart sections</li>
-              <li>Admin/user interface planning</li>
-              <li>Future back-end integration notes</li>
+              <li>Number of dashboard screens, admin screens, portal pages, forms, and detail views</li>
+              <li>Number and complexity of KPIs, calculations, filters, charts, reports, and exports</li>
+              <li>Whether you are combining multiple surveys, forms, or dashboard links into one centralized admin panel</li>
+              <li>User access needs, including admins, staff, clients, vendors, reviewers, and read-only roles</li>
+              <li>Data sources such as spreadsheets, databases, APIs, CRM records, tickets, survey responses, files, or cloud systems</li>
+              <li>Automation needs such as notifications, approvals, scheduled reports, imports, exports, and status updates</li>
+              <li>Training, documentation, launch support, maintenance, future KPI additions, and new feature planning</li>
             </ul>
+          </article>
+
+          <article class="info-card wide split-card" id="centralized-survey-hub">
+            <div>
+              <h2>Centralize surveys, dashboards, and admin access</h2>
+              <p>If your business has two or three separate surveys, forms, or dashboard links, we can scope a single admin panel where authorized users log in once and choose the dashboard they need. Each survey can keep its own questions, records, KPI views, charts, filters, and exports while still living inside one cleaner platform.</p>
+              <p>This is usually part of a custom platform or client portal scope because it may involve user roles, data import rules, survey response mapping, reporting logic, and admin controls.</p>
+            </div>
+            <div class="connection-panel">
+              <h3>Centralized hub can include</h3>
+              <div class="connection-list">
+                <span>One admin login</span>
+                <span>Survey dashboards</span>
+                <span>Separate KPI views</span>
+                <span>Response tables</span>
+                <span>Charts and filters</span>
+                <span>Exports / reports</span>
+                <span>User roles</span>
+                <span>Future surveys</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="info-card wide" id="scope-change-control">
+            <h2>Scope, revisions, and future add-ons</h2>
+            <p class="lead-copy">Dashboard projects work best with clear change control. After the demo or starting scope is approved, new KPIs, extra survey dashboards, extra user roles, new automations, and new integrations are handled as scoped change requests instead of unlimited revisions.</p>
+            <div class="process-grid">
+              <div class="process-step">
+                <strong>Kickoff</strong>
+                <span>Confirm goals, users, KPIs, surveys, data sources, and the approved feature list.</span>
+              </div>
+              <div class="process-step">
+                <strong>Prototype review</strong>
+                <span>Review layout and workflow direction. Include one revision round for layout and priority adjustments.</span>
+              </div>
+              <div class="process-step">
+                <strong>Working demo review</strong>
+                <span>Review the functional build. Include one revision round for approved scope items and usability polish.</span>
+              </div>
+              <div class="process-step">
+                <strong>Pre-launch QA</strong>
+                <span>Fix bugs, verify forms, permissions, reports, and core dashboard behavior before launch.</span>
+              </div>
+              <div class="process-step">
+                <strong>Launch support</strong>
+                <span>Provide a short stabilization window for launch questions and bug fixes tied to the approved scope.</span>
+              </div>
+            </div>
+            <p class="request-note">Included main-build review limit: two planned revision rounds plus pre-launch QA. Demo reviews are separate and limited by the selected demo option. New features requested after scope approval are change requests and may change the price and timeline.</p>
+            <div class="addon-price-list" aria-label="Example add-on pricing">
+              <div class="addon-price-item"><strong>Simple KPI card</strong><span>$350–$750 when the data already exists and the calculation is simple.</span></div>
+              <div class="addon-price-item"><strong>Complex KPI or calculation</strong><span>$750–$2.5k+ when rules, formulas, filters, or validation are needed.</span></div>
+              <div class="addon-price-item"><strong>New chart, table, or report view</strong><span>$750–$2.5k+ depending on layout, filters, and export needs.</span></div>
+              <div class="addon-price-item"><strong>New dashboard page</strong><span>$1.5k–$5k+ depending on data, role access, and UI complexity.</span></div>
+              <div class="addon-price-item"><strong>Additional survey/form connection</strong><span>$2.5k–$7.5k+ when adding another survey into the admin hub.</span></div>
+              <div class="addon-price-item"><strong>New integration or automation</strong><span>$3k–$10k+ depending on API, database, scheduling, and testing needs.</span></div>
+            </div>
+            <p class="scope-note">Ballpark add-on prices are planning ranges, not checkout prices. Final pricing depends on data quality, third-party systems, security needs, testing, and whether the feature changes already-approved work.</p>
+          </article>
+
+          <article class="info-card wide">
+            <h2>What we ask before we quote</h2>
+            <p class="lead-copy">After you request a starting point, we ask a quick dashboard survey so your quote is based on the real scope instead of a guess.</p>
+            <div class="intake-grid">
+              <div class="intake-item"><strong>What are we building?</strong><span>KPI dashboard, admin panel, client portal, reporting interface, workflow tool, or existing dashboard improvement.</span></div>
+              <div class="intake-item"><strong>Who will use it?</strong><span>Owners, internal team, admins, clients, vendors, partners, reviewers, or multiple user roles.</span></div>
+              <div class="intake-item"><strong>What should it track?</strong><span>Sales, projects, tasks, tickets, operations, staff performance, customer activity, compliance, or custom KPIs.</span></div>
+              <div class="intake-item"><strong>How many screens?</strong><span>1–3 screens, 4–8 screens, 8–12 screens, 12+ screens, or not sure yet.</span></div>
+              <div class="intake-item"><strong>Where is the data?</strong><span>Spreadsheets, databases, forms, CRM, APIs, manual entry, cloud storage, survey tools, or multiple systems.</span></div>
+              <div class="intake-item"><strong>Are there multiple surveys?</strong><span>Tell us if you want two, three, or more surveys/forms centralized into one admin login with separate dashboard views.</span></div>
+              <div class="intake-item"><strong>What automation is needed?</strong><span>Email alerts, approvals, scheduled reports, data syncs, imports, exports, or status updates.</span></div>
+              <div class="intake-item"><strong>Will KPIs change after launch?</strong><span>Share whether you expect new KPIs, survey questions, report pages, filters, or charts to be added over time.</span></div>
+              <div class="intake-item"><strong>Do you need a demo first?</strong><span>Choose free fit call only, $750 visual demo snapshot, $1,500 blueprint/clickable demo, or $3,500 advanced proof-of-concept before the full build.</span></div>
+              <div class="intake-item"><strong>Do you need ongoing support?</strong><span>Choose no maintenance, monthly support, KPI/report growth, or a custom admin/platform support plan.</span></div>
+            </div>
+          </article>
+
+          <article class="info-card wide">
+            <h2>Common screens we can design and build</h2>
+            <div class="screen-grid">
+              <div class="screen-card"><h3>Overview screens</h3><p>High-level snapshots for owners, managers, executives, or team leads.</p></div>
+              <div class="screen-card"><h3>Record tables</h3><p>Searchable and filterable lists for customers, projects, cases, tickets, assets, or tasks.</p></div>
+              <div class="screen-card"><h3>Detail pages</h3><p>Single-record views with status, history, notes, files, assignments, and next steps.</p></div>
+              <div class="screen-card"><h3>Intake forms</h3><p>Structured forms that collect the right information and reduce back-and-forth.</p></div>
+              <div class="screen-card"><h3>Survey dashboards</h3><p>Separate dashboard views for each survey or form, centralized under one admin login.</p></div>
+              <div class="screen-card"><h3>Approval flows</h3><p>Review screens for managers, admins, clients, vendors, or internal reviewers.</p></div>
+              <div class="screen-card"><h3>Role dashboards</h3><p>Different views for owners, admins, staff, clients, read-only users, or specialists.</p></div>
+              <div class="screen-card"><h3>Report pages</h3><p>Charts, cards, downloadable views, date ranges, filters, summaries, and exceptions.</p></div>
+              <div class="screen-card"><h3>Automation panels</h3><p>Controls and status views for sync jobs, notifications, imports, exports, and handoffs.</p></div>
+            </div>
+          </article>
+
+          <article class="info-card wide">
+            <h2>What happens after the selections are sent?</h2>
+            <div class="process-grid">
+              <div class="process-step">
+                <strong>Step 1</strong>
+                <span>The contact form opens with your selected path, starting point, budget range, and add-ons already included.</span>
+              </div>
+              <div class="process-step">
+                <strong>Step 2</strong>
+                <span>You complete the dashboard survey so your quote is based on your KPIs, users, screens, data, surveys, and workflow.</span>
+              </div>
+              <div class="process-step">
+                <strong>Step 3</strong>
+                <span>We review your request and confirm the next step: free fit call, paid demo invoice, deeper discovery, or a full proposal.</span>
+              </div>
+              <div class="process-step">
+                <strong>Step 4</strong>
+                <span>If you select a paid demo, we confirm the demo fee and timeline first. If you are ready for the full build, the proposal confirms scope, price, timeline, review rounds, payment/deposit terms, and add-ons.</span>
+              </div>
+              <div class="process-step">
+                <strong>Step 5</strong>
+                <span>After demo approval or full-build deposit, we start from a clear scope. New features after approval are handled through change requests.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="info-card wide split-card">
+            <div>
+              <h2>Designed for real data and future connections</h2>
+              <p>Some projects start as clean interface prototypes. Others need live data from databases, APIs, spreadsheets, cloud storage, or existing business systems. The right path depends on how much automation, access control, reporting, and system integration your business needs.</p>
+              <p>Cloud providers and tools are chosen based on the project. AWS, Azure, databases, APIs, storage platforms, CRM systems, ticketing tools, and spreadsheet imports are examples only, not sponsorships or endorsements.</p>
+            </div>
+            <div class="connection-panel">
+              <h3>Possible connection points</h3>
+              <div class="connection-list">
+                <span>Databases</span>
+                <span>APIs</span>
+                <span>Spreadsheets / CSV</span>
+                <span>Cloud storage</span>
+                <span>CRM records</span>
+                <span>Ticket queues</span>
+                <span>Survey responses</span>
+                <span>Email notifications</span>
+                <span>Scheduled reports</span>
+                <span>Admin authentication</span>
+              </div>
+            </div>
           </article>
         </div>
       </section>
@@ -602,10 +1467,10 @@
         <div class="container">
           <div class="service-cta-box">
             <div>
-              <h2>Ready to talk about Platforms &amp; Dashboards?</h2>
-              <p>Submit a project request and include what you want built, fixed, connected, or improved.</p>
+              <h2>Ready to build a clearer dashboard or platform?</h2>
+              <p>Send a request with the dashboard, portal, admin panel, workflow, report, survey hub, maintenance plan, or cloud-connected system you want built, fixed, connected, or improved.</p>
             </div>
-            <a class="btn btn-primary" href="contact.php?service=Platforms%20%26%20Dashboards">Start a Project</a>
+            <a class="btn btn-primary" href="contact.php?service=Platforms%20%26%20Dashboards&amp;plan=Project%20Request&amp;budget=Needs%20scoping">Request this service</a>
           </div>
         </div>
       </section>
@@ -617,10 +1482,10 @@
           <div class="footer-grid">
             <div class="footer-brand-block">
               <a class="footer-brand" href="index.html" aria-label="NxtGenGuard home">
-                <img src="nxtgenguard-site/assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
+                <img src="assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
                 <span>NxtGenGuard</span>
               </a>
-              <p>Enterprise websites, dashboards, systems, automation, cloud, and IT/security guidance built with clean structure and a guarded mindset.</p>
+              <p>Web platforms, dashboards, business systems, automation, cloud, and IT/security guidance built with clean structure and a guarded mindset.</p>
               <div class="footer-badges" aria-label="NxtGenGuard highlights">
                 <span>Established 2017</span>
                 <span>Enterprise services</span>
@@ -642,7 +1507,7 @@
             <nav class="footer-col" aria-label="Footer service links">
               <h4>Services</h4>
               <div class="footer-links-list">
-                <a href="enterprise-websites.html">Enterprise Websites</a>
+                <a href="enterprise-websites.html">Websites &amp; Web Platforms</a>
                 <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
                 <a href="business-systems.html">Business Systems</a>
                 <a href="automation-cloud.html">Automation &amp; Cloud</a>
@@ -654,7 +1519,6 @@
 
           <div class="footer-bottom">
             <span><strong>© NxtGenGuard</strong> · Established 2017 · All rights reserved.</span>
-            <span class="footer-status">Ready for new projects</span>
           </div>
         </div>
       </div>
@@ -672,6 +1536,160 @@
       mobileNav.classList.remove('open');
       document.body.classList.remove('nav-open');
     }
+
+    const dashboardRequest = {
+      service: 'Platforms & Dashboards',
+      path: '',
+      plan: '',
+      budget: '',
+      demo: null,
+      addons: []
+    };
+
+    function resetChoiceButtons(group) {
+      document.querySelectorAll(`[data-choice-group="${group}"]`).forEach((card) => {
+        card.classList.remove('is-selected');
+        const button = card.querySelector('[data-choice-type]');
+        if (button) {
+          button.classList.remove('is-selected');
+          const defaultLabels = {
+            path: 'Choose this path',
+            plan: 'Choose starting point',
+            demo: 'Choose demo option'
+          };
+          button.textContent = defaultLabels[group] || 'Choose option';
+        }
+      });
+    }
+
+    function updateRequestSummary() {
+      const summaryPath = document.getElementById('summaryPath');
+      const summaryPlan = document.getElementById('summaryPlan');
+      const summaryDemo = document.getElementById('summaryDemo');
+      const summaryAddons = document.getElementById('summaryAddons');
+      const summaryTodayDue = document.getElementById('summaryTodayDue');
+      const compiledLink = document.getElementById('compiledContactLink');
+
+      if (!compiledLink) return;
+
+      summaryPath.textContent = dashboardRequest.path || 'Not selected yet';
+      summaryPlan.textContent = dashboardRequest.plan
+        ? `${dashboardRequest.plan}${dashboardRequest.budget ? ` · ${dashboardRequest.budget}` : ''}`
+        : 'Not selected yet';
+
+      if (summaryDemo) {
+        summaryDemo.textContent = dashboardRequest.demo
+          ? `${dashboardRequest.demo.label}${dashboardRequest.demo.feeLabel ? ` · ${dashboardRequest.demo.feeLabel}` : ''}${dashboardRequest.demo.timeline ? ` · ${dashboardRequest.demo.timeline}` : ''}`
+          : 'Optional — not selected';
+      }
+
+      summaryAddons.textContent = dashboardRequest.addons.length
+        ? dashboardRequest.addons.map((addon) => addon.label).join(', ')
+        : 'None selected';
+
+      if (summaryTodayDue) {
+        if (dashboardRequest.demo && Number(dashboardRequest.demo.fee || 0) > 0) {
+          summaryTodayDue.textContent = `${dashboardRequest.demo.feeLabel} estimated due today for the selected demo. ${dashboardRequest.demo.credit || ''}`;
+        } else if (dashboardRequest.demo && Number(dashboardRequest.demo.fee || 0) === 0) {
+          summaryTodayDue.textContent = '$0 — free fit call selected. No demo files are included.';
+        } else {
+          summaryTodayDue.textContent = '$0 — no paid demo selected on this page.';
+        }
+      }
+
+      const params = new URLSearchParams({ service: dashboardRequest.service });
+      if (dashboardRequest.path) params.set('path', dashboardRequest.path);
+      if (dashboardRequest.plan) params.set('plan', dashboardRequest.plan);
+      if (dashboardRequest.budget) params.set('budget', dashboardRequest.budget);
+      if (dashboardRequest.demo) {
+        params.set('demo', dashboardRequest.demo.label);
+        params.set('demo_fee', dashboardRequest.demo.feeLabel || dashboardRequest.demo.fee || '');
+        params.set('demo_timeline', dashboardRequest.demo.timeline || '');
+        params.set('demo_credit', dashboardRequest.demo.credit || '');
+      }
+      if (dashboardRequest.addons.length) {
+        params.set('addons', dashboardRequest.addons.map((addon) => addon.label).join(', '));
+        params.set('addon_budgets', dashboardRequest.addons.map((addon) => addon.budget).filter(Boolean).join(', '));
+      }
+
+      compiledLink.href = `contact.php?${params.toString()}`;
+      const ready = Boolean(dashboardRequest.path && dashboardRequest.plan);
+      compiledLink.classList.toggle('is-disabled', !ready);
+      compiledLink.setAttribute('aria-disabled', ready ? 'false' : 'true');
+      compiledLink.textContent = ready ? 'Continue to contact with selections' : 'Choose a path and starting point first';
+    }
+
+    document.querySelectorAll('[data-choice-type]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const group = button.dataset.choiceType;
+        const card = button.closest(`[data-choice-group="${group}"]`);
+        if (!card) return;
+
+        resetChoiceButtons(group);
+        card.classList.add('is-selected');
+        button.classList.add('is-selected');
+        button.textContent = 'Selected';
+
+        if (group === 'path') {
+          dashboardRequest.path = button.dataset.value || card.dataset.choiceValue || '';
+          document.getElementById('dashboard-pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        if (group === 'plan') {
+          dashboardRequest.plan = button.dataset.value || card.dataset.choiceValue || '';
+          dashboardRequest.budget = button.dataset.budget || card.dataset.budget || '';
+          document.getElementById('dashboard-addons')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        if (group === 'demo') {
+          dashboardRequest.demo = {
+            value: button.dataset.value || card.dataset.choiceValue || '',
+            label: button.dataset.label || card.dataset.choiceLabel || button.dataset.value || card.dataset.choiceValue || '',
+            fee: button.dataset.demoFee || card.dataset.demoFee || '0',
+            feeLabel: button.dataset.demoFeeLabel || card.dataset.demoFeeLabel || '',
+            timeline: button.dataset.demoTimeline || card.dataset.demoTimeline || '',
+            credit: button.dataset.demoCredit || card.dataset.demoCredit || ''
+          };
+          document.getElementById('request-summary')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        updateRequestSummary();
+      });
+    });
+
+    document.querySelectorAll('[data-addon-button]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const card = button.closest('[data-addon-value]');
+        if (!card) return;
+
+        const value = card.dataset.addonValue || '';
+        const label = card.dataset.addonLabel || value;
+        const budget = card.dataset.addonBudget || '';
+        const currentIndex = dashboardRequest.addons.findIndex((addon) => addon.value === value);
+
+        if (currentIndex >= 0) {
+          dashboardRequest.addons.splice(currentIndex, 1);
+          card.classList.remove('is-selected');
+          button.classList.remove('is-selected');
+          button.textContent = 'Add to request';
+        } else {
+          dashboardRequest.addons.push({ value, label, budget });
+          card.classList.add('is-selected');
+          button.classList.add('is-selected');
+          button.textContent = 'Remove add-on';
+        }
+
+        updateRequestSummary();
+      });
+    });
+
+    document.getElementById('compiledContactLink')?.addEventListener('click', (event) => {
+      if (event.currentTarget.getAttribute('aria-disabled') === 'true') {
+        event.preventDefault();
+      }
+    });
+
+    updateRequestSummary();
   </script>
 
 </body>
