@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NxtGenGuard | Enterprise Websites</title>
-  <meta name="description" content="Clean, modern websites built to explain your company, services, and value clearly." />
+  <title>NxtGenGuard | Websites &amp; Web Platforms</title>
+  <meta name="description" content="Platform-neutral website guidance, setup, training, WordPress support, builder/CMS cleanup, ecommerce, and custom cloud website builds." />
   <style>
 
     :root {
@@ -71,6 +71,42 @@
     }
     .btn-primary:hover { box-shadow: 0 22px 48px rgba(22, 137, 232, 0.28); }
     .btn-secondary:hover { border-color: rgba(29, 142, 223, 0.34); background: #fff; }
+    .btn-small {
+      min-height: 44px;
+      padding: 0 15px;
+      border-radius: 13px;
+      font-size: 0.84rem;
+      letter-spacing: -0.01em;
+    }
+    .choice-actions,
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .choice-actions .btn,
+    .cta-actions .btn {
+      width: auto;
+    }
+    .platform-note {
+      margin-top: 18px !important;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background:
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.15), transparent 30%),
+        rgba(255, 255, 255, 0.66);
+      color: #36536d !important;
+      font-size: 0.95rem;
+    }
+    .option-card.featured {
+      border-color: rgba(20, 184, 166, 0.24);
+      background:
+        radial-gradient(circle at top right, rgba(20, 184, 166, 0.16), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(103, 205, 251, 0.16), transparent 30%),
+        rgba(255, 255, 255, 0.74);
+    }
 
 
     header {
@@ -455,6 +491,111 @@
     .info-card.wide { grid-column: 1 / -1; }
     .info-card h2 { margin: 0 0 18px; color: #071827; font-size: clamp(1.55rem, 2.6vw, 2.45rem); line-height: 1; letter-spacing: -0.055em; }
     .info-card p { margin: 0; color: var(--muted); line-height: 1.78; }
+    .section-kicker {
+      display: none;
+    }
+
+    .option-grid,
+    .pricing-grid,
+    .build-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .build-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .option-card,
+    .pricing-card,
+    .build-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.14), transparent 30%),
+        rgba(255, 255, 255, 0.68);
+      box-shadow: 0 10px 28px rgba(33, 91, 139, 0.07);
+    }
+
+    .option-card h3,
+    .pricing-card h3,
+    .build-card h3 {
+      margin: 0 0 10px;
+      color: #071827;
+      font-size: 1.05rem;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+
+    .option-card p,
+    .pricing-card p,
+    .build-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.94rem;
+    }
+
+    .option-tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      margin-bottom: 14px;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      color: #12324b;
+      background: rgba(103, 205, 251, 0.18);
+      border: 1px solid rgba(22, 137, 232, 0.14);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .option-card .clean-list,
+    .pricing-card .clean-list {
+      margin-top: 14px;
+      gap: 9px;
+    }
+
+    .option-card .clean-list li,
+    .pricing-card .clean-list li {
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+
+    .price-range {
+      display: block;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(18, 72, 116, 0.10);
+      color: #071827;
+      font-size: 1.02rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .price-note {
+      margin-top: 18px !important;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background: rgba(255, 255, 255, 0.64);
+      color: #36536d !important;
+      font-size: 0.95rem;
+    }
+
+    .mini-note {
+      margin-top: 12px !important;
+      color: #36536d !important;
+      font-size: 0.92rem !important;
+    }
+
     .clean-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
     .clean-list li {
       position: relative;
@@ -502,8 +643,8 @@
     }
     .service-cta-box h2 { margin: 0 0 8px; color: #071827; font-size: clamp(1.9rem, 3.8vw, 3.1rem); line-height: 0.96; letter-spacing: -0.06em; }
     .service-cta-box p { margin: 0; color: var(--muted); max-width: 650px; line-height: 1.76; }
-    @media (max-width: 1080px) { .detail-hero-grid, .content-grid { grid-template-columns: 1fr; } .process-grid { grid-template-columns: repeat(2, 1fr); } .service-cta-box { align-items: flex-start; flex-direction: column; } }
-    @media (max-width: 620px) { .detail-hero { padding: 58px 0 42px; } .hero-card, .info-card, .service-cta-box { border-radius: 24px; } .hero-card { padding: 8px; } .hero-card img, .hero-card video { height: 250px; border-radius: 18px; } .process-grid { grid-template-columns: 1fr; } .info-card, .service-cta-box { padding-left: 20px; padding-right: 20px; } .service-cta-box .btn, .detail-actions .btn { width: 100%; } }
+    @media (max-width: 1080px) { .detail-hero-grid, .content-grid { grid-template-columns: 1fr; } .process-grid { grid-template-columns: repeat(2, 1fr); } .option-grid, .pricing-grid, .build-grid { grid-template-columns: 1fr 1fr; } .service-cta-box { align-items: flex-start; flex-direction: column; } }
+    @media (max-width: 620px) { .detail-hero { padding: 58px 0 42px; } .hero-card, .info-card, .service-cta-box { border-radius: 24px; } .hero-card { padding: 8px; } .hero-card img, .hero-card video { height: 250px; border-radius: 18px; } .process-grid, .option-grid, .pricing-grid, .build-grid { grid-template-columns: 1fr; } .info-card, .service-cta-box { padding-left: 20px; padding-right: 20px; } .service-cta-box .btn, .detail-actions .btn { width: 100%; } }
 
   </style>
 </head>
@@ -521,7 +662,7 @@
             <a class="nav-drop-toggle active" href="services.html">Services ▾</a>
             <div class="nav-drop-menu">
               <a href="services.html">All Services</a>
-              <a href="enterprise-websites.html">Enterprise Websites</a>
+              <a href="enterprise-websites.html">Websites &amp; Web Platforms</a>
               <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
               <a href="business-systems.html">Business Systems</a>
               <a href="automation-cloud.html">Automation &amp; Cloud</a>
@@ -542,7 +683,7 @@
             <summary>Services</summary>
             <div class="mobile-submenu">
               <a href="services.html" onclick="closeMenu()">All Services</a>
-              <a href="enterprise-websites.html" onclick="closeMenu()">Enterprise Websites</a>
+              <a href="enterprise-websites.html" onclick="closeMenu()">Websites &amp; Web Platforms</a>
               <a href="platforms-dashboards.html" onclick="closeMenu()">Platforms &amp; Dashboards</a>
               <a href="business-systems.html" onclick="closeMenu()">Business Systems</a>
               <a href="automation-cloud.html" onclick="closeMenu()">Automation &amp; Cloud</a>
@@ -562,14 +703,14 @@
         <div class="container detail-hero-grid">
           <div class="detail-copy">
             <a class="back-link" href="services.html#websites">← Back to Services</a>
-            <h1 id="page-title">Enterprise Websites</h1>
-            <p>Enterprise websites that make your company easier to understand and easier to trust.</p>
+            <h1 id="page-title">Websites &amp; Web Platforms</h1>
+            <p>For startups and growing companies that need the right website path: a managed CMS or website builder for quick launch, a custom cloud build for advanced features, or ecommerce when the website needs to sell.</p>
             <div class="detail-actions">
-              <a class="btn btn-primary" href="contact.php?service=Enterprise%20Websites">Start this service</a>
-              <a class="btn btn-secondary" href="services.html">View all services</a>
+              <a class="btn btn-primary" href="#website-paths">Choose your website path</a>
+              <a class="btn btn-secondary" href="#pricing-guide">See pricing guide</a>
             </div>
           </div>
-          <div class="hero-card" aria-label="Enterprise Websites page preview video">
+          <div class="hero-card" aria-label="Websites and web platforms preview video">
             <video autoplay muted loop playsinline preload="metadata" poster="assets/images/logo/EnterpriseWebsites.png">
               <source src="assets/images/logo/EnterpriseWebsiteV.mp4" type="video/mp4" />
               <source src="assets/images/logo/EnterpriseWebsiteV.mov" type="video/quicktime" />
@@ -579,78 +720,300 @@
         </div>
       </section>
 
-      <section class="detail-content" aria-label="Enterprise Websites details">
+      <section class="detail-content" aria-label="Websites and web platforms details">
         <div class="container content-grid">
           <article class="info-card wide">
-            <h2>What this service is for</h2>
-            <p>This service is for companies that need a sharper online presence, clearer service pages, and a website structure that supports real business growth instead of just looking nice.</p>
+            <span class="section-kicker">Website direction</span>
+            <h2>Choose the website path that fits your business</h2>
+            <p>NxtGenGuard is platform-neutral. Before you spend money on a build, we help compare simple website builders, CMS platforms, WordPress-style setups with training, ecommerce stores, and custom cloud builds on AWS, Azure, or another approved hosting path.</p>
+            <p class="platform-note">Platform names such as WordPress, GoDaddy, Wix, Squarespace, Shopify, WooCommerce, AWS, Azure, and similar tools are examples only. Recommendations are based on your budget, timeline, editing needs, features, and long-term support plan—not on sponsorships or one preferred provider.</p>
+          </article>
+
+          <article class="info-card wide" id="website-paths">
+            <span class="section-kicker">Choose your path</span>
+            <h2>Select the option closest to what you need</h2>
+            <p>Choose a path below to start with the right conversation. Your selection opens the contact page with the website direction included, so NxtGenGuard can respond with the right questions, estimate range, and next steps.</p>
+            <div class="option-grid">
+              <div class="option-card featured">
+                <span class="option-tag">Budget friendly</span>
+                <h3>CMS or website builder</h3>
+                <p>Best when you already use a website platform or want a simple landing page without a custom coded build.</p>
+                <ul class="clean-list">
+                  <li>Landing page or small business website</li>
+                  <li>Template cleanup and page polish</li>
+                  <li>Basic SEO, forms, and mobile review</li>
+                  <li>Good for faster launch and lower budget</li>
+                </ul>
+                <strong class="price-range">Suggested start: $750–$3,500+</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=CMS%20or%20Website%20Builder">Choose this path</a>
+                </div>
+              </div>
+
+              <div class="option-card featured">
+                <span class="option-tag">Learn to manage it</span>
+                <h3>WordPress setup + training</h3>
+                <p>Best when you want a WordPress-based site and also want to learn how to manage pages, updates, and basic content changes.</p>
+                <ul class="clean-list">
+                  <li>WordPress setup or cleanup</li>
+                  <li>Theme, pages, plugins, and forms</li>
+                  <li>Owner training and handoff notes</li>
+                  <li>Optional monthly help after launch</li>
+                </ul>
+                <strong class="price-range">Suggested start: $1,500–$6,500+</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=WordPress%20Setup%20and%20Training">Choose this path</a>
+                </div>
+              </div>
+
+              <div class="option-card">
+                <span class="option-tag">Online sales</span>
+                <h3>Ecommerce website</h3>
+                <p>Best when you need product pages, payments, checkout, order flow, subscriptions, or a store launch checklist.</p>
+                <ul class="clean-list">
+                  <li>Product and category structure</li>
+                  <li>Checkout and payment setup</li>
+                  <li>Shipping, tax, and order flow review</li>
+                  <li>Launch testing for buying paths</li>
+                </ul>
+                <strong class="price-range">Suggested start: $4,500–$18,000+</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=Ecommerce%20Website">Choose this path</a>
+                </div>
+              </div>
+
+              <div class="option-card">
+                <span class="option-tag">Custom cloud</span>
+                <h3>AWS / Azure custom build</h3>
+                <p>Best when your website needs custom code, APIs, cloud hosting, secure forms, dashboards, databases, or application-style features.</p>
+                <ul class="clean-list">
+                  <li>Custom coded website or frontend</li>
+                  <li>Cloud deployment planning</li>
+                  <li>Forms, APIs, dashboards, or databases</li>
+                  <li>Stronger technical control and scaling path</li>
+                </ul>
+                <strong class="price-range">Suggested start: $6,500–$25,000+</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=Custom%20AWS%20or%20Azure">Choose this path</a>
+                </div>
+              </div>
+
+              <div class="option-card">
+                <span class="option-tag">Cleanup + support</span>
+                <h3>Fix, teach, or maintain</h3>
+                <p>Best when you already have a site and need cleanup, guidance, training, support, or small monthly improvements.</p>
+                <ul class="clean-list">
+                  <li>Website audit and cleanup list</li>
+                  <li>Content, layout, and form fixes</li>
+                  <li>Training session for the owner or team</li>
+                  <li>Monthly updates and support options</li>
+                </ul>
+                <strong class="price-range">Suggested start: $250–$950+</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=Website%20Cleanup%20Training%20and%20Support">Choose this path</a>
+                </div>
+              </div>
+
+              <div class="option-card">
+                <span class="option-tag">Not sure yet</span>
+                <h3>Recommend the best path</h3>
+                <p>Best when you know the goal but are not sure which platform or build path makes the most sense. We review budget, timeline, editing needs, features, and platform options before recommending a direction.</p>
+                <ul class="clean-list">
+                  <li>Platform and hosting recommendation</li>
+                  <li>Simple vs custom build decision</li>
+                  <li>Budget range and launch path</li>
+                  <li>Clear next step before build starts</li>
+                </ul>
+                <strong class="price-range">Suggested start: $250–$750</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=Recommendation%20Needed">Help me choose</a>
+                </div>
+              </div>
+            </div>
+            <p class="platform-note">The service is not tied to one provider. NxtGenGuard helps you choose, set up, clean up, learn, and support the option that makes the most sense for your business.</p>
           </article>
 
           <article class="info-card">
-            <h2>What we can do</h2>
+            <span class="section-kicker">What we can build</span>
+            <h2>Website services</h2>
             <ul class="clean-list">
-              <li>Homepage and service page structure</li>
-              <li>Responsive layouts for desktop, tablet, and mobile</li>
-              <li>Clear calls-to-action for project requests or lead intake</li>
-              <li>Basic SEO structure, metadata, headings, and page organization</li>
-              <li>Image placement, brand styling, and launch-ready page polish</li>
-              <li>Contact/project form routing into your intake process</li>
+              <li>Landing pages for startups, offers, and campaigns</li>
+              <li>Full business websites with homepage, service pages, and contact flow</li>
+              <li>CMS or builder-based website setup, cleanup, and page polish</li>
+              <li>WordPress setup, page structure, theme styling, plugin configuration, and handoff training</li>
+              <li>Custom coded pages hosted on AWS, Azure, or another approved hosting path</li>
+              <li>Ecommerce structure for products, checkout, payments, and launch testing</li>
+              <li>SEO-ready headings, metadata, page organization, responsive layouts, and support plans</li>
             </ul>
           </article>
 
           <article class="info-card">
-            <h2>Best for</h2>
+            <span class="section-kicker">Best fit</span>
+            <h2>Who this helps</h2>
             <ul class="clean-list">
-              <li>Service businesses that need a professional digital presence</li>
-              <li>Companies replacing an outdated or confusing website</li>
-              <li>Brands that need landing pages for new offers or campaigns</li>
-              <li>Teams that need pages that explain services clearly</li>
+              <li>Startups that need a first professional landing page</li>
+              <li>Small businesses that want a site they can manage without calling a developer for every change</li>
+              <li>Businesses already using a platform and needing cleanup, structure, or guidance</li>
+              <li>Brands deciding between a builder/CMS, WordPress, ecommerce, or custom cloud</li>
+              <li>Teams that need forms, intake routing, integrations, dashboards, or support</li>
+              <li>Companies that want clear pricing direction before starting the build</li>
             </ul>
+          </article>
+
+          <article class="info-card wide" id="pricing-guide">
+            <span class="section-kicker">Ballpark pricing</span>
+            <h2>Suggested starting points</h2>
+            <p>These starting ranges help you compare a guided setup, a managed CMS or WordPress-style build, ecommerce work, and custom cloud development. Final pricing is scoped after reviewing page count, copywriting, branding, platform, plugins, custom code, hosting, integrations, ecommerce features, and support expectations.</p>
+            <div class="pricing-grid">
+              <div class="pricing-card">
+                <h3>Website plan or platform recommendation</h3>
+                <p>Review goals, budget, platform options, hosting direction, and the cleanest launch path.</p>
+                <strong class="price-range">$250–$750</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Website%20Plan%20or%20Platform%20Recommendation&amp;budget=%24250%E2%80%93%24750">Choose plan</a>
+                </div>
+              </div>
+              <div class="pricing-card">
+                <h3>CMS / builder landing page</h3>
+                <p>One focused page on an existing platform or website builder with cleanup and mobile review.</p>
+                <strong class="price-range">$750–$3,500</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=CMS%20Builder%20Landing%20Page&amp;budget=%24750%E2%80%93%243%2C500">Choose plan</a>
+                </div>
+              </div>
+              <div class="pricing-card">
+                <h3>WordPress setup + training</h3>
+                <p>WordPress pages, theme styling, plugins, forms, SEO basics, and handoff training.</p>
+                <strong class="price-range">$1,500–$6,500+</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=WordPress%20Setup%20and%20Training&amp;budget=%241%2C500%E2%80%93%246%2C500%2B">Choose plan</a>
+                </div>
+              </div>
+              <div class="pricing-card">
+                <h3>Full business website</h3>
+                <p>Homepage, service pages, contact flow, responsive design, SEO structure, and launch checklist.</p>
+                <strong class="price-range">$3,500–$10,000+</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Full%20Business%20Website&amp;budget=%243%2C500%E2%80%93%2410%2C000%2B">Choose plan</a>
+                </div>
+              </div>
+              <div class="pricing-card">
+                <h3>Ecommerce website</h3>
+                <p>Product pages, checkout flow, payment setup, order path review, and launch testing.</p>
+                <strong class="price-range">$4,500–$18,000+</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Ecommerce%20Website&amp;budget=%244%2C500%E2%80%93%2418%2C000%2B">Choose plan</a>
+                </div>
+              </div>
+              <div class="pricing-card">
+                <h3>Custom AWS / Azure build</h3>
+                <p>Coded website, custom frontend, APIs, secure forms, dashboards, database, or cloud deployment.</p>
+                <strong class="price-range">$6,500–$25,000+</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Custom%20AWS%20or%20Azure%20Build&amp;budget=%246%2C500%E2%80%93%2425%2C000%2B">Choose plan</a>
+                </div>
+              </div>
+              <div class="pricing-card">
+                <h3>Training session</h3>
+                <p>Teach the owner or team how to edit pages, manage content, review updates, and avoid common mistakes.</p>
+                <strong class="price-range">$150–$350/hr</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Training%20Session&amp;budget=%24150%E2%80%93%24350/hr">Choose plan</a>
+                </div>
+              </div>
+              <div class="pricing-card">
+                <h3>Care and support</h3>
+                <p>Maintenance, content updates, backups, monitoring, minor improvements, and platform support.</p>
+                <strong class="price-range">$150–$850+/mo</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Care%20and%20Support&amp;budget=%24150%E2%80%93%24850%2B/mo">Choose plan</a>
+                </div>
+              </div>
+              <div class="pricing-card">
+                <h3>Website cleanup audit</h3>
+                <p>Review layout, messaging, mobile issues, forms, SEO basics, speed concerns, and next-step fixes.</p>
+                <strong class="price-range">$250–$950</strong>
+                <div class="choice-actions">
+                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Website%20Cleanup%20Audit&amp;budget=%24250%E2%80%93%24950">Choose plan</a>
+                </div>
+              </div>
+            </div>
+            <p class="price-note">Choosing a plan starts a request; it is not a checkout and does not charge you. Hosting, paid themes, premium plugins, ecommerce processing fees, stock media, email services, third-party tools, and AWS/Azure usage are separate unless they are included in the final proposal.</p>
           </article>
 
           <article class="info-card wide">
-            <h2>How the service works</h2>
-            <div class="process-grid">
-              <div class="process-step">
-                <strong>Step 1</strong>
-                <span>Define the company, services, audience, and page goals</span>
+            <span class="section-kicker">Quick decision guide</span>
+            <h2>How to choose</h2>
+            <div class="build-grid">
+              <div class="build-card">
+                <h3>Pick a builder/CMS</h3>
+                <p>Choose this when the budget is smaller, the timeline is short, and you want a clean site without a custom application build.</p>
               </div>
-              <div class="process-step">
-                <strong>Step 2</strong>
-                <span>Build a clean page structure with strong messaging</span>
+              <div class="build-card">
+                <h3>Pick WordPress + training</h3>
+                <p>Choose this when you want an editable website and want to learn how to manage pages, content, plugins, and simple updates.</p>
               </div>
-              <div class="process-step">
-                <strong>Step 3</strong>
-                <span>Add brand styling, images, sections, and calls-to-action</span>
+              <div class="build-card">
+                <h3>Pick ecommerce</h3>
+                <p>Choose this when the website must sell products, collect payments, manage orders, or support product catalog workflows.</p>
               </div>
-              <div class="process-step">
-                <strong>Step 4</strong>
-                <span>Review, refine, test responsiveness, and prepare for launch</span>
+              <div class="build-card">
+                <h3>Pick AWS / Azure</h3>
+                <p>Choose this when the website needs custom code, APIs, secure workflows, portals, dashboards, data, or deeper technical control.</p>
               </div>
             </div>
           </article>
 
           <article class="info-card wide">
+            <span class="section-kicker">Process</span>
+            <h2>How the service works</h2>
+            <div class="process-grid">
+              <div class="process-step">
+                <strong>Step 1</strong>
+                <span>You choose a path or ask for a recommendation</span>
+              </div>
+              <div class="process-step">
+                <strong>Step 2</strong>
+                <span>We review budget, timeline, platform, pages, content, and features</span>
+              </div>
+              <div class="process-step">
+                <strong>Step 3</strong>
+                <span>We build, clean up, configure, or train based on the selected path</span>
+              </div>
+              <div class="process-step">
+                <strong>Step 4</strong>
+                <span>We test, launch, hand off instructions, and offer support if needed</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="info-card wide">
+            <span class="section-kicker">Deliverables</span>
             <h2>Possible deliverables</h2>
             <ul class="clean-list">
-              <li>Homepage or landing page layout</li>
-              <li>Service page template</li>
-              <li>Navigation and footer structure</li>
-              <li>SEO-ready page structure</li>
-              <li>Launch support checklist</li>
+              <li>Landing page or full website layout</li>
+              <li>Builder/CMS page cleanup, structure, and platform guidance</li>
+              <li>WordPress page build, theme styling, plugin setup, and owner handoff training</li>
+              <li>Custom coded frontend or cloud-hosted website setup</li>
+              <li>Ecommerce product, checkout, payment, and launch testing guidance</li>
+              <li>Navigation, footer, service page structure, and contact flow</li>
+              <li>SEO-ready headings, metadata, launch checklist, support plan, and training notes</li>
             </ul>
           </article>
         </div>
       </section>
 
-      <section class="service-cta" aria-label="Start Enterprise Websites">
+      <section class="service-cta" aria-label="Start Websites and Web Platforms">
         <div class="container">
           <div class="service-cta-box">
             <div>
-              <h2>Ready to talk about Enterprise Websites?</h2>
-              <p>Submit a project request and include what you want built, fixed, connected, or improved.</p>
+              <h2>Need a website, but not sure which platform is right?</h2>
+              <p>Choose a path above, or send the goal, timeline, budget range, and what the website needs to do. We can recommend the cleanest option before building.</p>
+              <div class="cta-actions">
+                <a class="btn btn-primary" href="#website-paths">Choose a path</a>
+                <a class="btn btn-secondary" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=Recommendation%20Needed">Ask for a recommendation</a>
+              </div>
             </div>
-            <a class="btn btn-primary" href="contact.php?service=Enterprise%20Websites">Start a Project</a>
           </div>
         </div>
       </section>
@@ -665,7 +1028,7 @@
                 <img src="assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
                 <span>NxtGenGuard</span>
               </a>
-              <p>Enterprise websites, dashboards, systems, automation, cloud, and IT/security guidance built with clean structure and a guarded mindset.</p>
+              <p>Websites, platforms, dashboards, systems, automation, cloud, and IT/security guidance built with clean structure and a guarded mindset.</p>
               <div class="footer-badges" aria-label="NxtGenGuard highlights">
                 <span>Established 2017</span>
                 <span>Enterprise services</span>
@@ -687,7 +1050,7 @@
             <nav class="footer-col" aria-label="Footer service links">
               <h4>Services</h4>
               <div class="footer-links-list">
-                <a href="enterprise-websites.html">Enterprise Websites</a>
+                <a href="enterprise-websites.html">Websites &amp; Web Platforms</a>
                 <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
                 <a href="business-systems.html">Business Systems</a>
                 <a href="automation-cloud.html">Automation &amp; Cloud</a>
