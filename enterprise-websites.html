@@ -6,7 +6,6 @@
   <title>NxtGenGuard | Websites &amp; Web Platforms</title>
   <meta name="description" content="Platform-neutral website guidance, setup, training, WordPress support, builder/CMS cleanup, ecommerce, and custom cloud website builds." />
   <style>
-
     :root {
       --bg: #f8fcff;
       --bg-2: #edf8ff;
@@ -44,10 +43,12 @@
     body.nav-open { overflow: hidden; }
     a { color: inherit; text-decoration: none; }
     img, video { display: block; max-width: 100%; }
+    button { font-family: inherit; }
     .container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
 
     .btn {
       display: inline-flex;
+      cursor: pointer;
       align-items: center;
       justify-content: center;
       min-height: 54px;
@@ -78,6 +79,7 @@
       font-size: 0.84rem;
       letter-spacing: -0.01em;
     }
+
     .choice-actions,
     .cta-actions {
       display: flex;
@@ -86,10 +88,12 @@
       margin-top: 18px;
     }
     .choice-actions .btn,
-    .cta-actions .btn {
-      width: auto;
-    }
-    .platform-note {
+    .cta-actions .btn { width: auto; }
+
+    .platform-note,
+    .price-note,
+    .request-note,
+    .scope-note {
       margin-top: 18px !important;
       padding: 16px 18px;
       border-radius: 18px;
@@ -99,15 +103,22 @@
         rgba(255, 255, 255, 0.66);
       color: #36536d !important;
       font-size: 0.95rem;
+      line-height: 1.68 !important;
     }
-    .option-card.featured {
-      border-color: rgba(20, 184, 166, 0.24);
+    .scope-note {
+      border-color: rgba(255, 184, 107, 0.28);
       background:
-        radial-gradient(circle at top right, rgba(20, 184, 166, 0.16), transparent 32%),
-        radial-gradient(circle at bottom left, rgba(103, 205, 251, 0.16), transparent 30%),
-        rgba(255, 255, 255, 0.74);
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.18), transparent 30%),
+        rgba(255, 248, 239, 0.72);
+      color: #5a4430 !important;
+      font-weight: 760;
     }
-
+    .lead-copy { margin-bottom: 18px !important; }
+    .mini-note {
+      margin-top: 12px !important;
+      color: #36536d !important;
+      font-size: 0.92rem !important;
+    }
 
     header {
       position: sticky;
@@ -212,190 +223,6 @@
     .mobile-submenu a { color: var(--muted); font-weight: 650; }
     .mobile-panel summary::-webkit-details-marker { display: none; }
 
-
-    /* Premium site footer */
-    .site-footer {
-      position: relative;
-      padding: 0 0 48px;
-      overflow: hidden;
-    }
-
-    .site-footer::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 280px;
-      background:
-        radial-gradient(circle at 18% 20%, rgba(103, 205, 251, 0.20), transparent 28%),
-        radial-gradient(circle at 84% 72%, rgba(255, 184, 107, 0.15), transparent 30%);
-      pointer-events: none;
-      opacity: 0.86;
-    }
-
-    .footer-shell {
-      position: relative;
-      overflow: hidden;
-      border-radius: 34px;
-      border: 1px solid rgba(18, 72, 116, 0.13);
-      background:
-        radial-gradient(circle at top left, rgba(103, 205, 251, 0.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(255, 184, 107, 0.12), transparent 24%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 252, 255, 0.94));
-      box-shadow: 0 26px 70px rgba(20, 75, 120, 0.13);
-      padding: 34px;
-      isolation: isolate;
-    }
-
-    .footer-shell::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(18, 72, 116, 0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(18, 72, 116, 0.055) 1px, transparent 1px);
-      background-size: 38px 38px;
-      opacity: 0.26;
-      mask-image: radial-gradient(circle at top center, black 0%, transparent 76%);
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.35fr 0.75fr 1fr;
-      gap: 26px;
-      align-items: start;
-    }
-
-    .footer-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 900;
-      letter-spacing: -0.035em;
-      font-size: 1.08rem;
-      color: #071827;
-    }
-
-    .footer-brand img {
-      width: auto;
-      height: 48px;
-      max-width: 150px;
-      object-fit: contain;
-      border-radius: 12px;
-      filter: none;
-    }
-
-    .footer-brand-block p {
-      margin: 16px 0 0;
-      max-width: 410px;
-      color: var(--muted);
-      line-height: 1.78;
-      font-size: 0.96rem;
-    }
-
-    .footer-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 18px;
-    }
-
-    .footer-badges span {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 36px;
-      padding: 0 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(18, 72, 116, 0.12);
-      background: rgba(255, 255, 255, 0.72);
-      color: #193c58;
-      font-weight: 820;
-      font-size: 0.78rem;
-    }
-
-
-    .footer-col h4 {
-      margin: 0 0 14px;
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(25, 60, 88, 0.62);
-    }
-
-    .footer-links-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .footer-links-list a {
-      width: fit-content;
-      color: #193c58;
-      opacity: 0.86;
-      font-weight: 760;
-      line-height: 1.44;
-      transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease;
-    }
-
-    .footer-links-list a:hover {
-      opacity: 1;
-      color: #0a80df;
-      transform: translateX(3px);
-    }
-
-
-
-
-    .footer-bottom {
-      width: 100%;
-      margin-top: 34px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(18, 72, 116, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      color: rgba(25, 60, 88, 0.70);
-      font-size: 0.92rem;
-      text-align: center;
-    }
-
-    .footer-bottom span {
-      display: block;
-      width: 100%;
-    }
-
-    .footer-bottom strong {
-      color: #071827;
-    }
-
-    @media (max-width: 1080px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 620px) {
-      .site-footer { padding-bottom: 34px; }
-      .footer-shell { border-radius: 26px; padding: 24px 20px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-      .footer-brand-block p { max-width: none; }
-      .footer-links-list a { width: 100%; }
-      .footer-bottom { align-items: center; justify-content: center; text-align: center; }
-    }
-
-
-    @media (max-width: 860px) {
-      .desktop-nav { display: none; }
-      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
-    }
-    @media (max-width: 620px) {
-      .container { width: min(var(--max), calc(100% - 22px)); }
-    }
-
-
     .detail-hero {
       position: relative;
       overflow: hidden;
@@ -447,8 +274,7 @@
       position: relative;
       border-radius: 30px;
       border: 1px solid rgba(18, 72, 116, 0.14);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(242, 250, 255, 0.78));
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(242, 250, 255, 0.78));
       box-shadow: var(--shadow);
       overflow: hidden;
       padding: 10px;
@@ -476,6 +302,7 @@
       display: block;
       background: #eef8ff;
     }
+
     .detail-content { padding: 66px 0 86px; }
     .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .info-card {
@@ -490,25 +317,26 @@
     }
     .info-card.wide { grid-column: 1 / -1; }
     .info-card h2 { margin: 0 0 18px; color: #071827; font-size: clamp(1.55rem, 2.6vw, 2.45rem); line-height: 1; letter-spacing: -0.055em; }
+    .info-card h3 { margin: 0 0 10px; color: #071827; }
     .info-card p { margin: 0; color: var(--muted); line-height: 1.78; }
-    .section-kicker {
-      display: none;
-    }
+    .section-kicker { display: none; }
 
     .option-grid,
     .pricing-grid,
-    .build-grid {
+    .build-grid,
+    .addon-price-list {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
       margin-top: 22px;
     }
-
     .build-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .addon-price-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
     .option-card,
     .pricing-card,
-    .build-card {
+    .build-card,
+    .addon-price-item {
       position: relative;
       overflow: hidden;
       min-height: 100%;
@@ -520,26 +348,35 @@
         rgba(255, 255, 255, 0.68);
       box-shadow: 0 10px 28px rgba(33, 91, 139, 0.07);
     }
-
+    .option-card.featured,
+    .pricing-card.featured,
+    .demo-card.featured,
+    .addon-card.featured {
+      border-color: rgba(20, 184, 166, 0.24);
+      background:
+        radial-gradient(circle at top right, rgba(20, 184, 166, 0.16), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(103, 205, 251, 0.16), transparent 30%),
+        rgba(255, 255, 255, 0.74);
+    }
     .option-card h3,
     .pricing-card h3,
-    .build-card h3 {
+    .build-card h3,
+    .addon-price-item strong {
       margin: 0 0 10px;
       color: #071827;
       font-size: 1.05rem;
       letter-spacing: -0.025em;
       line-height: 1.15;
     }
-
     .option-card p,
     .pricing-card p,
-    .build-card p {
+    .build-card p,
+    .addon-price-item span {
       margin: 0;
       color: var(--muted);
       line-height: 1.65;
       font-size: 0.94rem;
     }
-
     .option-tag {
       display: inline-flex;
       align-items: center;
@@ -556,19 +393,10 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-
     .option-card .clean-list,
-    .pricing-card .clean-list {
-      margin-top: 14px;
-      gap: 9px;
-    }
-
+    .pricing-card .clean-list { margin-top: 14px; gap: 9px; }
     .option-card .clean-list li,
-    .pricing-card .clean-list li {
-      font-size: 0.93rem;
-      line-height: 1.5;
-    }
-
+    .pricing-card .clean-list li { font-size: 0.93rem; line-height: 1.5; }
     .price-range {
       display: block;
       margin-top: 16px;
@@ -579,21 +407,20 @@
       font-weight: 900;
       letter-spacing: -0.02em;
     }
-
-    .price-note {
-      margin-top: 18px !important;
-      padding: 16px 18px;
-      border-radius: 18px;
-      border: 1px solid rgba(18, 72, 116, 0.11);
-      background: rgba(255, 255, 255, 0.64);
-      color: #36536d !important;
-      font-size: 0.95rem;
+    .price-line {
+      display: block;
+      margin: 10px 0 12px;
+      color: var(--text);
+      font-size: clamp(1.18rem, 2vw, 1.52rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      font-weight: 950;
     }
-
-    .mini-note {
-      margin-top: 12px !important;
-      color: #36536d !important;
-      font-size: 0.92rem !important;
+    .price-detail {
+      margin: 0 0 6px !important;
+      color: #23445e !important;
+      font-weight: 850;
+      line-height: 1.55 !important;
     }
 
     .clean-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
@@ -614,6 +441,210 @@
       background: linear-gradient(135deg, var(--blue-2), var(--teal));
       box-shadow: 0 0 14px rgba(20, 184, 166, 0.38);
     }
+
+    .selection-panel {
+      margin: 0 0 22px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(22, 137, 232, 0.14);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.22), transparent 30%),
+        rgba(255, 255, 255, 0.76);
+    }
+    .selection-panel p { margin-top: 12px; }
+    .selection-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .selection-step {
+      display: grid;
+      gap: 4px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(22, 137, 232, 0.13);
+      background: rgba(255, 255, 255, 0.74);
+    }
+    .selection-step strong {
+      color: var(--blue);
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .selection-step span {
+      color: #23445e;
+      font-weight: 900;
+      line-height: 1.4;
+    }
+    .choice-card,
+    .pricing-card,
+    .demo-card,
+    .addon-card {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 16px;
+    }
+    .choice-card.is-selected,
+    .pricing-card.is-selected,
+    .demo-card.is-selected,
+    .addon-card.is-selected {
+      border-color: rgba(20, 184, 166, 0.52);
+      box-shadow: 0 20px 44px rgba(20, 184, 166, 0.16);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.34), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(237, 248, 255, 0.94));
+    }
+    .option-button.is-selected,
+    .demo-button.is-selected,
+    .addon-button.is-selected {
+      background: linear-gradient(135deg, #0e7fe4 0%, #25b6ef 58%, #14b8a6 100%);
+      color: #fff;
+    }
+    .step-divider {
+      margin: 28px 0 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(18, 72, 116, 0.12);
+    }
+
+    .demo-grid,
+    .addon-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .demo-grid { grid-template-columns: repeat(4, 1fr); }
+    .addon-grid { grid-template-columns: repeat(3, 1fr); }
+    .demo-card,
+    .addon-card {
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      border-radius: 22px;
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      background: linear-gradient(180deg, rgba(237, 248, 255, 0.72), rgba(255, 255, 255, 0.92));
+      padding: 20px;
+    }
+    .demo-card::before,
+    .addon-card::before,
+    .option-card::before,
+    .pricing-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-2), var(--teal), rgba(255, 184, 107, 0.9));
+      opacity: 0.82;
+    }
+    .demo-card p,
+    .addon-card p { color: var(--muted); line-height: 1.72; }
+    .demo-card .btn,
+    .addon-card .btn,
+    .choice-card .btn,
+    .pricing-card .btn { width: fit-content; align-self: end; }
+    .demo-meta {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .demo-meta span {
+      display: block;
+      border-radius: 14px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      padding: 10px 12px;
+      color: #23445e;
+      font-size: 0.84rem;
+      font-weight: 850;
+      line-height: 1.42;
+    }
+
+    .selection-summary {
+      margin-top: 22px;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(20, 184, 166, 0.26);
+      background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, 0.14), transparent 28%),
+        rgba(255, 255, 255, 0.78);
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 14px 0 16px;
+    }
+    .summary-item {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: rgba(255, 255, 255, 0.78);
+    }
+    .summary-item strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+      font-size: 0.82rem;
+    }
+    .summary-item span {
+      color: #23445e;
+      font-weight: 850;
+      line-height: 1.45;
+    }
+    .today-due-panel {
+      display: grid;
+      gap: 5px;
+      margin: 14px 0 16px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 184, 107, 0.30);
+      background:
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.18), transparent 30%),
+        rgba(255, 248, 239, 0.72);
+    }
+    .today-due-panel strong {
+      color: var(--text);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .today-due-panel span {
+      color: #5a4430;
+      font-size: 1.04rem;
+      font-weight: 950;
+      line-height: 1.45;
+    }
+    .compiled-link.is-disabled,
+    .compiled-link[aria-disabled="true"] {
+      opacity: 0.52;
+      pointer-events: none;
+      box-shadow: none;
+    }
+
+    .demo-policy-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .demo-policy-card {
+      border-radius: 18px;
+      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      padding: 16px;
+    }
+    .demo-policy-card strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .demo-policy-card span {
+      color: var(--muted);
+      line-height: 1.62;
+      font-size: 0.94rem;
+    }
+
     .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .process-step {
       padding: 18px;
@@ -624,6 +655,7 @@
     }
     .process-step strong { display: block; margin-bottom: 8px; color: #071827; }
     .process-step span { color: var(--muted); line-height: 1.62; }
+
     .service-cta { padding: 0 0 86px; }
     .service-cta-box {
       position: relative;
@@ -643,9 +675,166 @@
     }
     .service-cta-box h2 { margin: 0 0 8px; color: #071827; font-size: clamp(1.9rem, 3.8vw, 3.1rem); line-height: 0.96; letter-spacing: -0.06em; }
     .service-cta-box p { margin: 0; color: var(--muted); max-width: 650px; line-height: 1.76; }
-    @media (max-width: 1080px) { .detail-hero-grid, .content-grid { grid-template-columns: 1fr; } .process-grid { grid-template-columns: repeat(2, 1fr); } .option-grid, .pricing-grid, .build-grid { grid-template-columns: 1fr 1fr; } .service-cta-box { align-items: flex-start; flex-direction: column; } }
-    @media (max-width: 620px) { .detail-hero { padding: 58px 0 42px; } .hero-card, .info-card, .service-cta-box { border-radius: 24px; } .hero-card { padding: 8px; } .hero-card img, .hero-card video { height: 250px; border-radius: 18px; } .process-grid, .option-grid, .pricing-grid, .build-grid { grid-template-columns: 1fr; } .info-card, .service-cta-box { padding-left: 20px; padding-right: 20px; } .service-cta-box .btn, .detail-actions .btn { width: 100%; } }
 
+    .site-footer {
+      position: relative;
+      padding: 0 0 48px;
+      overflow: hidden;
+    }
+    .site-footer::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 280px;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(103, 205, 251, 0.20), transparent 28%),
+        radial-gradient(circle at 84% 72%, rgba(255, 184, 107, 0.15), transparent 30%);
+      pointer-events: none;
+      opacity: 0.86;
+    }
+    .footer-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      border: 1px solid rgba(18, 72, 116, 0.13);
+      background:
+        radial-gradient(circle at top left, rgba(103, 205, 251, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.12), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 252, 255, 0.94));
+      box-shadow: 0 26px 70px rgba(20, 75, 120, 0.13);
+      padding: 34px;
+      isolation: isolate;
+    }
+    .footer-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(18, 72, 116, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 72, 116, 0.055) 1px, transparent 1px);
+      background-size: 38px 38px;
+      opacity: 0.26;
+      mask-image: radial-gradient(circle at top center, black 0%, transparent 76%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.75fr 1fr;
+      gap: 26px;
+      align-items: start;
+    }
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      font-size: 1.08rem;
+      color: #071827;
+    }
+    .footer-brand img {
+      width: auto;
+      height: 48px;
+      max-width: 150px;
+      object-fit: contain;
+      border-radius: 12px;
+      filter: none;
+    }
+    .footer-brand-block p {
+      margin: 16px 0 0;
+      max-width: 410px;
+      color: var(--muted);
+      line-height: 1.78;
+      font-size: 0.96rem;
+    }
+    .footer-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+    .footer-badges span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      color: #193c58;
+      font-weight: 820;
+      font-size: 0.78rem;
+    }
+    .footer-col h4 {
+      margin: 0 0 14px;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(25, 60, 88, 0.62);
+    }
+    .footer-links-list { display: grid; gap: 10px; }
+    .footer-links-list a {
+      width: fit-content;
+      color: #193c58;
+      opacity: 0.86;
+      font-weight: 760;
+      line-height: 1.44;
+      transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease;
+    }
+    .footer-links-list a:hover {
+      opacity: 1;
+      color: #0a80df;
+      transform: translateX(3px);
+    }
+    .footer-bottom {
+      width: 100%;
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(18, 72, 116, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: rgba(25, 60, 88, 0.70);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+    .footer-bottom span { display: block; width: 100%; }
+    .footer-bottom strong { color: #071827; }
+
+    @media (max-width: 1080px) {
+      .detail-hero-grid, .content-grid { grid-template-columns: 1fr; }
+      .process-grid, .demo-policy-grid { grid-template-columns: repeat(2, 1fr); }
+      .option-grid, .pricing-grid, .build-grid, .addon-grid, .demo-grid, .selection-steps, .summary-grid, .addon-price-list { grid-template-columns: 1fr 1fr; }
+      .service-cta-box { align-items: flex-start; flex-direction: column; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 860px) {
+      .desktop-nav { display: none; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(var(--max), calc(100% - 22px)); }
+      .detail-hero { padding: 58px 0 42px; }
+      .hero-card, .info-card, .service-cta-box { border-radius: 24px; }
+      .hero-card { padding: 8px; }
+      .hero-card img, .hero-card video { height: 250px; border-radius: 18px; }
+      .process-grid, .option-grid, .pricing-grid, .build-grid, .addon-grid, .demo-grid, .selection-steps, .summary-grid, .demo-policy-grid, .addon-price-list { grid-template-columns: 1fr; }
+      .info-card, .service-cta-box { padding-left: 20px; padding-right: 20px; }
+      .service-cta-box .btn, .detail-actions .btn, .selection-summary .btn { width: 100%; }
+      .demo-card .btn, .addon-card .btn, .choice-card .btn, .pricing-card .btn { width: 100%; }
+      .site-footer { padding-bottom: 34px; }
+      .footer-shell { border-radius: 26px; padding: 24px 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-brand-block p { max-width: none; }
+      .footer-links-list a { width: 100%; }
+      .footer-bottom { align-items: center; justify-content: center; text-align: center; }
+    }
   </style>
 </head>
 <body>
@@ -704,10 +893,10 @@
           <div class="detail-copy">
             <a class="back-link" href="services.html#websites">← Back to Services</a>
             <h1 id="page-title">Websites &amp; Web Platforms</h1>
-            <p>For startups and growing companies that need the right website path: a managed CMS or website builder for quick launch, a custom cloud build for advanced features, or ecommerce when the website needs to sell.</p>
+            <p>For startups and growing companies that need the right website path: a managed CMS or website builder for quick launch, a custom cloud build for advanced features, ecommerce when the website needs to sell, or support when an existing site needs cleanup.</p>
             <div class="detail-actions">
-              <a class="btn btn-primary" href="#website-paths">Choose your website path</a>
-              <a class="btn btn-secondary" href="#pricing-guide">See pricing guide</a>
+              <a class="btn btn-primary" href="#website-request-builder">Build your website request</a>
+              <a class="btn btn-secondary" href="#website-pricing">See starting points</a>
             </div>
           </div>
           <div class="hero-card" aria-label="Websites and web platforms preview video">
@@ -726,111 +915,326 @@
             <span class="section-kicker">Website direction</span>
             <h2>Choose the website path that fits your business</h2>
             <p>NxtGenGuard is platform-neutral. Before you spend money on a build, we help compare simple website builders, CMS platforms, WordPress-style setups with training, ecommerce stores, and custom cloud builds on AWS, Azure, or another approved hosting path.</p>
-            <p class="platform-note">Platform names such as WordPress, GoDaddy, Wix, Squarespace, Shopify, WooCommerce, AWS, Azure, and similar tools are examples only. Recommendations are based on your budget, timeline, editing needs, features, and long-term support plan not on sponsorships or one preferred provider.</p>
+            <p class="platform-note">Platform names such as WordPress, GoDaddy, Wix, Squarespace, Shopify, WooCommerce, AWS, Azure, and similar tools are examples only. Recommendations are based on your budget, timeline, editing needs, features, and long-term support plan, not sponsorships or one preferred provider.</p>
           </article>
 
           <article class="info-card wide" id="website-paths">
-            <span class="section-kicker">Choose your path</span>
-            <h2>Select the option closest to what you need</h2>
-            <p>Choose a path below to start with the right conversation. Your selection opens the contact page with the website direction included, so NxtGenGuard can respond with the right questions, estimate range, and next steps.</p>
+            <span class="section-kicker">Request builder</span>
+            <h2 id="website-request-builder">Build your website request in 3 steps</h2>
+            <div class="selection-panel">
+              <div class="selection-steps" aria-label="Website request steps">
+                <div class="selection-step"><strong>Step 1</strong><span>Pick the website path</span></div>
+                <div class="selection-step"><strong>Step 2</strong><span>Pick the starting point</span></div>
+                <div class="selection-step"><strong>Step 3</strong><span>Add demo, support, or growth options</span></div>
+              </div>
+              <p>You can build your request on this page without leaving. Nothing is sent until you click the final contact button. When you continue, your selected website path, starting point, budget range, demo option, and optional add-ons are included with your contact request.</p>
+            </div>
+
+            <h2>Step 1: choose the website path you need</h2>
+            <p class="lead-copy">Choose the option closest to what you need. This does not lock you into a final scope; it helps us understand the right conversation before the proposal is prepared.</p>
             <div class="option-grid">
-              <div class="option-card featured">
-                <span class="option-tag">Budget friendly</span>
-                <h3>CMS or website builder</h3>
-                <p>Best when you already use a website platform or want a simple landing page without a custom coded build.</p>
-                <ul class="clean-list">
-                  <li>Landing page or small business website</li>
-                  <li>Template cleanup and page polish</li>
-                  <li>Basic SEO, forms, and mobile review</li>
-                  <li>Good for faster launch and lower budget</li>
-                </ul>
-                <strong class="price-range">Suggested start: $750–$3,500+</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=CMS%20or%20Website%20Builder">Choose this path</a>
+              <div class="option-card choice-card featured" data-choice-group="path" data-choice-value="CMS or website builder" data-choice-label="CMS or website builder">
+                <div>
+                  <span class="option-tag">Budget friendly</span>
+                  <h3>CMS or website builder</h3>
+                  <p>Best when you already use a website platform or want a simple landing page without a custom coded build.</p>
+                  <ul class="clean-list">
+                    <li>Landing page or small business website</li>
+                    <li>Template cleanup and page polish</li>
+                    <li>Basic SEO, forms, and mobile review</li>
+                  </ul>
+                  <strong class="price-range">Suggested start: $750–$3,500+</strong>
                 </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="CMS or website builder" data-label="CMS or website builder">Choose this path</button>
               </div>
 
-              <div class="option-card featured">
-                <span class="option-tag">Learn to manage it</span>
-                <h3>WordPress setup + training</h3>
-                <p>Best when you want a WordPress-based site and also want to learn how to manage pages, updates, and basic content changes.</p>
-                <ul class="clean-list">
-                  <li>WordPress setup or cleanup</li>
-                  <li>Theme, pages, plugins, and forms</li>
-                  <li>Owner training and handoff notes</li>
-                  <li>Optional monthly help after launch</li>
-                </ul>
-                <strong class="price-range">Suggested start: $1,500–$6,500+</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=WordPress%20Setup%20and%20Training">Choose this path</a>
+              <div class="option-card choice-card featured" data-choice-group="path" data-choice-value="WordPress setup and training" data-choice-label="WordPress setup + training">
+                <div>
+                  <span class="option-tag">Learn to manage it</span>
+                  <h3>WordPress setup + training</h3>
+                  <p>Best when you want a WordPress-based site and also want to learn how to manage pages, updates, and basic content changes.</p>
+                  <ul class="clean-list">
+                    <li>WordPress setup or cleanup</li>
+                    <li>Theme, pages, plugins, and forms</li>
+                    <li>Owner training and handoff notes</li>
+                  </ul>
+                  <strong class="price-range">Suggested start: $1,500–$6,500+</strong>
                 </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="WordPress setup and training" data-label="WordPress setup + training">Choose this path</button>
               </div>
 
-              <div class="option-card">
-                <span class="option-tag">Online sales</span>
-                <h3>Ecommerce website</h3>
-                <p>Best when you need product pages, payments, checkout, order flow, subscriptions, or a store launch checklist.</p>
-                <ul class="clean-list">
-                  <li>Product and category structure</li>
-                  <li>Checkout and payment setup</li>
-                  <li>Shipping, tax, and order flow review</li>
-                  <li>Launch testing for buying paths</li>
-                </ul>
-                <strong class="price-range">Suggested start: $4,500–$18,000+</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=Ecommerce%20Website">Choose this path</a>
+              <div class="option-card choice-card" data-choice-group="path" data-choice-value="Ecommerce website" data-choice-label="Ecommerce website">
+                <div>
+                  <span class="option-tag">Online sales</span>
+                  <h3>Ecommerce website</h3>
+                  <p>Best when you need product pages, payments, checkout, order flow, subscriptions, or a store launch checklist.</p>
+                  <ul class="clean-list">
+                    <li>Product and category structure</li>
+                    <li>Checkout and payment setup</li>
+                    <li>Shipping, tax, and order flow review</li>
+                  </ul>
+                  <strong class="price-range">Suggested start: $4,500–$18,000+</strong>
                 </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="Ecommerce website" data-label="Ecommerce website">Choose this path</button>
               </div>
 
-              <div class="option-card">
-                <span class="option-tag">Custom cloud</span>
-                <h3>AWS / Azure custom build</h3>
-                <p>Best when your website needs custom code, APIs, cloud hosting, secure forms, dashboards, databases, or application-style features.</p>
-                <ul class="clean-list">
-                  <li>Custom coded website or frontend</li>
-                  <li>Cloud deployment planning</li>
-                  <li>Forms, APIs, dashboards, or databases</li>
-                  <li>Stronger technical control and scaling path</li>
-                </ul>
-                <strong class="price-range">Suggested start: $6,500–$25,000+</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=Custom%20AWS%20or%20Azure">Choose this path</a>
+              <div class="option-card choice-card" data-choice-group="path" data-choice-value="Custom AWS or Azure build" data-choice-label="AWS / Azure custom build">
+                <div>
+                  <span class="option-tag">Custom cloud</span>
+                  <h3>AWS / Azure custom build</h3>
+                  <p>Best when your website needs custom code, APIs, cloud hosting, secure forms, dashboards, databases, or application-style features.</p>
+                  <ul class="clean-list">
+                    <li>Custom coded website or frontend</li>
+                    <li>Cloud deployment planning</li>
+                    <li>Forms, APIs, dashboards, or databases</li>
+                  </ul>
+                  <strong class="price-range">Suggested start: $6,500–$25,000+</strong>
                 </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="Custom AWS or Azure build" data-label="AWS / Azure custom build">Choose this path</button>
               </div>
 
-              <div class="option-card">
-                <span class="option-tag">Cleanup + support</span>
-                <h3>Fix, teach, or maintain</h3>
-                <p>Best when you already have a site and need cleanup, guidance, training, support, or small monthly improvements.</p>
-                <ul class="clean-list">
-                  <li>Website audit and cleanup list</li>
-                  <li>Content, layout, and form fixes</li>
-                  <li>Training session for the owner or team</li>
-                  <li>Monthly updates and support options</li>
-                </ul>
-                <strong class="price-range">Suggested start: $250–$950+</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=Website%20Cleanup%20Training%20and%20Support">Choose this path</a>
+              <div class="option-card choice-card" data-choice-group="path" data-choice-value="Website cleanup training and support" data-choice-label="Fix, teach, or maintain">
+                <div>
+                  <span class="option-tag">Cleanup + support</span>
+                  <h3>Fix, teach, or maintain</h3>
+                  <p>Best when you already have a site and need cleanup, guidance, training, support, or small monthly improvements.</p>
+                  <ul class="clean-list">
+                    <li>Website audit and cleanup list</li>
+                    <li>Content, layout, and form fixes</li>
+                    <li>Training session for the owner or team</li>
+                  </ul>
+                  <strong class="price-range">Suggested start: $250–$950+</strong>
                 </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="Website cleanup training and support" data-label="Fix, teach, or maintain">Choose this path</button>
               </div>
 
-              <div class="option-card">
-                <span class="option-tag">Not sure yet</span>
-                <h3>Recommend the best path</h3>
-                <p>Best when you know the goal but are not sure which platform or build path makes the most sense. We review budget, timeline, editing needs, features, and platform options before recommending a direction.</p>
-                <ul class="clean-list">
-                  <li>Platform and hosting recommendation</li>
-                  <li>Simple vs custom build decision</li>
-                  <li>Budget range and launch path</li>
-                  <li>Clear next step before build starts</li>
-                </ul>
-                <strong class="price-range">Suggested start: $250–$750</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-primary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=Recommendation%20Needed">Help me choose</a>
+              <div class="option-card choice-card" data-choice-group="path" data-choice-value="Recommendation needed" data-choice-label="Recommend the best path">
+                <div>
+                  <span class="option-tag">Not sure yet</span>
+                  <h3>Recommend the best path</h3>
+                  <p>Best when you know the goal but are not sure which platform or build path makes the most sense.</p>
+                  <ul class="clean-list">
+                    <li>Platform and hosting recommendation</li>
+                    <li>Simple vs custom build decision</li>
+                    <li>Budget range and launch path</li>
+                  </ul>
+                  <strong class="price-range">Suggested start: $250–$750</strong>
                 </div>
+                <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="path" data-value="Recommendation needed" data-label="Recommend the best path">Help me choose</button>
               </div>
             </div>
             <p class="platform-note">The service is not tied to one provider. NxtGenGuard helps you choose, set up, clean up, learn, and support the option that makes the most sense for your business.</p>
+
+            <div class="step-divider" id="website-pricing">
+              <h2>Step 2: choose your website starting point</h2>
+              <p class="lead-copy">These starting ranges help you compare a guided setup, a managed CMS or WordPress-style build, ecommerce work, custom cloud development, training, and support. Final pricing is scoped after reviewing page count, copywriting, branding, platform, plugins, custom code, hosting, integrations, ecommerce features, and support expectations.</p>
+              <div class="pricing-grid">
+                <div class="pricing-card choice-card" data-choice-group="plan" data-choice-value="Website plan or platform recommendation" data-budget="$250–$750">
+                  <div>
+                    <h3>Website plan or platform recommendation</h3>
+                    <p>Review goals, budget, platform options, hosting direction, and the cleanest launch path.</p>
+                    <strong class="price-range">$250–$750</strong>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="Website plan or platform recommendation" data-label="Website plan or platform recommendation" data-budget="$250–$750">Choose starting point</button>
+                </div>
+                <div class="pricing-card choice-card featured" data-choice-group="plan" data-choice-value="CMS builder landing page" data-budget="$750–$3,500">
+                  <div>
+                    <h3>CMS / builder landing page</h3>
+                    <p>One focused page on an existing platform or website builder with cleanup and mobile review.</p>
+                    <strong class="price-range">$750–$3,500</strong>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="CMS builder landing page" data-label="CMS / builder landing page" data-budget="$750–$3,500">Choose starting point</button>
+                </div>
+                <div class="pricing-card choice-card featured" data-choice-group="plan" data-choice-value="WordPress setup and training" data-budget="$1,500–$6,500+">
+                  <div>
+                    <h3>WordPress setup + training</h3>
+                    <p>WordPress pages, theme styling, plugins, forms, SEO basics, and handoff training.</p>
+                    <strong class="price-range">$1,500–$6,500+</strong>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="WordPress setup and training" data-label="WordPress setup + training" data-budget="$1,500–$6,500+">Choose starting point</button>
+                </div>
+                <div class="pricing-card choice-card" data-choice-group="plan" data-choice-value="Full business website" data-budget="$3,500–$10,000+">
+                  <div>
+                    <h3>Full business website</h3>
+                    <p>Homepage, service pages, contact flow, responsive design, SEO structure, and launch checklist.</p>
+                    <strong class="price-range">$3,500–$10,000+</strong>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="Full business website" data-label="Full business website" data-budget="$3,500–$10,000+">Choose starting point</button>
+                </div>
+                <div class="pricing-card choice-card" data-choice-group="plan" data-choice-value="Ecommerce website" data-budget="$4,500–$18,000+">
+                  <div>
+                    <h3>Ecommerce website</h3>
+                    <p>Product pages, checkout flow, payment setup, order path review, and launch testing.</p>
+                    <strong class="price-range">$4,500–$18,000+</strong>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="Ecommerce website" data-label="Ecommerce website" data-budget="$4,500–$18,000+">Choose starting point</button>
+                </div>
+                <div class="pricing-card choice-card" data-choice-group="plan" data-choice-value="Custom AWS or Azure build" data-budget="$6,500–$25,000+">
+                  <div>
+                    <h3>Custom AWS / Azure build</h3>
+                    <p>Coded website, custom frontend, APIs, secure forms, dashboards, database, or cloud deployment.</p>
+                    <strong class="price-range">$6,500–$25,000+</strong>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="Custom AWS or Azure build" data-label="Custom AWS / Azure build" data-budget="$6,500–$25,000+">Choose starting point</button>
+                </div>
+                <div class="pricing-card choice-card" data-choice-group="plan" data-choice-value="Training session" data-budget="$150–$350/hr">
+                  <div>
+                    <h3>Training session</h3>
+                    <p>Teach the owner or team how to edit pages, manage content, review updates, and avoid common mistakes.</p>
+                    <strong class="price-range">$150–$350/hr</strong>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="Training session" data-label="Training session" data-budget="$150–$350/hr">Choose starting point</button>
+                </div>
+                <div class="pricing-card choice-card" data-choice-group="plan" data-choice-value="Care and support" data-budget="$150–$850+/mo">
+                  <div>
+                    <h3>Care and support</h3>
+                    <p>Maintenance, content updates, backups, monitoring, minor improvements, and platform support.</p>
+                    <strong class="price-range">$150–$850+/mo</strong>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="Care and support" data-label="Care and support" data-budget="$150–$850+/mo">Choose starting point</button>
+                </div>
+                <div class="pricing-card choice-card" data-choice-group="plan" data-choice-value="Website cleanup audit" data-budget="$250–$950">
+                  <div>
+                    <h3>Website cleanup audit</h3>
+                    <p>Review layout, messaging, mobile issues, forms, SEO basics, speed concerns, and next-step fixes.</p>
+                    <strong class="price-range">$250–$950</strong>
+                  </div>
+                  <button class="btn btn-primary btn-small option-button" type="button" data-choice-type="plan" data-value="Website cleanup audit" data-label="Website cleanup audit" data-budget="$250–$950">Choose starting point</button>
+                </div>
+              </div>
+              <p class="price-note">Choosing a starting point starts a request; it is not a checkout and does not charge you. Hosting, paid themes, premium plugins, ecommerce processing fees, stock media, email services, third-party tools, and AWS/Azure usage are separate unless they are included in the final proposal.</p>
+            </div>
+
+            <div class="step-divider" id="website-options">
+              <h2>Step 3: choose demo, maintenance, or growth add-ons</h2>
+              <p class="lead-copy">These options help us understand what should happen next. A demo selection shows an estimated demo amount due today, but this page is still a request builder. You are not charged automatically.</p>
+
+              <h3>Demo options</h3>
+              <div class="demo-grid">
+                <div class="demo-card choice-card" data-choice-group="demo" data-choice-value="Free fit call first" data-demo-fee="0" data-demo-fee-label="$0" data-demo-timeline="Short Zoom or phone call before any paid demo" data-demo-credit="No demo files are included with the free fit call.">
+                  <div>
+                    <h3>Free fit call first</h3>
+                    <span class="price-line">$0 today</span>
+                    <p>A short Zoom or phone call to confirm the goal, timeline, platform direction, and whether a paid demo makes sense.</p>
+                    <div class="demo-meta"><span>No demo files</span><span>Scope check first</span><span>Good before a larger build</span></div>
+                  </div>
+                  <button class="btn btn-primary btn-small demo-button" type="button" data-choice-type="demo" data-value="Free fit call first" data-label="Free fit call first" data-demo-fee="0" data-demo-fee-label="$0" data-demo-timeline="Short Zoom or phone call before any paid demo" data-demo-credit="No demo files are included with the free fit call.">Choose demo option</button>
+                </div>
+
+                <div class="demo-card choice-card" data-choice-group="demo" data-choice-value="Homepage visual demo" data-demo-fee="350" data-demo-fee-label="$350" data-demo-timeline="Delivered in 2–3 business days" data-demo-credit="Credited toward the main website build if approved within 30 days.">
+                  <div>
+                    <h3>Homepage visual demo</h3>
+                    <span class="price-line">$350 today</span>
+                    <p>A quick homepage direction for layout, colors, sections, and first impression before a full website proposal is finalized.</p>
+                    <div class="demo-meta"><span>1 screen concept</span><span>2–3 business days</span><span>1 small polish pass</span></div>
+                  </div>
+                  <button class="btn btn-primary btn-small demo-button" type="button" data-choice-type="demo" data-value="Homepage visual demo" data-label="Homepage visual demo" data-demo-fee="350" data-demo-fee-label="$350" data-demo-timeline="Delivered in 2–3 business days" data-demo-credit="Credited toward the main website build if approved within 30 days.">Choose demo option</button>
+                </div>
+
+                <div class="demo-card choice-card featured" data-choice-group="demo" data-choice-value="Website blueprint and clickable demo" data-demo-fee="750" data-demo-fee-label="$750" data-demo-timeline="Delivered within 5 business days" data-demo-credit="Credited toward the main website build if approved within 45 days.">
+                  <div>
+                    <h3>Website blueprint + clickable demo</h3>
+                    <span class="price-line">$750 today</span>
+                    <p>A small planning and prototype phase for the core website direction before committing to the full build.</p>
+                    <div class="demo-meta"><span>2–3 core screens</span><span>Delivered within 5 business days</span><span>1 grouped revision round</span></div>
+                  </div>
+                  <button class="btn btn-primary btn-small demo-button" type="button" data-choice-type="demo" data-value="Website blueprint and clickable demo" data-label="Website blueprint + clickable demo" data-demo-fee="750" data-demo-fee-label="$750" data-demo-timeline="Delivered within 5 business days" data-demo-credit="Credited toward the main website build if approved within 45 days.">Choose demo option</button>
+                </div>
+
+                <div class="demo-card choice-card" data-choice-group="demo" data-choice-value="Ecommerce or custom flow prototype" data-demo-fee="1500" data-demo-fee-label="$1,500" data-demo-timeline="Delivered in 5–7 business days" data-demo-credit="Credited toward the main website build if approved within 45 days.">
+                  <div>
+                    <h3>Ecommerce/custom flow prototype</h3>
+                    <span class="price-line">$1,500 today</span>
+                    <p>A deeper prototype for stores, custom forms, client intake, cloud-connected features, or application-style website flows.</p>
+                    <div class="demo-meta"><span>3–5 sample screens</span><span>5–7 business days</span><span>2 grouped review rounds</span></div>
+                  </div>
+                  <button class="btn btn-primary btn-small demo-button" type="button" data-choice-type="demo" data-value="Ecommerce or custom flow prototype" data-label="Ecommerce/custom flow prototype" data-demo-fee="1500" data-demo-fee-label="$1,500" data-demo-timeline="Delivered in 5–7 business days" data-demo-credit="Credited toward the main website build if approved within 45 days.">Choose demo option</button>
+                </div>
+              </div>
+
+              <h3 class="step-divider">Maintenance and add-ons</h3>
+              <div class="addon-grid">
+                <div class="addon-card featured" data-addon-value="Website care and maintenance" data-addon-label="Website care and maintenance" data-addon-budget="$150–$850+/mo">
+                  <div>
+                    <h3>Website care and maintenance</h3>
+                    <span class="price-line">$150–$850+/mo</span>
+                    <p>For content updates, backups, monitoring, small fixes, plugin/platform help, and regular support after launch.</p>
+                  </div>
+                  <button class="btn btn-primary btn-small addon-button" type="button" data-addon-button>Add to request</button>
+                </div>
+                <div class="addon-card" data-addon-value="SEO and content structure" data-addon-label="SEO and content structure" data-addon-budget="$500–$2,500+">
+                  <div>
+                    <h3>SEO and content structure</h3>
+                    <span class="price-line">$500–$2,500+</span>
+                    <p>For page titles, metadata, heading structure, basic keyword direction, internal links, and launch-ready page organization.</p>
+                  </div>
+                  <button class="btn btn-primary btn-small addon-button" type="button" data-addon-button>Add to request</button>
+                </div>
+                <div class="addon-card" data-addon-value="Copywriting and content support" data-addon-label="Copywriting and content support" data-addon-budget="$750–$3,500+">
+                  <div>
+                    <h3>Copywriting/content support</h3>
+                    <span class="price-line">$750–$3,500+</span>
+                    <p>For homepage copy, service page structure, calls to action, offer wording, and content cleanup.</p>
+                  </div>
+                  <button class="btn btn-primary btn-small addon-button" type="button" data-addon-button>Add to request</button>
+                </div>
+                <div class="addon-card" data-addon-value="Ecommerce product setup" data-addon-label="Ecommerce product setup" data-addon-budget="$500–$4,500+">
+                  <div>
+                    <h3>Ecommerce product setup</h3>
+                    <span class="price-line">$500–$4,500+</span>
+                    <p>For products, categories, checkout details, shipping settings, tax basics, payment paths, and store launch review.</p>
+                  </div>
+                  <button class="btn btn-primary btn-small addon-button" type="button" data-addon-button>Add to request</button>
+                </div>
+                <div class="addon-card" data-addon-value="Training and handoff session" data-addon-label="Training and handoff session" data-addon-budget="$150–$350/hr">
+                  <div>
+                    <h3>Training and handoff session</h3>
+                    <span class="price-line">$150–$350/hr</span>
+                    <p>For teaching your owner or team how to update pages, publish content, manage forms, and avoid common mistakes.</p>
+                  </div>
+                  <button class="btn btn-primary btn-small addon-button" type="button" data-addon-button>Add to request</button>
+                </div>
+                <div class="addon-card" data-addon-value="Forms integrations and automations" data-addon-label="Forms, integrations, and automations" data-addon-budget="$750–$5,000+">
+                  <div>
+                    <h3>Forms, integrations, and automations</h3>
+                    <span class="price-line">$750–$5,000+</span>
+                    <p>For intake forms, email notifications, CRM handoffs, uploads, custom routing, or cloud-connected workflows.</p>
+                  </div>
+                  <button class="btn btn-primary btn-small addon-button" type="button" data-addon-button>Add to request</button>
+                </div>
+              </div>
+
+              <div class="selection-summary" id="request-summary">
+                <h3>Your request summary</h3>
+                <p>This summary updates on the page first. After you choose a path and starting point, the final button sends your selected website path, starting point, demo option, estimated demo cost, timeline, credit note, and add-ons to the contact form.</p>
+                <div class="summary-grid">
+                  <div class="summary-item"><strong>Website path</strong><span id="summaryPath">Not selected yet</span></div>
+                  <div class="summary-item"><strong>Starting point</strong><span id="summaryPlan">Not selected yet</span></div>
+                  <div class="summary-item"><strong>Demo option</strong><span id="summaryDemo">Optional — not selected</span></div>
+                  <div class="summary-item"><strong>Add-ons</strong><span id="summaryAddons">None selected</span></div>
+                </div>
+                <div class="today-due-panel" aria-live="polite">
+                  <strong>Estimated demo due today</strong>
+                  <span id="summaryTodayDue">$0 — no paid demo selected on this page.</span>
+                </div>
+                <a class="btn btn-primary compiled-link is-disabled" id="compiledContactLink" href="contact.php?service=Websites%20%26%20Web%20Platforms" aria-disabled="true">Choose a path and starting point first</a>
+              </div>
+              <p class="scope-note">No payment is collected on this page. We confirm paid demos through the contact form, a call, and an invoice/payment link before work starts. Your demo fee covers scope thinking, page structure, platform direction, review preparation, and a clean review-ready demo package.</p>
+            </div>
+          </article>
+
+          <article class="info-card wide" id="demo-policy">
+            <span class="section-kicker">Demo policy</span>
+            <h2>Paid demo process, review rules, and scope clarity</h2>
+            <p class="lead-copy">A paid demo is a small planning/prototype phase, not the full website. It helps you see the direction before committing to the full build while keeping the scope clear and preventing unlimited unpaid changes.</p>
+            <div class="demo-policy-grid">
+              <div class="demo-policy-card"><strong>1. Fit call first</strong><span>Start with a short Zoom or phone call to confirm the goal, selected path, platform direction, pages, content needs, and whether the demo option is the right size.</span></div>
+              <div class="demo-policy-card"><strong>2. Demo fee paid upfront</strong><span>The selected demo fee is due before demo work starts. The fee is credited toward the main website build if you approve the project within the stated credit window.</span></div>
+              <div class="demo-policy-card"><strong>3. Demo files delivered</strong><span>The review package may include screenshots, a preview link, a video walkthrough, PDF notes, or clickable prototype files depending on the demo option selected.</span></div>
+              <div class="demo-policy-card"><strong>4. Limited demo revisions</strong><span>Send demo changes as one grouped list. The standard demo includes the listed polish pass or grouped revision round; extra rounds are quoted before work continues.</span></div>
+            </div>
+            <p class="request-note">Demo change policy: one small polish pass is included with the $350 homepage visual demo, one grouped revision round is included with the $750 blueprint demo, two grouped review rounds are included with the $1,500 ecommerce/custom flow prototype, and extra demo revision rounds start around $150–$500 depending on what changed.</p>
+            <p class="scope-note">Demo disclaimer: demo work is a concept/prototype for review and planning. It is not a production website, deployed application, completed ecommerce store, live payment system, security system, API integration, or final source-code delivery unless a separate written scope says so. New pages, extra design directions, ecommerce flows, product setup, custom forms, integrations, automations, or platform changes requested after the approved demo scope are treated as change requests or added to the full proposal.</p>
           </article>
 
           <article class="info-card">
@@ -860,85 +1264,32 @@
             </ul>
           </article>
 
-          <article class="info-card wide" id="pricing-guide">
-            <span class="section-kicker">Ballpark pricing</span>
-            <h2>Suggested starting points</h2>
-            <p>These starting ranges help you compare a guided setup, a managed CMS or WordPress-style build, ecommerce work, and custom cloud development. Final pricing is scoped after reviewing page count, copywriting, branding, platform, plugins, custom code, hosting, integrations, ecommerce features, and support expectations.</p>
-            <div class="pricing-grid">
-              <div class="pricing-card">
-                <h3>Website plan or platform recommendation</h3>
-                <p>Review goals, budget, platform options, hosting direction, and the cleanest launch path.</p>
-                <strong class="price-range">$250–$750</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Website%20Plan%20or%20Platform%20Recommendation&amp;budget=%24250%E2%80%93%24750">Choose plan</a>
-                </div>
-              </div>
-              <div class="pricing-card">
-                <h3>CMS / builder landing page</h3>
-                <p>One focused page on an existing platform or website builder with cleanup and mobile review.</p>
-                <strong class="price-range">$750–$3,500</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=CMS%20Builder%20Landing%20Page&amp;budget=%24750%E2%80%93%243%2C500">Choose plan</a>
-                </div>
-              </div>
-              <div class="pricing-card">
-                <h3>WordPress setup + training</h3>
-                <p>WordPress pages, theme styling, plugins, forms, SEO basics, and handoff training.</p>
-                <strong class="price-range">$1,500–$6,500+</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=WordPress%20Setup%20and%20Training&amp;budget=%241%2C500%E2%80%93%246%2C500%2B">Choose plan</a>
-                </div>
-              </div>
-              <div class="pricing-card">
-                <h3>Full business website</h3>
-                <p>Homepage, service pages, contact flow, responsive design, SEO structure, and launch checklist.</p>
-                <strong class="price-range">$3,500–$10,000+</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Full%20Business%20Website&amp;budget=%243%2C500%E2%80%93%2410%2C000%2B">Choose plan</a>
-                </div>
-              </div>
-              <div class="pricing-card">
-                <h3>Ecommerce website</h3>
-                <p>Product pages, checkout flow, payment setup, order path review, and launch testing.</p>
-                <strong class="price-range">$4,500–$18,000+</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Ecommerce%20Website&amp;budget=%244%2C500%E2%80%93%2418%2C000%2B">Choose plan</a>
-                </div>
-              </div>
-              <div class="pricing-card">
-                <h3>Custom AWS / Azure build</h3>
-                <p>Coded website, custom frontend, APIs, secure forms, dashboards, database, or cloud deployment.</p>
-                <strong class="price-range">$6,500–$25,000+</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Custom%20AWS%20or%20Azure%20Build&amp;budget=%246%2C500%E2%80%93%2425%2C000%2B">Choose plan</a>
-                </div>
-              </div>
-              <div class="pricing-card">
-                <h3>Training session</h3>
-                <p>Teach the owner or team how to edit pages, manage content, review updates, and avoid common mistakes.</p>
-                <strong class="price-range">$150–$350/hr</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Training%20Session&amp;budget=%24150%E2%80%93%24350/hr">Choose plan</a>
-                </div>
-              </div>
-              <div class="pricing-card">
-                <h3>Care and support</h3>
-                <p>Maintenance, content updates, backups, monitoring, minor improvements, and platform support.</p>
-                <strong class="price-range">$150–$850+/mo</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Care%20and%20Support&amp;budget=%24150%E2%80%93%24850%2B/mo">Choose plan</a>
-                </div>
-              </div>
-              <div class="pricing-card">
-                <h3>Website cleanup audit</h3>
-                <p>Review layout, messaging, mobile issues, forms, SEO basics, speed concerns, and next-step fixes.</p>
-                <strong class="price-range">$250–$950</strong>
-                <div class="choice-actions">
-                  <a class="btn btn-secondary btn-small" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;plan=Website%20Cleanup%20Audit&amp;budget=%24250%E2%80%93%24950">Choose plan</a>
-                </div>
-              </div>
+          <article class="info-card wide">
+            <span class="section-kicker">Pricing factors</span>
+            <h2>What affects website pricing?</h2>
+            <ul class="clean-list">
+              <li>Number of pages, sections, templates, landing pages, products, forms, and content blocks</li>
+              <li>Whether the website is built on a CMS, builder, WordPress-style setup, ecommerce platform, or custom AWS/Azure path</li>
+              <li>Branding, copywriting, photo/media needs, SEO structure, page cleanup, and mobile polish</li>
+              <li>Premium themes, plugins, apps, ecommerce processing, hosting, stock media, email services, and third-party software</li>
+              <li>Custom forms, dashboards, portals, databases, API connections, automations, and cloud deployment requirements</li>
+              <li>Training, documentation, maintenance, future page additions, and post-launch support expectations</li>
+            </ul>
+          </article>
+
+          <article class="info-card wide">
+            <span class="section-kicker">Future changes</span>
+            <h2>Feature add-ons and change requests</h2>
+            <p>Once a scope is approved, normal polish and agreed review rounds are part of the build. New pages, new features, new platform direction, extra product setup, new forms, new automation, or a larger redesign direction after approval are handled as change requests so the timeline and budget stay clear.</p>
+            <div class="addon-price-list">
+              <div class="addon-price-item"><strong>Extra website section</strong><span>Usually $150–$650+ depending on content, design, and responsiveness.</span></div>
+              <div class="addon-price-item"><strong>Additional website page</strong><span>Usually $250–$1,200+ depending on layout, copy, SEO, and media needs.</span></div>
+              <div class="addon-price-item"><strong>New form or intake flow</strong><span>Usually $500–$2,500+ depending on fields, notifications, uploads, and routing.</span></div>
+              <div class="addon-price-item"><strong>Additional product setup</strong><span>Usually quoted per product batch or custom catalog structure.</span></div>
+              <div class="addon-price-item"><strong>Plugin, app, or integration setup</strong><span>Usually $500–$3,500+ depending on platform, testing, and configuration.</span></div>
+              <div class="addon-price-item"><strong>Extra demo revision round</strong><span>Usually starts around $150–$500 depending on what changed.</span></div>
             </div>
-            <p class="price-note">Choosing a plan starts a request; it is not a checkout and does not charge you. Hosting, paid themes, premium plugins, ecommerce processing fees, stock media, email services, third-party tools, and AWS/Azure usage are separate unless they are included in the final proposal.</p>
+            <p class="scope-note">This keeps the project affordable and controlled. Small changes can stay small, while larger requests are quoted before additional work starts.</p>
           </article>
 
           <article class="info-card wide">
@@ -970,19 +1321,19 @@
             <div class="process-grid">
               <div class="process-step">
                 <strong>Step 1</strong>
-                <span>You choose a path or ask for a recommendation</span>
+                <span>You build the request by choosing a path, starting point, and any demo or support options</span>
               </div>
               <div class="process-step">
                 <strong>Step 2</strong>
-                <span>We review budget, timeline, platform, pages, content, and features</span>
+                <span>We review budget, timeline, platform, pages, content, features, and any demo request</span>
               </div>
               <div class="process-step">
                 <strong>Step 3</strong>
-                <span>We build, clean up, configure, or train based on the selected path</span>
+                <span>We confirm scope, demo payment if selected, proposal details, review rounds, and next steps</span>
               </div>
               <div class="process-step">
                 <strong>Step 4</strong>
-                <span>We test, launch, hand off instructions, and offer support if needed</span>
+                <span>We build, test, launch, hand off instructions, and offer support if needed</span>
               </div>
             </div>
           </article>
@@ -1008,10 +1359,10 @@
           <div class="service-cta-box">
             <div>
               <h2>Need a website, but not sure which platform is right?</h2>
-              <p>Choose a path above, or send the goal, timeline, budget range, and what the website needs to do. We can recommend the cleanest option before building.</p>
+              <p>Build the request above, choose a demo option if you want one, or ask for a recommendation. We can recommend the cleanest option before building.</p>
               <div class="cta-actions">
-                <a class="btn btn-primary" href="#website-paths">Choose a path</a>
-                <a class="btn btn-secondary" href="contact.php?service=Websites%20%26%20Web%20Platforms&amp;path=Recommendation%20Needed">Ask for a recommendation</a>
+                <a class="btn btn-primary" href="#website-request-builder">Build your request</a>
+                <a class="btn btn-secondary" href="#request-summary">View request summary</a>
               </div>
             </div>
           </div>
@@ -1079,7 +1430,148 @@
       mobileNav.classList.remove('open');
       document.body.classList.remove('nav-open');
     }
-  </script>
 
+    const websiteRequest = {
+      service: 'Websites & Web Platforms',
+      path: '',
+      plan: '',
+      budget: '',
+      demo: null,
+      addons: []
+    };
+
+    const summaryPath = document.getElementById('summaryPath');
+    const summaryPlan = document.getElementById('summaryPlan');
+    const summaryDemo = document.getElementById('summaryDemo');
+    const summaryAddons = document.getElementById('summaryAddons');
+    const summaryTodayDue = document.getElementById('summaryTodayDue');
+    const compiledLink = document.getElementById('compiledContactLink');
+
+    document.querySelectorAll('[data-choice-type], [data-addon-button]').forEach((button) => {
+      button.dataset.defaultText = button.textContent.trim();
+    });
+
+    function resetChoiceButtons(group) {
+      document.querySelectorAll(`[data-choice-group="${group}"]`).forEach((card) => card.classList.remove('is-selected'));
+      document.querySelectorAll(`[data-choice-type="${group}"]`).forEach((button) => {
+        button.classList.remove('is-selected');
+        button.textContent = button.dataset.defaultText || 'Choose';
+      });
+    }
+
+    function updateRequestSummary() {
+      summaryPath.textContent = websiteRequest.path || 'Not selected yet';
+      summaryPlan.textContent = websiteRequest.plan
+        ? `${websiteRequest.plan}${websiteRequest.budget ? ` · ${websiteRequest.budget}` : ''}`
+        : 'Not selected yet';
+
+      if (summaryDemo) {
+        summaryDemo.textContent = websiteRequest.demo
+          ? `${websiteRequest.demo.label}${websiteRequest.demo.feeLabel ? ` · ${websiteRequest.demo.feeLabel}` : ''}${websiteRequest.demo.timeline ? ` · ${websiteRequest.demo.timeline}` : ''}`
+          : 'Optional — not selected';
+      }
+
+      summaryAddons.textContent = websiteRequest.addons.length
+        ? websiteRequest.addons.map((addon) => addon.label).join(', ')
+        : 'None selected';
+
+      if (summaryTodayDue) {
+        if (websiteRequest.demo && Number(websiteRequest.demo.fee || 0) > 0) {
+          summaryTodayDue.textContent = `${websiteRequest.demo.feeLabel} estimated due today for the selected demo. ${websiteRequest.demo.credit || ''}`;
+        } else if (websiteRequest.demo && Number(websiteRequest.demo.fee || 0) === 0) {
+          summaryTodayDue.textContent = '$0 — free fit call selected. No demo files are included.';
+        } else {
+          summaryTodayDue.textContent = '$0 — no paid demo selected on this page.';
+        }
+      }
+
+      const params = new URLSearchParams({ service: websiteRequest.service });
+      if (websiteRequest.path) params.set('path', websiteRequest.path);
+      if (websiteRequest.plan) params.set('plan', websiteRequest.plan);
+      if (websiteRequest.budget) params.set('budget', websiteRequest.budget);
+      if (websiteRequest.demo) {
+        params.set('demo', websiteRequest.demo.label);
+        params.set('demo_fee', websiteRequest.demo.feeLabel || websiteRequest.demo.fee || '');
+        params.set('demo_timeline', websiteRequest.demo.timeline || '');
+        params.set('demo_credit', websiteRequest.demo.credit || '');
+      }
+      if (websiteRequest.addons.length) {
+        params.set('addons', websiteRequest.addons.map((addon) => addon.label).join(', '));
+        params.set('addon_budgets', websiteRequest.addons.map((addon) => addon.budget).filter(Boolean).join(', '));
+      }
+
+      compiledLink.href = `contact.php?${params.toString()}`;
+      const ready = Boolean(websiteRequest.path && websiteRequest.plan);
+      compiledLink.classList.toggle('is-disabled', !ready);
+      compiledLink.setAttribute('aria-disabled', ready ? 'false' : 'true');
+      compiledLink.textContent = ready ? 'Continue to contact with selections' : 'Choose a path and starting point first';
+    }
+
+    document.querySelectorAll('[data-choice-type]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const group = button.dataset.choiceType;
+        const card = button.closest(`[data-choice-group="${group}"]`);
+        if (!card) return;
+
+        resetChoiceButtons(group);
+        card.classList.add('is-selected');
+        button.classList.add('is-selected');
+        button.textContent = 'Selected';
+
+        if (group === 'path') {
+          websiteRequest.path = button.dataset.label || button.dataset.value || card.dataset.choiceLabel || card.dataset.choiceValue || '';
+          document.getElementById('website-pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        if (group === 'plan') {
+          websiteRequest.plan = button.dataset.label || button.dataset.value || card.dataset.choiceLabel || card.dataset.choiceValue || '';
+          websiteRequest.budget = button.dataset.budget || card.dataset.budget || '';
+          document.getElementById('website-options')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        if (group === 'demo') {
+          websiteRequest.demo = {
+            value: button.dataset.value || card.dataset.choiceValue || '',
+            label: button.dataset.label || card.dataset.choiceLabel || button.dataset.value || card.dataset.choiceValue || '',
+            fee: button.dataset.demoFee || card.dataset.demoFee || '0',
+            feeLabel: button.dataset.demoFeeLabel || card.dataset.demoFeeLabel || '',
+            timeline: button.dataset.demoTimeline || card.dataset.demoTimeline || '',
+            credit: button.dataset.demoCredit || card.dataset.demoCredit || ''
+          };
+          document.getElementById('request-summary')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        updateRequestSummary();
+      });
+    });
+
+    document.querySelectorAll('[data-addon-button]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const card = button.closest('[data-addon-value]');
+        if (!card) return;
+
+        const value = card.dataset.addonValue || '';
+        const label = card.dataset.addonLabel || value;
+        const budget = card.dataset.addonBudget || '';
+        const currentIndex = websiteRequest.addons.findIndex((addon) => addon.value === value);
+
+        if (currentIndex >= 0) {
+          websiteRequest.addons.splice(currentIndex, 1);
+          card.classList.remove('is-selected');
+          button.classList.remove('is-selected');
+          button.textContent = button.dataset.defaultText || 'Add to request';
+        } else {
+          websiteRequest.addons.push({ value, label, budget });
+          card.classList.add('is-selected');
+          button.classList.add('is-selected');
+          button.textContent = 'Added';
+        }
+
+        updateRequestSummary();
+      });
+    });
+
+    updateRequestSummary();
+  </script>
 </body>
 </html>
