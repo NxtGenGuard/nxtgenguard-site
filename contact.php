@@ -63,6 +63,37 @@ function e(mixed $value): string
     return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
+function is_contact_page_url(string $url): bool
+{
+    $url = strtolower(trim($url));
+    if ($url === '') {
+        return false;
+    }
+
+    $path = strtolower((string) (parse_url($url, PHP_URL_PATH) ?: ''));
+    return str_contains($path, 'contact.php') || str_contains($url, 'contact.php?') || str_ends_with($url, 'contact.php');
+}
+
+function displayable_selections(array $selected): array
+{
+    // Keep the visible request packet clean. Source/ref/UTM fields are useful
+    // internally, but they should not replace customer-facing service choices.
+    $hiddenFromPacket = ['source_page', 'ref', 'utm_source', 'utm_medium', 'utm_campaign'];
+    $clean = [];
+
+    foreach ($selected as $key => $value) {
+        if (in_array((string) $key, $hiddenFromPacket, true)) {
+            continue;
+        }
+        if (!is_string($value) || trim($value) === '') {
+            continue;
+        }
+        $clean[$key] = $value;
+    }
+
+    return $clean;
+}
+
 function json_response(array $payload, int $status = 200): void
 {
     http_response_code($status);
@@ -146,12 +177,46 @@ function gather_selections(array $selectionLabels): array
     $selected = [];
     foreach ($selectionLabels as $key => $label) {
         $value = incoming_selection_value($key);
-        if ($value !== '') {
-            $selected[$key] = $value;
+        if ($value === '') {
+            continue;
+        }
+
+        // Never allow the contact page itself to become the visible/request
+        // source. This prevents contact.php?sent=1 or contact.php?... from
+        // replacing the real service selections after a successful submit.
+        if ($key === 'source_page' && is_contact_page_url($value)) {
+            continue;
+        }
+
+        $selected[$key] = $value;
+    }
+
+    // If a POST arrives from contact.php with query-string selections, carry
+    // those selections forward even if the form action removed the query.
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_REFERER'])) {
+        $referer = clean_text($_SERVER['HTTP_REFERER'], 1600);
+        $query = (string) (parse_url($referer, PHP_URL_QUERY) ?: '');
+        if ($query !== '') {
+            $refererParams = [];
+            parse_str($query, $refererParams);
+            foreach ($selectionLabels as $key => $label) {
+                if (!empty($selected[$key]) || empty($refererParams[$key])) {
+                    continue;
+                }
+                $value = clean_text($refererParams[$key], 900, false);
+                if ($value !== '' && !($key === 'source_page' && is_contact_page_url($value))) {
+                    $selected[$key] = $value;
+                }
+            }
         }
     }
-    if (empty($selected['source_page']) && !empty($_SERVER['HTTP_REFERER'])) {
-        $selected['source_page'] = clean_text($_SERVER['HTTP_REFERER'], 900);
+
+    // Add a source page only when the visitor came from another page.
+    if (empty($selected['source_page']) && ($_GET['sent'] ?? '') !== '1' && !empty($_SERVER['HTTP_REFERER'])) {
+        $referer = clean_text($_SERVER['HTTP_REFERER'], 900);
+        if (!is_contact_page_url($referer)) {
+            $selected['source_page'] = $referer;
+        }
     }
     return $selected;
 }
@@ -159,6 +224,47 @@ function gather_selections(array $selectionLabels): array
 function selected_service(array $selected): string
 {
     return $selected['service'] ?? 'General NxtGenGuard Request';
+}
+
+function visible_packet_selections(array $selected, array $selectionLabels, ?array $receipt = null): array
+{
+    // Keep tracking/source metadata available for email and hidden fields, but
+    // do not show raw URLs or UTM values inside the customer-facing request card.
+    $hiddenKeys = ['source_page', 'ref', 'utm_source', 'utm_medium', 'utm_campaign'];
+    $visible = [];
+
+    foreach ($selected as $key => $value) {
+        if (in_array((string) $key, $hiddenKeys, true)) {
+            continue;
+        }
+        if (!array_key_exists((string) $key, $selectionLabels)) {
+            continue;
+        }
+        $cleanValue = clean_text($value, 900, false);
+        if ($cleanValue !== '') {
+            $visible[(string) $key] = $cleanValue;
+        }
+    }
+
+    // On the receipt screen, always keep the service visible even if the
+    // submitted hidden selected packet was reduced to tracking metadata.
+    if (empty($visible['service']) && is_array($receipt ?? null)) {
+        $receiptService = clean_text($receipt['service'] ?? '', 180, false);
+        if ($receiptService !== '') {
+            $visible = ['service' => $receiptService] + $visible;
+        }
+    }
+
+    return $visible;
+}
+
+function contact_form_action(): string
+{
+    $query = (string) ($_SERVER['QUERY_STRING'] ?? '');
+    if ($query === '' || ($_GET['sent'] ?? '') === '1') {
+        return 'contact.php';
+    }
+    return 'contact.php?' . $query;
 }
 
 function service_slug(string $service): string
@@ -614,6 +720,28 @@ $errors = [];
 $success = false;
 $receipt = $_SESSION['last_receipt'] ?? null;
 
+// On the post-submit success screen, keep the request packet visible using
+// the selections saved during the successful submission.
+if (($_GET['sent'] ?? '') === '1' && is_array($receipt) && isset($receipt['selected']) && is_array($receipt['selected'])) {
+    $selected = [];
+    foreach ($receipt['selected'] as $key => $value) {
+        if (!is_string($value) || $value === '') {
+            continue;
+        }
+        if ($key === 'source_page' && is_contact_page_url($value)) {
+            continue;
+        }
+        $selected[$key] = $value;
+    }
+
+    if (empty($selected['service']) && !empty($receipt['service']) && is_string($receipt['service'])) {
+        $selected['service'] = clean_text($receipt['service'], 180);
+    }
+
+    $service = selected_service($selected);
+    $guide = service_guidance($service);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['ajax'] ?? '') === '') {
     $selected = gather_selections($selectionLabels);
     $service = selected_service($selected);
@@ -675,6 +803,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['ajax'] ?? '') === '') {
             $_SESSION['last_receipt'] = [
                 'id' => $requestId,
                 'service' => selected_service($selected),
+                'selected' => $selected,
                 'score' => $bodies['score']['label'],
                 'provider' => $internalSend['provider'],
                 'time' => gmdate('Y-m-d H:i:s') . ' UTC',
@@ -692,11 +821,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['ajax'] ?? '') === '') {
     }
 }
 
+$packetSelected = displayable_selections($selected);
+
 // Values for sticky form after validation errors.
 function form_value(string $key): string
 {
     return clean_text($_POST[$key] ?? '', $key === 'message' ? 5000 : 500, $key === 'message');
 }
+
+$displaySelected = visible_packet_selections($selected, $selectionLabels, is_array($receipt) ? $receipt : null);
+$formAction = contact_form_action();
 
 ?>
 <!DOCTYPE html>
@@ -937,13 +1071,13 @@ function form_value(string $key): string
             <div class="packet-top">
               <div>
                 <h2>Request packet</h2>
-                <p class="empty-packet" style="margin-top:8px">Selections from the service page appear here before you submit.</p>
+                <p class="empty-packet" style="margin-top:8px"><?= (($_GET['sent'] ?? '') === '1') ? 'Your submitted service selections are summarized here.' : 'Selections from the service page appear here before you submit.' ?></p>
               </div>
               <span class="status-pill">No checkout</span>
             </div>
-            <?php if (!empty($selected)): ?>
+            <?php if (!empty($displaySelected)): ?>
               <ul class="packet-list" id="heroPacketList">
-                <?php foreach ($selected as $key => $value): ?>
+                <?php foreach ($displaySelected as $key => $value): ?>
                   <li><strong><?= e($selectionLabels[$key] ?? $key) ?></strong><span><?= e($value) ?></span></li>
                 <?php endforeach; ?>
               </ul>
@@ -961,9 +1095,13 @@ function form_value(string $key): string
         <div class="container contact-layout">
           <section class="panel" id="contact-form">
             <?php if (($_GET['sent'] ?? '') === '1' && is_array($receipt)): ?>
+              <?php
+                $receiptService = clean_text($receipt['service'] ?? 'NxtGenGuard request', 180);
+                $receiptDescription = preg_match('/\brequest$/i', $receiptService) ? $receiptService : $receiptService . ' request';
+              ?>
               <div class="notice success" role="status">
                 <strong>Request received.</strong><br />
-                Your request ID is <?= e($receipt['id'] ?? '') ?>. We received the <?= e($receipt['service'] ?? 'NxtGenGuard') ?> request and will review the details before confirming next steps. No payment was collected on this page.
+                Your request ID is <?= e($receipt['id'] ?? '') ?>. We received your <?= e($receiptDescription) ?> and will review the details before confirming next steps. No payment was collected on this page.
               </div>
             <?php endif; ?>
 
@@ -984,7 +1122,7 @@ function form_value(string $key): string
               <strong>No payment is collected on this page.</strong> If a paid demo, review, urgency fee, support visit, or first-step option is selected, we confirm the scope with you first and send an invoice/payment link before work begins.
             </div>
 
-            <form method="post" action="contact.php" novalidate>
+            <form method="post" action="<?= e($formAction) ?>" novalidate>
               <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>" />
               <input type="hidden" name="form_started" value="<?= e((string) time()) ?>" />
               <div class="hidden-hp" aria-hidden="true">
