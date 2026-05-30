@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NxtGenGuard | IT &amp; Security Consulting</title>
-  <meta name="description" content="Guidance for infrastructure, security posture, device management, cloud planning, and technical cleanup." />
+  <meta name="description" content="Practical IT and security consulting for access, devices, cloud tools, infrastructure, risk cleanup, and security planning." />
   <style>
 
     :root {
       --bg: #f8fcff;
       --bg-2: #edf8ff;
-      --panel: rgba(255, 255, 255, 0.78);
+      --panel: rgba(255, 255, 255, 0.82);
       --panel-2: rgba(255, 255, 255, 0.94);
-      --line: rgba(22, 137, 232, 0.14);
-      --line-strong: rgba(22, 137, 232, 0.28);
+      --line: rgba(18, 72, 116, 0.13);
+      --line-strong: rgba(29, 142, 223, 0.28);
       --text: #071827;
       --muted: #5f7288;
       --blue: #1689e8;
@@ -21,7 +21,8 @@
       --teal: #14b8a6;
       --accent: #ffb86b;
       --radius: 28px;
-      --shadow: 0 26px 70px rgba(7, 24, 39, 0.12);
+      --shadow: 0 24px 70px rgba(20, 75, 120, 0.16);
+      --soft-shadow: 0 16px 40px rgba(33, 91, 139, 0.11);
       --max: 1240px;
       --nav-h: 84px;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -51,36 +52,57 @@
       justify-content: center;
       min-height: 54px;
       padding: 0 22px;
-      border-radius: 14px;
-      font-weight: 800;
-      transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease), background 0.28s var(--ease);
+      border-radius: 15px;
+      font-weight: 850;
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease), background 0.28s var(--ease), opacity 0.28s var(--ease);
     }
     .btn:hover { transform: translateY(-2px); }
     .btn-primary {
       color: #fff;
       background: linear-gradient(135deg, #0e7fe4 0%, #25b6ef 58%, #14b8a6 100%);
-      border: 1px solid rgba(22, 137, 232, 0.22);
-      box-shadow: 0 18px 38px rgba(22, 137, 232, 0.22);
+      border: 1px solid rgba(17, 142, 216, 0.35);
+      box-shadow: 0 18px 38px rgba(22, 137, 232, 0.23);
     }
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid rgba(22, 137, 232, 0.16);
-      color: var(--text);
-      box-shadow: 0 14px 32px rgba(7, 24, 39, 0.07);
+      background: rgba(255, 255, 255, 0.70);
+      border: 1px solid rgba(18, 72, 116, 0.13);
+      color: #12324b;
+      box-shadow: 0 12px 30px rgba(33, 91, 139, 0.08);
     }
-    .btn-primary:hover, .btn-secondary:hover {
-      border-color: rgba(20, 184, 166, 0.42);
-      box-shadow: 0 20px 42px rgba(22, 137, 232, 0.20);
+    .btn-primary:hover { box-shadow: 0 22px 48px rgba(22, 137, 232, 0.28); }
+    .btn-secondary:hover { border-color: rgba(29, 142, 223, 0.34); background: #fff; }
+    .btn-small {
+      min-height: 44px;
+      padding: 0 15px;
+      border-radius: 13px;
+      font-size: 0.84rem;
+      letter-spacing: -0.01em;
+    }
+    .btn.is-disabled {
+      opacity: 0.52;
+      pointer-events: auto;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .choice-actions,
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
     }
 
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid rgba(22, 137, 232, 0.12);
-      background: rgba(248, 252, 255, 0.86);
-      backdrop-filter: blur(18px);
-      box-shadow: 0 12px 34px rgba(7, 24, 39, 0.06);
+      border-bottom: 1px solid rgba(18, 72, 116, 0.10);
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 12px 36px rgba(18, 72, 116, 0.06);
     }
     .nav-wrap {
       min-height: var(--nav-h);
@@ -89,27 +111,31 @@
       justify-content: space-between;
       gap: 22px;
     }
-    .brand { display: inline-flex; align-items: center; justify-content: center; }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
     .brand img {
-      width: 68px;
-      height: 68px;
+      width: auto;
+      height: 62px;
+      max-width: 178px;
       object-fit: contain;
-      filter: drop-shadow(0 10px 18px rgba(7, 24, 39, 0.08));
+      border-radius: 16px;
+      filter: none;
     }
     .desktop-nav { display: flex; align-items: center; gap: 28px; }
     .desktop-nav a, .nav-drop-toggle {
-      color: rgba(7, 24, 39, 0.76);
-      font-weight: 800;
+      color: #193c58;
+      font-weight: 780;
       background: none;
       border: none;
       padding: 0;
       font-size: 0.97rem;
       cursor: pointer;
     }
-    .desktop-nav a:hover,
-    .desktop-nav a.active,
-    .nav-drop-toggle:hover,
-    .nav-drop-toggle.active { color: var(--blue); }
+    .desktop-nav a:hover, .desktop-nav a.active, .nav-drop-toggle:hover, .nav-drop-toggle.active { color: #0a80df; }
     .nav-drop { position: relative; padding-bottom: 14px; margin-bottom: -14px; }
     .nav-drop::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
     .nav-drop-menu {
@@ -118,10 +144,10 @@
       left: 0;
       min-width: 300px;
       padding: 12px;
-      border-radius: 18px;
-      border: 1px solid rgba(22, 137, 232, 0.14);
-      background: rgba(255, 255, 255, 0.97);
-      box-shadow: 0 24px 60px rgba(7, 24, 39, 0.16);
+      border-radius: 20px;
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 24px 60px rgba(18, 72, 116, 0.18);
       opacity: 0;
       visibility: hidden;
       transform: translateY(10px);
@@ -136,25 +162,25 @@
       pointer-events: auto;
     }
     .nav-drop-menu a { display: block; padding: 12px 14px; border-radius: 12px; }
-    .nav-drop-menu a:hover { background: rgba(103, 205, 251, 0.15); }
+    .nav-drop-menu a:hover { background: rgba(22, 137, 232, 0.08); }
 
     .menu-toggle {
       display: none;
       width: 48px;
       height: 48px;
       border-radius: 14px;
-      border: 1px solid rgba(22, 137, 232, 0.16);
-      background: rgba(255, 255, 255, 0.8);
-      color: var(--text);
+      border: 1px solid rgba(18, 72, 116, 0.14);
+      background: rgba(255, 255, 255, 0.78);
+      color: #12324b;
       font-size: 1.15rem;
-      box-shadow: 0 12px 26px rgba(7, 24, 39, 0.07);
+      box-shadow: 0 10px 28px rgba(33, 91, 139, 0.08);
     }
     .mobile-nav { display: none; padding: 0 0 18px; }
     .mobile-nav.open { display: block; }
     .mobile-panel {
-      border: 1px solid rgba(22, 137, 232, 0.14);
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.97);
+      border: 1px solid rgba(18, 72, 116, 0.13);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.95);
       padding: 14px;
       box-shadow: var(--shadow);
     }
@@ -162,24 +188,21 @@
       display: block;
       padding: 14px 12px;
       border-radius: 12px;
-      font-weight: 800;
+      font-weight: 780;
       list-style: none;
       cursor: pointer;
-      color: var(--text);
+      color: #193c58;
     }
-    .mobile-panel a:hover, .mobile-panel summary:hover, .mobile-panel details[open] summary { background: rgba(103, 205, 251, 0.15); }
+    .mobile-panel a:hover, .mobile-panel summary:hover, .mobile-panel details[open] summary { background: rgba(22, 137, 232, 0.08); color: #0a80df; }
     .mobile-submenu { padding: 4px 0 0 10px; }
-    .mobile-submenu a { color: var(--muted); font-weight: 700; }
+    .mobile-submenu a { color: var(--muted); font-weight: 650; }
     .mobile-panel summary::-webkit-details-marker { display: none; }
 
-
-    /* Premium site footer */
     .site-footer {
       position: relative;
       padding: 0 0 48px;
       overflow: hidden;
     }
-
     .site-footer::before {
       content: "";
       position: absolute;
@@ -188,47 +211,43 @@
       bottom: 0;
       height: 280px;
       background:
-        radial-gradient(circle at 18% 20%, rgba(103, 205, 251, 0.22), transparent 28%),
-        radial-gradient(circle at 84% 72%, rgba(255, 184, 107, 0.16), transparent 30%);
+        radial-gradient(circle at 18% 20%, rgba(103, 205, 251, 0.20), transparent 28%),
+        radial-gradient(circle at 84% 72%, rgba(255, 184, 107, 0.15), transparent 30%);
       pointer-events: none;
-      opacity: 0.9;
+      opacity: 0.86;
     }
-
     .footer-shell {
       position: relative;
       overflow: hidden;
       border-radius: 34px;
-      border: 1px solid rgba(22, 137, 232, 0.14);
+      border: 1px solid rgba(18, 72, 116, 0.13);
       background:
-        radial-gradient(circle at top left, rgba(103, 205, 251, 0.22), transparent 28%),
-        radial-gradient(circle at top right, rgba(255, 184, 107, 0.14), transparent 24%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(237, 248, 255, 0.9));
-      box-shadow: 0 26px 70px rgba(7, 24, 39, 0.11);
+        radial-gradient(circle at top left, rgba(103, 205, 251, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.12), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 252, 255, 0.94));
+      box-shadow: 0 26px 70px rgba(20, 75, 120, 0.13);
       padding: 34px;
       isolation: isolate;
     }
-
     .footer-shell::before {
       content: "";
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(22, 137, 232, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(22, 137, 232, 0.06) 1px, transparent 1px);
+        linear-gradient(rgba(18, 72, 116, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 72, 116, 0.055) 1px, transparent 1px);
       background-size: 38px 38px;
-      opacity: 0.18;
+      opacity: 0.26;
       mask-image: radial-gradient(circle at top center, black 0%, transparent 76%);
       pointer-events: none;
       z-index: -1;
     }
-
     .footer-grid {
       display: grid;
       grid-template-columns: 1.35fr 0.75fr 1fr;
-      gap: 30px;
+      gap: 26px;
       align-items: start;
     }
-
     .footer-brand {
       display: inline-flex;
       align-items: center;
@@ -236,16 +255,16 @@
       font-weight: 900;
       letter-spacing: -0.035em;
       font-size: 1.08rem;
-      color: var(--text);
+      color: #071827;
     }
-
     .footer-brand img {
-      width: 52px;
-      height: 52px;
+      width: auto;
+      height: 48px;
+      max-width: 150px;
       object-fit: contain;
-      filter: drop-shadow(0 10px 18px rgba(7, 24, 39, 0.08));
+      border-radius: 12px;
+      filter: none;
     }
-
     .footer-brand-block p {
       margin: 16px 0 0;
       max-width: 410px;
@@ -253,115 +272,72 @@
       line-height: 1.78;
       font-size: 0.96rem;
     }
-
     .footer-badges {
       display: flex;
       flex-wrap: wrap;
       gap: 9px;
       margin-top: 18px;
     }
-
-    .footer-badges span,
-    .footer-status {
+    .footer-badges span {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       min-height: 36px;
       padding: 0 12px;
       border-radius: 999px;
-      border: 1px solid rgba(22, 137, 232, 0.14);
+      border: 1px solid rgba(18, 72, 116, 0.12);
       background: rgba(255, 255, 255, 0.72);
-      color: #23445e;
-      font-weight: 800;
+      color: #193c58;
+      font-weight: 820;
       font-size: 0.78rem;
     }
-
-    .footer-status::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--teal);
-      box-shadow: 0 0 16px rgba(20, 184, 166, 0.58);
-    }
-
     .footer-col h4 {
       margin: 0 0 14px;
       font-size: 0.78rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: rgba(25, 60, 88, 0.62);
     }
-
     .footer-links-list {
       display: grid;
       gap: 10px;
     }
-
     .footer-links-list a {
       width: fit-content;
-      color: var(--text);
-      opacity: 0.78;
-      font-weight: 800;
+      color: #193c58;
+      opacity: 0.86;
+      font-weight: 760;
       line-height: 1.44;
       transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease;
     }
-
     .footer-links-list a:hover {
       opacity: 1;
-      color: var(--blue);
+      color: #0a80df;
       transform: translateX(3px);
     }
-
     .footer-bottom {
-      margin-top: 28px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(22, 137, 232, 0.12);
+      width: 100%;
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(18, 72, 116, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 14px;
-      flex-direction: column;
-      text-align: center;
-      color: rgba(7, 24, 39, 0.68);
+      flex-wrap: wrap;
+      color: rgba(25, 60, 88, 0.70);
       font-size: 0.92rem;
+      text-align: center;
     }
-
-    .footer-bottom strong {
-      color: var(--text);
-    }
-
-    @media (max-width: 1080px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .footer-brand-block { grid-column: span 2; }
-    }
-
-    @media (max-width: 620px) {
-      .site-footer { padding-bottom: 34px; }
-      .footer-shell { border-radius: 26px; padding: 24px 20px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-      .footer-brand-block { grid-column: auto; }
-      .footer-brand-block p { max-width: none; }
-      .footer-links-list a { width: 100%; }
-      .footer-bottom { align-items: center; }
-    }
-
-
-    @media (max-width: 860px) {
-      .desktop-nav { display: none; }
-      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
-    }
-    @media (max-width: 620px) {
-      .container { width: min(var(--max), calc(100% - 22px)); }
-    }
-
+    .footer-bottom span { display: block; width: 100%; }
+    .footer-bottom strong { color: #071827; }
 
     .detail-hero {
       position: relative;
       overflow: hidden;
       isolation: isolate;
-      padding: 82px 0 58px;
-      border-bottom: 1px solid rgba(22, 137, 232, 0.12);
+      padding: 92px 0 68px;
+      border-bottom: 1px solid rgba(18, 72, 116, 0.10);
     }
     .detail-hero::before {
       content: "";
@@ -369,10 +345,10 @@
       inset: 0;
       z-index: -2;
       background:
-        linear-gradient(90deg, rgba(248, 252, 255, 0.98) 0%, rgba(248, 252, 255, 0.86) 46%, rgba(248, 252, 255, 0.42) 100%),
-        linear-gradient(180deg, rgba(248, 252, 255, 0.34), rgba(237, 248, 255, 0.94)),
-        var(--hero-img) center center / cover no-repeat;
-      filter: saturate(1.08) brightness(1.04);
+        linear-gradient(90deg, rgba(250, 253, 255, 0.98) 0%, rgba(250, 253, 255, 0.94) 42%, rgba(250, 253, 255, 0.70) 70%, rgba(250, 253, 255, 0.42) 100%),
+        linear-gradient(180deg, rgba(240, 249, 255, 0.66), rgba(255, 255, 255, 0.96)),
+        var(--hero-img) center right / cover no-repeat;
+      filter: saturate(1.06);
     }
     .detail-hero::after {
       content: "";
@@ -380,48 +356,251 @@
       inset: 0;
       z-index: -1;
       background-image:
-        linear-gradient(rgba(22, 137, 232, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(22, 137, 232, 0.06) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(180deg, black 0%, transparent 82%);
-      opacity: 0.22;
+        linear-gradient(rgba(18, 72, 116, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 72, 116, 0.055) 1px, transparent 1px),
+        radial-gradient(circle at 18% 80%, rgba(103, 205, 251, 0.22), transparent 30%),
+        radial-gradient(circle at 86% 18%, rgba(255, 184, 107, 0.13), transparent 24%);
+      background-size: 42px 42px, 42px 42px, auto, auto;
+      mask-image: linear-gradient(180deg, black 0%, transparent 90%);
+      opacity: 0.55;
       pointer-events: none;
     }
     .detail-hero-grid { display: grid; grid-template-columns: 1fr 0.82fr; gap: 34px; align-items: center; }
     .detail-copy { display: grid; gap: 22px; }
-    .back-link { color: var(--blue); font-weight: 900; width: fit-content; }
-    .back-link:hover { color: var(--teal); }
-    .detail-copy h1 { margin: 0; font-size: clamp(2.8rem, 7.2vw, 6.1rem); line-height: 0.9; letter-spacing: -0.078em; color: var(--text); }
-    .detail-copy p { margin: 0; max-width: 780px; color: var(--muted); font-size: clamp(1rem, 1.4vw, 1.12rem); line-height: 1.82; }
+    .back-link { color: #0a80df; font-weight: 850; width: fit-content; }
+    .back-link:hover { color: #0d9ac8; }
+    .detail-copy h1 {
+      margin: 0;
+      max-width: 820px;
+      font-size: clamp(2.8rem, 7.2vw, 6.1rem);
+      line-height: 0.9;
+      letter-spacing: -0.078em;
+      color: var(--text);
+    }
+    .detail-copy p { margin: 0; max-width: 760px; color: var(--muted); font-size: clamp(1rem, 1.4vw, 1.13rem); line-height: 1.82; }
     .detail-actions { display: flex; flex-wrap: wrap; gap: 12px; }
     .hero-card {
+      position: relative;
       border-radius: 30px;
-      border: 1px solid rgba(22, 137, 232, 0.14);
-      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(18, 72, 116, 0.14);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(242, 250, 255, 0.78));
       box-shadow: var(--shadow);
       overflow: hidden;
+      padding: 10px;
     }
-    .hero-card img { width: 100%; height: 390px; object-fit: cover; object-position: center center; filter: saturate(1.08) brightness(1.02); }
-    .detail-content { padding: 62px 0 86px; }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.56), transparent 42%),
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.18), transparent 32%);
+      z-index: 1;
+    }
+    .hero-card img {
+      position: relative;
+      z-index: 0;
+      width: 100%;
+      height: 390px;
+      object-fit: cover;
+      object-position: center center;
+      border-radius: 22px;
+      filter: saturate(1.04) brightness(1.02) contrast(1.02);
+      display: block;
+      background: #eef8ff;
+    }
+
+    .detail-content { padding: 66px 0 86px; }
     .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .info-card {
       border-radius: 28px;
-      border: 1px solid rgba(22, 137, 232, 0.13);
-      background: rgba(255, 255, 255, 0.82);
-      box-shadow: 0 16px 38px rgba(7, 24, 39, 0.08);
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.12), transparent 28%),
+        rgba(255, 255, 255, 0.84);
+      box-shadow: var(--soft-shadow);
       padding: 28px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(16px);
     }
     .info-card.wide { grid-column: 1 / -1; }
-    .info-card h2 { margin: 0 0 18px; font-size: clamp(1.55rem, 2.6vw, 2.45rem); line-height: 1; letter-spacing: -0.055em; color: var(--text); }
+    .info-card h2 { margin: 0 0 18px; color: #071827; font-size: clamp(1.55rem, 2.6vw, 2.45rem); line-height: 1; letter-spacing: -0.055em; }
+    .info-card h3 { margin: 0 0 10px; color: #071827; }
     .info-card p { margin: 0; color: var(--muted); line-height: 1.78; }
+    .lead-copy { max-width: 840px; }
+    .section-kicker { display: none; }
+
+    .selection-panel {
+      margin-top: 24px;
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      background:
+        radial-gradient(circle at top left, rgba(103, 205, 251, 0.16), transparent 30%),
+        rgba(255, 255, 255, 0.62);
+    }
+    .selection-panel p { margin-top: 12px; }
+    .selection-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .selection-step {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(18, 72, 116, 0.10);
+      background: rgba(255, 255, 255, 0.70);
+    }
+    .selection-step strong {
+      display: block;
+      color: #0a80df;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+    .selection-step span { color: #193c58; font-weight: 820; line-height: 1.35; }
+
+    .path-grid,
+    .plan-grid,
+    .addon-grid,
+    .demo-grid,
+    .feature-grid,
+    .policy-grid,
+    .addon-price-list,
+    .summary-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+    .path-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .plan-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .demo-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .addon-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .feature-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .policy-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .addon-price-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .summary-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .choice-card,
+    .feature-card,
+    .policy-card,
+    .addon-price-item {
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.14), transparent 30%),
+        rgba(255, 255, 255, 0.68);
+      box-shadow: 0 10px 28px rgba(33, 91, 139, 0.07);
+    }
+    .choice-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.38), transparent 42%);
+      opacity: 0;
+      transition: opacity 0.24s ease;
+    }
+    .choice-card.featured {
+      border-color: rgba(20, 184, 166, 0.24);
+      background:
+        radial-gradient(circle at top right, rgba(20, 184, 166, 0.16), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(103, 205, 251, 0.16), transparent 30%),
+        rgba(255, 255, 255, 0.74);
+    }
+    .choice-card.is-selected {
+      border-color: rgba(22, 137, 232, 0.46);
+      box-shadow: 0 18px 44px rgba(22, 137, 232, 0.18);
+    }
+    .choice-card.is-selected::before { opacity: 1; }
+    .select-button.is-selected {
+      background: linear-gradient(135deg, #075fae 0%, #1689e8 52%, #14b8a6 100%);
+      box-shadow: 0 18px 40px rgba(22, 137, 232, 0.28);
+    }
+    .choice-card h3,
+    .feature-card h3,
+    .policy-card strong,
+    .addon-price-item strong {
+      display: block;
+      margin: 0 0 10px;
+      color: #071827;
+      font-size: 1.05rem;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+    .choice-card p,
+    .feature-card p,
+    .policy-card span,
+    .addon-price-item span {
+      display: block;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.94rem;
+    }
+    .option-tag {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      margin-bottom: 14px;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      color: #12324b;
+      background: rgba(103, 205, 251, 0.18);
+      border: 1px solid rgba(22, 137, 232, 0.14);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .price-line {
+      display: block;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(18, 72, 116, 0.10);
+      color: #071827;
+      font-size: 1.02rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+    .price-detail {
+      margin-top: 6px !important;
+      color: #36536d !important;
+      font-size: 0.9rem !important;
+    }
+    .demo-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .demo-meta span {
+      display: inline-flex;
+      min-height: 28px;
+      align-items: center;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.70);
+      border: 1px solid rgba(18, 72, 116, 0.10);
+      color: #193c58;
+      font-size: 0.72rem;
+      font-weight: 820;
+    }
     .clean-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .choice-card .clean-list { margin-top: 14px; gap: 9px; }
     .clean-list li {
       position: relative;
       padding-left: 26px;
-      color: #23445e;
+      color: #1d3b53;
       line-height: 1.66;
     }
+    .choice-card .clean-list li { font-size: 0.93rem; line-height: 1.5; }
     .clean-list li::before {
       content: "";
       position: absolute;
@@ -431,16 +610,74 @@
       height: 9px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--blue-2), var(--teal));
-      box-shadow: 0 0 14px rgba(20, 184, 166, 0.42);
+      box-shadow: 0 0 14px rgba(20, 184, 166, 0.38);
     }
+    .step-divider {
+      margin-top: 30px;
+      padding-top: 26px;
+      border-top: 1px solid rgba(18, 72, 116, 0.12);
+    }
+    .step-divider h2,
+    .step-divider h3 {
+      margin: 0 0 12px;
+      color: #071827;
+      letter-spacing: -0.04em;
+    }
+    .selection-summary {
+      margin-top: 28px;
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid rgba(22, 137, 232, 0.18);
+      background:
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.16), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(103, 205, 251, 0.18), transparent 32%),
+        rgba(255, 255, 255, 0.78);
+      box-shadow: 0 18px 40px rgba(33, 91, 139, 0.10);
+    }
+    .selection-summary h3 { margin: 0 0 10px; font-size: 1.35rem; letter-spacing: -0.04em; }
+    .summary-item {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(18, 72, 116, 0.10);
+      background: rgba(255, 255, 255, 0.70);
+    }
+    .summary-item strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #071827;
+      font-size: 0.79rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    .summary-item span { color: #36536d; line-height: 1.5; }
+    .summary-item.full { grid-column: 1 / -1; }
+    .scope-note,
+    .request-note,
+    .price-note,
+    .platform-note {
+      margin-top: 18px !important;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background: rgba(255, 255, 255, 0.64);
+      color: #36536d !important;
+      font-size: 0.95rem;
+    }
+    .request-note {
+      background:
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.15), transparent 30%),
+        rgba(255, 255, 255, 0.66);
+    }
+
     .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .process-step {
       padding: 18px;
       border-radius: 20px;
-      background: linear-gradient(180deg, rgba(237, 248, 255, 0.82), rgba(255, 255, 255, 0.9));
-      border: 1px solid rgba(22, 137, 232, 0.12);
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      box-shadow: 0 10px 28px rgba(33, 91, 139, 0.07);
     }
-    .process-step strong { display: block; margin-bottom: 8px; color: var(--text); }
+    .process-step strong { display: block; margin-bottom: 8px; color: #071827; }
     .process-step span { color: var(--muted); line-height: 1.62; }
     .service-cta { padding: 0 0 86px; }
     .service-cta-box {
@@ -448,21 +685,403 @@
       overflow: hidden;
       padding: 42px 34px;
       border-radius: 34px;
-      border: 1px solid rgba(22, 137, 232, 0.14);
+      border: 1px solid rgba(18, 72, 116, 0.12);
       background:
-        radial-gradient(circle at top right, rgba(103, 205, 251, 0.28), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(255, 184, 107, 0.18), transparent 26%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(237, 248, 255, 0.86));
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.26), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(255, 184, 107, 0.16), transparent 26%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(238, 249, 255, 0.94));
       box-shadow: var(--shadow);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
     }
-    .service-cta-box h2 { margin: 0 0 8px; font-size: clamp(1.9rem, 3.8vw, 3.1rem); line-height: 0.96; letter-spacing: -0.06em; color: var(--text); }
+    .service-cta-box h2 { margin: 0 0 8px; color: #071827; font-size: clamp(1.9rem, 3.8vw, 3.1rem); line-height: 0.96; letter-spacing: -0.06em; }
     .service-cta-box p { margin: 0; color: var(--muted); max-width: 650px; line-height: 1.76; }
-    @media (max-width: 1080px) { .detail-hero-grid, .content-grid { grid-template-columns: 1fr; } .process-grid { grid-template-columns: repeat(2, 1fr); } .service-cta-box { align-items: flex-start; flex-direction: column; } }
-    @media (max-width: 620px) { .detail-hero { padding: 58px 0 42px; } .hero-card, .info-card, .service-cta-box { border-radius: 24px; } .hero-card img { height: 250px; } .process-grid { grid-template-columns: 1fr; } .info-card, .service-cta-box { padding-left: 20px; padding-right: 20px; } .service-cta-box .btn, .detail-actions .btn { width: 100%; } }
+
+    @media (max-width: 1080px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .detail-hero-grid,
+      .content-grid { grid-template-columns: 1fr; }
+      .plan-grid,
+      .demo-grid,
+      .policy-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .path-grid,
+      .addon-grid,
+      .feature-grid,
+      .addon-price-list,
+      .summary-grid,
+      .process-grid,
+      .selection-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .service-cta-box { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 860px) {
+      .desktop-nav { display: none; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+    }
+    @media (max-width: 620px) {
+      .container { width: min(var(--max), calc(100% - 22px)); }
+      .site-footer { padding-bottom: 34px; }
+      .footer-shell { border-radius: 26px; padding: 24px 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-brand-block p { max-width: none; }
+      .footer-links-list a { width: 100%; }
+      .footer-bottom { align-items: center; justify-content: center; text-align: center; }
+      .detail-hero { padding: 58px 0 42px; }
+      .hero-card,
+      .info-card,
+      .service-cta-box,
+      .selection-panel,
+      .selection-summary { border-radius: 24px; }
+      .hero-card { padding: 8px; }
+      .hero-card img { height: 250px; border-radius: 18px; }
+      .path-grid,
+      .plan-grid,
+      .demo-grid,
+      .addon-grid,
+      .feature-grid,
+      .policy-grid,
+      .addon-price-list,
+      .summary-grid,
+      .process-grid,
+      .selection-steps { grid-template-columns: 1fr; }
+      .info-card,
+      .service-cta-box,
+      .selection-panel,
+      .selection-summary { padding-left: 20px; padding-right: 20px; }
+      .service-cta-box .btn,
+      .detail-actions .btn,
+      .selection-summary .btn,
+      .choice-card .btn { width: 100%; }
+    }
+
+
+
+    /* Distinct IT & Security triage layout */
+    .hero-security-console {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid rgba(18, 72, 116, 0.14);
+      background:
+        radial-gradient(circle at top right, rgba(20, 184, 166, 0.20), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(103, 205, 251, 0.20), transparent 30%),
+        rgba(255, 255, 255, 0.78);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      min-height: 390px;
+      backdrop-filter: blur(18px);
+    }
+    .hero-security-console::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(18, 72, 116, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 72, 116, 0.05) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.46;
+      pointer-events: none;
+    }
+    .console-inner { position: relative; z-index: 1; display: grid; gap: 18px; }
+    .console-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 22px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background: rgba(255, 255, 255, 0.72);
+    }
+    .console-top strong { display: block; color: #071827; letter-spacing: -0.025em; }
+    .console-top span { display: block; margin-top: 4px; color: var(--muted); font-size: 0.9rem; }
+    .security-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--teal);
+      box-shadow: 0 0 0 8px rgba(20, 184, 166, 0.12), 0 0 22px rgba(20, 184, 166, 0.42);
+      flex: 0 0 auto;
+    }
+    .console-status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .console-status {
+      min-height: 94px;
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background: rgba(255, 255, 255, 0.66);
+    }
+    .console-status span { display: block; margin-bottom: 8px; color: #36536d; font-size: 0.76rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.12em; }
+    .console-status strong { display: block; color: #071827; font-size: 1.04rem; letter-spacing: -0.025em; }
+    .console-ribbon {
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 184, 107, 0.22);
+      background:
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.18), transparent 34%),
+        rgba(255, 255, 255, 0.70);
+      color: #36536d;
+      line-height: 1.65;
+      font-size: 0.94rem;
+    }
+    .security-intro-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .security-note-card {
+      border-radius: 24px;
+      padding: 22px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background: rgba(255, 255, 255, 0.68);
+      box-shadow: 0 10px 28px rgba(33, 91, 139, 0.07);
+    }
+    .security-note-card strong { display: block; margin-bottom: 10px; color: #071827; font-size: 1.05rem; letter-spacing: -0.025em; }
+    .security-note-card span { display: block; color: var(--muted); line-height: 1.65; }
+    .triage-builder {
+      position: relative;
+      overflow: visible;
+    }
+    .triage-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 390px;
+      gap: 22px;
+      align-items: start;
+      margin-top: 24px;
+    }
+    .triage-form { display: grid; gap: 18px; }
+    .triage-section {
+      border-radius: 26px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.12), transparent 30%),
+        rgba(255, 255, 255, 0.66);
+      padding: 22px;
+      box-shadow: 0 10px 28px rgba(33, 91, 139, 0.07);
+    }
+    .question-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .question-head em {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0e7fe4 0%, #25b6ef 58%, #14b8a6 100%);
+      color: #fff;
+      font-style: normal;
+      font-weight: 900;
+      box-shadow: 0 12px 26px rgba(22, 137, 232, 0.18);
+      flex: 0 0 auto;
+    }
+    .question-head h2,
+    .question-head h3 {
+      margin: 0 0 6px;
+      color: #071827;
+      letter-spacing: -0.04em;
+      line-height: 1.03;
+    }
+    .question-head p { margin: 0; color: var(--muted); line-height: 1.62; font-size: 0.95rem; }
+    .triage-list { display: grid; gap: 10px; }
+    .triage-option,
+    .assessment-option,
+    .support-card,
+    .urgency-chip {
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background: rgba(255, 255, 255, 0.74);
+      color: #193c58;
+      transition: transform 0.24s var(--ease), box-shadow 0.24s var(--ease), border-color 0.24s var(--ease), background 0.24s var(--ease);
+    }
+    .triage-option:hover,
+    .assessment-option:hover,
+    .support-card:hover,
+    .urgency-chip:hover {
+      transform: translateY(-2px);
+      border-color: rgba(22, 137, 232, 0.28);
+      box-shadow: 0 14px 28px rgba(33, 91, 139, 0.10);
+    }
+    .triage-option.is-selected,
+    .assessment-option.is-selected,
+    .support-card.is-selected,
+    .urgency-chip.is-selected {
+      border-color: rgba(20, 184, 166, 0.34);
+      background:
+        radial-gradient(circle at top right, rgba(20, 184, 166, 0.16), transparent 34%),
+        rgba(255, 255, 255, 0.88);
+      box-shadow: 0 18px 40px rgba(22, 137, 232, 0.14);
+    }
+    .triage-option {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+      min-height: 74px;
+      border-radius: 20px;
+      padding: 15px;
+    }
+    .triage-option b,
+    .assessment-option b,
+    .support-card b { display: block; color: #071827; letter-spacing: -0.025em; }
+    .triage-option span,
+    .assessment-option span,
+    .support-card span { display: block; margin-top: 5px; color: var(--muted); line-height: 1.48; font-size: 0.92rem; }
+    .option-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      background: rgba(103, 205, 251, 0.18);
+      color: #0a80df;
+      font-weight: 900;
+    }
+    .urgency-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .urgency-chip {
+      border-radius: 18px;
+      padding: 15px;
+    }
+    .urgency-chip strong { display: block; color: #071827; margin-bottom: 5px; }
+    .urgency-chip span { display: block; color: var(--muted); font-size: 0.88rem; line-height: 1.42; }
+    .assessment-stack { display: grid; gap: 10px; }
+    .assessment-option {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      border-radius: 20px;
+      padding: 17px;
+    }
+    .assessment-price {
+      color: #071827;
+      font-weight: 950;
+      white-space: nowrap;
+      font-size: 0.96rem;
+    }
+    .support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .support-card {
+      border-radius: 20px;
+      padding: 16px;
+      min-height: 142px;
+    }
+    .support-card small {
+      display: block;
+      margin-top: 12px;
+      color: #071827;
+      font-weight: 900;
+    }
+    .triage-summary-panel {
+      position: sticky;
+      top: calc(var(--nav-h) + 18px);
+      border-radius: 28px;
+      border: 1px solid rgba(22, 137, 232, 0.18);
+      background:
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.16), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(103, 205, 251, 0.20), transparent 34%),
+        rgba(255, 255, 255, 0.82);
+      box-shadow: 0 22px 58px rgba(33, 91, 139, 0.14);
+      padding: 22px;
+    }
+    .triage-summary-panel h3 { margin: 0 0 6px; color: #071827; font-size: 1.45rem; letter-spacing: -0.045em; }
+    .triage-summary-panel p { margin: 0; color: var(--muted); line-height: 1.62; }
+    .packet-list { display: grid; gap: 10px; margin: 18px 0; }
+    .packet-row {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(18, 72, 116, 0.10);
+      background: rgba(255, 255, 255, 0.70);
+    }
+    .packet-row strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #36536d;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .packet-row span { color: #071827; line-height: 1.45; font-weight: 760; }
+    .summary-warning {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 184, 107, 0.24);
+      background: rgba(255, 250, 244, 0.76);
+      color: #6a4a20 !important;
+      font-size: 0.91rem;
+      line-height: 1.55;
+    }
+    .security-flow {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+    .security-flow-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background: rgba(255, 255, 255, 0.66);
+      box-shadow: 0 10px 28px rgba(33, 91, 139, 0.07);
+    }
+    .security-flow-row strong { color: #0a80df; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; }
+    .security-flow-row h3 { margin: 0 0 6px; color: #071827; letter-spacing: -0.03em; }
+    .security-flow-row p { margin: 0; }
+    .security-factor-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .security-factor {
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background: rgba(255, 255, 255, 0.68);
+      min-height: 150px;
+    }
+    .security-factor strong { display: block; margin-bottom: 8px; color: #071827; letter-spacing: -0.025em; }
+    .security-factor span { display: block; color: var(--muted); line-height: 1.58; }
+    .boundary-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+    .boundary-card {
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      background: rgba(255, 255, 255, 0.68);
+    }
+    .boundary-card strong { display: block; margin-bottom: 8px; color: #071827; }
+    .boundary-card span { display: block; color: var(--muted); line-height: 1.58; font-size: 0.93rem; }
+
+    @media (max-width: 1080px) {
+      .security-intro-grid,
+      .triage-layout { grid-template-columns: 1fr; }
+      .triage-summary-panel { position: relative; top: auto; }
+      .security-factor-list,
+      .boundary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 720px) {
+      .console-status-grid,
+      .urgency-row,
+      .support-grid,
+      .security-factor-list,
+      .boundary-grid { grid-template-columns: 1fr; }
+      .assessment-option { grid-template-columns: 1fr; }
+      .assessment-price { white-space: normal; }
+      .security-flow-row { grid-template-columns: 1fr; gap: 8px; }
+      .hero-security-console { min-height: auto; border-radius: 24px; }
+    }
 
   </style>
 </head>
@@ -472,7 +1091,7 @@
     <header>
       <div class="container nav-wrap">
         <a class="brand" href="index.html" aria-label="NxtGenGuard home">
-          <img src="nxtgenguard-site/assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
+          <img src="assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
         </a>
         <nav class="desktop-nav" aria-label="Primary">
           <a href="index.html">Home</a>
@@ -480,7 +1099,7 @@
             <a class="nav-drop-toggle active" href="services.html">Services ▾</a>
             <div class="nav-drop-menu">
               <a href="services.html">All Services</a>
-              <a href="enterprise-websites.html">Enterprise Websites</a>
+              <a href="enterprise-websites.html">Websites &amp; Web Platforms</a>
               <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
               <a href="business-systems.html">Business Systems</a>
               <a href="automation-cloud.html">Automation &amp; Cloud</a>
@@ -501,7 +1120,7 @@
             <summary>Services</summary>
             <div class="mobile-submenu">
               <a href="services.html" onclick="closeMenu()">All Services</a>
-              <a href="enterprise-websites.html" onclick="closeMenu()">Enterprise Websites</a>
+              <a href="enterprise-websites.html" onclick="closeMenu()">Websites &amp; Web Platforms</a>
               <a href="platforms-dashboards.html" onclick="closeMenu()">Platforms &amp; Dashboards</a>
               <a href="business-systems.html" onclick="closeMenu()">Business Systems</a>
               <a href="automation-cloud.html" onclick="closeMenu()">Automation &amp; Cloud</a>
@@ -522,90 +1141,233 @@
           <div class="detail-copy">
             <a class="back-link" href="services.html#consulting">← Back to Services</a>
             <h1 id="page-title">IT &amp; Security Consulting</h1>
-            <p>Practical IT and security guidance for companies that need stronger technical structure.</p>
+            <p>Security and IT decisions should not start with a generic package. NxtGenGuard starts with a safe triage: what is happening, how urgent it is, what systems are authorized for review, and what level of guidance your business needs next.</p>
             <div class="detail-actions">
-              <a class="btn btn-primary" href="contact.php?service=IT%20%26%20Security%20Consulting">Start this service</a>
-              <a class="btn btn-secondary" href="services.html">View all services</a>
+              <a class="btn btn-primary" href="#security-triage">Start security triage</a>
+              <a class="btn btn-secondary" href="#security-boundaries">View safety rules</a>
             </div>
           </div>
-          <div class="hero-card">
-            <img src="assets/images/logo/IT%26SecurityConsulting.png" alt="IT &amp; Security Consulting image" />
+          <div class="hero-security-console" aria-label="Security readiness console preview">
+            <div class="console-inner">
+              <div class="console-top">
+                <div>
+                  <strong>Security readiness console</strong>
+                  <span>Review first. Scope safely. Improve in phases.</span>
+                </div>
+                <i class="security-dot" aria-hidden="true"></i>
+              </div>
+              <div class="console-status-grid">
+                <div class="console-status"><span>Access</span><strong>Users, roles, admins</strong></div>
+                <div class="console-status"><span>Cloud</span><strong>Email, storage, SaaS</strong></div>
+                <div class="console-status"><span>Devices</span><strong>Workstations, network, cameras</strong></div>
+                <div class="console-status"><span>Roadmap</span><strong>Priorities, cleanup, support</strong></div>
+              </div>
+              <div class="console-ribbon">This service is advisory and implementation-focused. We help you understand risk, organize next steps, and decide what should be handled first without asking you to share sensitive credentials through the website.</div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="detail-content" aria-label="IT &amp; Security Consulting details">
+      <section class="detail-content" aria-label="IT and Security Consulting details">
         <div class="container content-grid">
           <article class="info-card wide">
-            <h2>What this service is for</h2>
-            <p>This service gives businesses a clearer view of their technical environment, where risk exists, what needs cleanup, and how to plan infrastructure, devices, cloud systems, and security practices.</p>
+            <div class="security-intro-grid">
+              <div>
+                <h2>Start with a safe first step</h2>
+                <p>When your business needs IT or security guidance, we begin by understanding what needs attention, which systems you own or manage, how urgent the concern is, and what should happen first. This helps NxtGenGuard recommend the right next step before cleanup, hardening, implementation, or ongoing support begins.</p>
+                <p class="request-note">No payment is collected on this page. If a paid review, advisory call, cleanup session, or monthly support plan is the right fit, we confirm the scope with you first and send an invoice/payment link before work begins.</p>
+              </div>
+              <div class="security-note-card">
+                <strong>Your request packet</strong>
+                <span>Your selections help us understand your concern area, urgency, preferred review depth, and support needs. We use that information to respond with a practical next step without asking you to send passwords, private keys, or sensitive records through the form.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="info-card wide triage-builder" id="security-triage">
+            <h2>Security triage intake</h2>
+            <p>Use this intake when you need guidance around accounts, devices, cloud tools, security readiness, access cleanup, or technical risk. Your selections stay here until you continue, then they are included with your contact request.</p>
+
+            <div class="triage-layout">
+              <div class="triage-form">
+                <section class="triage-section" aria-labelledby="concern-heading">
+                  <div class="question-head">
+                    <em>01</em>
+                    <div>
+                      <h3 id="concern-heading">What needs attention?</h3>
+                      <p>Choose the closest situation. More details can be added in the contact form.</p>
+                    </div>
+                  </div>
+                  <div class="triage-list">
+                    <button class="triage-option" type="button" data-triage-type="concern" data-value="General security posture review">
+                      <span class="option-icon">A</span><span><b>General security posture review</b><span>You want a practical review of tools, habits, risks, and improvement priorities.</span></span>
+                    </button>
+                    <button class="triage-option" type="button" data-triage-type="concern" data-value="Accounts, access, and permissions cleanup">
+                      <span class="option-icon">B</span><span><b>Accounts, access, and permissions</b><span>Users, admins, shared logins, MFA, offboarding, or staff access need cleanup.</span></span>
+                    </button>
+                    <button class="triage-option" type="button" data-triage-type="concern" data-value="Cloud, email, and file sharing review">
+                      <span class="option-icon">C</span><span><b>Cloud, email, and file sharing</b><span>Email, cloud storage, shared folders, SaaS tools, or admin panels need structure.</span></span>
+                    </button>
+                    <button class="triage-option" type="button" data-triage-type="concern" data-value="Devices, network, and camera planning">
+                      <span class="option-icon">D</span><span><b>Devices, network, and camera planning</b><span>Workstations, routers, Wi-Fi, cameras, shared devices, or locations need review.</span></span>
+                    </button>
+                    <button class="triage-option" type="button" data-triage-type="concern" data-value="Vendor, insurance, or security questionnaire readiness">
+                      <span class="option-icon">E</span><span><b>Vendor or questionnaire readiness</b><span>A customer, insurer, partner, or vendor is asking about security practices.</span></span>
+                    </button>
+                    <button class="triage-option" type="button" data-triage-type="concern" data-value="Urgent security concern or suspicious activity">
+                      <span class="option-icon">F</span><span><b>Urgent concern or suspicious activity</b><span>Something feels wrong and you need safe next-step guidance before sending sensitive details.</span></span>
+                    </button>
+                  </div>
+                </section>
+
+                <section class="triage-section" aria-labelledby="urgency-heading">
+                  <div class="question-head">
+                    <em>02</em>
+                    <div>
+                      <h3 id="urgency-heading">How urgent is this?</h3>
+                      <p>This helps route the request correctly. Urgent does not mean you should share passwords or private evidence through the form.</p>
+                    </div>
+                  </div>
+                  <div class="urgency-row">
+                    <button class="urgency-chip" type="button" data-triage-type="urgency" data-value="Planning ahead / no immediate concern"><strong>Planning ahead</strong><span>No immediate issue. You want structure before changes.</span></button>
+                    <button class="urgency-chip" type="button" data-triage-type="urgency" data-value="Need help soon"><strong>Need help soon</strong><span>There are known gaps or a deadline coming up.</span></button>
+                    <button class="urgency-chip" type="button" data-triage-type="urgency" data-value="Urgent concern"><strong>Urgent concern</strong><span>Something may be wrong and next steps should be handled carefully.</span></button>
+                  </div>
+                </section>
+
+                <section class="triage-section" id="assessment-depth" aria-labelledby="depth-heading">
+                  <div class="question-head">
+                    <em>03</em>
+                    <div>
+                      <h3 id="depth-heading">Choose the review depth</h3>
+                      <p>These are starting points, not checkout packages. Final scope is confirmed before any paid work begins.</p>
+                    </div>
+                  </div>
+                  <div class="assessment-stack">
+                    <button class="assessment-option" type="button" data-triage-type="engagement" data-value="Free fit call first" data-budget="$0" data-first-fee="$0"><span><b>Free fit call first</b><span>Short fit conversation to confirm whether this service is the right next step. No technical review files are included.</span></span><strong class="assessment-price">$0</strong></button>
+                    <button class="assessment-option" type="button" data-triage-type="engagement" data-value="Security strategy call" data-budget="$250–$500" data-first-fee="$250–$500"><span><b>Security strategy call</b><span>Focused advisory call for one concern, decision support, or a second opinion before making changes.</span></span><strong class="assessment-price">$250–$500</strong></button>
+                    <button class="assessment-option" type="button" data-triage-type="engagement" data-value="Remote review snapshot" data-budget="$750–$1,500" data-first-fee="$750–$1,500"><span><b>Remote review snapshot</b><span>Light remote review of selected information, a short findings summary, and priority recommendations.</span></span><strong class="assessment-price">$750–$1,500</strong></button>
+                    <button class="assessment-option" type="button" data-triage-type="engagement" data-value="IT and security checkup" data-budget="$1,500–$4,500" data-first-fee="$1,500–$4,500"><span><b>IT &amp; security checkup</b><span>Structured review of users, access, cloud tools, devices, notes, and practical cleanup priorities.</span></span><strong class="assessment-price">$1,500–$4,500</strong></button>
+                    <button class="assessment-option" type="button" data-triage-type="engagement" data-value="Risk roadmap and implementation support" data-budget="$4,500–$20,000+" data-first-fee="$4,500–$20,000+"><span><b>Risk roadmap + implementation support</b><span>Deeper advisory and hands-on support for cleanup phases, access structure, cloud hardening, documentation, or vendor readiness.</span></span><strong class="assessment-price">$4,500–$20k+</strong></button>
+                  </div>
+                </section>
+
+                <section class="triage-section" aria-labelledby="support-heading">
+                  <div class="question-head">
+                    <em>04</em>
+                    <div>
+                      <h3 id="support-heading">Optional support needs</h3>
+                      <p>Select anything you already know you may need after the first review.</p>
+                    </div>
+                  </div>
+                  <div class="support-grid">
+                    <button class="support-card" type="button" data-triage-type="support" data-value="Written assessment report" data-budget="$750–$2,500"><b>Written assessment report</b><span>Formal notes, priorities, recommendations, and next steps.</span><small>$750–$2,500</small></button>
+                    <button class="support-card" type="button" data-triage-type="support" data-value="Account and access cleanup support" data-budget="$1,500–$6,500+"><b>Account/access cleanup</b><span>User roles, admin access, MFA, offboarding, and permission structure.</span><small>$1,500–$6,500+</small></button>
+                    <button class="support-card" type="button" data-triage-type="support" data-value="Cloud and email hardening" data-budget="$1,500–$7,500+"><b>Cloud/email hardening</b><span>Email, storage, sharing, backups, workspace settings, and admin controls.</span><small>$1,500–$7,500+</small></button>
+                    <button class="support-card" type="button" data-triage-type="support" data-value="Device, network, and camera planning" data-budget="$1,500–$7,500+"><b>Device/network planning</b><span>Workstations, Wi-Fi, cameras, routers, offices, and shared equipment.</span><small>$1,500–$7,500+</small></button>
+                    <button class="support-card" type="button" data-triage-type="support" data-value="Staff security awareness session" data-budget="$500–$2,500"><b>Staff security session</b><span>Plain-language training around passwords, phishing, device care, and reporting concerns.</span><small>$500–$2,500</small></button>
+                    <button class="support-card" type="button" data-triage-type="support" data-value="Monthly IT/security advisory" data-budget="$750–$3,500/mo"><b>Monthly advisory</b><span>Ongoing questions, vendor conversations, change planning, and improvement tracking.</span><small>$750–$3,500/mo</small></button>
+                  </div>
+                </section>
+              </div>
+
+              <aside class="triage-summary-panel" id="security-request-summary" aria-live="polite">
+                <h3>Request packet</h3>
+                <p>Your selections are compiled here before continuing to contact.</p>
+                <div class="packet-list">
+                  <div class="packet-row"><strong>Concern</strong><span id="summaryConcern">Not selected yet</span></div>
+                  <div class="packet-row"><strong>Urgency</strong><span id="summaryUrgency">Not selected yet</span></div>
+                  <div class="packet-row"><strong>Review depth</strong><span id="summaryEngagement">Not selected yet</span></div>
+                  <div class="packet-row"><strong>First-step fee</strong><span id="summaryFirstFee">$0 until scope is confirmed</span></div>
+                  <div class="packet-row"><strong>Optional support</strong><span id="summarySupport">None selected</span></div>
+                </div>
+                <p class="summary-warning">Do not send passwords, private keys, payment data, protected records, or sensitive evidence through the contact form.</p>
+                <div class="choice-actions"><a class="btn btn-primary is-disabled" id="compiledSecurityLink" href="#security-triage" aria-disabled="true">Complete triage selections first</a></div>
+              </aside>
+            </div>
           </article>
 
           <article class="info-card">
-            <h2>What we can do</h2>
+            <h2>What we can review</h2>
             <ul class="clean-list">
-              <li>IT environment review and technical cleanup planning</li>
-              <li>Security posture review and risk discussion</li>
-              <li>Device, account, and access management recommendations</li>
-              <li>Cloud and infrastructure planning</li>
-              <li>Network, camera, and connected device planning when needed</li>
-              <li>Documentation of issues, priorities, and next steps</li>
+              <li>Current admin accounts, users, access points, and offboarding practices</li>
+              <li>Cloud storage, email, shared folders, SaaS tools, and backup direction</li>
+              <li>Devices, workstations, connected equipment, cameras, Wi-Fi, and locations</li>
+              <li>Security questionnaire, vendor, insurance, or customer readiness needs</li>
+              <li>Practical next steps before implementation, automation, or platform work begins</li>
             </ul>
           </article>
 
           <article class="info-card">
             <h2>Best for</h2>
             <ul class="clean-list">
-              <li>Companies unsure if their systems are organized securely</li>
-              <li>Businesses adding cloud tools, devices, cameras, or infrastructure</li>
-              <li>Teams that need technical guidance before building or upgrading</li>
-              <li>Owners who need a trusted explanation of what to fix first</li>
+              <li>Owners who need a plain-language explanation of what to fix first</li>
+              <li>Businesses that are unsure whether their accounts and devices are organized safely</li>
+              <li>Teams adding users, cloud tools, cameras, locations, or new vendors</li>
+              <li>Companies preparing for security questions from customers, partners, or insurers</li>
+              <li>Businesses that need a roadmap before spending money on tools or cleanup</li>
             </ul>
           </article>
 
           <article class="info-card wide">
-            <h2>How the service works</h2>
-            <div class="process-grid">
-              <div class="process-step">
-                <strong>Step 1</strong>
-                <span>Review current tools, devices, accounts, and risks</span>
-              </div>
-              <div class="process-step">
-                <strong>Step 2</strong>
-                <span>Identify gaps, cleanup needs, and priorities</span>
-              </div>
-              <div class="process-step">
-                <strong>Step 3</strong>
-                <span>Recommend practical improvements and project phases</span>
-              </div>
-              <div class="process-step">
-                <strong>Step 4</strong>
-                <span>Support implementation or connect it to a service plan</span>
-              </div>
+            <h2>How the advisory process works</h2>
+            <p>This flow is intentionally different from a normal project quote. We confirm authorization and scope first, then decide whether you need a call, a review, a roadmap, or implementation support.</p>
+            <div class="security-flow">
+              <div class="security-flow-row"><strong>Authorize</strong><div><h3>Confirm ownership and boundaries</h3><p>We confirm what systems your business owns or is authorized to review before any technical work starts.</p></div></div>
+              <div class="security-flow-row"><strong>Collect</strong><div><h3>Request only safe information</h3><p>We ask for high-level details, screenshots, lists, or documentation only when appropriate. Sensitive credentials should never be sent through the form.</p></div></div>
+              <div class="security-flow-row"><strong>Review</strong><div><h3>Identify risk and cleanup priorities</h3><p>We look for access gaps, cloud/tool issues, device structure problems, documentation needs, and practical improvements.</p></div></div>
+              <div class="security-flow-row"><strong>Improve</strong><div><h3>Move into roadmap or support</h3><p>You can use the findings internally, request a written roadmap, or continue with implementation support and monthly advisory.</p></div></div>
             </div>
+          </article>
+
+          <article class="info-card wide">
+            <h2>What affects consulting price?</h2>
+            <p>Security consulting pricing depends on risk, environment size, access complexity, documentation needs, urgency, and whether you need advice only or hands-on cleanup.</p>
+            <div class="security-factor-list">
+              <div class="security-factor"><strong>Users and roles</strong><span>More users, admins, contractors, vendors, and departments increase review and cleanup time.</span></div>
+              <div class="security-factor"><strong>Tools and cloud accounts</strong><span>Email, storage, CRMs, admin panels, SaaS tools, and multiple tenants may require separate review.</span></div>
+              <div class="security-factor"><strong>Devices and locations</strong><span>Offices, field devices, cameras, routers, workstations, and shared equipment can expand scope.</span></div>
+              <div class="security-factor"><strong>Documentation depth</strong><span>A quick call is different from a written report, roadmap, policy kit, or vendor-ready documentation.</span></div>
+              <div class="security-factor"><strong>Urgency and risk</strong><span>Suspected compromise, deadline pressure, or high-risk changes may require a different response path.</span></div>
+              <div class="security-factor"><strong>Implementation work</strong><span>Recommendations are separate from hands-on cleanup unless implementation support is included in the proposal.</span></div>
+            </div>
+          </article>
+
+          <article class="info-card wide" id="security-boundaries">
+            <h2>Safety, authorization, and scope boundaries</h2>
+            <div class="boundary-grid">
+              <div class="boundary-card"><strong>Authorized systems only</strong><span>We only review systems your business owns or is authorized to manage.</span></div>
+              <div class="boundary-card"><strong>No sensitive form data</strong><span>Do not submit passwords, private keys, payment data, protected records, or sensitive evidence through the contact form.</span></div>
+              <div class="boundary-card"><strong>Risk reduction, not guarantees</strong><span>Security work can reduce risk and improve structure, but no provider can guarantee incidents will never happen.</span></div>
+              <div class="boundary-card"><strong>Not legal certification</strong><span>Consulting guidance does not replace legal advice, insurance advice, or formal compliance certification unless separately scoped.</span></div>
+            </div>
+            <p class="scope-note">New offices, new cloud tenants, additional device groups, extra compliance frameworks, emergency incident response, penetration testing, forensic work, or hands-on remediation outside the approved scope are handled as separate change requests or a new engagement.</p>
           </article>
 
           <article class="info-card wide">
             <h2>Possible deliverables</h2>
             <ul class="clean-list">
-              <li>Technical review notes</li>
-              <li>Security and infrastructure recommendations</li>
-              <li>Priority action list</li>
-              <li>Cloud/device planning guidance</li>
-              <li>Next-step project roadmap</li>
+              <li>Security strategy call notes and next-step recommendations</li>
+              <li>Remote review snapshot or written assessment report</li>
+              <li>Account, access, device, cloud, and permission cleanup roadmap</li>
+              <li>Security questionnaire or vendor readiness support notes</li>
+              <li>Prioritized risk list, implementation plan, or monthly advisory support path</li>
             </ul>
           </article>
         </div>
       </section>
 
-      <section class="service-cta" aria-label="Start IT &amp; Security Consulting">
+      <section class="service-cta" aria-label="Start IT and Security Consulting">
         <div class="container">
           <div class="service-cta-box">
             <div>
-              <h2>Ready to talk about IT &amp; Security Consulting?</h2>
-              <p>Submit a project request and include what you want built, fixed, connected, or improved.</p>
+              <h2>Need a safer first step?</h2>
+              <p>Start with the triage intake above. Your selections will be sent with your contact request so NxtGenGuard can confirm the right review depth, scope, and next step.</p>
+              <div class="cta-actions">
+                <a class="btn btn-primary" href="#security-triage">Start security triage</a>
+                <a class="btn btn-secondary" href="#security-request-summary">View request packet</a>
+              </div>
             </div>
-            <a class="btn btn-primary" href="contact.php?service=IT%20%26%20Security%20Consulting">Start a Project</a>
           </div>
         </div>
       </section>
@@ -617,10 +1379,10 @@
           <div class="footer-grid">
             <div class="footer-brand-block">
               <a class="footer-brand" href="index.html" aria-label="NxtGenGuard home">
-                <img src="nxtgenguard-site/assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
+                <img src="assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
                 <span>NxtGenGuard</span>
               </a>
-              <p>Enterprise websites, dashboards, systems, automation, cloud, and IT/security guidance built with clean structure and a guarded mindset.</p>
+              <p>Websites, platforms, dashboards, systems, automation, cloud, and IT/security guidance built with clean structure and a guarded mindset.</p>
               <div class="footer-badges" aria-label="NxtGenGuard highlights">
                 <span>Established 2017</span>
                 <span>Enterprise services</span>
@@ -642,7 +1404,7 @@
             <nav class="footer-col" aria-label="Footer service links">
               <h4>Services</h4>
               <div class="footer-links-list">
-                <a href="enterprise-websites.html">Enterprise Websites</a>
+                <a href="enterprise-websites.html">Websites &amp; Web Platforms</a>
                 <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
                 <a href="business-systems.html">Business Systems</a>
                 <a href="automation-cloud.html">Automation &amp; Cloud</a>
@@ -654,7 +1416,6 @@
 
           <div class="footer-bottom">
             <span><strong>© NxtGenGuard</strong> · Established 2017 · All rights reserved.</span>
-            <span class="footer-status">Ready for new projects</span>
           </div>
         </div>
       </div>
@@ -672,6 +1433,113 @@
       mobileNav.classList.remove('open');
       document.body.classList.remove('nav-open');
     }
+
+    const securityRequest = {
+      service: 'IT & Security Consulting',
+      concern: '',
+      urgency: '',
+      engagement: null,
+      support: []
+    };
+
+    const summaryConcern = document.getElementById('summaryConcern');
+    const summaryUrgency = document.getElementById('summaryUrgency');
+    const summaryEngagement = document.getElementById('summaryEngagement');
+    const summaryFirstFee = document.getElementById('summaryFirstFee');
+    const summarySupport = document.getElementById('summarySupport');
+    const compiledSecurityLink = document.getElementById('compiledSecurityLink');
+
+    function setSingleSelection(type, value) {
+      document.querySelectorAll(`[data-triage-type="${type}"]`).forEach((button) => {
+        button.classList.toggle('is-selected', button.dataset.value === value);
+      });
+    }
+
+    function supportLabel(item) {
+      return item.budget ? `${item.value} (${item.budget})` : item.value;
+    }
+
+    function updateSecuritySummary() {
+      summaryConcern.textContent = securityRequest.concern || 'Not selected yet';
+      summaryUrgency.textContent = securityRequest.urgency || 'Not selected yet';
+      summaryEngagement.textContent = securityRequest.engagement
+        ? `${securityRequest.engagement.value} (${securityRequest.engagement.budget})`
+        : 'Not selected yet';
+      summaryFirstFee.textContent = securityRequest.engagement
+        ? `${securityRequest.engagement.firstFee} estimated first-step fee before final scope is confirmed`
+        : '$0 until scope is confirmed';
+      summarySupport.textContent = securityRequest.support.length
+        ? securityRequest.support.map(supportLabel).join(', ')
+        : 'None selected';
+
+      const params = new URLSearchParams();
+      params.set('service', securityRequest.service);
+      if (securityRequest.concern) params.set('concern', securityRequest.concern);
+      if (securityRequest.urgency) params.set('urgency', securityRequest.urgency);
+      if (securityRequest.engagement) {
+        params.set('engagement', securityRequest.engagement.value);
+        params.set('budget', securityRequest.engagement.budget);
+        params.set('first_step_fee', securityRequest.engagement.firstFee);
+      }
+      if (securityRequest.support.length) {
+        params.set('support', securityRequest.support.map((item) => item.value).join(', '));
+        params.set('support_budgets', securityRequest.support.map((item) => `${item.value}: ${item.budget || 'TBD'}`).join('; '));
+      }
+
+      const ready = Boolean(securityRequest.concern && securityRequest.urgency && securityRequest.engagement);
+      compiledSecurityLink.href = ready ? `contact.php?${params.toString()}` : '#security-triage';
+      compiledSecurityLink.classList.toggle('is-disabled', !ready);
+      compiledSecurityLink.setAttribute('aria-disabled', ready ? 'false' : 'true');
+      compiledSecurityLink.textContent = ready ? 'Continue to contact with security packet' : 'Complete triage selections first';
+    }
+
+    document.querySelectorAll('[data-triage-type]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const type = button.dataset.triageType;
+        const value = button.dataset.value || '';
+
+        if (type === 'concern') {
+          securityRequest.concern = value;
+          setSingleSelection('concern', value);
+        }
+
+        if (type === 'urgency') {
+          securityRequest.urgency = value;
+          setSingleSelection('urgency', value);
+        }
+
+        if (type === 'engagement') {
+          securityRequest.engagement = {
+            value,
+            budget: button.dataset.budget || 'TBD',
+            firstFee: button.dataset.firstFee || button.dataset.budget || 'TBD'
+          };
+          setSingleSelection('engagement', value);
+        }
+
+        if (type === 'support') {
+          const exists = securityRequest.support.some((item) => item.value === value);
+          if (exists) {
+            securityRequest.support = securityRequest.support.filter((item) => item.value !== value);
+            button.classList.remove('is-selected');
+          } else {
+            securityRequest.support.push({ value, budget: button.dataset.budget || '' });
+            button.classList.add('is-selected');
+          }
+        }
+
+        updateSecuritySummary();
+      });
+    });
+
+    compiledSecurityLink.addEventListener('click', (event) => {
+      if (compiledSecurityLink.getAttribute('aria-disabled') === 'true') {
+        event.preventDefault();
+        document.getElementById('security-triage').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    updateSecuritySummary();
   </script>
 
 </body>
