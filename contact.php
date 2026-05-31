@@ -150,7 +150,7 @@ function gather_selections(array $selectionLabels): array
 
 function selected_service(array $selected): string
 {
-    return $selected['service'] ?? 'General NxtGenGuard Request';
+    return $selected['service'] ?? 'General request';
 }
 
 function is_general_request_name(string $service): bool
@@ -161,7 +161,7 @@ function is_general_request_name(string $service): bool
 
 function request_type_label(string $service): string
 {
-    return is_general_request_name($service) ? 'General NxtGenGuard request' : $service;
+    return is_general_request_name($service) ? 'General request' : $service;
 }
 
 function customer_request_phrase(string $service): string
@@ -296,7 +296,7 @@ function openai_assistant_reply(string $message, array $context): ?string
     }
 
     $model = env_value('OPENAI_MODEL', 'gpt-4.1-mini');
-    $system = "You are NxtgenBot, the NxtGenGuard contact-page assistant. Be concise, practical, and customer-facing. Help visitors organize service requests and answer basic safe troubleshooting questions about websites, forms, email/DNS, computers, cameras, Wi-Fi, data recovery triage, dashboards, and automation. Give only low-risk first steps. Ask at most two clarifying questions. Never ask for passwords, private keys, seed phrases, full payment details, or sensitive records. Do not promise exact pricing, guaranteed security outcomes, or guaranteed data recovery. If the request is urgent, recommend submitting the form and avoiding unsafe changes until reviewed.";
+    $system = "You are NxtgenBot, the NxtGenGuard contact-page assistant. Be concise, practical, customer-facing, and safety-first. Answer basic questions with low-risk first steps only, then guide the visitor to submit the contact form when hands-on work, hardware changes, security risk, data loss, cameras/LPR, cabling, routers, DNS, or professional support may be needed. For RAM upgrades, blue screens, routers, cameras, data recovery, and security incidents, explain what details to gather and when a professional should handle it. Never ask for passwords, private keys, seed phrases, full payment details, API keys, or sensitive records. Do not promise exact pricing, guaranteed security outcomes, or guaranteed data recovery. If the request is urgent, recommend submitting the form and avoiding unsafe changes until reviewed.";
     $contextText = json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
     $payload = [
@@ -346,36 +346,55 @@ function local_assistant_reply(string $message, array $context): string
     $slug = service_slug($service . ' ' . $message);
     $lower = strtolower($message);
 
-    if (preg_match('/(password\s*[:=]|private key|seed phrase|api[_\s-]?key\s*[:=]|secret\s*[:=]|credit card|ssn|social security)/i', $message)) {
+    $opening = "Here is a safe starting point. ";
+    $formClose = "\n\nIf you want NxtGenGuard to review it, add this to the form with your device model, timeline, and whether you prefer remote or on-site help.";
+
+    if (preg_match('/(password\s*[:=]|private key|seed phrase|api[_\s-]?key\s*[:=]|secret\s*[:=]|credit card|ssn|social security|full card|bank login)/i', $message)) {
         return "Please remove passwords, private keys, API keys, seed phrases, payment details, or sensitive records before submitting. NxtGenGuard can confirm a safer way to review private technical information after your request is received.";
     }
 
-    if (preg_match('/(computer|pc|workstation|laptop|desktop|slow|setup|install|upgrade|windows|mac|new computer)/i', $lower)) {
-        return "For computer or workstation help, include the device type, operating system, what you need done, whether this is setup/upgrade/troubleshooting, and if on-site help is needed. Safe first steps: restart once, note any error messages, avoid installing random cleanup tools, and back up important files if the computer still works.";
+    if (preg_match('/(blue screen|bsod|stop code|stopcode|crash loop|keeps crashing|windows crash|screen of death)/i', $lower)) {
+        return $opening . "For a blue screen, do not keep forcing restarts over and over. Take a photo of the exact stop code, note what changed recently, and restart once. If it happens again, disconnect new USB devices or recently added hardware and avoid random repair/cleanup tools. If the computer still starts, back up important files first.\n\nBlue screens can be caused by drivers, failing storage, RAM, overheating, updates, or hardware changes. If it repeats, if the system will not boot, or if important data is on the machine, it is better to have a professional review it. Please contact NxtGenGuard for further assistance.";
     }
 
-    if (preg_match('/(camera|cameras|lpr|license plate|nvr|dvr|doorbell|alarm|sensor|access control|gate)/i', $lower)) {
-        return "For camera, LPR, alarm, or access-control help, include the property type, indoor/outdoor locations, wired or wireless preference, recording needs, night visibility, internet/Wi-Fi condition, and whether hardware is already installed. For LPR, angle, lighting, distance, storage, and camera placement matter a lot.";
+    if (preg_match('/(install|add|upgrade|change|replace).{0,35}(ram|memory)|\b(ram|memory)\b.{0,35}(install|upgrade|add|replace|change)/i', $lower)) {
+        return $opening . "For a RAM upgrade, first confirm the exact computer model, current RAM amount, RAM type/speed, maximum supported memory, and whether there are open slots. Back up important files before hardware work. Power the computer off fully and unplug it before opening anything.\n\nRAM installation can be simple on some desktops, but laptops, all-in-ones, business workstations, warranty devices, and tight cases can be risky. Do not force the RAM into the slot, and avoid touching components without anti-static care. If you are unsure about compatibility or opening the device, it is better for a professional to handle it. NxtGenGuard can review the model and recommend the right upgrade path.";
     }
 
-    if (preg_match('/(wifi|wi-fi|wireless|router|mesh|network|access point|ethernet|internet|slow internet)/i', $lower)) {
-        return "For Wi-Fi or network help, include your internet provider, router/model if known, square footage, dead zones, number of users/devices, and whether you need home or business coverage. Safe first steps: power-cycle modem/router, test near the router, and avoid factory resetting equipment unless you have the login details.";
+    if (preg_match('/(router|modem|wifi|wi-fi|wireless|mesh|network|internet|access point|ethernet|dead zone|slow internet|connect my router|set up router|setup router)/i', $lower)) {
+        return $opening . "For router or Wi-Fi setup, gather your internet provider name, modem/router model, home or business size, dead zones, number of users/devices, and whether you need wired, mesh, or access-point coverage. Basic safe steps: connect the modem/internet line to the router WAN/Internet port, power-cycle the modem and router, test close to the router first, and set a strong Wi-Fi name/password.\n\nAvoid factory resetting equipment unless you have the admin login and ISP/account details. For business networks, cabling, access points, cameras, or coverage problems, professional setup is recommended so the network is secure and stable.";
     }
 
-    if (preg_match('/(email|gmail|google workspace|domain|dns|mx|spf|dmarc|dkim|resend|contact form|not receiving)/i', $lower)) {
-        return "For email, DNS, or contact-form issues, include the domain, what should happen, what is failing, and any recent DNS/hosting changes. Do not send passwords or API keys. Helpful details include whether the issue is sending, receiving, verification, spam, or form delivery.";
+    if (preg_match('/(camera|cameras|lpr|license plate|nvr|dvr|doorbell|alarm|sensor|access control|gate|surveillance|wireless camera|security camera)/i', $lower)) {
+        return $opening . "For camera, LPR, alarm, or access-control help, include the property type, indoor/outdoor locations, wired or wireless preference, recording needs, night visibility, internet/Wi-Fi condition, and whether hardware is already installed. For LPR, angle, lighting, distance, vehicle speed, and camera placement matter a lot.\n\nDo not climb, drill, run cable, or touch electrical wiring unless you are trained and authorized. Camera and LPR work is usually better handled professionally because placement, network stability, storage, and power affect the final result.";
     }
 
-    if (preg_match('/(website|wordpress|wix|squarespace|shopify|page|form|seo|builder|cms)/i', $lower)) {
-        return "For website help, include the platform, pages needed, current website link, form/contact needs, ecommerce needs, timeline, and whether you want training or ongoing support. If something is broken, describe what changed right before it stopped working.";
+    if (preg_match('/(new computer|computer setup|setup computer|set up computer|pc setup|workstation|laptop|desktop|transfer files|printer|monitor|dock|slow computer|computer slow|pc slow)/i', $lower)) {
+        return $opening . "For computer or workstation help, include the device type, operating system, what you need done, whether this is setup, upgrade, troubleshooting, file transfer, printer/monitor setup, or on-site help. Safe first steps: restart once, write down any error messages, avoid random cleanup tools, and back up important files if the computer still works.\n\nIf the computer is for business use, has sensitive files, has hardware issues, or must connect to cameras/network equipment, it is better to have it configured cleanly by a professional.";
     }
 
-    if (preg_match('/(data recovery|recover|deleted|drive|ssd|hard drive|clicking|not recognized|usb|memory card|files lost)/i', $lower)) {
-        return "For data recovery triage, include the device type, what happened, whether it powers on, whether there is clicking/noise, and what files matter most. Stop using the device if the data is important because continued use can reduce recovery chances.";
+    if (preg_match('/(data recovery|recover|deleted|drive|ssd|hard drive|clicking|not recognized|usb|memory card|files lost|lost files|corrupt|won.t mount|won’t mount)/i', $lower)) {
+        return $opening . "For data recovery triage, stop using the device if the files are important. Do not install recovery tools onto the same drive, do not format it, and do not open a hard drive. Include the device type, what happened, whether it powers on, whether there is clicking/noise, and what files matter most.\n\nData recovery is never guaranteed, and the safest next step depends on whether this is deletion, corruption, physical damage, or a failing drive. Please contact NxtGenGuard before trying more fixes.";
     }
 
-    if (preg_match('/(hacked|breach|compromised|ransomware|suspicious|locked out|phishing|malware|virus)/i', $lower) || $slug === 'security') {
-        return "For IT or security help, start with what feels wrong, which system/account/device is involved, who owns it, and how urgent it is. Do not send passwords or private records here. If something may be compromised, avoid risky changes and submit the form for a safe next step.";
+    if (preg_match('/(email|gmail|google workspace|domain|dns|mx|spf|dmarc|dkim|resend|contact form|not receiving|not sending|spam|verify domain|verification)/i', $lower)) {
+        return $opening . "For email, DNS, or contact-form issues, include the domain, what should happen, what is failing, and any recent DNS/hosting changes. Helpful details: is the issue sending, receiving, verification, spam placement, or form delivery?\n\nDo not send passwords, API keys, or private DNS account access through chat. DNS changes can affect website and email routing, so if you are unsure, have NxtGenGuard review the records before changing MX, SPF, DKIM, or DMARC.";
+    }
+
+    if (preg_match('/(hacked|breach|compromised|ransomware|suspicious|locked out|phishing|malware|virus|account takeover|unauthorized|unknown login)/i', $lower) || $slug === 'security') {
+        return $opening . "For a possible security issue, write down what happened, which account/device/system is involved, who owns it, and how urgent it is. Do not send passwords or private records here. If malware, ransomware, or account compromise is suspected, avoid logging into more accounts from that device and avoid making random changes that could erase evidence.\n\nSubmit the form and mark the timeline as urgent so NxtGenGuard can recommend the safest next step.";
+    }
+
+    if (preg_match('/(website|wordpress|wix|squarespace|shopify|page|form|seo|builder|cms|landing page|domain connection)/i', $lower)) {
+        return $opening . "For website help, include the platform, current website link, pages needed, form/contact needs, ecommerce needs, timeline, and whether you want training or ongoing support. If something broke, describe what changed right before it stopped working.\n\nNxtGenGuard can help choose a platform, clean up an existing site, build a custom page, or connect the website to forms, email, dashboards, and support workflows.";
+    }
+
+    if (preg_match('/(dashboard|portal|admin panel|kpi|report|chart|table|survey|form responses|client portal)/i', $lower)) {
+        return $opening . "For dashboard, admin panel, or portal help, include the KPIs, screens, users/roles, data sources, surveys/forms, reports, filters, and whether you need one centralized admin login. If you already have spreadsheets, forms, or survey links, list what each one tracks.\n\nNxtGenGuard can review whether you need a simple reporting view, a multi-dashboard admin hub, or a larger custom platform.";
+    }
+
+    if (preg_match('/(automation|automate|api|cloud|digitalocean|aws|azure|zapier|workflow|notification|sync|backup|deploy)/i', $lower)) {
+        return $opening . "For automation or cloud help, include the trigger, the tools involved, what should happen automatically, who receives alerts, where the data should go, and what should happen if the automation fails.\n\nFor account/API work, never paste API keys or passwords into chat. Submit the request first, and NxtGenGuard can confirm the safest way to review private connection details.";
     }
 
     return match ($slug) {
@@ -402,9 +421,11 @@ if (($_GET['ajax'] ?? '') === 'assistant') {
     json_response([
         'reply' => $reply,
         'suggestions' => [
-            'Add timeline and urgency',
-            'Add budget or selected option',
-            'Add current tools/systems',
+            'Router setup',
+            'Install RAM',
+            'Blue screen help',
+            'Camera/LPR',
+            'Email/DNS',
         ],
     ]);
 }
@@ -427,7 +448,7 @@ function lead_score(array $posted, array $selected): array
     $budget = strtolower(($selected['budget'] ?? '') . ' ' . ($posted['budget_context'] ?? '') . ' ' . ($selected['demo_fee'] ?? '') . ' ' . ($selected['review_fee'] ?? '') . ' ' . ($selected['first_step_fee'] ?? ''));
     $urgency = strtolower(($selected['urgency'] ?? '') . ' ' . $timeline);
 
-    if ($service !== 'General NxtGenGuard Request') $score += 18;
+    if (!is_general_request_name($service)) $score += 18;
     if (!empty($posted['phone'])) $score += 10;
     if (!empty($posted['business'])) $score += 8;
     if (strlen($message) > 140) $score += 12;
@@ -531,9 +552,10 @@ function build_email_bodies(string $requestId, array $posted, array $selected, a
     }
     $plain .= "\nMessage\n" . ($posted['message'] ?? '') . "\n";
 
-    $brandHeader = '<div style="text-align:center;padding:24px 28px 10px"><img src="' . e((string) $logoUrl) . '" alt="NxtGenGuard" width="86" style="display:inline-block;width:86px;max-width:86px;height:auto;border:0;outline:none;text-decoration:none" /></div>';
+    $brandHeader = '<div style="text-align:center;padding:30px 28px 16px;background:#f8fcff"><div style="display:inline-block;text-align:center;background:#ffffff;border:1px solid #dceefc;border-radius:24px;padding:16px 24px;box-shadow:0 12px 28px rgba(20,75,120,.10)"><img src="' . e((string) $logoUrl) . '" alt="NxtGenGuard" width="180" style="display:block;margin:0 auto;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;background:#ffffff" /><div style="margin-top:10px;color:#071827;font-size:15px;line-height:1.2;font-weight:900;letter-spacing:-.02em">NxtGenGuard</div></div></div>';
 
-    $html = '<div style="font-family:Inter,Arial,sans-serif;background:#f8fcff;padding:24px;color:#071827">';
+    $html = '<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent">New NxtGenGuard request received: ' . e($requestType) . ' · ' . e($requestId) . '</div>';
+    $html .= '<div style="font-family:Inter,Arial,sans-serif;background:#f8fcff;padding:24px;color:#071827">';
     $html .= '<div style="max-width:760px;margin:0 auto;background:#ffffff;border:1px solid #dceefc;border-radius:24px;overflow:hidden">';
     $html .= $brandHeader;
     $html .= '<div style="padding:16px 28px 24px;text-align:center;background:linear-gradient(135deg,#0e7fe4,#25b6ef,#14b8a6);color:#fff">';
@@ -560,7 +582,8 @@ function build_email_bodies(string $requestId, array $posted, array $selected, a
     $customerLine = customer_request_phrase($service);
     $confirmPlain = "Hi {$name},\n\nWe received {$customerLine}.\n\nRequest ID: {$requestId}\nRequest type: {$requestType}\n\nWe will review your details, selected options, timeline, and message before confirming the safest next step. No payment was collected on the contact page. If a paid demo, review, urgency fee, support visit, or project deposit is needed, we will confirm the scope first and send an invoice/payment link before any paid work starts.\n\nPlease do not reply with passwords, private keys, seed phrases, full payment details, or sensitive records. We will confirm a safer way to review private technical information if it is needed.\n\nNxtGenGuard";
 
-    $confirmHtml = '<div style="font-family:Inter,Arial,sans-serif;background:#f8fcff;padding:24px;color:#071827">';
+    $confirmHtml = '<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent">NxtGenGuard received your request. No payment was collected.</div>';
+    $confirmHtml .= '<div style="font-family:Inter,Arial,sans-serif;background:#f8fcff;padding:24px;color:#071827">';
     $confirmHtml .= '<div style="max-width:680px;margin:0 auto;background:#fff;border:1px solid #dceefc;border-radius:24px;overflow:hidden">';
     $confirmHtml .= $brandHeader;
     $confirmHtml .= '<div style="padding:12px 28px 24px;text-align:center;background:linear-gradient(135deg,#0e7fe4,#25b6ef,#14b8a6);color:#fff"><h1 style="margin:0;font-size:26px;letter-spacing:-.04em">Request received</h1><p style="margin:8px 0 0;opacity:.95">' . e($requestId) . '</p></div>';
@@ -570,7 +593,7 @@ function build_email_bodies(string $requestId, array $posted, array $selected, a
     $confirmHtml .= '<p>We will review your details, selected options, timeline, and message before confirming the safest next step.</p>';
     $confirmHtml .= '<p>No payment was collected on the contact page. If a paid demo, review, urgency fee, support visit, or project deposit is needed, we will confirm the scope first and send an invoice/payment link before any paid work starts.</p>';
     $confirmHtml .= '<p style="padding:14px 16px;border-radius:16px;background:#f4fbff;border:1px solid #dceefc"><strong>Security reminder:</strong> Please do not send passwords, private keys, seed phrases, full payment details, or sensitive records by email.</p>';
-    $confirmHtml .= '<p>NxtGenGuard</p></div></div></div>';
+    $confirmHtml .= '<p>NxtGenGuard</p><p style="margin-top:18px;color:#6b7c8e;font-size:13px;line-height:1.55">Tip: If this message appeared in spam, mark it as not spam and add requests@send.nxtgenguard.com to your contacts so future NxtGenGuard updates are easier to find.</p></div></div></div>';
 
     return [
         'plain' => $plain,
@@ -742,7 +765,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['ajax'] ?? '') === '') {
 
         $customerSend = ['ok' => true, 'provider' => 'skipped'];
         if (env_bool('SEND_CUSTOMER_CONFIRMATION', true)) {
-            $customerSend = send_email($posted['email'], 'We received your NxtGenGuard request · ' . $requestId, $bodies['confirm_html'], $bodies['confirm_plain'], $to);
+            $customerSend = send_email($posted['email'], 'NxtGenGuard request received · ' . $requestId, $bodies['confirm_html'], $bodies['confirm_plain'], $to);
         }
 
         if ($internalSend['ok']) {
@@ -910,7 +933,7 @@ function form_value(string $key): string
     .assistant-head h3 { margin:0; font-size:1.25rem; letter-spacing:-.035em; }
     .assistant-head p { margin:7px 0 0; color:var(--muted); line-height:1.55; font-size:.92rem; }
     .chat-log { height:330px; overflow:auto; padding:18px; display:grid; gap:12px; align-content:start; }
-    .msg { max-width:92%; padding:12px 14px; border-radius:18px; line-height:1.55; font-size:.92rem; }
+    .msg { max-width:92%; padding:12px 14px; border-radius:18px; line-height:1.55; font-size:.92rem; white-space:pre-wrap; }
     .msg.bot { justify-self:start; background:#f1f9ff; border:1px solid rgba(22,137,232,.12); color:#1d3b53; border-bottom-left-radius:6px; }
     .msg.user { justify-self:end; background:linear-gradient(135deg,#0e7fe4,#14b8a6); color:#fff; border-bottom-right-radius:6px; }
     .chat-controls { padding:14px; border-top:1px solid rgba(18,72,116,.10); display:grid; gap:10px; }
@@ -1217,7 +1240,7 @@ function form_value(string $key): string
             <span class="bot-face" aria-hidden="true">🤖</span>
             <div>
               <h3>NxtgenBot</h3>
-              <p>Ask basic website, computer, camera, network, DNS, or request questions. For private details, use the form.</p>
+              <p>Ask basic computer, router, camera/LPR, website, DNS, or request questions. For hands-on work or private details, use the form.</p>
             </div>
           </div>
           <button class="bot-close" type="button" onclick="closeNxtgenBot()" aria-label="Close NxtgenBot">×</button>
@@ -1232,6 +1255,9 @@ function form_value(string $key): string
                 <button type="button" onclick="quickAsk('<?= e($q) ?>')"><?= e($q) ?></button>
               <?php endforeach; ?>
               <button type="button" onclick="quickAsk('Computer setup')">Computer setup</button>
+              <button type="button" onclick="quickAsk('Install more RAM')">Install RAM</button>
+              <button type="button" onclick="quickAsk('Computer has a blue screen')">Blue screen</button>
+              <button type="button" onclick="quickAsk('Connect my router')">Router setup</button>
               <button type="button" onclick="quickAsk('Camera or LPR help')">Camera/LPR</button>
               <button type="button" onclick="quickAsk('Email or DNS issue')">Email/DNS</button>
             </div>
@@ -1241,7 +1267,7 @@ function form_value(string $key): string
               <button class="btn btn-primary" type="button" onclick="addAssistantToForm()">Add notes to form</button>
             </div>
             <button class="btn btn-secondary" type="button" onclick="requestHumanFollowUp()">I want NxtGenGuard to contact me</button>
-            <p class="bot-disclaimer">NxtgenBot gives general guidance only. Do not send passwords, private keys, payment details, or sensitive records in chat.</p>
+            <p class="bot-disclaimer">NxtgenBot gives general guidance only. For hardware changes, electrical/cabling, data recovery, security incidents, or anything risky, contact a professional. Do not send passwords, private keys, payment details, or sensitive records in chat.</p>
           </div>
         </div>
       </section>
