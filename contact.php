@@ -1,14 +1,6 @@
 <?php
 /**
  * NxtGenGuard Contact + Intelligent Intake Page
- * ------------------------------------------------------------
- * Drop this file at the root of your PHP-enabled site as contact.php.
- * It reads URL selections from service pages, displays a polished intake
- * form, provides an optional AI-powered intake assistant, and sends both
- * the NxtGenGuard lead email and the customer confirmation email.
- *
- * Recommended email provider: Resend API, Postmark API, or SendGrid API.
- * Plain PHP mail() is not recommended for DigitalOcean hosting.
  */
 
 declare(strict_types=1);
@@ -61,37 +53,6 @@ function clean_text(mixed $value, int $maxLength = 1200, bool $preserveLines = f
 function e(mixed $value): string
 {
     return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-}
-
-function is_contact_page_url(string $url): bool
-{
-    $url = strtolower(trim($url));
-    if ($url === '') {
-        return false;
-    }
-
-    $path = strtolower((string) (parse_url($url, PHP_URL_PATH) ?: ''));
-    return str_contains($path, 'contact.php') || str_contains($url, 'contact.php?') || str_ends_with($url, 'contact.php');
-}
-
-function displayable_selections(array $selected): array
-{
-    // Keep the visible request packet clean. Source/ref/UTM fields are useful
-    // internally, but they should not replace customer-facing service choices.
-    $hiddenFromPacket = ['source_page', 'ref', 'utm_source', 'utm_medium', 'utm_campaign'];
-    $clean = [];
-
-    foreach ($selected as $key => $value) {
-        if (in_array((string) $key, $hiddenFromPacket, true)) {
-            continue;
-        }
-        if (!is_string($value) || trim($value) === '') {
-            continue;
-        }
-        $clean[$key] = $value;
-    }
-
-    return $clean;
 }
 
 function json_response(array $payload, int $status = 200): void
@@ -177,46 +138,12 @@ function gather_selections(array $selectionLabels): array
     $selected = [];
     foreach ($selectionLabels as $key => $label) {
         $value = incoming_selection_value($key);
-        if ($value === '') {
-            continue;
-        }
-
-        // Never allow the contact page itself to become the visible/request
-        // source. This prevents contact.php?sent=1 or contact.php?... from
-        // replacing the real service selections after a successful submit.
-        if ($key === 'source_page' && is_contact_page_url($value)) {
-            continue;
-        }
-
-        $selected[$key] = $value;
-    }
-
-    // If a POST arrives from contact.php with query-string selections, carry
-    // those selections forward even if the form action removed the query.
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_REFERER'])) {
-        $referer = clean_text($_SERVER['HTTP_REFERER'], 1600);
-        $query = (string) (parse_url($referer, PHP_URL_QUERY) ?: '');
-        if ($query !== '') {
-            $refererParams = [];
-            parse_str($query, $refererParams);
-            foreach ($selectionLabels as $key => $label) {
-                if (!empty($selected[$key]) || empty($refererParams[$key])) {
-                    continue;
-                }
-                $value = clean_text($refererParams[$key], 900, false);
-                if ($value !== '' && !($key === 'source_page' && is_contact_page_url($value))) {
-                    $selected[$key] = $value;
-                }
-            }
+        if ($value !== '') {
+            $selected[$key] = $value;
         }
     }
-
-    // Add a source page only when the visitor came from another page.
-    if (empty($selected['source_page']) && ($_GET['sent'] ?? '') !== '1' && !empty($_SERVER['HTTP_REFERER'])) {
-        $referer = clean_text($_SERVER['HTTP_REFERER'], 900);
-        if (!is_contact_page_url($referer)) {
-            $selected['source_page'] = $referer;
-        }
+    if (empty($selected['source_page']) && !empty($_SERVER['HTTP_REFERER'])) {
+        $selected['source_page'] = clean_text($_SERVER['HTTP_REFERER'], 900);
     }
     return $selected;
 }
@@ -226,46 +153,49 @@ function selected_service(array $selected): string
     return $selected['service'] ?? 'General NxtGenGuard Request';
 }
 
-function visible_packet_selections(array $selected, array $selectionLabels, ?array $receipt = null): array
+function is_general_request_name(string $service): bool
 {
-    // Keep tracking/source metadata available for email and hidden fields, but
-    // do not show raw URLs or UTM values inside the customer-facing request card.
+    $normalized = strtolower(trim($service));
+    return $normalized === '' || $normalized === 'general nxtgenguard request' || $normalized === 'general request';
+}
+
+function request_type_label(string $service): string
+{
+    return is_general_request_name($service) ? 'General NxtGenGuard request' : $service;
+}
+
+function customer_request_phrase(string $service): string
+{
+    return is_general_request_name($service) ? 'your NxtGenGuard request' : 'your request for ' . $service;
+}
+
+function receipt_request_phrase(string $service): string
+{
+    return is_general_request_name($service) ? 'your NxtGenGuard request' : 'your ' . $service . ' request';
+}
+
+function internal_email_subject(string $service, string $name): string
+{
+    $name = $name !== '' ? $name : 'website visitor';
+    if (is_general_request_name($service)) {
+        return '[NxtGenGuard] New request from ' . $name;
+    }
+    return '[NxtGenGuard] ' . $service . ' request from ' . $name;
+}
+
+function public_selection_rows(array $selected, array $selectionLabels): array
+{
     $hiddenKeys = ['source_page', 'ref', 'utm_source', 'utm_medium', 'utm_campaign'];
-    $visible = [];
-
+    $rows = ['Service' => selected_service($selected)];
     foreach ($selected as $key => $value) {
-        if (in_array((string) $key, $hiddenKeys, true)) {
+        if ($key === 'service' || in_array($key, $hiddenKeys, true) || trim((string) $value) === '') {
             continue;
         }
-        if (!array_key_exists((string) $key, $selectionLabels)) {
-            continue;
-        }
-        $cleanValue = clean_text($value, 900, false);
-        if ($cleanValue !== '') {
-            $visible[(string) $key] = $cleanValue;
-        }
+        $rows[$selectionLabels[$key] ?? $key] = $value;
     }
-
-    // On the receipt screen, always keep the service visible even if the
-    // submitted hidden selected packet was reduced to tracking metadata.
-    if (empty($visible['service']) && is_array($receipt ?? null)) {
-        $receiptService = clean_text($receipt['service'] ?? '', 180, false);
-        if ($receiptService !== '') {
-            $visible = ['service' => $receiptService] + $visible;
-        }
-    }
-
-    return $visible;
+    return $rows;
 }
 
-function contact_form_action(): string
-{
-    $query = (string) ($_SERVER['QUERY_STRING'] ?? '');
-    if ($query === '' || ($_GET['sent'] ?? '') === '1') {
-        return 'contact.php';
-    }
-    return 'contact.php?' . $query;
-}
 
 function service_slug(string $service): string
 {
@@ -366,7 +296,7 @@ function openai_assistant_reply(string $message, array $context): ?string
     }
 
     $model = env_value('OPENAI_MODEL', 'gpt-4.1-mini');
-    $system = "You are the NxtGenGuard intake assistant on the contact page. Be concise, professional, and customer-facing. Your job is to help the visitor explain their request clearly before submitting the form. Ask at most two questions. Never ask for passwords, private keys, seed phrases, full payment details, or sensitive records. Do not promise exact pricing or guaranteed security/data recovery results. If the request is urgent, advise submitting the form and avoiding unsafe actions.";
+    $system = "You are NxtgenBot, the NxtGenGuard contact-page assistant. Be concise, practical, and customer-facing. Help visitors organize service requests and answer basic safe troubleshooting questions about websites, forms, email/DNS, computers, cameras, Wi-Fi, data recovery triage, dashboards, and automation. Give only low-risk first steps. Ask at most two clarifying questions. Never ask for passwords, private keys, seed phrases, full payment details, or sensitive records. Do not promise exact pricing, guaranteed security outcomes, or guaranteed data recovery. If the request is urgent, recommend submitting the form and avoiding unsafe changes until reviewed.";
     $contextText = json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
     $payload = [
@@ -416,16 +346,36 @@ function local_assistant_reply(string $message, array $context): string
     $slug = service_slug($service . ' ' . $message);
     $lower = strtolower($message);
 
-    if (preg_match('/(password\s*[:=]|private key|seed phrase|api[_\s-]?key\s*[:=]|secret\s*[:=])/i', $message)) {
-        return "Please remove any passwords, private keys, API keys, seed phrases, or sensitive records before submitting. We can confirm a safer way to review private technical information after your request is received.";
+    if (preg_match('/(password\s*[:=]|private key|seed phrase|api[_\s-]?key\s*[:=]|secret\s*[:=]|credit card|ssn|social security)/i', $message)) {
+        return "Please remove passwords, private keys, API keys, seed phrases, payment details, or sensitive records before submitting. NxtGenGuard can confirm a safer way to review private technical information after your request is received.";
     }
 
-    if ($slug === 'security' || preg_match('/(hacked|breach|compromised|ransomware|suspicious|locked out|phishing)/i', $lower)) {
-        return "For IT or security help, start with what feels wrong, which system/account/device is involved, who owns it, and how urgent it is. Do not send passwords or private records here. If something may be compromised, avoid making risky changes until the request is reviewed.";
+    if (preg_match('/(computer|pc|workstation|laptop|desktop|slow|setup|install|upgrade|windows|mac|new computer)/i', $lower)) {
+        return "For computer or workstation help, include the device type, operating system, what you need done, whether this is setup/upgrade/troubleshooting, and if on-site help is needed. Safe first steps: restart once, note any error messages, avoid installing random cleanup tools, and back up important files if the computer still works.";
     }
 
-    if (preg_match('/(data recovery|recover|deleted|drive|ssd|hard drive|clicking|not recognized|usb|memory card)/i', $lower)) {
-        return "For data recovery triage, include the device type, what happened, whether it still powers on, any clicking/noise, and what files matter most. Stop using the device if the data is important because continued use can reduce recovery chances.";
+    if (preg_match('/(camera|cameras|lpr|license plate|nvr|dvr|doorbell|alarm|sensor|access control|gate)/i', $lower)) {
+        return "For camera, LPR, alarm, or access-control help, include the property type, indoor/outdoor locations, wired or wireless preference, recording needs, night visibility, internet/Wi-Fi condition, and whether hardware is already installed. For LPR, angle, lighting, distance, storage, and camera placement matter a lot.";
+    }
+
+    if (preg_match('/(wifi|wi-fi|wireless|router|mesh|network|access point|ethernet|internet|slow internet)/i', $lower)) {
+        return "For Wi-Fi or network help, include your internet provider, router/model if known, square footage, dead zones, number of users/devices, and whether you need home or business coverage. Safe first steps: power-cycle modem/router, test near the router, and avoid factory resetting equipment unless you have the login details.";
+    }
+
+    if (preg_match('/(email|gmail|google workspace|domain|dns|mx|spf|dmarc|dkim|resend|contact form|not receiving)/i', $lower)) {
+        return "For email, DNS, or contact-form issues, include the domain, what should happen, what is failing, and any recent DNS/hosting changes. Do not send passwords or API keys. Helpful details include whether the issue is sending, receiving, verification, spam, or form delivery.";
+    }
+
+    if (preg_match('/(website|wordpress|wix|squarespace|shopify|page|form|seo|builder|cms)/i', $lower)) {
+        return "For website help, include the platform, pages needed, current website link, form/contact needs, ecommerce needs, timeline, and whether you want training or ongoing support. If something is broken, describe what changed right before it stopped working.";
+    }
+
+    if (preg_match('/(data recovery|recover|deleted|drive|ssd|hard drive|clicking|not recognized|usb|memory card|files lost)/i', $lower)) {
+        return "For data recovery triage, include the device type, what happened, whether it powers on, whether there is clicking/noise, and what files matter most. Stop using the device if the data is important because continued use can reduce recovery chances.";
+    }
+
+    if (preg_match('/(hacked|breach|compromised|ransomware|suspicious|locked out|phishing|malware|virus)/i', $lower) || $slug === 'security') {
+        return "For IT or security help, start with what feels wrong, which system/account/device is involved, who owns it, and how urgent it is. Do not send passwords or private records here. If something may be compromised, avoid risky changes and submit the form for a safe next step.";
     }
 
     return match ($slug) {
@@ -434,7 +384,7 @@ function local_assistant_reply(string $message, array $context): string
         'systems' => "For a business system, describe the current manual workflow, who submits requests, who manages them, what needs tracking, and what status or notifications should happen.",
         'automation' => "For automation/cloud work, list the tools involved, the trigger, the action you want automated, any cloud/API requirements, and what should happen when the automation fails.",
         'support' => "For maintenance/support, include whether it is remote or on-site, what device/system/network/camera/data issue is involved, urgency, and whether hardware or third-party accounts may be needed.",
-        default => "Tell us the goal, what exists today, what needs to change, your timeline, and any budget or paid first-step option already selected. We will use that to recommend the safest next step.",
+        default => "Tell NxtgenBot the goal, what exists today, what needs to change, your timeline, and any budget or paid first-step option already selected. NxtGenGuard will use that to recommend the safest next step.",
     };
 }
 
@@ -546,6 +496,9 @@ function build_email_bodies(string $requestId, array $posted, array $selected, a
     $score = lead_score($posted, $selected);
     $notes = risk_notes($posted, $selected);
     $service = selected_service($selected);
+    $requestType = request_type_label($service);
+    $siteUrl = rtrim(env_value('SITE_URL', 'https://nxtgenguard.com') ?? 'https://nxtgenguard.com', '/');
+    $logoUrl = env_value('EMAIL_LOGO_URL', $siteUrl . '/assets/images/logo/logo-dark.jpg');
 
     $customerRows = [
         'Request ID' => $requestId,
@@ -560,25 +513,32 @@ function build_email_bodies(string $requestId, array $posted, array $selected, a
         'Budget note' => $posted['budget_context'] ?? '',
     ];
 
-    $selectedRows = [];
-    foreach ($selected as $key => $value) {
-        $selectedRows[$selectionLabels[$key] ?? $key] = $value;
+    $selectedRows = public_selection_rows($selected, $selectionLabels);
+    $trackingRows = [];
+    foreach (['source_page', 'ref', 'utm_source', 'utm_medium', 'utm_campaign'] as $key) {
+        if (!empty($selected[$key])) {
+            $trackingRows[$selectionLabels[$key] ?? $key] = $selected[$key];
+        }
     }
 
-    $plain = "New NxtGenGuard request\n\n";
+    $plain = "New NxtGenGuard request\n";
+    $plain .= $requestType . " · " . $requestId . "\n\n";
     $plain .= text_rows($customerRows) . "\n\n";
-    $plain .= "Selected options\n" . text_rows($selectedRows) . "\n\n";
+    $plain .= "Selected request options\n" . text_rows($selectedRows) . "\n\n";
     $plain .= "Lead score: {$score['score']}/100 ({$score['label']})\n";
     if ($notes) {
         $plain .= "\nInternal notes\n- " . implode("\n- ", $notes) . "\n";
     }
     $plain .= "\nMessage\n" . ($posted['message'] ?? '') . "\n";
 
+    $brandHeader = '<div style="text-align:center;padding:24px 28px 10px"><img src="' . e((string) $logoUrl) . '" alt="NxtGenGuard" width="86" style="display:inline-block;width:86px;max-width:86px;height:auto;border:0;outline:none;text-decoration:none" /></div>';
+
     $html = '<div style="font-family:Inter,Arial,sans-serif;background:#f8fcff;padding:24px;color:#071827">';
-    $html .= '<div style="max-width:720px;margin:0 auto;background:#ffffff;border:1px solid #dceefc;border-radius:24px;overflow:hidden">';
-    $html .= '<div style="padding:26px 28px;background:linear-gradient(135deg,#0e7fe4,#25b6ef,#14b8a6);color:#fff">';
+    $html .= '<div style="max-width:760px;margin:0 auto;background:#ffffff;border:1px solid #dceefc;border-radius:24px;overflow:hidden">';
+    $html .= $brandHeader;
+    $html .= '<div style="padding:16px 28px 24px;text-align:center;background:linear-gradient(135deg,#0e7fe4,#25b6ef,#14b8a6);color:#fff">';
     $html .= '<h1 style="margin:0;font-size:26px;letter-spacing:-.04em">New NxtGenGuard request</h1>';
-    $html .= '<p style="margin:8px 0 0;opacity:.92">' . e($service) . ' · ' . e($requestId) . '</p>';
+    $html .= '<p style="margin:8px 0 0;opacity:.95">' . e($requestType) . ' · ' . e($requestId) . '</p>';
     $html .= '</div><div style="padding:26px 28px">';
     $html .= '<p style="margin:0 0 18px;color:#23445e"><strong>Lead score:</strong> ' . e((string) $score['score']) . '/100 · ' . e($score['label']) . '</p>';
     $html .= '<h2 style="margin:0 0 10px;font-size:18px">Customer</h2>' . html_table($customerRows);
@@ -590,17 +550,25 @@ function build_email_bodies(string $requestId, array $posted, array $selected, a
     }
     $html .= '<h2 style="margin:26px 0 10px;font-size:18px">Message</h2>';
     $html .= '<div style="white-space:pre-wrap;background:#f4fbff;border:1px solid #dceefc;border-radius:18px;padding:16px;line-height:1.6;color:#071827">' . e($posted['message'] ?? '') . '</div>';
+    if ($trackingRows) {
+        $html .= '<h2 style="margin:26px 0 10px;font-size:18px">Source / tracking</h2>' . html_table($trackingRows);
+    }
     $html .= '<p style="margin:22px 0 0;color:#5f7288;font-size:13px">Submitted from IP ' . e(request_ip()) . ' · ' . e($_SERVER['HTTP_USER_AGENT'] ?? '') . '</p>';
     $html .= '</div></div></div>';
 
-    $confirmPlain = "Hi " . ($posted['name'] ?? 'there') . ",\n\nWe received your NxtGenGuard request.\n\nRequest ID: {$requestId}\nService: {$service}\n\nWe will review your selected options, timeline, and message before confirming the safest next step. No payment was collected on the contact page. If a paid demo, review, urgency fee, or support item is needed, we will confirm the scope first and send an invoice/payment link before work starts.\n\nPlease do not reply with passwords, private keys, seed phrases, or sensitive records. We will confirm a safer way to review private technical information if it is needed.\n\nNxtGenGuard";
+    $name = $posted['name'] !== '' ? $posted['name'] : 'there';
+    $customerLine = customer_request_phrase($service);
+    $confirmPlain = "Hi {$name},\n\nWe received {$customerLine}.\n\nRequest ID: {$requestId}\nRequest type: {$requestType}\n\nWe will review your details, selected options, timeline, and message before confirming the safest next step. No payment was collected on the contact page. If a paid demo, review, urgency fee, support visit, or project deposit is needed, we will confirm the scope first and send an invoice/payment link before any paid work starts.\n\nPlease do not reply with passwords, private keys, seed phrases, full payment details, or sensitive records. We will confirm a safer way to review private technical information if it is needed.\n\nNxtGenGuard";
 
     $confirmHtml = '<div style="font-family:Inter,Arial,sans-serif;background:#f8fcff;padding:24px;color:#071827">';
     $confirmHtml .= '<div style="max-width:680px;margin:0 auto;background:#fff;border:1px solid #dceefc;border-radius:24px;overflow:hidden">';
-    $confirmHtml .= '<div style="padding:26px 28px;background:linear-gradient(135deg,#0e7fe4,#25b6ef,#14b8a6);color:#fff"><h1 style="margin:0;font-size:26px;letter-spacing:-.04em">Request received</h1><p style="margin:8px 0 0;opacity:.92">' . e($requestId) . '</p></div>';
+    $confirmHtml .= $brandHeader;
+    $confirmHtml .= '<div style="padding:12px 28px 24px;text-align:center;background:linear-gradient(135deg,#0e7fe4,#25b6ef,#14b8a6);color:#fff"><h1 style="margin:0;font-size:26px;letter-spacing:-.04em">Request received</h1><p style="margin:8px 0 0;opacity:.95">' . e($requestId) . '</p></div>';
     $confirmHtml .= '<div style="padding:26px 28px;line-height:1.7;color:#23445e">';
-    $confirmHtml .= '<p>Hi ' . e($posted['name'] ?? 'there') . ',</p><p>We received your NxtGenGuard request for <strong>' . e($service) . '</strong>. We will review your selected options, timeline, and message before confirming the safest next step.</p>';
-    $confirmHtml .= '<p>No payment was collected on the contact page. If a paid demo, review, urgency fee, or support item is needed, we will confirm the scope first and send an invoice/payment link before work starts.</p>';
+    $confirmHtml .= '<p>Hi ' . e($name) . ',</p><p>We received ' . e($customerLine) . '.</p>';
+    $confirmHtml .= '<div style="margin:18px 0;padding:14px 16px;border-radius:16px;background:#f4fbff;border:1px solid #dceefc;color:#193c58"><strong>Request ID:</strong> ' . e($requestId) . '<br><strong>Request type:</strong> ' . e($requestType) . '</div>';
+    $confirmHtml .= '<p>We will review your details, selected options, timeline, and message before confirming the safest next step.</p>';
+    $confirmHtml .= '<p>No payment was collected on the contact page. If a paid demo, review, urgency fee, support visit, or project deposit is needed, we will confirm the scope first and send an invoice/payment link before any paid work starts.</p>';
     $confirmHtml .= '<p style="padding:14px 16px;border-radius:16px;background:#f4fbff;border:1px solid #dceefc"><strong>Security reminder:</strong> Please do not send passwords, private keys, seed phrases, full payment details, or sensitive records by email.</p>';
     $confirmHtml .= '<p>NxtGenGuard</p></div></div></div>';
 
@@ -720,28 +688,6 @@ $errors = [];
 $success = false;
 $receipt = $_SESSION['last_receipt'] ?? null;
 
-// On the post-submit success screen, keep the request packet visible using
-// the selections saved during the successful submission.
-if (($_GET['sent'] ?? '') === '1' && is_array($receipt) && isset($receipt['selected']) && is_array($receipt['selected'])) {
-    $selected = [];
-    foreach ($receipt['selected'] as $key => $value) {
-        if (!is_string($value) || $value === '') {
-            continue;
-        }
-        if ($key === 'source_page' && is_contact_page_url($value)) {
-            continue;
-        }
-        $selected[$key] = $value;
-    }
-
-    if (empty($selected['service']) && !empty($receipt['service']) && is_string($receipt['service'])) {
-        $selected['service'] = clean_text($receipt['service'], 180);
-    }
-
-    $service = selected_service($selected);
-    $guide = service_guidance($service);
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['ajax'] ?? '') === '') {
     $selected = gather_selections($selectionLabels);
     $service = selected_service($selected);
@@ -789,7 +735,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['ajax'] ?? '') === '') {
         $requestId = generate_request_id();
         $bodies = build_email_bodies($requestId, $posted, $selected, $selectionLabels);
         $to = env_value('CONTACT_TO_EMAIL', 'hello@nxtgenguard.com');
-        $internalSubject = '[NxtGenGuard] ' . selected_service($selected) . ' request from ' . $posted['name'];
+        $internalSubject = internal_email_subject(selected_service($selected), $posted['name']);
         $replyTo = $posted['email'];
 
         $internalSend = send_email($to, $internalSubject, $bodies['html'], $bodies['plain'], $replyTo);
@@ -803,7 +749,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['ajax'] ?? '') === '') {
             $_SESSION['last_receipt'] = [
                 'id' => $requestId,
                 'service' => selected_service($selected),
-                'selected' => $selected,
                 'score' => $bodies['score']['label'],
                 'provider' => $internalSend['provider'],
                 'time' => gmdate('Y-m-d H:i:s') . ' UTC',
@@ -821,16 +766,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['ajax'] ?? '') === '') {
     }
 }
 
-$packetSelected = displayable_selections($selected);
-
 // Values for sticky form after validation errors.
 function form_value(string $key): string
 {
     return clean_text($_POST[$key] ?? '', $key === 'message' ? 5000 : 500, $key === 'message');
 }
-
-$displaySelected = visible_packet_selections($selected, $selectionLabels, is_array($receipt) ? $receipt : null);
-$formAction = contact_form_action();
 
 ?>
 <!DOCTYPE html>
@@ -1003,6 +943,47 @@ $formAction = contact_form_action();
     @media (max-width:1080px) { .hero-grid, .contact-layout { grid-template-columns:1fr; } .assistant-card { position:relative; top:auto; } .footer-grid { grid-template-columns:1fr 1fr; } }
     @media (max-width:860px) { .desktop-nav { display:none; } .menu-toggle { display:inline-flex; align-items:center; justify-content:center; } }
     @media (max-width:680px) { .container { width:min(var(--max), calc(100% - 22px)); } .contact-hero { padding:58px 0 30px; } .packet-card, .panel, .assistant-shell, .footer-shell { border-radius:24px; } .panel, .packet-card, .footer-shell { padding:22px 18px; } .form-grid { grid-template-columns:1fr; } .packet-list li { grid-template-columns:1fr; gap:4px; } .btn, .submit-row .btn, .hero-actions .btn { width:100%; } .footer-grid { grid-template-columns:1fr; gap:24px; } .footer-links-list a { width:100%; } .chat-log { height:300px; } }
+
+
+    /* Contact hero video + moved request packet */
+    .hero-video-wrap { position: relative; min-height: 420px; display: flex; align-items: center; justify-content: center; overflow: visible; isolation: isolate; }
+    .hero-video-wrap::before { content: ""; position: absolute; width: min(92%, 520px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 50% 50%, rgba(103, 205, 251, 0.22), transparent 48%), radial-gradient(circle at 58% 42%, rgba(20, 184, 166, 0.16), transparent 42%), radial-gradient(circle at 42% 72%, rgba(255, 184, 107, 0.10), transparent 38%); filter: blur(2px); z-index: -2; }
+    .hero-video-wrap::after { content: ""; position: absolute; inset: 3% 0 auto 0; margin: auto; width: min(92%, 540px); height: min(92%, 540px); background-image: linear-gradient(rgba(18, 72, 116, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 72, 116, 0.045) 1px, transparent 1px); background-size: 34px 34px; mask-image: radial-gradient(circle, black 0%, transparent 68%); opacity: .72; z-index: -3; }
+    .hero-cube-video { width: min(100%, 540px); height: auto; display: block; background: transparent; border: 0; outline: 0; box-shadow: none; object-fit: contain; filter: drop-shadow(0 32px 48px rgba(7, 24, 39, .22)) contrast(1.04) saturate(1.03); -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, #000 58%, rgba(0,0,0,.72) 70%, transparent 82%); mask-image: radial-gradient(ellipse at center, #000 0%, #000 58%, rgba(0,0,0,.72) 70%, transparent 82%); }
+    .hero-video-caption { position: absolute; right: 0; bottom: 8px; max-width: 280px; padding: 14px 16px; border-radius: 18px; border: 1px solid rgba(18, 72, 116, .11); background: rgba(255,255,255,.68); backdrop-filter: blur(14px); box-shadow: 0 16px 36px rgba(33,91,139,.10); color: #193c58; }
+    .hero-video-caption strong { display:block; color:#071827; font-weight:950; letter-spacing:-.02em; }
+    .hero-video-caption span { display:block; margin-top:4px; color:var(--muted); font-size:.88rem; line-height:1.45; }
+    .request-strip { margin: 24px 0 0; }
+    .request-strip .packet-card { padding: 24px; }
+    .request-strip .packet-top { margin-bottom: 12px; }
+    .request-strip .packet-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .request-strip .packet-list li { grid-template-columns: minmax(118px, .35fr) 1fr; }
+    .side-summary { position: sticky; top: calc(var(--nav-h) + 20px); display: grid; gap: 16px; }
+    .side-note { font-size: .94rem; }
+
+    /* Floating NxtgenBot */
+    .nxtgenbot-widget { position: fixed; right: 22px; bottom: 22px; z-index: 150; font-family: inherit; }
+    .bot-launcher { display: flex; align-items: center; gap: 12px; max-width: min(330px, calc(100vw - 44px)); padding: 12px 14px 12px 12px; border-radius: 999px; border: 1px solid rgba(18,72,116,.13); background: rgba(255,255,255,.92); color: #193c58; box-shadow: 0 22px 56px rgba(7,24,39,.18); cursor: pointer; font-family: inherit; text-align: left; }
+    .bot-face { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 1.45rem; background: linear-gradient(135deg,#0e7fe4,#25b6ef 56%,#14b8a6); box-shadow: 0 14px 34px rgba(22,137,232,.28); flex: 0 0 auto; }
+    .bot-launcher strong { display:block; color:#071827; font-size:.92rem; line-height:1.15; }
+    .bot-launcher small { display:block; color:var(--muted); font-weight:750; margin-top:3px; }
+    .bot-panel { position: absolute; right: 0; bottom: 76px; width: min(420px, calc(100vw - 32px)); max-height: min(720px, calc(100vh - 120px)); overflow: hidden; border-radius: 28px; border: 1px solid rgba(18,72,116,.13); background: rgba(255,255,255,.96); box-shadow: 0 30px 80px rgba(7,24,39,.22); backdrop-filter: blur(20px); transform: translateY(12px) scale(.96); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .22s ease, transform .22s ease, visibility .22s ease; }
+    .nxtgenbot-widget.open .bot-panel { opacity:1; visibility:visible; pointer-events:auto; transform: translateY(0) scale(1); }
+    .nxtgenbot-widget.open .bot-launcher { display:none; }
+    .bot-panel-head { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding: 18px 18px 14px; border-bottom: 1px solid rgba(18,72,116,.10); background: radial-gradient(circle at top right, rgba(103,205,251,.20), transparent 38%), rgba(248,252,255,.92); }
+    .bot-title { display:flex; gap:12px; align-items:center; }
+    .bot-title h3 { margin:0; font-size:1.05rem; letter-spacing:-.035em; }
+    .bot-title p { margin:4px 0 0; color:var(--muted); font-size:.86rem; line-height:1.45; }
+    .bot-close { width:38px; height:38px; border-radius:12px; border:1px solid rgba(18,72,116,.12); background:#fff; cursor:pointer; color:#193c58; font-size:1.2rem; }
+    .bot-body { padding: 14px; display:grid; gap:12px; }
+    .bot-body .chat-log { height: 280px; }
+    .bot-body .chat-controls { border-top:0; padding:0; }
+    .bot-actions { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    .bot-actions .btn { width:100%; min-height:46px; }
+    .bot-disclaimer { margin:0; color:#6b7c8e; font-size:.78rem; line-height:1.45; }
+    @media (max-width:1080px) { .hero-video-wrap { min-height: 360px; } .request-strip .packet-list { grid-template-columns:1fr; } .side-summary { position:relative; top:auto; } }
+    @media (max-width:680px) { .hero-video-wrap { min-height: 300px; } .hero-video-caption { left: 12px; right: 12px; bottom: 0; max-width:none; } .nxtgenbot-widget { right: 14px; bottom: 14px; } .bot-launcher { padding: 10px 12px 10px 10px; } .bot-launcher small { display:none; } .bot-panel { bottom: 0; right: -2px; width: calc(100vw - 24px); max-height: calc(100vh - 34px); } .bot-actions { grid-template-columns:1fr; } }
+
   </style>
 </head>
 <body>
@@ -1063,45 +1044,53 @@ $formAction = contact_form_action();
             <p>Tell us what you want built, fixed, connected, secured, recovered, or supported. Your selected service options are carried into this form so we can respond with the right next step.</p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#contact-form">Complete request</a>
-              <a class="btn btn-secondary" href="#intake-assistant">Use intake assistant</a>
+              <button class="btn btn-secondary" type="button" onclick="openNxtgenBot()">Ask NxtgenBot</button>
             </div>
           </div>
+          <div class="hero-video-wrap" aria-label="NxtGenGuard secure request preview video">
+            <video class="hero-cube-video" autoplay muted loop playsinline preload="metadata" poster="assets/videos/contact-cube-poster.png">
+              <source src="assets/videos/contact-cube-transparent.webm" type="video/webm" />
+              <source src="assets/videos/contact-cube-light.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div class="hero-video-caption">
+              <strong>Secure request intake</strong>
+              <span>Smart routing, no checkout, and a safer next step before paid work begins.</span>
+            </div>
+          </div>
+</div>
+      </section>
 
-          <aside class="packet-card" aria-label="Selected request packet">
+
+      <section class="request-strip" aria-label="Selected request packet">
+        <div class="container">
+          <aside class="packet-card">
             <div class="packet-top">
               <div>
                 <h2>Request packet</h2>
-                <p class="empty-packet" style="margin-top:8px"><?= (($_GET['sent'] ?? '') === '1') ? 'Your submitted service selections are summarized here.' : 'Selections from the service page appear here before you submit.' ?></p>
+                <p class="empty-packet">Your selected service options are summarized here before you submit.</p>
               </div>
               <span class="status-pill">No checkout</span>
             </div>
-            <?php if (!empty($displaySelected)): ?>
-              <ul class="packet-list" id="heroPacketList">
-                <?php foreach ($displaySelected as $key => $value): ?>
-                  <li><strong><?= e($selectionLabels[$key] ?? $key) ?></strong><span><?= e($value) ?></span></li>
-                <?php endforeach; ?>
-              </ul>
-            <?php else: ?>
-              <p class="empty-packet" id="heroPacketEmpty">No service options were selected yet. You can still submit a general request.</p>
-            <?php endif; ?>
-            <div class="chips" aria-label="Request types">
+            <ul class="packet-list" id="requestPacketList">
+              <?php foreach (public_selection_rows($selected, $selectionLabels) as $label => $value): ?>
+                <li><strong><?= e($label) ?></strong><span><?= e($value) ?></span></li>
+              <?php endforeach; ?>
+            </ul>
+            <div class="chips" aria-label="Supported request areas">
               <span class="chip">Websites</span><span class="chip">Dashboards</span><span class="chip">Automation</span><span class="chip">Security</span><span class="chip">Maintenance</span><span class="chip">Data recovery triage</span><span class="chip">Cameras/LPR</span><span class="chip">Workstations</span>
             </div>
           </aside>
         </div>
       </section>
 
-      <section class="contact-section" aria-label="Contact form and assistant">
+      <section class="contact-section" aria-label="Contact form and request summary">
         <div class="container contact-layout">
           <section class="panel" id="contact-form">
             <?php if (($_GET['sent'] ?? '') === '1' && is_array($receipt)): ?>
-              <?php
-                $receiptService = clean_text($receipt['service'] ?? 'NxtGenGuard request', 180);
-                $receiptDescription = preg_match('/\brequest$/i', $receiptService) ? $receiptService : $receiptService . ' request';
-              ?>
               <div class="notice success" role="status">
                 <strong>Request received.</strong><br />
-                Your request ID is <?= e($receipt['id'] ?? '') ?>. We received your <?= e($receiptDescription) ?> and will review the details before confirming next steps. No payment was collected on this page.
+                Your request ID is <?= e($receipt['id'] ?? '') ?>. We received <?= e(receipt_request_phrase((string) ($receipt['service'] ?? ''))) ?> and will review the details before confirming next steps. No payment was collected on this page.
               </div>
             <?php endif; ?>
 
@@ -1122,7 +1111,7 @@ $formAction = contact_form_action();
               <strong>No payment is collected on this page.</strong> If a paid demo, review, urgency fee, support visit, or first-step option is selected, we confirm the scope with you first and send an invoice/payment link before work begins.
             </div>
 
-            <form method="post" action="<?= e($formAction) ?>" novalidate>
+            <form method="post" action="contact.php" novalidate>
               <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>" />
               <input type="hidden" name="form_started" value="<?= e((string) time()) ?>" />
               <div class="hidden-hp" aria-hidden="true">
@@ -1197,28 +1186,7 @@ $formAction = contact_form_action();
               </div>
             </form>
           </section>
-
-          <aside class="assistant-card" id="intake-assistant" aria-label="NxtGenGuard intake assistant">
-            <div class="assistant-shell">
-              <div class="assistant-head">
-                <h3>NxtGenGuard Intake Assistant</h3>
-                <p>Use this helper to organize your request before you submit. It can help you describe your scope, urgency, selected options, and next-step needs.</p>
-              </div>
-              <div class="chat-log" id="chatLog" aria-live="polite">
-                <div class="msg bot">Hi — describe what you need help with, and I’ll help turn it into a clearer request for the form.</div>
-              </div>
-              <div class="chat-controls">
-                <div class="quick-replies">
-                  <?php foreach ($guide['quick'] as $q): ?>
-                    <button type="button" onclick="quickAsk('<?= e($q) ?>')"><?= e($q) ?></button>
-                  <?php endforeach; ?>
-                </div>
-                <textarea id="assistantInput" placeholder="Ask the assistant how to explain your request..."></textarea>
-                <button class="btn btn-secondary" type="button" onclick="sendAssistantMessage()">Ask assistant</button>
-                <button class="btn btn-primary" type="button" onclick="addAssistantToForm()">Add assistant notes to form</button>
-              </div>
-            </div>
-
+          <aside class="side-summary" aria-label="Live request summary">
             <div class="panel" style="border-radius:28px">
               <h2 style="font-size:1.35rem">Live request summary</h2>
               <p class="helper">This updates while you type so you can see what will be included in your request email.</p>
@@ -1229,10 +1197,56 @@ $formAction = contact_form_action();
                 <div><strong>Message strength</strong><span id="sumStrength">Add details to improve the request.</span></div>
               </div>
             </div>
+            <div class="notice side-note">
+              <strong>Need help wording your request?</strong><br />Use the NxtgenBot bubble in the corner for basic questions, safe troubleshooting guidance, and help turning your notes into a clearer request.
+            </div>
           </aside>
-        </div>
+</div>
       </section>
     </main>
+
+
+    <div class="nxtgenbot-widget" id="nxtgenBot" aria-live="polite">
+      <button class="bot-launcher" type="button" onclick="openNxtgenBot()" aria-controls="nxtgenBotPanel" aria-expanded="false">
+        <span class="bot-face" aria-hidden="true">🤖</span>
+        <span><strong>Have questions?</strong><small>Ask NxtgenBot</small></span>
+      </button>
+      <section class="bot-panel" id="nxtgenBotPanel" aria-label="NxtgenBot chat assistant" aria-hidden="true">
+        <div class="bot-panel-head">
+          <div class="bot-title">
+            <span class="bot-face" aria-hidden="true">🤖</span>
+            <div>
+              <h3>NxtgenBot</h3>
+              <p>Ask basic website, computer, camera, network, DNS, or request questions. For private details, use the form.</p>
+            </div>
+          </div>
+          <button class="bot-close" type="button" onclick="closeNxtgenBot()" aria-label="Close NxtgenBot">×</button>
+        </div>
+        <div class="bot-body">
+          <div class="chat-log" id="chatLog" aria-live="polite">
+            <div class="msg bot">Hi — I’m NxtgenBot. I can help with basic questions and help organize your request. What are you trying to fix, build, connect, or understand?</div>
+          </div>
+          <div class="chat-controls">
+            <div class="quick-replies">
+              <?php foreach ($guide['quick'] as $q): ?>
+                <button type="button" onclick="quickAsk('<?= e($q) ?>')"><?= e($q) ?></button>
+              <?php endforeach; ?>
+              <button type="button" onclick="quickAsk('Computer setup')">Computer setup</button>
+              <button type="button" onclick="quickAsk('Camera or LPR help')">Camera/LPR</button>
+              <button type="button" onclick="quickAsk('Email or DNS issue')">Email/DNS</button>
+            </div>
+            <textarea id="assistantInput" placeholder="Ask NxtgenBot a question..."></textarea>
+            <div class="bot-actions">
+              <button class="btn btn-secondary" type="button" onclick="sendAssistantMessage()">Ask NxtgenBot</button>
+              <button class="btn btn-primary" type="button" onclick="addAssistantToForm()">Add notes to form</button>
+            </div>
+            <button class="btn btn-secondary" type="button" onclick="requestHumanFollowUp()">I want NxtGenGuard to contact me</button>
+            <p class="bot-disclaimer">NxtgenBot gives general guidance only. Do not send passwords, private keys, payment details, or sensitive records in chat.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
 
     <footer class="site-footer" aria-label="NxtGenGuard footer">
       <div class="container">
@@ -1290,6 +1304,7 @@ $formAction = contact_form_action();
     const selected = <?= json_encode($selected, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;
     const selectionLabels = <?= json_encode($selectionLabels, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;
     let lastAssistantReply = '';
+    const botStorageKey = 'nxtgenbot_contact_session_v1';
 
     const messageField = document.getElementById('message');
     const timelineField = document.getElementById('timeline');
@@ -1299,6 +1314,38 @@ $formAction = contact_form_action();
     const sumStrength = document.getElementById('sumStrength');
     const assistantInput = document.getElementById('assistantInput');
     const chatLog = document.getElementById('chatLog');
+    const nxtgenBot = document.getElementById('nxtgenBot');
+    const botPanel = document.getElementById('nxtgenBotPanel');
+    const botLauncher = document.querySelector('.bot-launcher');
+
+    function openNxtgenBot() {
+      if (!nxtgenBot) return;
+      nxtgenBot.classList.add('open');
+      if (botPanel) botPanel.setAttribute('aria-hidden', 'false');
+      if (botLauncher) botLauncher.setAttribute('aria-expanded', 'true');
+      setTimeout(() => assistantInput && assistantInput.focus(), 80);
+    }
+    function closeNxtgenBot() {
+      if (!nxtgenBot) return;
+      nxtgenBot.classList.remove('open');
+      if (botPanel) botPanel.setAttribute('aria-hidden', 'true');
+      if (botLauncher) botLauncher.setAttribute('aria-expanded', 'false');
+    }
+    function saveBotSession() {
+      try {
+        const messages = Array.from(chatLog.querySelectorAll('.msg')).slice(-16).map(el => ({ kind: el.classList.contains('user') ? 'user' : 'bot', text: el.textContent || '' }));
+        localStorage.setItem(botStorageKey, JSON.stringify(messages));
+      } catch (e) {}
+    }
+    function restoreBotSession() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(botStorageKey) || '[]');
+        if (Array.isArray(stored) && stored.length > 1) {
+          chatLog.innerHTML = '';
+          stored.forEach(item => appendMessage(item.kind === 'user' ? 'user' : 'bot', item.text || '', false));
+        }
+      } catch (e) {}
+    }
 
     function updateSummary() {
       const msg = (messageField.value || '').trim();
@@ -1324,20 +1371,23 @@ $formAction = contact_form_action();
     });
     updateSummary();
 
-    function appendMessage(kind, text) {
+    function appendMessage(kind, text, save = true) {
       const div = document.createElement('div');
       div.className = 'msg ' + kind;
       div.textContent = text;
       chatLog.appendChild(div);
       chatLog.scrollTop = chatLog.scrollHeight;
+      if (save) saveBotSession();
     }
 
     function quickAsk(text) {
+      openNxtgenBot();
       assistantInput.value = text + ': ';
       assistantInput.focus();
     }
 
     async function sendAssistantMessage() {
+      openNxtgenBot();
       const message = assistantInput.value.trim();
       if (!message) return;
       appendMessage('user', message);
@@ -1358,9 +1408,11 @@ $formAction = contact_form_action();
         const data = await res.json();
         lastAssistantReply = data.reply || 'Add your goal, timeline, budget range, current setup, and desired next step to the form.';
         thinking.textContent = lastAssistantReply;
+        saveBotSession();
       } catch (err) {
         lastAssistantReply = 'Add your goal, current setup, timeline, budget or selected option, and what would make this request successful.';
         thinking.textContent = lastAssistantReply;
+        saveBotSession();
       }
     }
 
@@ -1372,8 +1424,20 @@ $formAction = contact_form_action();
       const addition = 'Assistant notes:\n' + lastAssistantReply;
       messageField.value = current ? current + '\n\n' + addition : addition;
       messageField.focus();
+      messageField.scrollIntoView({ behavior: 'smooth', block: 'center' });
       updateSummary();
     }
+
+    function requestHumanFollowUp() {
+      const current = messageField.value.trim();
+      const note = 'I would like NxtGenGuard to contact me about this request.';
+      messageField.value = current ? current + '\n\n' + note : note;
+      document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      updateSummary();
+      closeNxtgenBot();
+    }
+
+    restoreBotSession();
 
     assistantInput.addEventListener('keydown', function(event) {
       if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
