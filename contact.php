@@ -1048,9 +1048,9 @@ function form_value(string $key): string
             </div>
           </div>
           <div class="hero-video-wrap" aria-label="NxtGenGuard secure request preview video">
-            <video class="hero-cube-video" autoplay muted loop playsinline preload="metadata" poster="assets/videos/contact-cube-poster.png">
-              <source src="assets/videos/contact-cube-transparent.webm" type="video/webm" />
-              <source src="assets/videos/contact-cube-light.mp4" type="video/mp4" />
+            <video class="hero-cube-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/logo/contact-cube-poster.png">
+              <source src="assets/images/logo/contact-cube-transparent.webm" type="video/webm" />
+              <source src="assets/images/logo/contact-cube-light.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div class="hero-video-caption">
