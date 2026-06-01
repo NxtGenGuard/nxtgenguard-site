@@ -179,42 +179,64 @@
       position: relative;
       overflow: hidden;
       isolation: isolate;
-      padding: 94px 0 74px;
+      padding: 94px 0 68px;
       border-bottom: 1px solid rgba(18, 72, 116, 0.10);
+      background:
+        radial-gradient(circle at 84% 50%, rgba(32, 122, 226, 0.10), transparent 24%),
+        radial-gradient(circle at 72% 74%, rgba(20, 184, 166, 0.09), transparent 22%),
+        linear-gradient(180deg, rgba(250, 253, 255, 0.96), rgba(238, 249, 255, 0.88));
     }
     .services-hero::before {
       content: "";
       position: absolute;
       inset: 0;
       z-index: -2;
-      background:
-        linear-gradient(90deg, rgba(250, 253, 255, 0.99) 0%, rgba(250, 253, 255, 0.93) 36%, rgba(250, 253, 255, 0.66) 64%, rgba(250, 253, 255, 0.34) 100%),
-        linear-gradient(180deg, rgba(240, 249, 255, 0.62), rgba(255, 255, 255, 0.96)),
-        url("assets/images/logo/ServicesBG.png") center right / cover no-repeat;
-      filter: saturate(1.08) brightness(1.03);
+      background-image:
+        linear-gradient(rgba(18, 72, 116, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 72, 116, 0.055) 1px, transparent 1px);
+      background-size: 42px 42px, 42px 42px;
+      mask-image: linear-gradient(180deg, black 0%, transparent 92%);
+      opacity: 0.72;
+      pointer-events: none;
     }
     .services-hero::after {
       content: "";
       position: absolute;
       inset: 0;
       z-index: -1;
-      background-image:
-        linear-gradient(rgba(18, 72, 116, 0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(18, 72, 116, 0.055) 1px, transparent 1px),
-        radial-gradient(circle at 18% 80%, rgba(103, 205, 251, 0.22), transparent 30%),
-        radial-gradient(circle at 86% 18%, rgba(255, 184, 107, 0.13), transparent 24%);
-      background-size: 42px 42px, 42px 42px, auto, auto;
-      mask-image: linear-gradient(180deg, black 0%, transparent 90%);
-      opacity: 0.55;
+      background:
+        linear-gradient(90deg, rgba(250, 253, 255, 0.98) 0%, rgba(250, 253, 255, 0.94) 22%, rgba(250, 253, 255, 0.74) 42%, rgba(250, 253, 255, 0.30) 62%, rgba(250, 253, 255, 0.08) 100%),
+        linear-gradient(180deg, rgba(240, 249, 255, 0.30), rgba(255, 255, 255, 0.42));
       pointer-events: none;
     }
     .services-hero-grid {
+      position: relative;
       display: grid;
       grid-template-columns: 0.92fr 1.08fr;
-      gap: 34px;
+      gap: 26px;
       align-items: center;
+      min-height: 560px;
     }
-    .services-hero-copy { display: grid; gap: 22px; }
+    .services-hero-grid::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -9%;
+      width: min(96%, 1200px);
+      height: min(130%, 760px);
+      transform: translateY(-50%);
+      background: url("assets/images/logo/ServicesBG.png") center center / contain no-repeat;
+      opacity: 1;
+      z-index: 0;
+      pointer-events: none;
+      filter: saturate(1.08) brightness(1.02);
+    }
+    .services-hero-copy {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 22px;
+    }
     .services-hero h1 {
       margin: 0;
       max-width: 850px;
@@ -231,75 +253,25 @@
       line-height: 1.82;
     }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .hero-visual-scene {
-      position: relative;
-      min-height: 470px;
-      display: grid;
-      align-items: center;
-      justify-items: center;
-      isolation: isolate;
-      overflow: visible;
-    }
-    .hero-visual-scene::before {
-      content: "";
-      position: absolute;
-      width: min(96%, 640px);
-      aspect-ratio: 1.08;
-      border-radius: 42%;
-      background:
-        radial-gradient(circle at 56% 42%, rgba(103, 205, 251, 0.26), transparent 45%),
-        radial-gradient(circle at 34% 74%, rgba(20, 184, 166, 0.18), transparent 42%),
-        radial-gradient(circle at 74% 74%, rgba(255, 184, 107, 0.11), transparent 36%);
-      filter: blur(2px);
-      z-index: -3;
-    }
-    .hero-visual-scene::after {
-      content: "";
-      position: absolute;
-      inset: 4% 0 0 8%;
-      background-image:
-        linear-gradient(rgba(18, 72, 116, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(18, 72, 116, 0.045) 1px, transparent 1px);
-      background-size: 34px 34px;
-      mask-image: radial-gradient(circle at 54% 48%, black 0%, transparent 70%);
-      opacity: 0.6;
-      z-index: -2;
-      pointer-events: none;
-    }
-    .hero-visual-scene img {
-      width: min(100%, 650px);
-      height: auto;
-      max-height: 470px;
-      object-fit: contain;
-      filter: saturate(1.1) brightness(1.04) contrast(1.03) drop-shadow(0 34px 52px rgba(7, 24, 39, 0.18));
-      opacity: 0.96;
-      mix-blend-mode: multiply;
-      -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, #000 58%, rgba(0,0,0,.72) 72%, transparent 86%);
-      mask-image: radial-gradient(ellipse at center, #000 0%, #000 58%, rgba(0,0,0,.72) 72%, transparent 86%);
-    }
     .hero-summary {
-      border-radius: 28px;
-      border: 1px solid rgba(18, 72, 116, 0.12);
+      position: relative;
+      z-index: 2;
+      justify-self: end;
+      width: min(100%, 690px);
+      border-radius: 32px;
+      border: 1px solid rgba(18, 72, 116, 0.13);
       background:
         radial-gradient(circle at top right, rgba(103, 205, 251, 0.24), transparent 34%),
         radial-gradient(circle at bottom left, rgba(20, 184, 166, 0.13), transparent 28%),
-        rgba(255, 255, 255, 0.78);
-      box-shadow: var(--soft-shadow);
-      padding: 22px;
+        rgba(255, 255, 255, 0.80);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      padding: 26px;
       display: grid;
-      gap: 12px;
-      backdrop-filter: blur(16px);
+      gap: 14px;
     }
-    .hero-summary.overlay {
-      position: absolute;
-      left: 0;
-      right: auto;
-      bottom: 4px;
-      width: min(100%, 520px);
-      z-index: 2;
-    }
-    .hero-summary h2 { margin: 0; color: #071827; font-size: 1.38rem; letter-spacing: -0.045em; }
-    .hero-summary p { margin: 0; color: var(--muted); line-height: 1.68; }
+    .hero-summary h2 { margin: 0; color: #071827; font-size: 1.45rem; letter-spacing: -0.045em; }
+    .hero-summary p { margin: 0; color: var(--muted); line-height: 1.7; }
     .summary-list { display: grid; gap: 10px; margin: 8px 0 0; padding: 0; list-style: none; }
     .summary-list li {
       display: flex;
@@ -528,10 +500,9 @@
     .footer-bottom strong { color: #071827; }
 
     @media (max-width: 1080px) {
-      .services-hero-grid { grid-template-columns: 1fr; }
-      .hero-visual-scene { min-height: 390px; }
-      .hero-visual-scene img { max-height: 390px; }
-      .hero-summary.overlay { position: relative; left: auto; bottom: auto; width: 100%; margin-top: -22px; }
+      .services-hero-grid { grid-template-columns: 1fr; min-height: auto; }
+      .services-hero-grid::after { width: min(118%, 980px); height: 520px; right: -22%; top: 58%; opacity: 0.90; }
+      .hero-summary { justify-self: stretch; width: 100%; }
       .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .choose-help-box { align-items: flex-start; flex-direction: column; }
@@ -540,13 +511,13 @@
       .desktop-nav { display: none; }
       .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
       .services-hero { padding: 74px 0 56px; }
+      .services-hero-grid::after { width: min(130%, 900px); right: -36%; height: 420px; top: 60%; }
     }
     @media (max-width: 620px) {
       .container { width: min(var(--max), calc(100% - 22px)); }
       .cards-grid { grid-template-columns: 1fr; }
       .services-hero h1 { font-size: clamp(3rem, 17vw, 5.4rem); }
-      .hero-visual-scene { min-height: 320px; }
-      .hero-visual-scene img { max-height: 320px; mix-blend-mode: normal; opacity: 0.88; }
+      .services-hero-grid::after { width: 160%; right: -52%; top: 63%; height: 340px; opacity: 0.78; }
       .service-visual, .service-visual img { min-height: 210px; height: 210px; }
       .statement-card, .service-card, .choose-help-box, .footer-shell, .hero-summary { border-radius: 24px; }
       .statement-card, .choose-help-box, .footer-shell { padding-left: 20px; padding-right: 20px; }
@@ -618,18 +589,15 @@
               <a class="btn btn-secondary" href="contact.php?service=General%20NxtGenGuard%20Request&amp;path=Help%20Choosing%20A%20Service">Help me choose</a>
             </div>
           </div>
-          <div class="hero-visual-scene" aria-label="NxtGenGuard service scene">
-            <img src="assets/images/logo/ServicesBG.png" alt="NxtGenGuard services hero image" />
-            <aside class="hero-summary overlay" aria-label="Service overview">
-              <h2>What can we help with?</h2>
-              <p>Services are request-based. You can start with a website, dashboard, system, automation, IT/security review, or support need.</p>
-              <ul class="summary-list">
-                <li>Website paths, CMS cleanup, ecommerce, and custom web builds.</li>
-                <li>Dashboards, admin panels, client portals, and reporting interfaces.</li>
-                <li>IT support, workstations, networks, cameras/LPR, and data recovery triage.</li>
-              </ul>
-            </aside>
-          </div>
+          <aside class="hero-summary" aria-label="Service overview">
+            <h2>What can we help with?</h2>
+            <p>Services are request-based. You can start with a website, dashboard, system, automation, IT/security review, or support need.</p>
+            <ul class="summary-list">
+              <li>Website paths, CMS cleanup, ecommerce, and custom web builds.</li>
+              <li>Dashboards, admin panels, client portals, and reporting interfaces.</li>
+              <li>IT support, workstations, networks, cameras/LPR, and data recovery triage.</li>
+            </ul>
+          </aside>
         </div>
       </section>
 
