@@ -186,7 +186,8 @@ function internal_email_subject(string $service, string $name): string
 function public_selection_rows(array $selected, array $selectionLabels): array
 {
     $hiddenKeys = ['source_page', 'ref', 'utm_source', 'utm_medium', 'utm_campaign'];
-    $rows = ['Service' => selected_service($selected)];
+    $service = selected_service($selected);
+    $rows = ['Service' => is_general_request_name($service) ? 'General request' : $service];
     foreach ($selected as $key => $value) {
         if ($key === 'service' || in_array($key, $hiddenKeys, true) || trim((string) $value) === '') {
             continue;
@@ -683,7 +684,7 @@ function build_email_bodies(string $requestId, array $posted, array $selected, a
     $service = selected_service($selected);
     $requestType = request_type_label($service);
     $siteUrl = rtrim(env_value('SITE_URL', 'https://nxtgenguard.com') ?? 'https://nxtgenguard.com', '/');
-    $logoUrl = env_value('EMAIL_LOGO_URL', $siteUrl . '/assets/images/logo/logo-dark.jpg');
+    $logoUrl = env_value('EMAIL_LOGO_URL', $siteUrl . '/assets/images/logo/logo-email-v2.png');
 
     $customerRows = [
         'Request ID' => $requestId,
@@ -716,7 +717,7 @@ function build_email_bodies(string $requestId, array $posted, array $selected, a
     }
     $plain .= "\nMessage\n" . ($posted['message'] ?? '') . "\n";
 
-    $brandHeader = '<div style="text-align:center;padding:30px 28px 16px;background:#f8fcff"><div style="display:inline-block;text-align:center;background:#ffffff;border:1px solid #dceefc;border-radius:24px;padding:16px 24px;box-shadow:0 12px 28px rgba(20,75,120,.10)"><img src="' . e((string) $logoUrl) . '" alt="NxtGenGuard" width="180" style="display:block;margin:0 auto;width:180px;max-width:180px;height:auto;border:0;outline:none;text-decoration:none;background:#ffffff" /><div style="margin-top:10px;color:#071827;font-size:15px;line-height:1.2;font-weight:900;letter-spacing:-.02em">NxtGenGuard</div></div></div>';
+    $brandHeader = '<div style="text-align:center;padding:30px 28px 18px;background:#f8fcff"><div style="display:inline-block;text-align:center;background:#ffffff;border:1px solid #dceefc;border-radius:26px;padding:18px 28px;box-shadow:0 12px 28px rgba(20,75,120,.10)"><img src="' . e((string) $logoUrl) . '" alt="NxtGenGuard" width="220" style="display:block;margin:0 auto;width:220px;max-width:220px;height:auto;border:0;outline:none;text-decoration:none;background:#ffffff" /></div></div>';
 
     $html = '<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent">New NxtGenGuard request received: ' . e($requestType) . ' · ' . e($requestId) . '</div>';
     $html .= '<div style="font-family:Inter,Arial,sans-serif;background:#f8fcff;padding:24px;color:#071827">';
@@ -1163,10 +1164,14 @@ function form_value(string $key): string
     .hero-video-caption strong { display:block; color:#071827; font-weight:950; letter-spacing:-.02em; }
     .hero-video-caption span { display:block; margin-top:4px; color:var(--muted); font-size:.88rem; line-height:1.45; }
     .request-strip { margin: 24px 0 0; }
-    .request-strip .packet-card { padding: 24px; }
-    .request-strip .packet-top { margin-bottom: 12px; }
-    .request-strip .packet-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .request-strip .packet-list li { grid-template-columns: minmax(118px, .35fr) 1fr; }
+    .request-strip .container { display: flex; justify-content: center; }
+    .request-strip .packet-card { width: 100%; max-width: 1180px; padding: 24px 26px; text-align: center; }
+    .request-strip .packet-top { margin-bottom: 14px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; text-align: center; }
+    .request-strip .packet-top > div { text-align: center; }
+    .request-strip .packet-top h2, .request-strip .packet-top p { text-align: center; }
+    .request-strip .packet-list { display: grid; grid-template-columns: minmax(0, 900px); justify-content: center; gap: 12px; margin: 18px auto 0; padding: 0; }
+    .request-strip .packet-list li { display: grid; grid-template-columns: 180px 1fr; align-items: center; gap: 16px; text-align: left; max-width: 900px; margin: 0 auto; }
+    .request-strip .chips { justify-content: center; margin-top: 18px; }
     .side-summary { position: sticky; top: calc(var(--nav-h) + 20px); display: grid; gap: 16px; }
     .side-note { font-size: .94rem; }
 
@@ -1176,22 +1181,39 @@ function form_value(string $key): string
     .bot-face { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 1.45rem; background: linear-gradient(135deg,#0e7fe4,#25b6ef 56%,#14b8a6); box-shadow: 0 14px 34px rgba(22,137,232,.28); flex: 0 0 auto; }
     .bot-launcher strong { display:block; color:#071827; font-size:.92rem; line-height:1.15; }
     .bot-launcher small { display:block; color:var(--muted); font-weight:750; margin-top:3px; }
-    .bot-panel { position: absolute; right: 0; bottom: 76px; width: min(420px, calc(100vw - 32px)); max-height: min(720px, calc(100vh - 120px)); overflow: hidden; border-radius: 28px; border: 1px solid rgba(18,72,116,.13); background: rgba(255,255,255,.96); box-shadow: 0 30px 80px rgba(7,24,39,.22); backdrop-filter: blur(20px); transform: translateY(12px) scale(.96); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .22s ease, transform .22s ease, visibility .22s ease; }
+    .bot-panel { position: absolute; right: 0; bottom: 76px; width: min(420px, calc(100vw - 32px)); height: min(720px, calc(100vh - 120px)); display: flex; flex-direction: column; overflow: hidden; border-radius: 28px; border: 1px solid rgba(18,72,116,.13); background: rgba(255,255,255,.96); box-shadow: 0 30px 80px rgba(7,24,39,.22); backdrop-filter: blur(20px); transform: translateY(12px) scale(.96); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .22s ease, transform .22s ease, visibility .22s ease; }
     .nxtgenbot-widget.open .bot-panel { opacity:1; visibility:visible; pointer-events:auto; transform: translateY(0) scale(1); }
     .nxtgenbot-widget.open .bot-launcher { display:none; }
-    .bot-panel-head { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding: 18px 18px 14px; border-bottom: 1px solid rgba(18,72,116,.10); background: radial-gradient(circle at top right, rgba(103,205,251,.20), transparent 38%), rgba(248,252,255,.92); }
+    .bot-panel-head { flex: 0 0 auto; display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding: 18px 18px 14px; border-bottom: 1px solid rgba(18,72,116,.10); background: radial-gradient(circle at top right, rgba(103,205,251,.20), transparent 38%), rgba(248,252,255,.92); }
     .bot-title { display:flex; gap:12px; align-items:center; }
     .bot-title h3 { margin:0; font-size:1.05rem; letter-spacing:-.035em; }
     .bot-title p { margin:4px 0 0; color:var(--muted); font-size:.86rem; line-height:1.45; }
-    .bot-close { width:38px; height:38px; border-radius:12px; border:1px solid rgba(18,72,116,.12); background:#fff; cursor:pointer; color:#193c58; font-size:1.2rem; }
-    .bot-body { padding: 14px; display:grid; gap:12px; }
-    .bot-body .chat-log { height: 280px; }
-    .bot-body .chat-controls { border-top:0; padding:0; }
+    .bot-close { width:38px; height:38px; border-radius:12px; border:1px solid rgba(18,72,116,.12); background:#fff; cursor:pointer; color:#193c58; font-size:1.2rem; flex: 0 0 auto; }
+    .bot-body { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 12px; padding: 14px; }
+    .bot-body .chat-log { flex: 1 1 auto; min-height: 160px; height: auto; overflow: auto; }
+    .bot-body .chat-controls { flex: 0 0 auto; border-top:0; padding:0; display: grid; gap: 10px; }
     .bot-actions { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
     .bot-actions .btn { width:100%; min-height:46px; }
     .bot-disclaimer { margin:0; color:#6b7c8e; font-size:.78rem; line-height:1.45; }
     @media (max-width:1080px) { .hero-video-wrap { min-height: 360px; } .request-strip .packet-list { grid-template-columns:1fr; } .side-summary { position:relative; top:auto; } }
-    @media (max-width:680px) { .hero-video-wrap { min-height: 300px; } .hero-video-caption { left: 12px; right: 12px; bottom: 0; max-width:none; } .nxtgenbot-widget { right: 14px; bottom: 14px; } .bot-launcher { padding: 10px 12px 10px 10px; } .bot-launcher small { display:none; } .bot-panel { bottom: 0; right: -2px; width: calc(100vw - 24px); max-height: calc(100vh - 34px); } .bot-actions { grid-template-columns:1fr; } }
+    @media (max-width:680px) {
+      .hero-video-wrap { min-height: 300px; }
+      .hero-video-caption { left: 12px; right: 12px; bottom: 0; max-width:none; }
+      .request-strip .packet-card { padding: 20px 16px; }
+      .request-strip .packet-list { grid-template-columns: 1fr; }
+      .request-strip .packet-list li { grid-template-columns: 1fr; text-align: center; gap: 6px; }
+      .request-strip .packet-list strong, .request-strip .packet-list span { text-align: center; }
+      .nxtgenbot-widget { right: 12px; bottom: 12px; }
+      .bot-launcher { padding: 10px 12px 10px 10px; }
+      .bot-launcher small { display:none; }
+      .bot-panel { right: 0; bottom: 0; width: calc(100vw - 24px); height: calc(100vh - 24px); max-height: calc(100vh - 24px); border-radius: 24px; }
+      .bot-body { padding: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+      .bot-body .chat-log { min-height: 140px; }
+      .quick-replies { max-height: 180px; overflow: auto; padding-right: 4px; }
+      .bot-actions { grid-template-columns:1fr; }
+      .bot-actions .btn, .chat-controls > .btn { width: 100%; }
+      .chat-controls textarea { min-height: 92px; }
+    }
 
   </style>
 </head>
@@ -1257,9 +1279,9 @@ function form_value(string $key): string
             </div>
           </div>
           <div class="hero-video-wrap" aria-label="NxtGenGuard secure request preview video">
-            <video class="hero-cube-video" autoplay muted loop playsinline preload="metadata" poster="assets/videos/contact-cube-poster.png">
-              <source src="assets/videos/contact-cube-transparent.webm" type="video/webm" />
-              <source src="assets/videos/contact-cube-light.mp4" type="video/mp4" />
+            <video class="hero-cube-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/logo/contact-cube-poster.png">
+              <source src="assets/images/logo/contact-cube-transparent.webm" type="video/webm" />
+              <source src="assets/images/logo/contact-cube-light.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div class="hero-video-caption">
