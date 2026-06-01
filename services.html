@@ -4,22 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NxtGenGuard | Services</title>
-  <meta name="description" content="NxtGenGuard enterprise services for websites, platforms, dashboards, systems, automation, cloud, and IT security consulting." />
+  <meta name="description" content="NxtGenGuard services for websites, web platforms, dashboards, business systems, automation, cloud, IT/security consulting, maintenance, field support, data recovery triage, cameras, networks, and workstation help." />
   <style>
-
     :root {
-      --bg: #020612;
-      --bg-2: #07111f;
-      --panel: rgba(10, 16, 30, 0.78);
-      --panel-2: rgba(8, 14, 26, 0.92);
-      --line: rgba(255, 255, 255, 0.08);
-      --line-strong: rgba(99, 156, 255, 0.24);
-      --text: #f7f9ff;
-      --muted: #9aacc7;
-      --blue: #2b78ff;
-      --blue-2: #78b6ff;
+      --bg: #f8fcff;
+      --bg-2: #edf8ff;
+      --panel: rgba(255, 255, 255, 0.82);
+      --panel-2: rgba(255, 255, 255, 0.94);
+      --line: rgba(18, 72, 116, 0.13);
+      --line-strong: rgba(29, 142, 223, 0.28);
+      --text: #071827;
+      --muted: #5f7288;
+      --blue: #1689e8;
+      --blue-2: #67cdfb;
+      --teal: #14b8a6;
+      --accent: #ffb86b;
       --radius: 28px;
-      --shadow: 0 26px 80px rgba(0, 0, 0, 0.46);
+      --shadow: 0 24px 70px rgba(20, 75, 120, 0.16);
+      --soft-shadow: 0 16px 40px rgba(33, 91, 139, 0.11);
       --max: 1240px;
       --nav-h: 84px;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -32,9 +34,10 @@
       font-family: Inter, Arial, Helvetica, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 10% 15%, rgba(38, 94, 195, 0.16), transparent 24%),
-        radial-gradient(circle at 88% 12%, rgba(80, 150, 255, 0.12), transparent 24%),
-        linear-gradient(180deg, #01040d 0%, #050c18 44%, #030813 100%);
+        radial-gradient(circle at 8% 8%, rgba(103, 205, 251, 0.34), transparent 28%),
+        radial-gradient(circle at 92% 12%, rgba(255, 184, 107, 0.20), transparent 24%),
+        radial-gradient(circle at 48% 96%, rgba(20, 184, 166, 0.16), transparent 30%),
+        linear-gradient(180deg, #fbfdff 0%, #edf8ff 48%, #ffffff 100%);
       overflow-x: hidden;
     }
     body.nav-open { overflow: hidden; }
@@ -48,56 +51,35 @@
       justify-content: center;
       min-height: 54px;
       padding: 0 22px;
-      border-radius: 14px;
-      font-weight: 800;
+      border-radius: 15px;
+      font-weight: 850;
+      border: 1px solid transparent;
       transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease), background 0.28s var(--ease);
     }
     .btn:hover { transform: translateY(-2px); }
     .btn-primary {
       color: #fff;
-      background: linear-gradient(135deg, rgba(31, 69, 202, 0.96), rgba(46, 88, 224, 0.9));
-      border: 1px solid rgba(126, 165, 255, 0.38);
-      box-shadow: 0 18px 38px rgba(31, 69, 202, 0.28);
+      background: linear-gradient(135deg, #0e7fe4 0%, #25b6ef 58%, #14b8a6 100%);
+      border-color: rgba(17, 142, 216, 0.35);
+      box-shadow: 0 18px 38px rgba(22, 137, 232, 0.23);
     }
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.74);
+      border-color: rgba(18, 72, 116, 0.13);
+      color: #12324b;
+      box-shadow: 0 12px 30px rgba(33, 91, 139, 0.08);
     }
-    .btn-primary:hover, .btn-secondary:hover { border-color: rgba(186, 214, 255, 0.56); }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      width: fit-content;
-      padding: 10px 15px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.04);
-      color: #dce8ff;
-      font-size: 0.9rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      backdrop-filter: blur(14px);
-    }
-    .pill::before {
-      content: "";
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue-2), var(--blue));
-      box-shadow: 0 0 18px rgba(120, 182, 255, 0.9);
-    }
+    .btn-primary:hover { box-shadow: 0 22px 48px rgba(22, 137, 232, 0.28); }
+    .btn-secondary:hover { border-color: rgba(29, 142, 223, 0.34); background: #fff; }
 
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      background: rgba(3, 8, 18, 0.74);
-      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(18, 72, 116, 0.10);
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 12px 36px rgba(18, 72, 116, 0.06);
     }
     .nav-wrap {
       min-height: var(--nav-h);
@@ -106,36 +88,43 @@
       justify-content: space-between;
       gap: 22px;
     }
-    .brand { display: inline-flex; align-items: center; justify-content: center; }
-    .brand img {
-      width: 62px;
-      height: 62px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 22px rgba(116, 176, 255, 0.18));
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
-    .desktop-nav, .nav-actions { display: flex; align-items: center; gap: 28px; }
+    .brand img {
+      width: auto;
+      height: 62px;
+      max-width: 178px;
+      object-fit: contain;
+      border-radius: 16px;
+      filter: none;
+    }
+    .desktop-nav { display: flex; align-items: center; gap: 28px; }
     .desktop-nav a, .nav-drop-toggle {
-      color: #edf2ff;
-      font-weight: 700;
+      color: #193c58;
+      font-weight: 780;
       background: none;
       border: none;
       padding: 0;
       font-size: 0.97rem;
       cursor: pointer;
     }
-    .desktop-nav a:hover, .desktop-nav a.active, .nav-drop-toggle:hover, .nav-drop-toggle.active { color: #fff; }
+    .desktop-nav a:hover, .desktop-nav a.active, .nav-drop-toggle:hover, .nav-drop-toggle.active { color: #0a80df; }
     .nav-drop { position: relative; padding-bottom: 14px; margin-bottom: -14px; }
     .nav-drop::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
     .nav-drop-menu {
       position: absolute;
       top: calc(100% + 8px);
       left: 0;
-      min-width: 300px;
+      min-width: 310px;
       padding: 12px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(7, 12, 24, 0.98);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      border-radius: 20px;
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 24px 60px rgba(18, 72, 116, 0.18);
       opacity: 0;
       visibility: hidden;
       transform: translateY(10px);
@@ -150,24 +139,25 @@
       pointer-events: auto;
     }
     .nav-drop-menu a { display: block; padding: 12px 14px; border-radius: 12px; }
-    .nav-drop-menu a:hover { background: rgba(255, 255, 255, 0.05); }
+    .nav-drop-menu a:hover { background: rgba(22, 137, 232, 0.08); }
 
     .menu-toggle {
       display: none;
       width: 48px;
       height: 48px;
       border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.04);
-      color: #fff;
+      border: 1px solid rgba(18, 72, 116, 0.14);
+      background: rgba(255, 255, 255, 0.78);
+      color: #12324b;
       font-size: 1.15rem;
+      box-shadow: 0 10px 28px rgba(33, 91, 139, 0.08);
     }
     .mobile-nav { display: none; padding: 0 0 18px; }
     .mobile-nav.open { display: block; }
     .mobile-panel {
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: rgba(7, 13, 24, 0.96);
+      border: 1px solid rgba(18, 72, 116, 0.13);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.95);
       padding: 14px;
       box-shadow: var(--shadow);
     }
@@ -175,23 +165,221 @@
       display: block;
       padding: 14px 12px;
       border-radius: 12px;
-      font-weight: 700;
+      font-weight: 780;
       list-style: none;
       cursor: pointer;
+      color: #193c58;
     }
-    .mobile-panel a:hover, .mobile-panel summary:hover, .mobile-panel details[open] summary { background: rgba(255, 255, 255, 0.05); }
+    .mobile-panel a:hover, .mobile-panel summary:hover, .mobile-panel details[open] summary { background: rgba(22, 137, 232, 0.08); color: #0a80df; }
     .mobile-submenu { padding: 4px 0 0 10px; }
-    .mobile-submenu a { color: var(--muted); font-weight: 600; }
+    .mobile-submenu a { color: var(--muted); font-weight: 650; }
     .mobile-panel summary::-webkit-details-marker { display: none; }
 
-
-    /* Premium site footer */
-    .site-footer {
+    .services-hero {
       position: relative;
-      padding: 0 0 48px;
       overflow: hidden;
+      isolation: isolate;
+      padding: 94px 0 68px;
+      border-bottom: 1px solid rgba(18, 72, 116, 0.10);
+    }
+    .services-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(250, 253, 255, 0.98) 0%, rgba(250, 253, 255, 0.92) 46%, rgba(250, 253, 255, 0.68) 76%, rgba(250, 253, 255, 0.48) 100%),
+        linear-gradient(180deg, rgba(240, 249, 255, 0.68), rgba(255, 255, 255, 0.96)),
+        url("assets/images/logo/ServicesBG.png") center right / cover no-repeat;
+      filter: saturate(1.06);
+    }
+    .services-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(18, 72, 116, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 72, 116, 0.055) 1px, transparent 1px),
+        radial-gradient(circle at 18% 80%, rgba(103, 205, 251, 0.22), transparent 30%),
+        radial-gradient(circle at 86% 18%, rgba(255, 184, 107, 0.13), transparent 24%);
+      background-size: 42px 42px, 42px 42px, auto, auto;
+      mask-image: linear-gradient(180deg, black 0%, transparent 90%);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .services-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.72fr;
+      gap: 34px;
+      align-items: center;
+    }
+    .services-hero-copy { display: grid; gap: 22px; }
+    .services-hero h1 {
+      margin: 0;
+      max-width: 850px;
+      color: var(--text);
+      font-size: clamp(3.2rem, 9vw, 7.2rem);
+      line-height: 0.86;
+      letter-spacing: -0.08em;
+    }
+    .services-hero p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.6vw, 1.18rem);
+      line-height: 1.82;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-summary {
+      border-radius: 32px;
+      border: 1px solid rgba(18, 72, 116, 0.13);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.24), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(20, 184, 166, 0.13), transparent 28%),
+        rgba(255, 255, 255, 0.80);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      display: grid;
+      gap: 14px;
+    }
+    .hero-summary h2 { margin: 0; color: #071827; font-size: 1.45rem; letter-spacing: -0.045em; }
+    .hero-summary p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .summary-list { display: grid; gap: 10px; margin: 8px 0 0; padding: 0; list-style: none; }
+    .summary-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 13px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(18, 72, 116, 0.10);
+      background: rgba(255, 255, 255, 0.66);
+      color: #23445e;
+      line-height: 1.55;
+      font-weight: 760;
+    }
+    .summary-list li::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--blue-2), var(--teal));
+      flex: 0 0 auto;
+      margin-top: 0.48em;
+      box-shadow: 0 0 14px rgba(20, 184, 166, 0.42);
     }
 
+    .services-statement { padding: 56px 0 18px; }
+    .statement-card {
+      display: grid;
+      gap: 14px;
+      place-items: center;
+      text-align: center;
+      padding: 38px 34px;
+      border-radius: 32px;
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.20), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(255, 184, 107, 0.14), transparent 30%),
+        rgba(255, 255, 255, 0.82);
+      box-shadow: var(--soft-shadow);
+    }
+    .statement-card h2 {
+      margin: 0 auto;
+      max-width: 980px;
+      color: #071827;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+    .statement-card p { margin: 0; max-width: 800px; color: var(--muted); line-height: 1.75; }
+
+    .service-cards-section { padding: 28px 0 84px; }
+    .cards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .service-card {
+      scroll-margin-top: calc(var(--nav-h) + 24px);
+      position: relative;
+      min-height: 100%;
+      border-radius: 30px;
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.15), transparent 30%),
+        rgba(255, 255, 255, 0.82);
+      overflow: hidden;
+      box-shadow: var(--soft-shadow);
+      transition: transform 0.36s var(--ease), border-color 0.36s var(--ease), box-shadow 0.36s var(--ease), background 0.36s var(--ease);
+    }
+    .service-card:hover, .service-card:focus-visible {
+      transform: translateY(-8px);
+      border-color: var(--line-strong);
+      box-shadow: 0 24px 58px rgba(33, 91, 139, 0.16);
+      outline: none;
+      background: rgba(255, 255, 255, 0.94);
+    }
+    .service-visual {
+      min-height: 230px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(238, 249, 255, 0.94), rgba(255, 255, 255, 0.98));
+    }
+    .service-visual img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      object-position: center center;
+      filter: saturate(1.04) brightness(1.02) contrast(1.02);
+      transform: scale(1.01);
+      transition: transform 0.42s var(--ease), filter 0.42s var(--ease);
+    }
+    .service-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.0) 0%, rgba(248, 252, 255, 0.12) 50%, rgba(248, 252, 255, 0.72) 100%);
+      pointer-events: none;
+    }
+    .service-card:hover .service-visual img { transform: scale(1.06); filter: saturate(1.1) brightness(1.04); }
+    .service-card-body { padding: 28px; display: grid; gap: 16px; }
+    .service-card h3 { margin: 0; color: #071827; font-size: clamp(1.35rem, 2.3vw, 1.9rem); line-height: 1.02; letter-spacing: -0.052em; }
+    .service-card p { margin: 0; color: var(--muted); line-height: 1.76; font-size: 0.98rem; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+    .service-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      color: #193c58;
+      font-size: 0.78rem;
+      font-weight: 820;
+    }
+    .card-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; color: #0a80df; font-weight: 900; }
+    .card-link::after { content: "↗"; transition: transform 0.28s var(--ease); }
+    .service-card:hover .card-link::after, .service-card:focus-visible .card-link::after { transform: translate(3px, -3px); }
+
+    .choose-help { padding: 0 0 88px; }
+    .choose-help-box {
+      position: relative;
+      overflow: hidden;
+      padding: 42px 34px;
+      border-radius: 34px;
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      background:
+        radial-gradient(circle at top right, rgba(103, 205, 251, 0.26), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(255, 184, 107, 0.16), transparent 26%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(238, 249, 255, 0.94));
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .choose-help-box h2 { margin: 0 0 8px; color: #071827; font-size: clamp(1.9rem, 3.8vw, 3.1rem); line-height: 0.96; letter-spacing: -0.06em; }
+    .choose-help-box p { margin: 0; color: var(--muted); max-width: 720px; line-height: 1.76; }
+
+    .site-footer { position: relative; padding: 0 0 48px; overflow: hidden; }
     .site-footer::before {
       content: "";
       position: absolute;
@@ -200,47 +388,38 @@
       bottom: 0;
       height: 280px;
       background:
-        radial-gradient(circle at 18% 20%, rgba(43, 120, 255, 0.14), transparent 26%),
-        radial-gradient(circle at 84% 72%, rgba(120, 182, 255, 0.10), transparent 30%);
+        radial-gradient(circle at 18% 20%, rgba(103, 205, 251, 0.20), transparent 28%),
+        radial-gradient(circle at 84% 72%, rgba(255, 184, 107, 0.15), transparent 30%);
       pointer-events: none;
       opacity: 0.86;
     }
-
     .footer-shell {
       position: relative;
       overflow: hidden;
       border-radius: 34px;
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(18, 72, 116, 0.13);
       background:
-        radial-gradient(circle at top left, rgba(43, 120, 255, 0.14), transparent 28%),
-        radial-gradient(circle at top right, rgba(120, 182, 255, 0.10), transparent 24%),
-        linear-gradient(180deg, rgba(8, 14, 28, 0.94), rgba(5, 10, 20, 0.92));
-      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.32);
+        radial-gradient(circle at top left, rgba(103, 205, 251, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(255, 184, 107, 0.12), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 252, 255, 0.94));
+      box-shadow: 0 26px 70px rgba(20, 75, 120, 0.13);
       padding: 34px;
       isolation: isolate;
     }
-
     .footer-shell::before {
       content: "";
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+        linear-gradient(rgba(18, 72, 116, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 72, 116, 0.055) 1px, transparent 1px);
       background-size: 38px 38px;
-      opacity: 0.18;
+      opacity: 0.26;
       mask-image: radial-gradient(circle at top center, black 0%, transparent 76%);
       pointer-events: none;
       z-index: -1;
     }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.25fr 0.72fr 1fr 0.92fr;
-      gap: 26px;
-      align-items: start;
-    }
-
+    .footer-grid { display: grid; grid-template-columns: 1.35fr 0.75fr 1fr; gap: 26px; align-items: start; }
     .footer-brand {
       display: inline-flex;
       align-items: center;
@@ -248,245 +427,83 @@
       font-weight: 900;
       letter-spacing: -0.035em;
       font-size: 1.08rem;
-      color: #fff;
+      color: #071827;
     }
-
-    .footer-brand img {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 22px rgba(120, 182, 255, 0.18));
-    }
-
-    .footer-brand-block p {
-      margin: 16px 0 0;
-      max-width: 410px;
-      color: var(--muted);
-      line-height: 1.78;
-      font-size: 0.96rem;
-    }
-
-    .footer-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 18px;
-    }
-
-    .footer-badges span,
-    .footer-status {
+    .footer-brand img { width: auto; height: 48px; max-width: 150px; object-fit: contain; border-radius: 12px; filter: none; }
+    .footer-brand-block p { margin: 16px 0 0; max-width: 430px; color: var(--muted); line-height: 1.78; font-size: 0.96rem; }
+    .footer-badges { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .footer-badges span {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
       min-height: 36px;
       padding: 0 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.035);
-      color: #dbe7ff;
-      font-weight: 800;
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      background: rgba(255, 255, 255, 0.72);
+      color: #193c58;
+      font-weight: 820;
       font-size: 0.78rem;
     }
-
-    .footer-status::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #4dff9a;
-      box-shadow: 0 0 16px rgba(77, 255, 154, 0.7);
-    }
-
-    .footer-col h4,
-    .footer-cta-card h4 {
-      margin: 0 0 14px;
-      font-size: 0.78rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(220, 232, 255, 0.68);
-    }
-
-    .footer-links-list {
-      display: grid;
-      gap: 10px;
-    }
-
+    .footer-col h4 { margin: 0 0 14px; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(25, 60, 88, 0.62); }
+    .footer-links-list { display: grid; gap: 10px; }
     .footer-links-list a {
       width: fit-content;
-      color: #dbe6ff;
+      color: #193c58;
       opacity: 0.86;
-      font-weight: 750;
+      font-weight: 760;
       line-height: 1.44;
       transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease;
     }
-
-    .footer-links-list a:hover {
-      opacity: 1;
-      color: #fff;
-      transform: translateX(3px);
-    }
-
-    .footer-cta-card {
-      padding: 22px;
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background:
-        radial-gradient(circle at top right, rgba(120, 182, 255, 0.12), transparent 34%),
-        rgba(255, 255, 255, 0.035);
-      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
-    }
-
-    .footer-cta-card p {
-      margin: 0 0 18px;
-      color: var(--muted);
-      line-height: 1.68;
-      font-size: 0.94rem;
-    }
-
-    .footer-cta-card .btn {
-      width: 100%;
-      min-height: 50px;
-    }
-
+    .footer-links-list a:hover { opacity: 1; color: #0a80df; transform: translateX(3px); }
     .footer-bottom {
-      margin-top: 28px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      width: 100%;
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(18, 72, 116, 0.12);
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
-      color: rgba(212, 224, 246, 0.72);
+      color: rgba(25, 60, 88, 0.70);
       font-size: 0.92rem;
+      text-align: center;
     }
-
-    .footer-bottom strong {
-      color: #eef4ff;
-    }
+    .footer-bottom span { display: block; width: 100%; }
+    .footer-bottom strong { color: #071827; }
 
     @media (max-width: 1080px) {
+      .services-hero-grid { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .footer-cta-card { grid-column: span 2; }
+      .choose-help-box { align-items: flex-start; flex-direction: column; }
     }
-
-    @media (max-width: 620px) {
-      .site-footer { padding-bottom: 34px; }
-      .footer-shell { border-radius: 26px; padding: 24px 20px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-      .footer-cta-card { grid-column: auto; }
-      .footer-brand-block p { max-width: none; }
-      .footer-links-list a { width: 100%; }
-      .footer-bottom { align-items: flex-start; flex-direction: column; }
-    }
-
-
     @media (max-width: 860px) {
-      .desktop-nav, .nav-actions { display: none; }
+      .desktop-nav { display: none; }
       .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+      .services-hero { padding: 74px 0 56px; }
     }
     @media (max-width: 620px) {
       .container { width: min(var(--max), calc(100% - 22px)); }
+      .cards-grid { grid-template-columns: 1fr; }
+      .services-hero h1 { font-size: clamp(3rem, 17vw, 5.4rem); }
+      .service-visual, .service-visual img { min-height: 210px; height: 210px; }
+      .statement-card, .service-card, .choose-help-box, .footer-shell, .hero-summary { border-radius: 24px; }
+      .statement-card, .choose-help-box, .footer-shell { padding-left: 20px; padding-right: 20px; }
+      .choose-help-box .btn, .hero-actions .btn { width: 100%; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-brand-block p { max-width: none; }
+      .footer-links-list a { width: 100%; }
+      .footer-bottom { align-items: center; justify-content: center; text-align: center; }
     }
-
-
-    .services-hero {
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-      padding: 108px 0 66px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      background:
-        linear-gradient(90deg, rgba(2, 6, 17, 0.94) 0%, rgba(2, 6, 17, 0.72) 44%, rgba(2, 6, 17, 0.42) 100%),
-        linear-gradient(180deg, rgba(2, 6, 17, 0.18), rgba(2, 6, 17, 0.78)),
-        url("assets/images/logo/ServicesBG.png") center center / cover no-repeat;
-    }
-    .services-hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(180deg, black 0%, transparent 78%);
-      opacity: 0.24;
-      pointer-events: none;
-    }
-    .services-hero-inner { position: relative; z-index: 1; display: grid; gap: 22px; max-width: 890px; }
-    .services-hero h1 { margin: 0; font-size: clamp(3.2rem, 9vw, 7.2rem); line-height: 0.86; letter-spacing: -0.08em; text-shadow: 0 18px 48px rgba(0, 0, 0, 0.36); }
-    .services-hero p { margin: 0; max-width: 760px; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.18rem); line-height: 1.82; }
-    .services-statement { padding: 56px 0 18px; }
-    .statement-card {
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 38px 34px;
-      border-radius: 32px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: radial-gradient(circle at top right, rgba(120, 182, 255, 0.1), transparent 28%), rgba(7, 12, 24, 0.82);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
-    }
-    .statement-card h2 {
-      margin: 0 auto;
-      max-width: 980px;
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      line-height: 0.98;
-      letter-spacing: -0.06em;
-      animation: statementBounce 6s ease-in-out infinite;
-    }
-    @keyframes statementBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .statement-card h2 { animation: none; }
-    }
-    .service-cards-section { padding: 26px 0 92px; }
-    .cards-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-    .service-card {
-      scroll-margin-top: calc(var(--nav-h) + 24px);
-      position: relative;
-      min-height: 100%;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(6, 11, 21, 0.84);
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
-      transition: transform 0.36s var(--ease), border-color 0.36s var(--ease), box-shadow 0.36s var(--ease), background 0.36s var(--ease);
-    }
-    .service-card:hover, .service-card:focus-visible { transform: translateY(-8px); border-color: var(--line-strong); box-shadow: 0 24px 50px rgba(0, 0, 0, 0.32); outline: none; background: rgba(8, 14, 26, 0.94); }
-    .service-visual {
-      min-height: 240px;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(7, 18, 38, 0.94), rgba(4, 8, 18, 0.98));
-    }
-    .service-visual img { width: 100%; height: 240px; object-fit: cover; object-position: center center; filter: saturate(1.02) brightness(0.82); transform: scale(1.01); transition: transform 0.42s var(--ease), filter 0.42s var(--ease); }
-    .service-visual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(3, 8, 18, 0.06) 0%, rgba(3, 8, 18, 0.22) 48%, rgba(3, 8, 18, 0.68) 100%); pointer-events: none; }
-    .service-card:hover .service-visual img { transform: scale(1.06); filter: saturate(1.1) brightness(0.92); }
-    .service-card-body { padding: 28px; display: grid; gap: 16px; }
-    .service-card h3 { margin: 0; font-size: clamp(1.35rem, 2.3vw, 1.9rem); line-height: 1.02; letter-spacing: -0.052em; }
-    .service-card p { margin: 0; color: var(--muted); line-height: 1.76; font-size: 0.98rem; }
-    .service-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
-    .service-tag { display: inline-flex; align-items: center; min-height: 32px; padding: 0 11px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.03); color: #dbe6ff; font-size: 0.78rem; font-weight: 700; }
-    .card-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; color: #eef3ff; font-weight: 900; }
-    .card-link::after { content: "↗"; transition: transform 0.28s var(--ease); }
-    .service-card:hover .card-link::after, .service-card:focus-visible .card-link::after { transform: translate(3px, -3px); }
-    @media (max-width: 1080px) { .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .statement-card { grid-template-columns: 1fr; } }
-    @media (max-width: 860px) { .services-hero { padding: 82px 0 52px; } }
-    @media (max-width: 620px) { .cards-grid { grid-template-columns: 1fr; } .service-visual, .service-visual img { min-height: 210px; height: 210px; } .statement-card, .service-card { border-radius: 24px; } .statement-card { padding-left: 20px; padding-right: 20px; } }
-
   </style>
 </head>
 <body>
   <div class="site ready" id="siteRoot">
-
     <header>
       <div class="container nav-wrap">
         <a class="brand" href="index.html" aria-label="NxtGenGuard home">
-          <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
+          <img src="assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
         </a>
         <nav class="desktop-nav" aria-label="Primary">
           <a href="index.html">Home</a>
@@ -494,7 +511,7 @@
             <a class="nav-drop-toggle active" href="services.html">Services ▾</a>
             <div class="nav-drop-menu">
               <a href="services.html">All Services</a>
-              <a href="enterprise-websites.html">Enterprise Websites</a>
+              <a href="enterprise-websites.html">Websites &amp; Web Platforms</a>
               <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
               <a href="business-systems.html">Business Systems</a>
               <a href="automation-cloud.html">Automation &amp; Cloud</a>
@@ -506,9 +523,6 @@
           <a href="about.html">About</a>
           <a href="contact.php">Contact</a>
         </nav>
-        <div class="nav-actions">
-          <a class="btn btn-secondary" href="contact.php">Start a Project</a>
-        </div>
         <button class="menu-toggle" type="button" aria-label="Open menu" onclick="toggleMenu()">☰</button>
       </div>
       <div class="container mobile-nav" id="mobileNav">
@@ -518,7 +532,7 @@
             <summary>Services</summary>
             <div class="mobile-submenu">
               <a href="services.html" onclick="closeMenu()">All Services</a>
-              <a href="enterprise-websites.html" onclick="closeMenu()">Enterprise Websites</a>
+              <a href="enterprise-websites.html" onclick="closeMenu()">Websites &amp; Web Platforms</a>
               <a href="platforms-dashboards.html" onclick="closeMenu()">Platforms &amp; Dashboards</a>
               <a href="business-systems.html" onclick="closeMenu()">Business Systems</a>
               <a href="automation-cloud.html" onclick="closeMenu()">Automation &amp; Cloud</a>
@@ -535,60 +549,78 @@
 
     <main>
       <section class="services-hero" aria-labelledby="page-title">
-        <div class="container services-hero-inner">
-          <h1 id="page-title">Services</h1>
-          <p>Simple, focused services for companies that need a sharper digital presence, cleaner workflows, and stronger technical structure.</p>
+        <div class="container services-hero-grid">
+          <div class="services-hero-copy">
+            <h1 id="page-title">Services</h1>
+            <p>NxtGenGuard helps you build, connect, secure, recover, and support the digital and technical systems your business depends on. Choose the service that fits what you need today, or start a request and we will help route it.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#service-list">Browse services</a>
+              <a class="btn btn-secondary" href="contact.php?service=General%20NxtGenGuard%20Request&amp;path=Help%20Choosing%20A%20Service">Help me choose</a>
+            </div>
+          </div>
+          <aside class="hero-summary" aria-label="Service overview">
+            <h2>What can we help with?</h2>
+            <p>Services are request-based. You can start with a website, dashboard, system, automation, IT/security review, or support need.</p>
+            <ul class="summary-list">
+              <li>Website paths, CMS cleanup, ecommerce, and custom web builds.</li>
+              <li>Dashboards, admin panels, client portals, and reporting interfaces.</li>
+              <li>IT support, workstations, networks, cameras/LPR, and data recovery triage.</li>
+            </ul>
+          </aside>
         </div>
       </section>
 
       <section class="services-statement" aria-label="Services statement">
         <div class="container">
           <div class="statement-card">
-            <h2>Pick what you need built, cleaned up, or connected.</h2>
+            <h2>Pick what you need built, cleaned up, connected, secured, recovered, or supported.</h2>
+            <p>Every service page starts a request only. There is no checkout on the service pages; NxtGenGuard confirms scope, pricing, timeline, and next steps before paid work begins.</p>
           </div>
         </div>
       </section>
 
-      <section class="service-cards-section" aria-label="NxtGenGuard services">
+      <section class="service-cards-section" id="service-list" aria-label="NxtGenGuard services">
         <div class="container">
           <div class="cards-grid">
             <a class="service-card" id="websites" href="enterprise-websites.html">
               <div class="service-visual" aria-hidden="true">
-                <img src="assets/images/logo/EnterpriseWebsites.png" alt="Enterprise Websites service image" />
+                <img src="assets/images/logo/EnterpriseWebsites.png" alt="Websites and web platforms service image" />
               </div>
               <div class="service-card-body">
-                <h3>Enterprise Websites</h3>
-                <p>Clean, modern websites built to explain your company, services, and value clearly.</p>
+                <h3>Websites &amp; Web Platforms</h3>
+                <p>Platform-neutral website help for CMS or builder sites, WordPress-style setup and training, ecommerce, and custom cloud web builds.</p>
                 <div class="service-tags">
-                  <span class="service-tag">Landing pages</span>
-                  <span class="service-tag">Service pages</span>
-                  <span class="service-tag">SEO structure</span>
+                  <span class="service-tag">CMS / builders</span>
+                  <span class="service-tag">Ecommerce</span>
+                  <span class="service-tag">Custom web</span>
                 </div>
                 <span class="card-link">View service</span>
               </div>
             </a>
+
             <a class="service-card" id="platforms" href="platforms-dashboards.html">
               <div class="service-visual" aria-hidden="true">
-                <img src="assets/images/logo/Platforms%26Dashboards.png" alt="Platforms &amp; Dashboards service image" />
+                <img src="assets/images/logo/Platforms%26Dashboards.png" alt="Platforms and dashboards service image" />
               </div>
               <div class="service-card-body">
                 <h3>Platforms &amp; Dashboards</h3>
-                <p>Custom dashboards, portals, and internal tools that help teams see work, data, and progress.</p>
+                <p>Custom dashboards, admin panels, client portals, reporting interfaces, data views, charts, tables, forms, and user access flows.</p>
                 <div class="service-tags">
                   <span class="service-tag">Dashboards</span>
+                  <span class="service-tag">Admin panels</span>
                   <span class="service-tag">Portals</span>
-                  <span class="service-tag">Reporting</span>
                 </div>
                 <span class="card-link">View service</span>
               </div>
             </a>
+
             <a class="service-card" id="systems" href="business-systems.html">
               <div class="service-visual" aria-hidden="true">
-                <img src="assets/images/logo/BusinessSystems.png" alt="Business Systems service image" />
+                <img src="assets/images/logo/BusinessSystems.png" alt="Business systems service image" />
               </div>
               <div class="service-card-body">
                 <h3>Business Systems</h3>
-                <p>Connected systems that organize intake, operations, tracking, communication, and delivery.</p>
+                <p>Connected systems that organize intake, operations, tracking, communication, handoffs, records, and delivery workflows.</p>
                 <div class="service-tags">
                   <span class="service-tag">Workflows</span>
                   <span class="service-tag">Intake</span>
@@ -597,13 +629,14 @@
                 <span class="card-link">View service</span>
               </div>
             </a>
+
             <a class="service-card" id="automation" href="automation-cloud.html">
               <div class="service-visual" aria-hidden="true">
-                <img src="assets/images/logo/Automation%26Cloud.png" alt="Automation &amp; Cloud service image" />
+                <img src="assets/images/logo/Automation%26Cloud.png" alt="Automation and cloud service image" />
               </div>
               <div class="service-card-body">
                 <h3>Automation &amp; Cloud</h3>
-                <p>Automated tasks, cloud setup, integrations, and deployment support for cleaner business operations.</p>
+                <p>Automation planning, form-to-workflow flows, API connections, cloud setup, deployment support, alerts, storage, and backup structure.</p>
                 <div class="service-tags">
                   <span class="service-tag">Cloud setup</span>
                   <span class="service-tag">Automation</span>
@@ -612,32 +645,34 @@
                 <span class="card-link">View service</span>
               </div>
             </a>
+
             <a class="service-card" id="consulting" href="it-security-consulting.html">
               <div class="service-visual" aria-hidden="true">
-                <img src="assets/images/logo/IT%26SecurityConsulting.png" alt="IT &amp; Security Consulting service image" />
+                <img src="assets/images/logo/IT%26SecurityConsulting.png" alt="IT and security consulting service image" />
               </div>
               <div class="service-card-body">
                 <h3>IT &amp; Security Consulting</h3>
-                <p>Guidance for infrastructure, security posture, device management, cloud planning, and technical cleanup.</p>
+                <p>Safe first-step guidance for security posture, accounts, access, devices, cloud/email, vendor readiness, and urgent technical concerns.</p>
                 <div class="service-tags">
                   <span class="service-tag">Security</span>
-                  <span class="service-tag">Cloud</span>
+                  <span class="service-tag">Access review</span>
                   <span class="service-tag">IT planning</span>
                 </div>
                 <span class="card-link">View service</span>
               </div>
             </a>
+
             <a class="service-card" id="maintenance" href="maintenance-support.html">
               <div class="service-visual" aria-hidden="true">
-                <img src="assets/images/logo/Maintenance%26Support.png" alt="Maintenance &amp; Support service image" />
+                <img src="assets/images/logo/Maintenance%26Support.png" alt="Maintenance and support service image" />
               </div>
               <div class="service-card-body">
                 <h3>Maintenance &amp; Support</h3>
-                <p>Ongoing updates, improvements, troubleshooting, and technical support for the systems we build.</p>
+                <p>Support for websites, systems, automations, computers, workstations, Wi-Fi, networks, cameras/LPR, data recovery triage, and field setup.</p>
                 <div class="service-tags">
-                  <span class="service-tag">Updates</span>
-                  <span class="service-tag">Fixes</span>
-                  <span class="service-tag">Optimization</span>
+                  <span class="service-tag">Support</span>
+                  <span class="service-tag">Cameras/LPR</span>
+                  <span class="service-tag">Workstations</span>
                 </div>
                 <span class="card-link">View service</span>
               </div>
@@ -646,6 +681,17 @@
         </div>
       </section>
 
+      <section class="choose-help" aria-label="Help choosing a service">
+        <div class="container">
+          <div class="choose-help-box">
+            <div>
+              <h2>Not sure which service fits?</h2>
+              <p>Send the goal, timeline, budget note, and what is happening now. NxtGenGuard can route the request to the right service path before quoting or starting work.</p>
+            </div>
+            <a class="btn btn-primary" href="contact.php?service=General%20NxtGenGuard%20Request&amp;path=Help%20Choosing%20A%20Service">Start a request</a>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer" aria-label="NxtGenGuard footer">
@@ -654,13 +700,13 @@
           <div class="footer-grid">
             <div class="footer-brand-block">
               <a class="footer-brand" href="index.html" aria-label="NxtGenGuard home">
-                <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
+                <img src="assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
                 <span>NxtGenGuard</span>
               </a>
-              <p>Enterprise websites, dashboards, systems, automation, cloud, and IT/security guidance built with clean structure and a guarded mindset.</p>
+              <p>Websites, platforms, dashboards, systems, automation, cloud, field support, data recovery triage, and IT/security guidance built with clean structure and a guarded mindset.</p>
               <div class="footer-badges" aria-label="NxtGenGuard highlights">
                 <span>Established 2017</span>
-                <span>Enterprise services</span>
+                <span>Request-based service</span>
                 <span>Secure by design</span>
               </div>
             </div>
@@ -679,7 +725,7 @@
             <nav class="footer-col" aria-label="Footer service links">
               <h4>Services</h4>
               <div class="footer-links-list">
-                <a href="enterprise-websites.html">Enterprise Websites</a>
+                <a href="enterprise-websites.html">Websites &amp; Web Platforms</a>
                 <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
                 <a href="business-systems.html">Business Systems</a>
                 <a href="automation-cloud.html">Automation &amp; Cloud</a>
@@ -687,22 +733,14 @@
                 <a href="maintenance-support.html">Maintenance &amp; Support</a>
               </div>
             </nav>
-
-            <div class="footer-cta-card">
-              <h4>Project intake</h4>
-              <p>Tell us what you need built, cleaned up, connected, or supported. The request starts as a project ticket.</p>
-              <a class="btn btn-primary" href="contact.php">Start a Project</a>
-            </div>
           </div>
 
           <div class="footer-bottom">
             <span><strong>© NxtGenGuard</strong> · Established 2017 · All rights reserved.</span>
-            <span class="footer-status">Ready for new projects</span>
           </div>
         </div>
       </div>
     </footer>
-
   </div>
 
   <script>
@@ -716,6 +754,5 @@
       document.body.classList.remove('nav-open');
     }
   </script>
-
 </body>
 </html>
