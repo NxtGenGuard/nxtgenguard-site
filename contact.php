@@ -288,6 +288,170 @@ function api_post_json(string $url, array $headers, array $payload, int $timeout
     ];
 }
 
+
+function api_post_form(string $url, array $fields, int $timeoutSeconds = 12): array
+{
+    if (!function_exists('curl_init')) {
+        return ['ok' => false, 'status' => 0, 'body' => 'cURL is not enabled on this server.'];
+    }
+
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => http_build_query($fields),
+        CURLOPT_TIMEOUT => $timeoutSeconds,
+    ]);
+
+    $raw = curl_exec($ch);
+    $errno = curl_errno($ch);
+    $error = curl_error($ch);
+    $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($errno !== 0) {
+        return ['ok' => false, 'status' => $status, 'body' => $error ?: 'cURL request failed.'];
+    }
+
+    $decoded = json_decode((string) $raw, true);
+    return [
+        'ok' => $status >= 200 && $status < 300,
+        'status' => $status,
+        'body' => $decoded ?: (string) $raw,
+    ];
+}
+
+function turnstile_is_configured(): bool
+{
+    return (bool) env_value('TURNSTILE_SITE_KEY') && (bool) env_value('TURNSTILE_SECRET_KEY');
+}
+
+function verify_turnstile_token(): ?string
+{
+    if (!turnstile_is_configured()) {
+        return null;
+    }
+
+    $token = clean_text($_POST['cf-turnstile-response'] ?? '', 3000);
+    if ($token === '') {
+        return 'Please complete the verification check before submitting.';
+    }
+
+    $result = api_post_form('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+        'secret' => env_value('TURNSTILE_SECRET_KEY'),
+        'response' => $token,
+        'remoteip' => request_ip(),
+    ]);
+
+    if (!$result['ok'] || !is_array($result['body']) || empty($result['body']['success'])) {
+        return 'The verification check did not pass. Please refresh the page and try again.';
+    }
+
+    return null;
+}
+
+function spam_reasons(array $posted, array $selected): array
+{
+    $text = strtolower(
+        ($posted['name'] ?? '') . ' ' .
+        ($posted['business'] ?? '') . ' ' .
+        ($posted['email'] ?? '') . ' ' .
+        ($posted['phone'] ?? '') . ' ' .
+        ($posted['budget_context'] ?? '') . ' ' .
+        ($posted['message'] ?? '') . ' ' .
+        implode(' ', $selected)
+    );
+
+    $reasons = [];
+    $commercialPitch = [
+        'insurance quote',
+        'health insurance',
+        'life insurance',
+        'auto insurance',
+        'business insurance',
+        'workers comp',
+        'workers compensation',
+        'medicare',
+        'loan offer',
+        'business loan',
+        'merchant cash advance',
+        'seo services',
+        'backlinks',
+        'guest post',
+        'link insertion',
+        'casino',
+        'crypto investment',
+        'forex',
+        'telegram',
+        'whatsapp marketing',
+        'rank your website',
+        'generate leads',
+        'lead generation service',
+        'web traffic',
+        'increase traffic',
+        'cheap leads',
+        'guaranteed leads',
+        'bulk email',
+        'cold outreach',
+    ];
+
+    foreach ($commercialPitch as $phrase) {
+        if (str_contains($text, $phrase)) {
+            $reasons[] = 'commercial spam phrase: ' . $phrase;
+        }
+    }
+
+    $urlCount = preg_match_all('/https?:\/\//i', $text);
+    if ($urlCount >= 2) {
+        $reasons[] = 'too many links';
+    }
+
+    if (preg_match('/\b(insurance|loan|seo|backlink|casino|crypto|forex|medicare|marketing|traffic|leads)\b/i', $text)
+        && preg_match('/\b(offer|quote|cheap|guaranteed|promotion|marketing|leads|rank|traffic|agency|outreach)\b/i', $text)) {
+        $reasons[] = 'sales-pitch pattern';
+    }
+
+    if (preg_match('/[а-яА-Я]{8,}/u', $text) || preg_match('/[\p{Han}\p{Arabic}]{8,}/u', $text)) {
+        $reasons[] = 'unexpected language/script pattern';
+    }
+
+    return array_values(array_unique($reasons));
+}
+
+function duplicate_submission_check(string $email, string $message): ?string
+{
+    $fingerprint = sha1(strtolower(trim($email)) . '|' . strtolower(trim($message)));
+    $file = sys_get_temp_dir() . '/nxtgenguard-duplicate-' . $fingerprint . '.txt';
+    $now = time();
+
+    if (is_file($file)) {
+        $last = (int) file_get_contents($file);
+        if ($last > $now - 86400) {
+            return 'Duplicate submission detected.';
+        }
+    }
+
+    @file_put_contents($file, (string) $now);
+    return null;
+}
+
+function silently_accept_spam(array $selected, array $reasons): void
+{
+    $_SESSION['last_receipt'] = [
+        'id' => generate_request_id(),
+        'service' => selected_service($selected),
+        'score' => 'Received',
+        'provider' => 'spam-filter',
+        'time' => gmdate('Y-m-d H:i:s') . ' UTC',
+        'customer_confirmation' => 'not sent',
+        'spam_reasons' => $reasons,
+    ];
+
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    header('Location: contact.php?sent=1');
+    exit;
+}
+
 function openai_assistant_reply(string $message, array $context): ?string
 {
     $apiKey = env_value('OPENAI_API_KEY');
@@ -707,6 +871,7 @@ $selected = gather_selections($selectionLabels);
 $service = selected_service($selected);
 $guide = service_guidance($service);
 $csrf = ensure_csrf_token();
+$turnstileSiteKey = env_value('TURNSTILE_SITE_KEY', '');
 $errors = [];
 $success = false;
 $receipt = $_SESSION['last_receipt'] ?? null;
@@ -723,7 +888,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['ajax'] ?? '') === '') {
     }
 
     $started = (int) ($_POST['form_started'] ?? 0);
-    if ($started > 0 && time() - $started < 2) {
+    $minimumSeconds = (int) env_value('CONTACT_MIN_SECONDS_BEFORE_SUBMIT', '4');
+    if ($started > 0 && time() - $started < $minimumSeconds) {
         $errors[] = 'Please take a moment to review the form before submitting.';
     }
 
@@ -753,6 +919,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_GET['ajax'] ?? '') === '') {
     if ($posted['message'] === '' || strlen($posted['message']) < 20) $errors[] = 'Please add a few details about what you need help with.';
     if (empty($_POST['consent'])) $errors[] = 'Please confirm the safe contact and no-payment notice.';
     if (detect_sensitive_submission($posted['message'])) $errors[] = 'Please remove passwords, private keys, API keys, seed phrases, or sensitive records before submitting.';
+
+    if ($turnstileError = verify_turnstile_token()) {
+        $errors[] = $turnstileError;
+    }
+
+    if (!$errors && ($duplicateError = duplicate_submission_check($posted['email'], $posted['message']))) {
+        $errors[] = 'This request looks like a duplicate. Please wait before submitting again.';
+    }
+
+    $spamReasons = spam_reasons($posted, $selected);
+    if (!$errors && $spamReasons) {
+        if (env_bool('CONTACT_SPAM_SILENT_DROP', true)) {
+            silently_accept_spam($selected, $spamReasons);
+        }
+        $errors[] = 'This request could not be accepted. Please remove promotional or unrelated sales content and try again.';
+    }
 
     if (!$errors) {
         $requestId = generate_request_id();
@@ -803,6 +985,9 @@ function form_value(string $key): string
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NxtGenGuard | Contact</title>
   <meta name="description" content="Start a NxtGenGuard request for websites, dashboards, business systems, automation, cloud, IT/security consulting, maintenance, support, data recovery triage, cameras, networks, and workstation help." />
+  <?php if ($turnstileSiteKey): ?>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <?php endif; ?>
   <style>
     :root {
       --bg: #f8fcff;
@@ -924,6 +1109,7 @@ function form_value(string $key): string
     .hidden-hp { position:absolute !important; left:-10000px !important; width:1px !important; height:1px !important; overflow:hidden !important; }
     .checkbox-line { display:flex; align-items:flex-start; gap:10px; padding:14px 0 0; color:#23445e; line-height:1.55; font-size:.94rem; }
     .checkbox-line input { width:auto; margin-top:4px; box-shadow:none; }
+    .turnstile-wrap { padding:14px; border-radius:18px; border:1px solid rgba(18,72,116,.11); background:rgba(255,255,255,.68); display:flex; justify-content:flex-start; overflow:hidden; }
     .submit-row { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:22px; }
     .submit-row .helper { max-width:560px; }
 
@@ -1071,9 +1257,9 @@ function form_value(string $key): string
             </div>
           </div>
           <div class="hero-video-wrap" aria-label="NxtGenGuard secure request preview video">
-            <video class="hero-cube-video" autoplay muted loop playsinline preload="metadata" poster="assets/images/logo/contact-cube-poster.png">
-              <source src="assets/images/logo/contact-cube-transparent.webm" type="video/webm" />
-              <source src="assets/images/logo/contact-cube-light.mp4" type="video/mp4" />
+            <video class="hero-cube-video" autoplay muted loop playsinline preload="metadata" poster="assets/videos/contact-cube-poster.png">
+              <source src="assets/videos/contact-cube-transparent.webm" type="video/webm" />
+              <source src="assets/videos/contact-cube-light.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div class="hero-video-caption">
@@ -1197,6 +1383,15 @@ function form_value(string $key): string
                   <p class="helper">Do not submit passwords, private keys, seed phrases, full payment details, or sensitive records. We will confirm a safer way to review private information if needed.</p>
                 </div>
               </div>
+
+              <?php if ($turnstileSiteKey): ?>
+                <div class="field full" style="margin-top:18px">
+                  <div class="turnstile-wrap">
+                    <div class="cf-turnstile" data-sitekey="<?= e($turnstileSiteKey) ?>" data-theme="light"></div>
+                  </div>
+                  <p class="helper">This quick verification helps block spam while keeping the request form simple for real visitors.</p>
+                </div>
+              <?php endif; ?>
 
               <label class="checkbox-line">
                 <input type="checkbox" name="consent" value="1" <?= !empty($_POST['consent']) ? 'checked' : '' ?> required />
