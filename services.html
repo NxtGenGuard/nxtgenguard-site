@@ -181,88 +181,40 @@
       isolation: isolate;
       padding: 94px 0 68px;
       border-bottom: 1px solid rgba(18, 72, 116, 0.10);
-      background:
-        radial-gradient(circle at 80% 54%, rgba(103, 205, 251, 0.18), transparent 30%),
-        radial-gradient(circle at 68% 78%, rgba(20, 184, 166, 0.12), transparent 26%),
-        linear-gradient(180deg, rgba(250, 253, 255, 0.98), rgba(238, 249, 255, 0.88));
     }
-
     .services-hero::before {
       content: "";
       position: absolute;
-      top: 50%;
-      right: -8%;
-      width: min(1040px, 82vw);
-      height: 560px;
-      transform: translateY(-50%) translate3d(0, 0, 0) scale(1);
-      transform-origin: 50% 50%;
-      z-index: 0;
-      pointer-events: none;
-      border-radius: 50% / 43%;
+      inset: 0;
+      z-index: -2;
       background:
-        radial-gradient(circle at 18% 48%, rgba(255, 255, 255, 0.18), transparent 22%),
-        radial-gradient(circle at 84% 30%, rgba(103, 205, 251, 0.12), transparent 26%),
-        url("assets/images/logo/ServicesBG.png") 70% center / cover no-repeat;
-      opacity: 0.98;
-      filter: saturate(1.06) brightness(1.02);
-      box-shadow: 0 34px 88px rgba(33, 91, 139, 0.10);
-      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.12) 8%, rgba(0,0,0,0.92) 26%, rgba(0,0,0,1) 42%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.92) 70%, rgba(0,0,0,0.56) 82%, rgba(0,0,0,0.08) 92%, rgba(0,0,0,0) 100%);
-      mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.12) 8%, rgba(0,0,0,0.92) 26%, rgba(0,0,0,1) 42%, rgba(0,0,0,1) 58%, rgba(0,0,0,0.92) 70%, rgba(0,0,0,0.56) 82%, rgba(0,0,0,0.08) 92%, rgba(0,0,0,0) 100%);
-      animation: servicesOvalDrift 8.5s ease-in-out infinite;
-      will-change: transform;
+        linear-gradient(90deg, rgba(250, 253, 255, 0.98) 0%, rgba(250, 253, 255, 0.92) 46%, rgba(250, 253, 255, 0.68) 76%, rgba(250, 253, 255, 0.48) 100%),
+        linear-gradient(180deg, rgba(240, 249, 255, 0.68), rgba(255, 255, 255, 0.96)),
+        url("assets/images/logo/ServicesBG.png") center right / cover no-repeat;
+      filter: saturate(1.06);
     }
-
     .services-hero::after {
       content: "";
       position: absolute;
       inset: 0;
-      z-index: 1;
+      z-index: -1;
       background-image:
-        linear-gradient(90deg, rgba(250, 253, 255, 0.98) 0%, rgba(250, 253, 255, 0.94) 20%, rgba(250, 253, 255, 0.76) 36%, rgba(250, 253, 255, 0.34) 58%, rgba(250, 253, 255, 0.10) 100%),
-        linear-gradient(180deg, rgba(240, 249, 255, 0.28), rgba(255, 255, 255, 0.46)),
         linear-gradient(rgba(18, 72, 116, 0.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(18, 72, 116, 0.055) 1px, transparent 1px);
-      background-size: auto, auto, 42px 42px, 42px 42px;
-      mask-image: linear-gradient(180deg, black 0%, transparent 92%);
+        linear-gradient(90deg, rgba(18, 72, 116, 0.055) 1px, transparent 1px),
+        radial-gradient(circle at 18% 80%, rgba(103, 205, 251, 0.22), transparent 30%),
+        radial-gradient(circle at 86% 18%, rgba(255, 184, 107, 0.13), transparent 24%);
+      background-size: 42px 42px, 42px 42px, auto, auto;
+      mask-image: linear-gradient(180deg, black 0%, transparent 90%);
+      opacity: 0.55;
       pointer-events: none;
     }
-
-    @keyframes servicesOvalDrift {
-      0%, 100% {
-        transform: translateY(-50%) translate3d(0, 0, 0) scale(1);
-      }
-      25% {
-        transform: translateY(-50%) translate3d(-18px, -14px, 0) scale(1.012);
-      }
-      50% {
-        transform: translateY(-50%) translate3d(20px, 8px, 0) scale(1.006);
-      }
-      75% {
-        transform: translateY(-50%) translate3d(-8px, 16px, 0) scale(1.014);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .services-hero::before {
-        animation: none;
-      }
-    }
-
     .services-hero-grid {
-      position: relative;
-      z-index: 2;
       display: grid;
-      grid-template-columns: 0.94fr 0.90fr;
+      grid-template-columns: 1fr 0.72fr;
       gap: 34px;
       align-items: center;
-      min-height: 560px;
     }
-    .services-hero-copy {
-      position: relative;
-      z-index: 3;
-      display: grid;
-      gap: 22px;
-    }
+    .services-hero-copy { display: grid; gap: 22px; }
     .services-hero h1 {
       margin: 0;
       max-width: 850px;
@@ -280,10 +232,6 @@
     }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
     .hero-summary {
-      position: relative;
-      z-index: 3;
-      justify-self: end;
-      width: min(100%, 690px);
       border-radius: 32px;
       border: 1px solid rgba(18, 72, 116, 0.13);
       background:
@@ -291,7 +239,6 @@
         radial-gradient(circle at bottom left, rgba(20, 184, 166, 0.13), transparent 28%),
         rgba(255, 255, 255, 0.80);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
       padding: 26px;
       display: grid;
       gap: 14px;
@@ -526,9 +473,7 @@
     .footer-bottom strong { color: #071827; }
 
     @media (max-width: 1080px) {
-      .services-hero-grid { grid-template-columns: 1fr; min-height: auto; }
-      .services-hero::before { width: min(980px, 118vw); height: 500px; right: -22%; top: 59%; opacity: 0.92; }
-      .hero-summary { justify-self: stretch; width: 100%; }
+      .services-hero-grid { grid-template-columns: 1fr; }
       .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .choose-help-box { align-items: flex-start; flex-direction: column; }
@@ -537,13 +482,11 @@
       .desktop-nav { display: none; }
       .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
       .services-hero { padding: 74px 0 56px; }
-      .services-hero::before { width: min(860px, 132vw); height: 380px; right: -32%; top: 64%; opacity: 0.80; }
     }
     @media (max-width: 620px) {
       .container { width: min(var(--max), calc(100% - 22px)); }
       .cards-grid { grid-template-columns: 1fr; }
       .services-hero h1 { font-size: clamp(3rem, 17vw, 5.4rem); }
-      .services-hero::before { width: 155vw; height: 300px; right: -48vw; top: 68%; opacity: 0.70; }
       .service-visual, .service-visual img { min-height: 210px; height: 210px; }
       .statement-card, .service-card, .choose-help-box, .footer-shell, .hero-summary { border-radius: 24px; }
       .statement-card, .choose-help-box, .footer-shell { padding-left: 20px; padding-right: 20px; }
@@ -553,6 +496,157 @@
       .footer-links-list a { width: 100%; }
       .footer-bottom { align-items: center; justify-content: center; text-align: center; }
     }
+  
+
+    /* Animated oval hero scene — Chrome-safe real element, not pseudo-only */
+    .services-hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      padding: 94px 0 68px;
+      border-bottom: 1px solid rgba(18, 72, 116, 0.10);
+      background:
+        radial-gradient(circle at 78% 18%, rgba(103, 205, 251, 0.16), transparent 24%),
+        radial-gradient(circle at 72% 78%, rgba(20, 184, 166, 0.10), transparent 28%),
+        linear-gradient(180deg, rgba(250, 253, 255, 0.97), rgba(238, 249, 255, 0.88));
+    }
+    .services-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image:
+        linear-gradient(rgba(18, 72, 116, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 72, 116, 0.055) 1px, transparent 1px);
+      background-size: 42px 42px, 42px 42px;
+      opacity: 0.62;
+      pointer-events: none;
+    }
+    .services-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(250, 253, 255, 0.99) 0%, rgba(250, 253, 255, 0.95) 18%, rgba(250, 253, 255, 0.78) 34%, rgba(250, 253, 255, 0.42) 53%, rgba(250, 253, 255, 0.10) 78%, rgba(250, 253, 255, 0.02) 100%),
+        linear-gradient(180deg, rgba(240, 249, 255, 0.24), rgba(255, 255, 255, 0.38));
+      pointer-events: none;
+    }
+    .services-hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 0.94fr 1.06fr;
+      gap: 28px;
+      align-items: center;
+      min-height: 560px;
+    }
+    .hero-floating-oval {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      width: min(1240px, 80vw);
+      height: clamp(390px, 37vw, 610px);
+      transform: translate(-54%, -52%) scale(0.98);
+      transform-origin: 50% 50%;
+      border-radius: 50% / 43%;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 48%, rgba(255, 255, 255, 0.12), transparent 24%),
+        radial-gradient(circle at 78% 34%, rgba(103, 205, 251, 0.14), transparent 28%),
+        url("assets/images/logo/ServicesBG.png") 70% center / cover no-repeat;
+      opacity: 0.96;
+      z-index: 0;
+      pointer-events: none;
+      filter: saturate(1.08) brightness(1.02);
+      box-shadow:
+        0 34px 96px rgba(17, 79, 133, 0.12),
+        inset 0 0 90px 42px rgba(248, 252, 255, 0.42),
+        inset 120px 0 120px rgba(248, 252, 255, 0.50),
+        inset -58px 0 95px rgba(248, 252, 255, 0.18);
+      animation: servicesHeroOvalBounce 16s ease-in-out infinite;
+      will-change: transform;
+    }
+    .hero-floating-oval::before,
+    .hero-floating-oval::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+    .hero-floating-oval::before {
+      background:
+        radial-gradient(ellipse at center, transparent 42%, rgba(248, 252, 255, 0.16) 68%, rgba(248, 252, 255, 0.82) 100%),
+        linear-gradient(90deg, rgba(248, 252, 255, 0.50), transparent 22%, transparent 75%, rgba(248, 252, 255, 0.18));
+      mix-blend-mode: screen;
+    }
+    .hero-floating-oval::after {
+      box-shadow: inset 0 0 74px 38px rgba(248, 252, 255, 0.46);
+    }
+    @keyframes servicesHeroOvalBounce {
+      0%, 100% {
+        transform: translate(-54%, -52%) scale(0.98);
+      }
+      20% {
+        transform: translate(-34%, -59%) scale(1.015);
+      }
+      40% {
+        transform: translate(-10%, -46%) scale(1.005);
+      }
+      60% {
+        transform: translate(10%, -56%) scale(1.025);
+      }
+      80% {
+        transform: translate(-18%, -44%) scale(1.01);
+      }
+    }
+    .services-hero-copy,
+    .hero-summary {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-summary {
+      justify-self: end;
+      width: min(100%, 690px);
+      backdrop-filter: blur(9px);
+    }
+    @media (max-width: 1080px) {
+      .services-hero-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-floating-oval {
+        width: min(1120px, 118vw);
+        height: 470px;
+        top: 58%;
+        left: 54%;
+        opacity: 0.82;
+      }
+      .hero-summary {
+        justify-self: stretch;
+        width: 100%;
+      }
+    }
+    @media (max-width: 860px) {
+      .services-hero { padding: 74px 0 56px; }
+      .hero-floating-oval {
+        width: 130vw;
+        height: 360px;
+        left: 58%;
+        top: 64%;
+        opacity: 0.68;
+      }
+    }
+    @media (max-width: 620px) {
+      .hero-floating-oval {
+        width: 150vw;
+        height: 280px;
+        left: 58%;
+        top: 68%;
+        opacity: 0.55;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -607,6 +701,7 @@
     <main>
       <section class="services-hero" aria-labelledby="page-title">
         <div class="container services-hero-grid">
+          <div class="hero-floating-oval" aria-hidden="true"></div>
           <div class="services-hero-copy">
             <h1 id="page-title">Services</h1>
             <p>NxtGenGuard helps you build, connect, secure, recover, and support the digital and technical systems your business depends on. Choose the service that fits what you need today, or start a request and we will help route it.</p>
