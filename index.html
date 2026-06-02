@@ -3410,6 +3410,129 @@
       }
     }
 
+
+    /* User requested: show the full CTA video instead of cropping it. */
+    .cta-box {
+      display: block !important;
+      min-height: 0 !important;
+      height: auto !important;
+      max-height: none !important;
+      aspect-ratio: 16 / 9 !important;
+      overflow: hidden !important;
+    }
+
+    .cta-box .cta-inner {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      z-index: 1 !important;
+    }
+
+    .cta-box .cta-media,
+    .cta-box .cta-video-frame {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .cta-box .cta-video-frame {
+      display: grid !important;
+      place-items: center !important;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(103, 232, 249, 0.18), transparent 28%),
+        radial-gradient(circle at 84% 82%, rgba(47, 123, 255, 0.22), transparent 32%),
+        url("assets/images/logo/cta-video-poster.jpg") center center / cover no-repeat,
+        #020617 !important;
+    }
+
+    .cta-box .cta-video {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important;
+      object-position: center center !important;
+      transform: none !important;
+      background: transparent !important;
+    }
+
+    .cta-box .cta-video-frame::before {
+      background:
+        linear-gradient(180deg, rgba(2, 6, 17, 0.04) 0%, rgba(2, 6, 17, 0.12) 50%, rgba(2, 6, 17, 0.22) 100%),
+        radial-gradient(circle at top right, rgba(103, 232, 249, 0.10), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(47, 123, 255, 0.12), transparent 32%) !important;
+    }
+
+    @media (max-width: 760px) {
+      .cta-box {
+        aspect-ratio: 16 / 9 !important;
+        min-height: 230px !important;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .cta-box {
+        min-height: 210px !important;
+        border-radius: 24px !important;
+      }
+    }
+
+
+
+    /* User requested: make the two bottom CTA buttons perfectly even. */
+    .cta-copy--outside .cta-actions,
+    .cta-copy.cta-copy--outside .cta-actions {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: clamp(14px, 2vw, 24px) !important;
+      flex-wrap: wrap !important;
+    }
+
+    .cta-copy--outside .cta-actions .btn,
+    .cta-copy.cta-copy--outside .cta-actions .btn {
+      box-sizing: border-box !important;
+      width: clamp(240px, 18vw, 280px) !important;
+      min-width: 0 !important;
+      max-width: 280px !important;
+      flex: 0 0 clamp(240px, 18vw, 280px) !important;
+      height: 66px !important;
+      min-height: 66px !important;
+      padding: 0 24px !important;
+      border-width: 1px !important;
+      border-radius: 18px !important;
+      line-height: 1 !important;
+      text-align: center !important;
+    }
+
+    .cta-copy--outside .cta-actions .btn-primary,
+    .cta-copy.cta-copy--outside .cta-actions .btn-primary {
+      box-shadow: 0 14px 30px rgba(22, 137, 232, 0.20) !important;
+    }
+
+    .cta-copy--outside .cta-actions .btn-secondary,
+    .cta-copy.cta-copy--outside .cta-actions .btn-secondary {
+      box-shadow: 0 14px 30px rgba(8, 22, 38, 0.16) !important;
+    }
+
+    @media (max-width: 560px) {
+      .cta-copy--outside .cta-actions,
+      .cta-copy.cta-copy--outside .cta-actions {
+        width: 100% !important;
+        gap: 12px !important;
+      }
+
+      .cta-copy--outside .cta-actions .btn,
+      .cta-copy.cta-copy--outside .cta-actions .btn {
+        width: min(100%, 320px) !important;
+        max-width: 320px !important;
+        flex: 0 1 min(100%, 320px) !important;
+        height: 62px !important;
+        min-height: 62px !important;
+      }
+    }
+
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7LW5PDQ2VN"></script>
