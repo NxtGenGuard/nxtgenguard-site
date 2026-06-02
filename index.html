@@ -3533,6 +3533,91 @@
       }
     }
 
+
+
+    /* Final CTA alignment fix: same grid columns, same height, same vertical position. */
+    .cta-copy.cta-copy--outside.cta-copy--bottom {
+      width: 100% !important;
+      max-width: 1240px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      padding-left: 8px !important;
+      padding-right: 8px !important;
+    }
+
+    .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions {
+      width: 100% !important;
+      display: grid !important;
+      grid-template-columns: repeat(2, 280px) !important;
+      justify-content: center !important;
+      justify-items: stretch !important;
+      align-items: center !important;
+      align-content: center !important;
+      gap: 28px !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+    }
+
+    .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions .btn,
+    .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions .btn-primary,
+    .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions .btn-secondary {
+      position: relative !important;
+      top: auto !important;
+      bottom: auto !important;
+      left: auto !important;
+      right: auto !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 280px !important;
+      min-width: 280px !important;
+      max-width: 280px !important;
+      height: 68px !important;
+      min-height: 68px !important;
+      max-height: 68px !important;
+      flex: none !important;
+      margin: 0 !important;
+      padding: 0 24px !important;
+      border-width: 1px !important;
+      border-radius: 18px !important;
+      line-height: 1 !important;
+      box-sizing: border-box !important;
+      transform: none !important;
+      translate: none !important;
+      vertical-align: top !important;
+    }
+
+    .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions .btn:hover,
+    .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions .btn:focus-visible {
+      transform: none !important;
+    }
+
+    .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions .btn-primary {
+      box-shadow: 0 14px 30px rgba(14, 165, 233, 0.20) !important;
+    }
+
+    .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions .btn-secondary {
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18) !important;
+    }
+
+    @media (max-width: 680px) {
+      .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions {
+        grid-template-columns: minmax(0, min(100%, 320px)) !important;
+        gap: 12px !important;
+      }
+
+      .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions .btn,
+      .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions .btn-primary,
+      .cta-copy.cta-copy--outside.cta-copy--bottom .cta-actions .btn-secondary {
+        width: min(100%, 320px) !important;
+        min-width: 0 !important;
+        max-width: 320px !important;
+        height: 62px !important;
+        min-height: 62px !important;
+        max-height: 62px !important;
+      }
+    }
+
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7LW5PDQ2VN"></script>
