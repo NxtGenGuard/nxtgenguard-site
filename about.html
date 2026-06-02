@@ -1117,6 +1117,266 @@
       }
     }
 
+
+    /* Final full-color hero video treatment
+       Keeps the video full color and only blends the hero edges/corners into the page. */
+    .page-hero {
+      background: #f8fcff;
+    }
+
+    .about-hero-video-bg {
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: -4 !important;
+      overflow: hidden !important;
+      background: #f8fcff !important;
+    }
+
+    .about-hero-bg-video {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center center !important;
+      display: block !important;
+      opacity: 1 !important;
+      filter: none !important;
+      mix-blend-mode: normal !important;
+      transform: scale(1.02);
+      animation: aboutHeroVideoDrift 16s ease-in-out infinite alternate;
+    }
+
+    /* This no longer washes out the video. It only feathers the edges and corners. */
+    .page-hero::before {
+      z-index: -3 !important;
+      background:
+        linear-gradient(90deg,
+          rgba(248, 252, 255, 0.50) 0%,
+          rgba(248, 252, 255, 0.16) 10%,
+          rgba(248, 252, 255, 0.00) 24%,
+          rgba(248, 252, 255, 0.00) 76%,
+          rgba(248, 252, 255, 0.16) 90%,
+          rgba(248, 252, 255, 0.46) 100%
+        ),
+        linear-gradient(180deg,
+          rgba(248, 252, 255, 0.48) 0%,
+          rgba(248, 252, 255, 0.08) 15%,
+          rgba(248, 252, 255, 0.00) 48%,
+          rgba(248, 252, 255, 0.16) 88%,
+          rgba(248, 252, 255, 0.64) 100%
+        ),
+        radial-gradient(circle at 0% 0%, rgba(103, 205, 251, 0.18), transparent 32%),
+        radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.28), transparent 28%),
+        radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.34), transparent 30%),
+        radial-gradient(circle at 100% 100%, rgba(20, 184, 166, 0.14), transparent 32%) !important;
+      pointer-events: none !important;
+      opacity: 1 !important;
+    }
+
+    /* Light grid/glass atmosphere only; no color-dimming layer. */
+    .page-hero::after {
+      z-index: -2 !important;
+      background-image:
+        linear-gradient(rgba(18, 72, 116, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 72, 116, 0.045) 1px, transparent 1px) !important;
+      background-size: 42px 42px !important;
+      opacity: 0.32 !important;
+      mix-blend-mode: normal !important;
+      mask-image: linear-gradient(180deg, black 0%, transparent 92%) !important;
+      pointer-events: none !important;
+    }
+
+    /* Keep text readable without hiding the video across the whole hero. */
+    .page-hero .hero-copy {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.30)) !important;
+      border: 1px solid rgba(18, 72, 116, 0.11);
+      box-shadow: 0 22px 60px rgba(33, 91, 139, 0.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-brand-card {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.18)) !important;
+      border: 1px solid rgba(18, 72, 116, 0.12);
+      box-shadow: 0 24px 70px rgba(33, 91, 139, 0.14);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-brand-card-inner,
+    .brand-proof-mark {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.70), rgba(255, 255, 255, 0.38)) !important;
+      backdrop-filter: blur(12px);
+    }
+
+    @media (max-width: 620px) {
+      .page-hero::before {
+        background:
+          linear-gradient(90deg, rgba(248, 252, 255, 0.44), rgba(248, 252, 255, 0.04) 28%, rgba(248, 252, 255, 0.10) 72%, rgba(248, 252, 255, 0.44)),
+          linear-gradient(180deg, rgba(248, 252, 255, 0.50), transparent 26%, rgba(248, 252, 255, 0.58)) !important;
+      }
+    }
+
+
+    /* Final hero layout: full-color video + bottom full-width headline */
+    .page-hero {
+      min-height: min(820px, calc(100vh - var(--nav-h) + 120px)) !important;
+      display: flex !important;
+      align-items: flex-end !important;
+      padding: 0 0 clamp(34px, 6vh, 74px) !important;
+      overflow: hidden !important;
+      isolation: isolate !important;
+      background: #f8fcff !important;
+    }
+
+    .about-hero-video-bg {
+      position: absolute !important;
+      inset: 0 !important;
+      z-index: -4 !important;
+      overflow: hidden !important;
+      background: #f8fcff !important;
+    }
+
+    .about-hero-bg-video {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center center !important;
+      display: block !important;
+      opacity: 1 !important;
+      filter: none !important;
+      mix-blend-mode: normal !important;
+      transform: scale(1.02);
+      animation: aboutHeroVideoDrift 16s ease-in-out infinite alternate;
+    }
+
+    /* Edge/corner blend only. No full-screen wash over the video. */
+    .page-hero::before {
+      z-index: -3 !important;
+      background:
+        linear-gradient(90deg,
+          rgba(248, 252, 255, 0.42) 0%,
+          rgba(248, 252, 255, 0.10) 10%,
+          rgba(248, 252, 255, 0.00) 24%,
+          rgba(248, 252, 255, 0.00) 76%,
+          rgba(248, 252, 255, 0.12) 90%,
+          rgba(248, 252, 255, 0.42) 100%
+        ),
+        linear-gradient(180deg,
+          rgba(248, 252, 255, 0.34) 0%,
+          rgba(248, 252, 255, 0.02) 18%,
+          rgba(248, 252, 255, 0.00) 58%,
+          rgba(248, 252, 255, 0.24) 88%,
+          rgba(248, 252, 255, 0.74) 100%
+        ),
+        radial-gradient(circle at 0% 0%, rgba(103, 205, 251, 0.16), transparent 32%),
+        radial-gradient(circle at 100% 100%, rgba(20, 184, 166, 0.12), transparent 32%) !important;
+      opacity: 1 !important;
+      pointer-events: none !important;
+    }
+
+    .page-hero::after {
+      z-index: -2 !important;
+      background-image:
+        linear-gradient(rgba(18, 72, 116, 0.040) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 72, 116, 0.040) 1px, transparent 1px) !important;
+      background-size: 42px 42px !important;
+      opacity: 0.25 !important;
+      mask-image: linear-gradient(180deg, black 0%, transparent 92%) !important;
+      pointer-events: none !important;
+    }
+
+    .page-hero .hero-grid {
+      position: relative !important;
+      z-index: 2 !important;
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 auto !important;
+    }
+
+    .page-hero .hero-copy {
+      width: min(100vw - 52px, 1760px) !important;
+      max-width: none !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+      text-align: center !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+    }
+
+    .page-hero .hero-copy h1 {
+      margin: 0 auto 18px !important;
+      width: 100% !important;
+      max-width: none !important;
+      white-space: nowrap !important;
+      font-size: clamp(1.85rem, 2.55vw, 3.15rem) !important;
+      line-height: 1 !important;
+      letter-spacing: -0.065em !important;
+      color: #071827 !important;
+      text-shadow:
+        0 2px 0 rgba(255, 255, 255, 0.46),
+        0 16px 44px rgba(255, 255, 255, 0.42),
+        0 16px 48px rgba(7, 24, 39, 0.18) !important;
+    }
+
+    .page-hero .hero-copy p {
+      max-width: 980px !important;
+      margin: 0 auto 22px !important;
+      color: #36536d !important;
+      font-weight: 760 !important;
+      line-height: 1.7 !important;
+      text-shadow: 0 10px 34px rgba(255, 255, 255, 0.52) !important;
+    }
+
+    .page-hero .hero-actions {
+      justify-content: center !important;
+      margin: 0 !important;
+    }
+
+    .hero-photo-card,
+    .hero-brand-card,
+    .hero-brand-card-inner {
+      display: none !important;
+    }
+
+    @media (max-width: 1120px) {
+      .page-hero .hero-copy h1 {
+        white-space: normal !important;
+        max-width: 980px !important;
+        font-size: clamp(2.4rem, 6.8vw, 4.6rem) !important;
+        line-height: 0.9 !important;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page-hero {
+        padding: 64px 0 36px !important;
+      }
+
+      .page-hero .hero-copy {
+        width: min(100vw - 24px, 100%) !important;
+      }
+
+      .page-hero .hero-copy h1 {
+        font-size: clamp(2.15rem, 11vw, 3.2rem) !important;
+        line-height: 0.92 !important;
+      }
+
+      .page-hero .hero-copy p {
+        font-size: 0.95rem !important;
+        line-height: 1.62 !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .about-hero-bg-video {
+        animation: none !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -1191,14 +1451,6 @@
               <a class="btn btn-secondary" href="contact.php?service=General%20NxtGenGuard%20Request">Start a request</a>
             </div>
           </div>
-
-          <aside class="hero-photo-card hero-brand-card" aria-label="NxtGenGuard visual card">
-            <div class="hero-brand-card-inner">
-              <img src="assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" />
-              <strong>Engineer-led delivery.</strong>
-              <span>Practical systems, clearer handoffs, and a guarded mindset for business technology work.</span>
-            </div>
-          </aside>
         </div>
       </section>
 
