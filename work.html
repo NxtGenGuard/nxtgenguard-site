@@ -4,471 +4,420 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NxtGenGuard | Work</title>
-  <meta name="description" content="NxtGenGuard work examples across websites, dashboards, business systems, automation, security camera setups, data extraction, and technical projects." />
+  <meta name="description" content="Explore NxtGenGuard portfolio showcases across websites, dashboards, systems, automation, cloud, devices, camera planning, AI intake, and security-minded operations." />
+  <meta name="theme-color" content="#f8fcff" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="assets/images/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
   <style>
-:root {
-  --bg: #020612;
-  --bg-2: #07111f;
-  --panel: rgba(10, 16, 30, 0.78);
-  --panel-2: rgba(8, 14, 26, 0.92);
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(99, 156, 255, 0.24);
-  --text: #f7f9ff;
-  --muted: #9aacc7;
-  --blue: #2b78ff;
-  --blue-2: #78b6ff;
-  --radius: 28px;
-  --shadow: 0 26px 80px rgba(0, 0, 0, 0.46);
-  --max: 1240px;
-  --nav-h: 84px;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  font-family: Inter, Arial, Helvetica, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(circle at 10% 15%, rgba(38, 94, 195, 0.16), transparent 24%),
-    radial-gradient(circle at 88% 12%, rgba(80, 150, 255, 0.12), transparent 24%),
-    linear-gradient(180deg, #01040d 0%, #050c18 44%, #030813 100%);
-  overflow-x: hidden;
-}
-body.nav-open { overflow: hidden; }
-a { color: inherit; text-decoration: none; }
-img { display: block; max-width: 100%; }
-.container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 54px;
-  padding: 0 22px;
-  border-radius: 14px;
-  font-weight: 800;
-  border: 0;
-  cursor: pointer;
-  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease), background 0.28s var(--ease);
-}
-.btn:hover { transform: translateY(-2px); }
-.btn-primary {
-  color: #fff;
-  background: linear-gradient(135deg, rgba(31, 69, 202, 0.96), rgba(46, 88, 224, 0.9));
-  border: 1px solid rgba(126, 165, 255, 0.38);
-  box-shadow: 0 18px 38px rgba(31, 69, 202, 0.28);
-}
-.btn-secondary { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: #fff; }
-.btn-small { min-height: 42px; padding: 0 16px; border-radius: 12px; font-size: 0.9rem; }
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  width: fit-content;
-  padding: 10px 15px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.04);
-  color: #dce8ff;
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  backdrop-filter: blur(14px);
-}
-.pill::before {
-  content: "";
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--blue-2), var(--blue));
-  box-shadow: 0 0 18px rgba(120, 182, 255, 0.9);
-}
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(3, 8, 18, 0.74);
-  backdrop-filter: blur(18px);
-}
-.nav-wrap { min-height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 22px; }
-.brand { display: inline-flex; align-items: center; justify-content: center; }
-.brand img { width: 62px; height: 62px; object-fit: contain; filter: drop-shadow(0 0 22px rgba(116, 176, 255, 0.18)); }
-.desktop-nav, .nav-actions { display: flex; align-items: center; gap: 28px; }
-.desktop-nav a, .nav-drop-toggle { color: #edf2ff; font-weight: 700; background: none; border: none; padding: 0; font-size: 0.97rem; cursor: pointer; }
-.desktop-nav a:hover, .desktop-nav a.active, .nav-drop-toggle:hover, .nav-drop-toggle.active { color: #fff; }
-.nav-drop { position: relative; padding-bottom: 14px; margin-bottom: -14px; }
-.nav-drop::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
-.nav-drop-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  min-width: 300px;
-  padding: 12px;
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  background: rgba(7, 12, 24, 0.98);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
-}
-.nav-drop-menu::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
-.nav-drop:hover .nav-drop-menu, .nav-drop:focus-within .nav-drop-menu { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
-.nav-drop-menu a { display: block; padding: 12px 14px; border-radius: 12px; }
-.nav-drop-menu a:hover { background: rgba(255, 255, 255, 0.05); }
-.menu-toggle { display: none; width: 48px; height: 48px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.04); color: #fff; font-size: 1.15rem; }
-.mobile-nav { display: none; padding: 0 0 18px; }
-.mobile-nav.open { display: block; }
-.mobile-panel { border: 1px solid var(--line); border-radius: 22px; background: rgba(7, 13, 24, 0.96); padding: 14px; box-shadow: var(--shadow); }
-.mobile-panel a, .mobile-panel summary { display: block; padding: 14px 12px; border-radius: 12px; font-weight: 700; list-style: none; cursor: pointer; }
-.mobile-panel a:hover, .mobile-panel summary:hover, .mobile-panel details[open] summary { background: rgba(255, 255, 255, 0.05); }
-.mobile-submenu { padding: 4px 0 0 10px; }
-.mobile-submenu a { color: var(--muted); font-weight: 600; }
-.mobile-panel summary::-webkit-details-marker { display: none; }
-.page-hero {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  padding: 112px 0 70px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-.page-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  background:
-    radial-gradient(circle at 16% 26%, rgba(43, 120, 255, 0.18), transparent 30%),
-    radial-gradient(circle at 82% 18%, rgba(120, 182, 255, 0.12), transparent 26%),
-    linear-gradient(180deg, rgba(2, 6, 17, 0.42), rgba(2, 6, 17, 0.02));
-}
-.page-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: linear-gradient(180deg, black 0%, transparent 78%);
-  opacity: 0.2;
-}
-.page-hero-inner { display: grid; gap: 22px; max-width: 930px; }
-.page-hero h1 { margin: 0; font-size: clamp(3.1rem, 8vw, 6.8rem); line-height: 0.88; letter-spacing: -0.08em; text-shadow: 0 18px 48px rgba(0, 0, 0, 0.36); }
-.page-hero p { margin: 0; max-width: 780px; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.16rem); line-height: 1.82; }
-.section { padding: 74px 0 0; }
-.section:last-of-type { padding-bottom: 92px; }
-.section-head { max-width: 850px; margin-bottom: 28px; }
-.section-head h2 { margin: 0; font-size: clamp(2rem, 4vw, 3.6rem); line-height: 0.98; letter-spacing: -0.06em; }
-.section-head p { margin: 12px 0 0; color: var(--muted); line-height: 1.82; }
-.grid-2 { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 26px; align-items: stretch; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.card {
-  border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: radial-gradient(circle at top right, rgba(120, 182, 255, 0.08), transparent 28%), rgba(7, 12, 24, 0.82);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
-  padding: 28px;
-  overflow: hidden;
-}
-.card h3 { margin: 0 0 10px; font-size: 1.35rem; letter-spacing: -0.04em; }
-.card p { margin: 0; color: var(--muted); line-height: 1.78; }
-.card strong { color: #fff; }
-.placeholder {
-  min-height: 300px;
-  border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: radial-gradient(circle at 28% 22%, rgba(120, 182, 255, 0.24), transparent 28%), radial-gradient(circle at 80% 72%, rgba(43, 120, 255, 0.16), transparent 30%), linear-gradient(135deg, rgba(7, 18, 38, 0.94), rgba(4, 8, 18, 0.98));
-  display: grid;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
-}
-.placeholder::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 30px 30px;
-  opacity: 0.28;
-}
-.placeholder span {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 46px;
-  padding: 0 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(220, 232, 255, 0.78);
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  backdrop-filter: blur(12px);
-}
-.tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
-.tag { display: inline-flex; align-items: center; min-height: 32px; padding: 0 11px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.03); color: #dbe6ff; font-size: 0.78rem; font-weight: 700; }
-.timeline { display: grid; gap: 16px; }
-.timeline-item { display: grid; grid-template-columns: 150px 1fr; gap: 18px; padding: 20px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); }
-.timeline-item span { color: var(--blue-2); font-weight: 900; }
-.timeline-item h3 { margin: 0 0 6px; }
-.timeline-item p { margin: 0; color: var(--muted); line-height: 1.7; }
-.work-card { padding: 0; display: grid; min-height: 100%; }
-.work-card .placeholder { min-height: 190px; border-radius: 0; border: 0; }
-.work-card-body { padding: 24px; }
-.work-card-body h3 { margin: 0 0 10px; font-size: 1.3rem; letter-spacing: -0.04em; }
-.work-card-body p { margin: 0; color: var(--muted); line-height: 1.72; }
-.contact-layout { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 26px; align-items: start; }
-.form-card { padding: 30px; }
-.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-.field { display: grid; gap: 8px; }
-.field.full { grid-column: 1 / -1; }
-label { color: #dce8ff; font-weight: 800; font-size: 0.9rem; }
-input, select, textarea { width: 100%; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; background: rgba(255,255,255,0.04); color: #fff; min-height: 50px; padding: 12px 14px; font: inherit; outline: none; }
-select option { color: #06101f; }
-textarea { min-height: 150px; resize: vertical; }
-input:focus, select:focus, textarea:focus { border-color: rgba(120, 182, 255, 0.38); box-shadow: 0 0 0 4px rgba(43,120,255,0.12); }
-.form-note { color: var(--muted); line-height: 1.7; font-size: 0.92rem; }
-.alert { padding: 16px 18px; border-radius: 16px; margin-bottom: 18px; line-height: 1.6; }
-.alert.success { background: rgba(59, 201, 129, 0.12); border: 1px solid rgba(59, 201, 129, 0.28); color: #d8ffe7; }
-.alert.error { background: rgba(255, 89, 89, 0.12); border: 1px solid rgba(255, 89, 89, 0.28); color: #ffe0e0; }
-.info-list { display: grid; gap: 14px; }
-.info-row { padding: 18px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); }
-.info-row span { display: block; color: var(--muted); font-size: 0.88rem; margin-bottom: 5px; }
-.info-row strong { font-size: 1.02rem; }
-.robot-card { margin-top: 22px; padding: 0; overflow: hidden; }
-.robot-head { display: flex; gap: 14px; align-items: center; padding: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); }
-.robot-avatar { width: 52px; height: 52px; border-radius: 18px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(43,120,255,0.9), rgba(120,182,255,0.6)); box-shadow: 0 12px 28px rgba(43,120,255,0.24); font-size: 1.55rem; }
-.robot-feed { height: 280px; overflow: auto; padding: 18px; display: grid; align-content: start; gap: 12px; }
-.bubble { max-width: 86%; padding: 12px 14px; border-radius: 16px; line-height: 1.55; font-size: 0.94rem; }
-.bubble.bot { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.07); color: #dce8ff; justify-self: start; }
-.bubble.user { background: rgba(43,120,255,0.22); border: 1px solid rgba(120,182,255,0.18); justify-self: end; }
-.robot-actions { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 18px 14px; }
-.robot-actions button { min-height: 36px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); color: #fff; border-radius: 999px; padding: 0 12px; cursor: pointer; }
-.robot-input { display: flex; gap: 10px; padding: 14px 18px 18px; border-top: 1px solid rgba(255,255,255,0.08); }
-.robot-input input { min-height: 44px; }
-.robot-input .btn { min-height: 44px; }
-footer { padding: 0 0 48px; }
-.footer-shell { border-radius: 32px; border: 1px solid rgba(255, 255, 255, 0.08); background: radial-gradient(circle at top right, rgba(110, 189, 255, 0.11), transparent 24%), radial-gradient(circle at bottom left, rgba(31, 69, 202, 0.09), transparent 28%), rgba(7, 12, 24, 0.86); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22); padding: 30px 32px; display: grid; gap: 18px; text-align: center; }
-.footer-links-clean { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-.footer-links-clean a { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 18px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.03); color: #dbe6ff; opacity: 0.9; font-weight: 700; }
-.footer-links-clean a:hover { opacity: 1; transform: translateY(-2px); border-color: rgba(110, 189, 255, 0.28); background: rgba(255, 255, 255, 0.05); }
-.footer-note { margin: 0 auto; max-width: 920px; color: #e4edff; line-height: 1.8; font-weight: 600; }
-.footer-pagebar { margin-top: 18px; padding: 18px 20px 0; text-align: center; color: rgba(212, 224, 246, 0.76); font-size: 0.98rem; }
-@media (max-width: 1080px) { .grid-2, .contact-layout { grid-template-columns: 1fr; } .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 860px) { .desktop-nav, .nav-actions { display: none; } .menu-toggle { display: inline-flex; align-items: center; justify-content: center; } .page-hero { padding: 82px 0 52px; } }
-@media (max-width: 620px) { .container { width: min(var(--max), calc(100% - 22px)); } .grid-3, .grid-4, .form-grid { grid-template-columns: 1fr; } .timeline-item { grid-template-columns: 1fr; } .card, .placeholder, .footer-shell { border-radius: 24px; } .card, .form-card, .footer-shell { padding-left: 20px; padding-right: 20px; } .btn, .footer-links-clean a { width: 100%; } .robot-input { flex-direction: column; } }
+    :root {
+      --bg:#f8fcff;--bg2:#edf8ff;--text:#071827;--muted:#5f7288;--blue:#1689e8;--teal:#14b8a6;
+      --accent:#ffb86b;--line:rgba(18,72,116,.13);--shadow:0 24px 70px rgba(20,75,120,.16);
+      --soft:0 16px 40px rgba(33,91,139,.11);--max:1240px;--nav-h:84px;--ease:cubic-bezier(.22,1,.36,1);
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--text);background:
+      radial-gradient(circle at 8% 8%,rgba(103,205,251,.34),transparent 28%),
+      radial-gradient(circle at 92% 12%,rgba(255,184,107,.20),transparent 24%),
+      radial-gradient(circle at 48% 96%,rgba(20,184,166,.16),transparent 30%),
+      linear-gradient(180deg,#fbfdff 0%,#edf8ff 48%,#fff 100%);overflow-x:hidden}
+    body.nav-open{overflow:hidden}a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+    .container{width:min(var(--max),calc(100% - 32px));margin:0 auto}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 22px;border-radius:15px;border:1px solid transparent;font:inherit;font-weight:850;cursor:pointer;transition:.28s var(--ease)}
+    .btn:hover{transform:translateY(-2px)}.btn-primary{color:#fff;background:linear-gradient(135deg,#0e7fe4,#25b6ef 58%,#14b8a6);box-shadow:0 18px 38px rgba(22,137,232,.23)}
+    .btn-secondary{background:rgba(255,255,255,.76);border-color:var(--line);color:#12324b;box-shadow:0 12px 30px rgba(33,91,139,.08)}
+    header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.84);backdrop-filter:blur(20px);border-bottom:1px solid rgba(18,72,116,.10);box-shadow:0 12px 36px rgba(18,72,116,.06)}
+    .nav-wrap{min-height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:22px}.brand{display:inline-flex}.brand img{height:62px;width:auto;max-width:178px;border-radius:16px;object-fit:contain}
+    .desktop-nav,.nav-actions{display:flex;align-items:center;gap:28px}.desktop-nav a,.nav-drop-toggle{color:#193c58;font-weight:800;background:none;border:0;padding:0;font-size:.97rem;cursor:pointer}
+    .desktop-nav a:hover,.desktop-nav a.active,.nav-drop-toggle:hover{color:#0a80df}.nav-drop{position:relative;padding-bottom:14px;margin-bottom:-14px}.nav-drop::after{content:"";position:absolute;left:0;right:0;top:100%;height:16px}
+    .nav-drop-menu{position:absolute;top:calc(100% + 8px);left:0;min-width:310px;padding:12px;border-radius:20px;border:1px solid rgba(18,72,116,.12);background:rgba(255,255,255,.98);box-shadow:0 24px 60px rgba(18,72,116,.18);opacity:0;visibility:hidden;transform:translateY(10px);pointer-events:none;transition:.2s ease}
+    .nav-drop:hover .nav-drop-menu,.nav-drop:focus-within .nav-drop-menu{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}.nav-drop-menu a{display:block;padding:12px 14px;border-radius:12px}.nav-drop-menu a:hover{background:rgba(22,137,232,.08)}
+    .menu-toggle{display:none;width:48px;height:48px;border-radius:14px;border:1px solid rgba(18,72,116,.14);background:rgba(255,255,255,.78);color:#12324b;font-size:1.15rem}
+    .mobile-nav{display:none;padding:0 0 18px}.mobile-nav.open{display:block}.mobile-panel{border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.98);padding:14px;box-shadow:var(--shadow)}.mobile-panel a,.mobile-panel summary{display:block;padding:14px 12px;border-radius:12px;font-weight:800;color:#193c58;list-style:none;cursor:pointer}.mobile-panel a:hover,.mobile-panel summary:hover{background:rgba(22,137,232,.08);color:#0a80df}.mobile-submenu{padding:4px 0 0 10px}.mobile-submenu a{color:var(--muted)}.mobile-panel summary::-webkit-details-marker{display:none}
+
+    .hero{position:relative;overflow:hidden;isolation:isolate;padding:92px 0 68px;border-bottom:1px solid rgba(18,72,116,.10)}.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(circle at 18% 22%,rgba(103,205,251,.34),transparent 28%),radial-gradient(circle at 88% 16%,rgba(255,184,107,.18),transparent 24%),linear-gradient(180deg,rgba(250,253,255,.98),rgba(236,248,255,.88))}.hero::after{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(18,72,116,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(18,72,116,.055) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(180deg,black 0%,transparent 88%);opacity:.52}
+    .hero-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:center}.hero-copy{display:grid;gap:22px}.eyebrow{display:inline-flex;width:fit-content;min-height:38px;align-items:center;padding:0 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.76);color:#193c58;font-size:.78rem;font-weight:950;letter-spacing:.14em;text-transform:uppercase}.hero h1{margin:0;font-size:clamp(3rem,7.4vw,6.7rem);line-height:.88;letter-spacing:-.08em;max-width:880px}.hero p{margin:0;max-width:780px;color:var(--muted);font-size:clamp(1rem,1.5vw,1.15rem);line-height:1.82}.hero-actions{display:flex;flex-wrap:wrap;gap:12px}.hero-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.hero-meta div{padding:14px;border-radius:20px;border:1px solid rgba(18,72,116,.11);background:rgba(255,255,255,.72);box-shadow:0 12px 28px rgba(33,91,139,.07)}.hero-meta strong{display:block}.hero-meta span{display:block;color:var(--muted);font-size:.82rem;margin-top:4px;line-height:1.45}.hero-visual{border-radius:36px;overflow:hidden;border:1px solid var(--line);background:#fff;padding:14px;box-shadow:var(--shadow);animation:heroFloat 8s ease-in-out infinite}.hero-visual img{border-radius:26px;width:100%}@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+    .concept-note{padding:24px 0 0}.concept-note-box{display:flex;align-items:flex-start;gap:14px;padding:18px 20px;border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.78);box-shadow:var(--soft);color:#36536d;line-height:1.62}.concept-note-box strong{color:#071827}
+
+    .logo-marquee{padding:54px 0 0;overflow:hidden}.logo-marquee-title{text-align:center;color:#5f7288;font-size:.82rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}.logo-window{overflow:hidden;mask-image:linear-gradient(90deg,transparent,black 8%,black 92%,transparent)}.logo-track{display:flex;width:max-content;gap:14px;animation:logoScroll 28s linear infinite}.logo-track span{display:grid;place-items:center;min-width:210px;min-height:72px;padding:0 22px;border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.78);box-shadow:0 12px 28px rgba(33,91,139,.07);color:#193c58;font-weight:900;letter-spacing:-.02em}@keyframes logoScroll{to{transform:translateX(-50%)}}
+
+    .section{padding:82px 0 0}.section:last-of-type{padding-bottom:92px}.section-head{max-width:900px;margin-bottom:30px}.section-head.center{margin-inline:auto;text-align:center}.section-head h2{margin:0;font-size:clamp(2.2rem,4.8vw,4rem);line-height:.98;letter-spacing:-.06em}.section-head p{margin:12px 0 0;color:var(--muted);line-height:1.82}.section-head.center p{max-width:780px;margin-left:auto;margin-right:auto}
+
+    .featured-case{display:grid;grid-template-columns:1.08fr .92fr;gap:26px;padding:20px;border-radius:34px;border:1px solid var(--line);background:rgba(255,255,255,.84);box-shadow:var(--shadow)}.featured-image{min-height:520px;border-radius:26px;overflow:hidden}.featured-image img{width:100%;height:100%;object-fit:cover}.featured-copy{display:grid;align-content:center;gap:18px;padding:clamp(22px,3vw,36px);border-radius:26px;background:radial-gradient(circle at top right,rgba(103,205,251,.18),transparent 30%),rgba(248,252,255,.84)}.case-label,.project-label{display:inline-flex;width:fit-content;min-height:30px;align-items:center;padding:0 10px;border-radius:999px;border:1px solid rgba(18,72,116,.10);background:rgba(103,205,251,.16);color:#193c58;font-size:.72rem;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.featured-copy h3{margin:0;font-size:clamp(1.9rem,3.5vw,3rem);line-height:1;letter-spacing:-.055em}.featured-copy p{margin:0;color:var(--muted);line-height:1.8}.case-list{display:grid;gap:10px}.case-row{padding:14px 16px;border-radius:18px;border:1px solid rgba(18,72,116,.10);background:rgba(255,255,255,.72)}.case-row strong{display:block;margin-bottom:4px}.case-row span{color:var(--muted);line-height:1.55}
+
+    .filters{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-bottom:26px}.filter-btn{min-height:42px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.76);color:#193c58;font:inherit;font-weight:850;cursor:pointer;transition:.24s ease}.filter-btn:hover,.filter-btn.active{transform:translateY(-2px);color:#fff;border-color:transparent;background:linear-gradient(135deg,#0e7fe4,#25b6ef 58%,#14b8a6)}
+    .project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.project-card{position:relative;overflow:hidden;border-radius:30px;border:1px solid var(--line);background:rgba(255,255,255,.84);box-shadow:var(--soft);transition:.38s var(--ease)}.project-card:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(33,91,139,.16)}.project-card.is-hidden{display:none}.project-media{aspect-ratio:16/9;overflow:hidden;background:#eaf7ff}.project-media img{width:100%;height:100%;object-fit:cover;transition:.48s var(--ease)}.project-card:hover .project-media img{transform:scale(1.035)}.project-body{padding:24px;display:grid;gap:12px}.brand-line{color:#0a80df;font-weight:900;font-size:.88rem}.project-card h3{margin:0;font-size:1.4rem;line-height:1.06;letter-spacing:-.045em}.project-card p{margin:0;color:var(--muted);line-height:1.72}.tag-row{display:flex;flex-wrap:wrap;gap:8px}.tag{display:inline-flex;align-items:center;min-height:32px;padding:0 11px;border-radius:999px;border:1px solid rgba(18,72,116,.11);background:rgba(255,255,255,.72);color:#193c58;font-size:.78rem;font-weight:850}.project-open{position:absolute;top:16px;right:16px;z-index:3;min-height:38px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.58);background:rgba(7,24,39,.76);color:#fff;font:inherit;font-size:.78rem;font-weight:900;cursor:pointer;backdrop-filter:blur(10px)}
+
+    .outcomes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.outcome{padding:24px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.78);box-shadow:var(--soft)}.outcome strong{display:block;font-size:2rem;letter-spacing:-.05em}.outcome span{display:block;color:var(--muted);line-height:1.55;margin-top:7px}
+
+    .cta-card{display:grid;justify-items:center;text-align:center;gap:18px;padding:clamp(32px,5vw,52px);border-radius:34px;border:1px solid var(--line);background:radial-gradient(circle at top right,rgba(103,205,251,.24),transparent 30%),radial-gradient(circle at bottom left,rgba(255,184,107,.14),transparent 28%),rgba(255,255,255,.86);box-shadow:var(--shadow)}.cta-card h2{margin:0;max-width:800px;font-size:clamp(2.2rem,4.8vw,4rem);line-height:.96;letter-spacing:-.06em}.cta-card p{margin:0;max-width:760px;color:var(--muted);line-height:1.82}
+
+    footer{position:relative;padding:0 0 48px}.footer-shell{border-radius:34px;border:1px solid var(--line);background:radial-gradient(circle at top left,rgba(103,205,251,.18),transparent 30%),radial-gradient(circle at top right,rgba(255,184,107,.12),transparent 24%),linear-gradient(180deg,rgba(255,255,255,.92),rgba(247,252,255,.94));box-shadow:0 26px 70px rgba(20,75,120,.13);padding:34px}.footer-grid{display:grid;grid-template-columns:1.35fr .75fr 1fr;gap:26px}.footer-brand{display:inline-flex;align-items:center;gap:12px;font-weight:900;font-size:1.08rem}.footer-brand img{height:48px;width:auto;max-width:150px;border-radius:12px}.footer-brand-block p{margin:16px 0 0;max-width:410px;color:var(--muted);line-height:1.78}.footer-col h4{margin:0 0 14px;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(25,60,88,.62)}.footer-links-list{display:grid;gap:10px}.footer-links-list a{width:fit-content;color:#193c58;font-weight:760;opacity:.86}.footer-links-list a:hover{color:#0a80df;opacity:1}.footer-bottom{margin-top:34px;padding-top:20px;border-top:1px solid rgba(18,72,116,.12);text-align:center;color:rgba(25,60,88,.70)}.footer-bottom strong{color:#071827}
+
+    .lightbox{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:24px;background:rgba(4,12,24,.82);backdrop-filter:blur(14px);opacity:0;visibility:hidden;pointer-events:none;transition:.25s ease}.lightbox.open{opacity:1;visibility:visible;pointer-events:auto}.lightbox-card{width:min(1180px,100%);max-height:calc(100vh - 48px);overflow:auto;border-radius:28px;background:#fff;padding:14px;box-shadow:0 40px 100px rgba(0,0,0,.35)}.lightbox-card img{width:100%;border-radius:20px}.lightbox-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 8px 16px}.lightbox-head strong{font-size:1.1rem}.lightbox-close{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:1.3rem;cursor:pointer}
+    [data-reveal]{opacity:0;transform:translateY(34px) scale(.985);transition:opacity .78s var(--ease),transform .78s var(--ease);transition-delay:var(--delay,0ms)}[data-reveal].visible{opacity:1;transform:none}
+
+    @media(max-width:1080px){.hero-grid,.featured-case{grid-template-columns:1fr}.project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.outcomes{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-grid{grid-template-columns:1fr 1fr}.footer-brand-block{grid-column:span 2}}
+    @media(max-width:860px){.desktop-nav,.nav-actions{display:none}.menu-toggle{display:inline-flex;align-items:center;justify-content:center}.hero{padding-top:72px}}
+    @media(max-width:620px){.container{width:min(var(--max),calc(100% - 22px))}.hero h1{font-size:clamp(2.7rem,13vw,4.2rem)}.hero-actions,.btn{width:100%}.hero-meta,.project-grid,.outcomes{grid-template-columns:1fr}.featured-case{padding:14px;border-radius:26px}.featured-image{min-height:280px}.footer-grid{grid-template-columns:1fr}.footer-brand-block{grid-column:auto}.footer-links-list a{width:100%}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}[data-reveal]{opacity:1!important;transform:none!important}}
+
+    /* Clean Work hero using banner1.jpg */
+    .hero-banner {
+      position: relative;
+      min-height: min(780px, calc(100vh - var(--nav-h) + 90px));
+      display: flex;
+      align-items: flex-end;
+      padding: 0 0 clamp(44px, 7vh, 86px);
+      overflow: hidden;
+      isolation: isolate;
+      color: #fff;
+      border-bottom: 1px solid rgba(18, 72, 116, 0.10);
+      background: #06111f;
+    }
+
+    .hero-banner .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -4;
+      background: url("assets/images/work/banner1.jpg") center center / cover no-repeat;
+      transform: scale(1.02);
+      animation: bannerSlowDrift 18s ease-in-out infinite alternate;
+    }
+
+    .hero-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        linear-gradient(90deg,
+          rgba(2, 8, 18, 0.74) 0%,
+          rgba(2, 8, 18, 0.36) 38%,
+          rgba(2, 8, 18, 0.18) 70%,
+          rgba(2, 8, 18, 0.48) 100%
+        ),
+        linear-gradient(180deg,
+          rgba(2, 8, 18, 0.16) 0%,
+          rgba(2, 8, 18, 0.08) 42%,
+          rgba(2, 8, 18, 0.74) 100%
+        );
+      pointer-events: none;
+    }
+
+    .hero-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(248,252,255,0.34), transparent 12%, transparent 88%, rgba(248,252,255,0.26)),
+        linear-gradient(180deg, rgba(248,252,255,0.28), transparent 18%, transparent 78%, rgba(248,252,255,0.18));
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.42;
+    }
+
+    .hero-banner-inner {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero-banner .hero-copy {
+      width: min(950px, 100%);
+      display: grid;
+      gap: 20px;
+      padding: clamp(24px, 4vw, 42px);
+      border-radius: 34px;
+      background: linear-gradient(135deg, rgba(4, 12, 24, 0.64), rgba(4, 18, 34, 0.32));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 28px 80px rgba(3, 9, 18, 0.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .hero-banner h1 {
+      margin: 0;
+      max-width: 860px;
+      color: #f8fcff;
+      font-size: clamp(3rem, 7.4vw, 6.7rem);
+      line-height: 0.88;
+      letter-spacing: -0.08em;
+      text-shadow: 0 18px 48px rgba(0, 0, 0, 0.44);
+    }
+
+    .hero-banner p {
+      margin: 0;
+      max-width: 780px;
+      color: rgba(248, 252, 255, 0.90);
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      line-height: 1.82;
+      text-shadow: 0 10px 30px rgba(0,0,0,.34);
+    }
+
+    .hero-banner .btn-secondary {
+      color: #071827;
+      background: rgba(255,255,255,.88);
+      border-color: rgba(255,255,255,.35);
+    }
+
+    @keyframes bannerSlowDrift {
+      0% { transform: scale(1.02) translate3d(-10px, -6px, 0); }
+      100% { transform: scale(1.065) translate3d(12px, 10px, 0); }
+    }
+
+    .featured-copy h3 {
+      margin-top: 0;
+    }
+
+    .project-card .project-body {
+      padding-top: 24px;
+    }
+
+    .section-head.center {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    @media (max-width: 620px) {
+      .hero-banner {
+        min-height: 650px;
+        padding-bottom: 34px;
+      }
+
+      .hero-banner .hero-copy {
+        border-radius: 26px;
+        padding: 22px 18px;
+      }
+
+      .hero-banner h1 {
+        font-size: clamp(2.55rem, 12vw, 4rem);
+      }
+    }
 
   </style>
 </head>
 <body>
-  <div class="site ready" id="siteRoot">
+  <div id="siteRoot">
     <header>
       <div class="container nav-wrap">
-        <a class="brand" href="index.html" aria-label="NxtGenGuard home">
-          <img src="assets/images/logo/logo-White.png" alt="NxtGenGuard logo" />
-        </a>
-
+        <a class="brand" href="index.html" aria-label="NxtGenGuard home"><img src="assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" /></a>
         <nav class="desktop-nav" aria-label="Primary">
           <a href="index.html">Home</a>
           <div class="nav-drop">
             <a class="nav-drop-toggle" href="services.html">Services ▾</a>
             <div class="nav-drop-menu">
               <a href="services.html">All Services</a>
-              <a href="services.html#websites">Websites</a>
-              <a href="services.html#platforms">Platforms &amp; Dashboards</a>
-              <a href="services.html#systems">Business Systems</a>
-              <a href="services.html#automation">Automation &amp; Cloud</a>
-              <a href="services.html#consulting">IT &amp; Security Consulting</a>
+              <a href="enterprise-websites.html">Websites &amp; Web Platforms</a>
+              <a href="platforms-dashboards.html">Platforms &amp; Dashboards</a>
+              <a href="business-systems.html">Business Systems</a>
+              <a href="automation-cloud.html">Automation &amp; Cloud</a>
+              <a href="it-security-consulting.html">IT &amp; Security Consulting</a>
+              <a href="maintenance-support.html">Maintenance &amp; Support</a>
             </div>
           </div>
           <a class="active" href="work.html" aria-current="page">Work</a>
           <a href="about.html">About</a>
           <a href="contact.php">Contact</a>
         </nav>
-
-        <div class="nav-actions">
-          <a class="btn btn-secondary" href="contact.php">Start a Project</a>
-        </div>
-
+        <div class="nav-actions"><a class="btn btn-secondary" href="contact.php?service=General%20NxtGenGuard%20Request">Start a request</a></div>
         <button class="menu-toggle" type="button" aria-label="Open menu" onclick="toggleMenu()">☰</button>
       </div>
-
       <div class="container mobile-nav" id="mobileNav">
         <div class="mobile-panel">
           <a href="index.html" onclick="closeMenu()">Home</a>
-          <details>
-            <summary>Services</summary>
-            <div class="mobile-submenu">
-              <a href="services.html" onclick="closeMenu()">All Services</a>
-              <a href="services.html#websites" onclick="closeMenu()">Websites</a>
-              <a href="services.html#platforms" onclick="closeMenu()">Platforms &amp; Dashboards</a>
-              <a href="services.html#systems" onclick="closeMenu()">Business Systems</a>
-              <a href="services.html#automation" onclick="closeMenu()">Automation &amp; Cloud</a>
-              <a href="services.html#consulting" onclick="closeMenu()">IT &amp; Security Consulting</a>
-            </div>
-          </details>
-          <a href="work.html" onclick="closeMenu()">Work</a>
-          <a href="about.html" onclick="closeMenu()">About</a>
-          <a href="contact.php" onclick="closeMenu()">Contact</a>
+          <details><summary>Services</summary><div class="mobile-submenu">
+            <a href="services.html" onclick="closeMenu()">All Services</a>
+            <a href="enterprise-websites.html" onclick="closeMenu()">Websites &amp; Web Platforms</a>
+            <a href="platforms-dashboards.html" onclick="closeMenu()">Platforms &amp; Dashboards</a>
+            <a href="business-systems.html" onclick="closeMenu()">Business Systems</a>
+            <a href="automation-cloud.html" onclick="closeMenu()">Automation &amp; Cloud</a>
+            <a href="it-security-consulting.html" onclick="closeMenu()">IT &amp; Security Consulting</a>
+            <a href="maintenance-support.html" onclick="closeMenu()">Maintenance &amp; Support</a>
+          </div></details>
+          <a href="work.html" onclick="closeMenu()">Work</a><a href="about.html" onclick="closeMenu()">About</a><a href="contact.php" onclick="closeMenu()">Contact</a>
         </div>
       </div>
     </header>
 
     <main>
-      <section class="page-hero" aria-labelledby="page-title">
-        <div class="container page-hero-inner">
-          <div class="pill">Work portfolio</div>
-          <h1 id="page-title">Keep this page as Work.</h1>
-          <p>
-            I recommend keeping this page as a portfolio instead of turning it into a blog. Use it to show everything you have built:
-            webpages, dashboards, security cameras, data extraction, automations, systems, prototypes, and real technical work. Testimonials can be added later as proof blocks.
-          </p>
-        </div>
-      </section>
-
-      <section class="section" aria-label="Work direction">
-        <div class="container grid-3">
-          <article class="card">
-            <h3>Why not only blogs?</h3>
-            <p>Blogs are useful later for SEO, but your main proof right now should be visual work, systems, dashboards, and technical projects.</p>
-          </article>
-          <article class="card">
-            <h3>Where testimonials go</h3>
-            <p>Add testimonials below projects once you have quotes. They should support your work, not replace the portfolio.</p>
-          </article>
-          <article class="card">
-            <h3>What to publish here</h3>
-            <p>Use project cards for websites, dashboards, IT systems, camera setups, data extraction, automation, and security-focused work.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" aria-label="Project cards">
-        <div class="container">
-          <div class="section-head">
-            <h2>Project examples.</h2>
-            <p>These are placeholders. Replace the titles, images, and descriptions with your real work as you collect screenshots.</p>
-          </div>
-          <div class="grid-3">
-            <article class="card work-card">
-              <div class="placeholder"><span>Website image</span></div>
-              <div class="work-card-body">
-                <h3>Business Website Build</h3>
-                <p>A clean service-business website with homepage, service sections, contact flow, and a sharper brand presentation.</p>
-                <div class="tag-row"><span class="tag">Web design</span><span class="tag">Landing page</span><span class="tag">SEO structure</span></div>
-              </div>
-            </article>
-
-            <article class="card work-card">
-              <div class="placeholder"><span>Dashboard image</span></div>
-              <div class="work-card-body">
-                <h3>Operations Dashboard</h3>
-                <p>A dashboard-style view for tracking work, requests, statuses, metrics, and operational visibility.</p>
-                <div class="tag-row"><span class="tag">Dashboard</span><span class="tag">Reporting</span><span class="tag">Internal tool</span></div>
-              </div>
-            </article>
-
-            <article class="card work-card">
-              <div class="placeholder"><span>Survey image</span></div>
-              <div class="work-card-body">
-                <h3>Survey &amp; Data Reporting</h3>
-                <p>Collection and visualization of form or survey data so teams can understand patterns, results, and follow-up needs.</p>
-                <div class="tag-row"><span class="tag">Forms</span><span class="tag">Charts</span><span class="tag">Data cleanup</span></div>
-              </div>
-            </article>
-
-            <article class="card work-card">
-              <div class="placeholder"><span>Automation image</span></div>
-              <div class="work-card-body">
-                <h3>Data Extraction Workflow</h3>
-                <p>Automation for collecting, cleaning, moving, or transforming data from files, websites, forms, or operational sources.</p>
-                <div class="tag-row"><span class="tag">Python</span><span class="tag">Automation</span><span class="tag">Data extraction</span></div>
-              </div>
-            </article>
-
-            <article class="card work-card">
-              <div class="placeholder"><span>Camera image</span></div>
-              <div class="work-card-body">
-                <h3>Security Camera &amp; Site Tech</h3>
-                <p>Planning and setup for cameras, device placement, network readiness, access, and practical site technology needs.</p>
-                <div class="tag-row"><span class="tag">Cameras</span><span class="tag">Network</span><span class="tag">Site setup</span></div>
-              </div>
-            </article>
-
-            <article class="card work-card">
-              <div class="placeholder"><span>Cloud image</span></div>
-              <div class="work-card-body">
-                <h3>Cloud &amp; System Setup</h3>
-                <p>Cloud planning, system organization, deployment support, accounts, permissions, and cleaner technical structure.</p>
-                <div class="tag-row"><span class="tag">Cloud</span><span class="tag">Systems</span><span class="tag">Deployment</span></div>
-              </div>
-            </article>
-
-            <article class="card work-card">
-              <div class="placeholder"><span>MDM image</span></div>
-              <div class="work-card-body">
-                <h3>Device Management Support</h3>
-                <p>Experience with managed device environments, Apple systems, policies, setup workflows, and technical support structure.</p>
-                <div class="tag-row"><span class="tag">JAMF</span><span class="tag">Apple</span><span class="tag">Endpoint support</span></div>
-              </div>
-            </article>
-
-            <article class="card work-card">
-              <div class="placeholder"><span>AI image</span></div>
-              <div class="work-card-body">
-                <h3>AI / Chatbot Prototype</h3>
-                <p>Prototype assistants, guided intake bots, and simple automation helpers that can support users before a ticket is created.</p>
-                <div class="tag-row"><span class="tag">Chatbot</span><span class="tag">Intake</span><span class="tag">Prototype</span></div>
-              </div>
-            </article>
-
-            <article class="card work-card">
-              <div class="placeholder"><span>Security image</span></div>
-              <div class="work-card-body">
-                <h3>Security &amp; Network Review</h3>
-                <p>Security-minded cleanup for devices, access, network structure, cloud tools, and operational risk reduction.</p>
-                <div class="tag-row"><span class="tag">Security</span><span class="tag">Network</span><span class="tag">Consulting</span></div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" aria-label="Testimonials placeholder">
-        <div class="container grid-2">
-          <div class="card">
-            <div class="pill">Testimonials later</div>
-            <h2 style="margin:14px 0 10px;font-size:clamp(2rem,4vw,3.2rem);line-height:.98;letter-spacing:-.06em;">Add proof when you have it.</h2>
+      <section class="hero hero-banner" aria-labelledby="page-title">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="container hero-banner-inner">
+          <div class="hero-copy" data-reveal>
+            <h1 id="page-title">Work that makes the outcome visible.</h1>
             <p>
-              I would not make the page only testimonials. Put testimonials under the work as supporting proof. Keep this page as the place clients can see what you actually do.
+              Websites, dashboards, systems, automation, cloud, field technology, device operations, and security-minded workflows brought together with a clear plan.
             </p>
-          </div>
-          <div class="card">
-            <h3>Suggested testimonial format</h3>
-            <p>“NxtGenGuard helped us clean up our workflow, launch a better system, and understand what was happening technically.”</p>
-            <div class="tag-row"><span class="tag">Client name placeholder</span><span class="tag">Company placeholder</span><span class="tag">Project type</span></div>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#projects">Explore the work</a>
+              <a class="btn btn-secondary" href="contact.php?service=General%20NxtGenGuard%20Request">Start a request</a>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="section" aria-label="Work call to action">
+      <section class="section">
         <div class="container">
-          <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;">
-            <div>
-              <div class="pill">Build the next case study</div>
-              <h2 style="margin:14px 0 8px;font-size:clamp(1.9rem,3.8vw,3.1rem);line-height:.98;letter-spacing:-.06em;">Turn your next project into proof.</h2>
-              <p>Every site, dashboard, system, camera setup, or automation can become a portfolio card here.</p>
+          <div class="section-head" data-reveal>
+            <h2>Asteron Operations command center.</h2>
+            <p>A complete project showcase showing how intake, reporting, user roles, operational health, and automation can live inside one structured interface.</p>
+          </div>
+          <article class="featured-case" data-reveal>
+            <div class="featured-image"><img src="assets/images/work/asteron-operations.jpg" alt="Asteron Operations dashboard project" /></div>
+            <div class="featured-copy">
+              <h3>Asteron Operations</h3>
+              <p>A representative internal platform designed to centralize work requests, system health, activity, performance metrics, and follow-up priorities.</p>
+              <div class="case-list">
+                <div class="case-row"><strong>The challenge</strong><span>Too many disconnected links, status updates, spreadsheets, and support handoffs.</span></div>
+                <div class="case-row"><strong>The system</strong><span>One role-aware dashboard with requests, KPIs, automations, recent activity, and operational reporting.</span></div>
+                <div class="case-row"><strong>The value</strong><span>Cleaner visibility, fewer handoffs, and a stronger foundation for support and growth.</span></div>
+              </div>
+              <a class="btn btn-primary" href="contact.php?service=Platforms%20%26%20Dashboards&path=Operations%20Dashboard">Request a similar build</a>
             </div>
-            <a class="btn btn-primary" href="contact.php">Start a Project</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="container">
+          <div class="section-head center" data-reveal>
+            <h2>A full range of digital and technical work.</h2>
+            <p>Each project shows a different kind of business need, from web presence to dashboards, systems, automation, field technology, and security-minded operations.</p>
+          </div>
+          <div class="filters" data-reveal>
+            <button class="filter-btn active" type="button" data-filter="all">All</button>
+            <button class="filter-btn" type="button" data-filter="website">Websites</button>
+            <button class="filter-btn" type="button" data-filter="dashboard">Dashboards</button>
+            <button class="filter-btn" type="button" data-filter="system">Systems</button>
+            <button class="filter-btn" type="button" data-filter="automation">Automation</button>
+            <button class="filter-btn" type="button" data-filter="support">Support</button>
+            <button class="filter-btn" type="button" data-filter="security">Security</button>
+          </div>
+          <div class="project-grid">
+            <article class="project-card" data-category="website" data-reveal>
+              <button class="project-open" type="button" data-image="assets/images/work/northstar-website.jpg" data-title="Northstar Home Services — Service website and request flow" aria-label="Open Northstar Home Services project image">
+                <span>View project</span>
+              </button>
+              <div class="project-media"><img src="assets/images/work/northstar-website.jpg" alt="Northstar Home Services Service website and request flow project showcase" loading="lazy" /></div>
+              <div class="project-body">
+                <div class="brand-line">Northstar Home Services</div>
+                <h3>Service website and request flow</h3>
+                <p>A conversion-focused website experience designed to explain services clearly, build trust, and route customers into a guided request.</p>
+                <div class="tag-row"><span class="tag">Website</span><span class="tag">Service pages</span><span class="tag">Request flow</span></div>
+              </div>
+            </article>
+            <article class="project-card" data-category="dashboard" data-reveal>
+              <button class="project-open" type="button" data-image="assets/images/work/pulseview-dashboard.jpg" data-title="PulseView Analytics — Executive KPI dashboard" aria-label="Open PulseView Analytics project image">
+                <span>View project</span>
+              </button>
+              <div class="project-media"><img src="assets/images/work/pulseview-dashboard.jpg" alt="PulseView Analytics Executive KPI dashboard project showcase" loading="lazy" /></div>
+              <div class="project-body">
+                <div class="brand-line">PulseView Analytics</div>
+                <h3>Executive KPI dashboard</h3>
+                <p>A visual reporting interface for trends, exceptions, follow-ups, and role-based decision support.</p>
+                <div class="tag-row"><span class="tag">Dashboard</span><span class="tag">KPIs</span><span class="tag">Reporting</span></div>
+              </div>
+            </article>
+            <article class="project-card" data-category="dashboard" data-reveal>
+              <button class="project-open" type="button" data-image="assets/images/work/signalform-reporting.jpg" data-title="SignalForm Research — Survey reporting portal" aria-label="Open SignalForm Research project image">
+                <span>View project</span>
+              </button>
+              <div class="project-media"><img src="assets/images/work/signalform-reporting.jpg" alt="SignalForm Research Survey reporting portal project showcase" loading="lazy" /></div>
+              <div class="project-body">
+                <div class="brand-line">SignalForm Research</div>
+                <h3>Survey reporting portal</h3>
+                <p>A centralized reporting portal for survey responses, completion rates, follow-ups, and multi-view analysis.</p>
+                <div class="tag-row"><span class="tag">Surveys</span><span class="tag">Charts</span><span class="tag">Data views</span></div>
+              </div>
+            </article>
+            <article class="project-card" data-category="automation" data-reveal>
+              <button class="project-open" type="button" data-image="assets/images/work/relaygrid-automation.jpg" data-title="RelayGrid Automation — Connected workflow automation" aria-label="Open RelayGrid Automation project image">
+                <span>View project</span>
+              </button>
+              <div class="project-media"><img src="assets/images/work/relaygrid-automation.jpg" alt="RelayGrid Automation Connected workflow automation project showcase" loading="lazy" /></div>
+              <div class="project-body">
+                <div class="brand-line">RelayGrid Automation</div>
+                <h3>Connected workflow automation</h3>
+                <p>An automation workflow connecting intake, validation, data cleanup, approvals, alerts, and reporting.</p>
+                <div class="tag-row"><span class="tag">Automation</span><span class="tag">APIs</span><span class="tag">Workflow</span></div>
+              </div>
+            </article>
+            <article class="project-card" data-category="support" data-reveal>
+              <button class="project-open" type="button" data-image="assets/images/work/sentrasite-camera-plan.jpg" data-title="SentraSite Vision — Camera and network plan" aria-label="Open SentraSite Vision project image">
+                <span>View project</span>
+              </button>
+              <div class="project-media"><img src="assets/images/work/sentrasite-camera-plan.jpg" alt="SentraSite Vision Camera and network plan project showcase" loading="lazy" /></div>
+              <div class="project-body">
+                <div class="brand-line">SentraSite Vision</div>
+                <h3>Camera and network plan</h3>
+                <p>A site-technology planning system for camera coverage, networking, storage, and installation readiness.</p>
+                <div class="tag-row"><span class="tag">Cameras</span><span class="tag">Network</span><span class="tag">Site planning</span></div>
+              </div>
+            </article>
+            <article class="project-card" data-category="system" data-reveal>
+              <button class="project-open" type="button" data-image="assets/images/work/cloudharbor-architecture.jpg" data-title="CloudHarbor Systems — Cloud application architecture" aria-label="Open CloudHarbor Systems project image">
+                <span>View project</span>
+              </button>
+              <div class="project-media"><img src="assets/images/work/cloudharbor-architecture.jpg" alt="CloudHarbor Systems Cloud application architecture project showcase" loading="lazy" /></div>
+              <div class="project-body">
+                <div class="brand-line">CloudHarbor Systems</div>
+                <h3>Cloud application architecture</h3>
+                <p>A cloud structure for applications, APIs, data, storage, monitoring, DNS, and secure access.</p>
+                <div class="tag-row"><span class="tag">Cloud</span><span class="tag">Deployment</span><span class="tag">Architecture</span></div>
+              </div>
+            </article>
+            <article class="project-card" data-category="support" data-reveal>
+              <button class="project-open" type="button" data-image="assets/images/work/devicebridge-management.jpg" data-title="DeviceBridge Operations — Device management workflow" aria-label="Open DeviceBridge Operations project image">
+                <span>View project</span>
+              </button>
+              <div class="project-media"><img src="assets/images/work/devicebridge-management.jpg" alt="DeviceBridge Operations Device management workflow project showcase" loading="lazy" /></div>
+              <div class="project-body">
+                <div class="brand-line">DeviceBridge Operations</div>
+                <h3>Device management workflow</h3>
+                <p>A device lifecycle dashboard for enrollment, compliance, software readiness, and support operations.</p>
+                <div class="tag-row"><span class="tag">Devices</span><span class="tag">JAMF</span><span class="tag">Support</span></div>
+              </div>
+            </article>
+            <article class="project-card" data-category="automation" data-reveal>
+              <button class="project-open" type="button" data-image="assets/images/work/clearpath-ai-intake.jpg" data-title="ClearPath Assist — AI-guided intake assistant" aria-label="Open ClearPath Assist project image">
+                <span>View project</span>
+              </button>
+              <div class="project-media"><img src="assets/images/work/clearpath-ai-intake.jpg" alt="ClearPath Assist AI-guided intake assistant project showcase" loading="lazy" /></div>
+              <div class="project-body">
+                <div class="brand-line">ClearPath Assist</div>
+                <h3>AI-guided intake assistant</h3>
+                <p>A guided assistant for basic questions, safe triage, service routing, and cleaner contact requests.</p>
+                <div class="tag-row"><span class="tag">AI assistant</span><span class="tag">Intake</span><span class="tag">Automation</span></div>
+              </div>
+            </article>
+            <article class="project-card" data-category="security" data-reveal>
+              <button class="project-open" type="button" data-image="assets/images/work/guardline-security-review.jpg" data-title="Guardline Security — Security posture review" aria-label="Open Guardline Security project image">
+                <span>View project</span>
+              </button>
+              <div class="project-media"><img src="assets/images/work/guardline-security-review.jpg" alt="Guardline Security Security posture review project showcase" loading="lazy" /></div>
+              <div class="project-body">
+                <div class="brand-line">Guardline Security</div>
+                <h3>Security posture review</h3>
+                <p>A security review for accounts, devices, email, backups, networks, applications, and priority actions.</p>
+                <div class="tag-row"><span class="tag">Security</span><span class="tag">Access</span><span class="tag">Risk review</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="cta-card" data-reveal>
+            <h2>Turn your idea into the next finished case study.</h2>
+            <p>Start with the goal, current setup, timeline, and budget direction. NxtGenGuard reviews the request first and confirms the right next step before paid work begins.</p>
+            <div class="hero-actions" style="justify-content:center">
+              <a class="btn btn-primary" href="contact.php?service=General%20NxtGenGuard%20Request">Start a request</a>
+              <a class="btn btn-secondary" href="services.html">View services</a>
+            </div>
           </div>
         </div>
       </section>
@@ -477,24 +426,60 @@ footer { padding: 0 0 48px; }
     <footer>
       <div class="container">
         <div class="footer-shell">
-          <div class="footer-links-clean" aria-label="Footer links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="work.html">Work</a>
-            <a href="about.html">About</a>
-            <a href="contact.php">Contact</a>
+          <div class="footer-grid">
+            <div class="footer-brand-block">
+              <a class="footer-brand" href="index.html"><img src="assets/images/logo/logo-dark.jpg" alt="NxtGenGuard logo" /><span>NxtGenGuard</span></a>
+              <p>Websites, platforms, dashboards, systems, automation, cloud, field support, data recovery triage, and IT/security guidance built with clean structure and a guarded mindset.</p>
+            </div>
+            <nav class="footer-col"><h4>Navigate</h4><div class="footer-links-list"><a href="index.html">Home</a><a href="services.html">Services</a><a href="work.html">Work</a><a href="about.html">About</a><a href="contact.php">Contact</a></div></nav>
+            <nav class="footer-col"><h4>Services</h4><div class="footer-links-list"><a href="enterprise-websites.html">Websites &amp; Web Platforms</a><a href="platforms-dashboards.html">Platforms &amp; Dashboards</a><a href="business-systems.html">Business Systems</a><a href="automation-cloud.html">Automation &amp; Cloud</a><a href="it-security-consulting.html">IT &amp; Security Consulting</a><a href="maintenance-support.html">Maintenance &amp; Support</a></div></nav>
           </div>
-          <p class="footer-note">Built for service businesses, operations teams, and growing companies that need clearer presentation, better reporting, and stronger system structure.</p>
+          <div class="footer-bottom"><strong>© NxtGenGuard</strong> · Established 2017 · All rights reserved.</div>
         </div>
       </div>
-      <div class="footer-pagebar">© NxtGenGuard · Established 2017 · All rights reserved.</div>
     </footer>
+  </div>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-card">
+      <div class="lightbox-head"><strong id="lightboxTitle">Project preview</strong><button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close preview">×</button></div>
+      <img id="lightboxImage" src="" alt="" />
+    </div>
   </div>
 
   <script>
     const mobileNav = document.getElementById('mobileNav');
     function toggleMenu() { mobileNav.classList.toggle('open'); document.body.classList.toggle('nav-open'); }
     function closeMenu() { mobileNav.classList.remove('open'); document.body.classList.remove('nav-open'); }
+
+    const buttons = [...document.querySelectorAll('.filter-btn')];
+    const cards = [...document.querySelectorAll('.project-card')];
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      buttons.forEach(x => x.classList.remove('active')); btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(card => card.classList.toggle('is-hidden', f !== 'all' && card.dataset.category !== f));
+    }));
+
+    const reveals = [...document.querySelectorAll('[data-reveal]')];
+    reveals.forEach((el,i) => el.style.setProperty('--delay', `${Math.min(i*45,420)}ms`));
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => entries.forEach(entry => {
+        if(entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
+      }), {threshold:.12});
+      reveals.forEach(el => io.observe(el));
+    } else reveals.forEach(el => el.classList.add('visible'));
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    function closeLightbox() { lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    document.querySelectorAll('.project-open').forEach(btn => btn.addEventListener('click', () => {
+      lightboxImage.src = btn.dataset.image; lightboxImage.alt = btn.dataset.title; lightboxTitle.textContent = btn.dataset.title;
+      lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+    }));
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if(e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
   </script>
 </body>
 </html>
